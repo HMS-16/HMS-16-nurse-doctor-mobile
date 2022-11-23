@@ -1,7 +1,12 @@
-import 'package:hms_16/Views/landing_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:hms_16/Views/navbar.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setEnabledSystemUIMode(
+    SystemUiMode.immersiveSticky,
+  );
   runApp(const MyApp());
 }
 
@@ -12,10 +17,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(
-        
-      ),
-      home: LandingPage(),
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(),
+      home: NavBar(),
     );
   }
 }
