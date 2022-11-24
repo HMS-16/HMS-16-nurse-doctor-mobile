@@ -21,20 +21,6 @@ class _HomePageState extends State<HomePage> {
     ChartData(7, 19),
   ];
 
-  // void iniState() {
-  //   super.initState();
-
-  //   data = [
-  //     ChartData(1, 10),
-  //     ChartData(2, 6),
-  //     ChartData(3, 8),
-  //     ChartData(4, 14),
-  //     ChartData(5, 5),
-  //     ChartData(6, 17),
-  //     ChartData(7, 19),
-  //   ];
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
