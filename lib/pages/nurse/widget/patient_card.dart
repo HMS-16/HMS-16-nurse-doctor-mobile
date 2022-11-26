@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hms_16/Views/nurse/schedule/detail_schedule_bynurse.dart';
+import 'package:hms_16/pages/nurse/schedule/detail_schedule_bynurse.dart';
+
 import 'package:hms_16/style/theme.dart';
 
 class PatientCard extends StatelessWidget {

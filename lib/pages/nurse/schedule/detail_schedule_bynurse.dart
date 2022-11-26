@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:hms_16/Views/nurse/schedule/change_doctor_bynurse.dart';
-import 'package:hms_16/Views/nurse/schedule/change_schedule_bynurse.dart';
-import 'package:hms_16/Views/nurse/schedule/view_schedule_bynurse.dart';
+import 'package:hms_16/pages/nurse/schedule/change_doctor_bynurse.dart';
+import 'package:hms_16/pages/nurse/schedule/change_schedule_bynurse.dart';
 import 'package:hms_16/style/theme.dart';
 
 class DetailScheduleNurse extends StatelessWidget {
