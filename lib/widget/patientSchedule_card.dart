@@ -7,7 +7,7 @@ class PatientScheduleCard extends StatelessWidget {
   const PatientScheduleCard({
     super.key,
     required this.patientName,
-    required this.disease,
+    // required this.disease,
     required this.doctorName,
     required this.nurseName,
     required this.time,
@@ -18,7 +18,7 @@ class PatientScheduleCard extends StatelessWidget {
   });
 
   final String patientName;
-  final String disease;
+  // final String disease;
   final String doctorName;
   final String nurseName;
   final String time;
@@ -83,14 +83,14 @@ class PatientScheduleCard extends StatelessWidget {
                           style: textStyle.copyWith(
                               fontSize: 16, fontWeight: FontWeight.w600),
                         ),
-                        Text(
-                          disease,
-                          style: textStyle.copyWith(
-                            color: cBlackLightest,
-                            fontSize: 12,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
+                        // Text(
+                        //   disease,
+                        //   style: textStyle.copyWith(
+                        //     color: cBlackLightest,
+                        //     fontSize: 12,
+                        //     fontWeight: FontWeight.w400,
+                        //   ),
+                        // ),
                         Text(
                           "Doctor : $doctorName",
                           style: textStyle.copyWith(

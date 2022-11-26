@@ -198,22 +198,21 @@ class PatientListSchedule extends StatelessWidget {
                   fontColor = cSuccessDark;
                 }
                 return PatientScheduleCard(
-                  fontColor: fontColor,
-                  lineColor: lineColor,
-                  paintBadge: badgeColor,
-                  badgeText: condition,
-                  patientName: person.name,
-                  disease: person.disease,
-                  doctorName: person.doctor,
-                  nurseName: person.nurse,
-                  time: person.time == 0
-                      ? "1.00 pm - 1.30 pm"
-                      : person.time == 1
-                          ? "1.30 pm - 2.00 pm"
-                          : person.time == 2
-                              ? "2.00 pm - 2.30 pm"
-                              : "2.30 pm - 3.00 pm",
-                );
+                    fontColor: fontColor,
+                    lineColor: lineColor,
+                    paintBadge: badgeColor,
+                    badgeText: condition,
+                    patientName: person.name,
+                    // disease: person.disease,
+                    doctorName: person.doctor,
+                    nurseName: person.nurse,
+                    time: person.time == 0
+                        ? "1.00 pm - 1.30 pm"
+                        : person.time == 1
+                            ? "1.30 pm - 2.00 pm"
+                            : person.time == 2
+                                ? "2.00 pm - 2.30 pm"
+                                : "2.30 pm - 3.00 pm");
               }),
             );
           }

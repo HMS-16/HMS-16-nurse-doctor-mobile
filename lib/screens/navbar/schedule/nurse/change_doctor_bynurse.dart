@@ -17,7 +17,7 @@ class ChangeDoctorByNurse extends StatefulWidget {
 class _ChangeDoctorByNurseState extends State<ChangeDoctorByNurse> {
   @override
   Widget build(BuildContext context) {
-    final patientProvider = Provider.of<PatientViewModel>(context);
+    // final patientProvider = Provider.of<PatientViewModel>(context);
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(color: cBlack),
@@ -105,7 +105,12 @@ class _ChangeDoctorByNurseState extends State<ChangeDoctorByNurse> {
                                           backgroundColor: cPrimaryBase,
                                         ),
                                         onPressed: () async {
-                                          context.read<PatientViewModel>().changeDoctor(index, value.getlistDoctor[index].name);
+                                          context
+                                              .read<PatientViewModel>()
+                                              .changeDoctor(value
+                                                  .getlistDoctor[index].name);
+                                          print(
+                                              value.getlistDoctor[index].name);
                                           // setState(() {
                                           //   patientProvider.persons[index].doctor =
                                           //       value.getlistDoctor[index].name;

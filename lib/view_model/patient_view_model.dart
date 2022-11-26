@@ -23,8 +23,18 @@ class PatientViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  changeDoctor(index,doctor) {
-    _patients[index].doctor = doctor;
+  changeDoctor(doctor) {
+    _patient!.doctor = doctor;
+    notifyListeners();
+  }
+
+  changeSchedule(schedule) {
+    _patient!.time = schedule;
+    notifyListeners();
+  }
+
+  changeProgressPatient(status) {
+    _patient!.progress = status;
     notifyListeners();
   }
 }
