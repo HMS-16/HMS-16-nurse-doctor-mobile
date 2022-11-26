@@ -3,10 +3,16 @@ import 'package:hms_16/Views/nurse/schedule/detail_schedule_bynurse.dart';
 import 'package:hms_16/style/theme.dart';
 
 class PatientCard extends StatelessWidget {
-  const PatientCard({super.key});
+  const PatientCard(
+      {super.key,
+      required this.patientName,
+      required this.disease,
+      required this.doctorName,
+      required this.nurseName,
+      required this.time,
+      required this.icon});
 
-  final Widget? child;
-  final String name;
+  final String patientName;
   final String disease;
   final String doctorName;
   final String nurseName;
@@ -26,7 +32,7 @@ class PatientCard extends StatelessWidget {
       ], borderRadius: BorderRadius.circular(15), color: cWhiteBase),
       child: ListTile(
         title: Text(
-          name,
+          patientName,
           style: textStyle.copyWith(fontSize: 16, fontWeight: FontWeight.w600),
         ),
         subtitle: Column(
@@ -47,7 +53,7 @@ class PatientCard extends StatelessWidget {
                     builder: (context) => const DetailScheduleNurse(),
                   ));
             },
-            icon: Icon(Icons.arrow_forward_ios)),
+            icon: const Icon(Icons.arrow_forward_ios)),
       ),
     );
   }
