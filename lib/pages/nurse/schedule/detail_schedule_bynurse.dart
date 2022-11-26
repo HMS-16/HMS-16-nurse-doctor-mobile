@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hms_16/pages/nurse/schedule/change_doctor_bynurse.dart';
 import 'package:hms_16/pages/nurse/schedule/change_schedule_bynurse.dart';
+import 'package:hms_16/pages/nurse/schedule/detail_patient_bynurse.dart';
 import 'package:hms_16/style/theme.dart';
 
 class DetailScheduleNurse extends StatelessWidget {
@@ -9,28 +10,20 @@ class DetailScheduleNurse extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        iconTheme: IconThemeData(color: cBlack),
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        title: Text(
+          'Schedule Detail',
+          style: textStyle.copyWith(
+              fontSize: 20, fontWeight: FontWeight.w600, color: cBlackBase),
+        ),
+      ),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Column(
           children: [
-            ListTile(
-              leading: IconButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  icon: Icon(
-                    Icons.arrow_back,
-                    color: cIcon,
-                  )),
-              title: Text("Schedule Detail",
-                  style: textStyle.copyWith(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w700,
-                      color: cBlackBase)),
-            ),
-            const SizedBox(
-              height: 28.0,
-            ),
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 16),
               padding: const EdgeInsets.only(top: 20),
@@ -98,7 +91,13 @@ class DetailScheduleNurse extends StatelessWidget {
                           fontWeight: FontWeight.w700),
                     ),
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const PatientDetailNurse(),
+                            ));
+                      },
                       icon: Icon(
                         Icons.arrow_forward,
                         color: cIcon,

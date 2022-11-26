@@ -11,7 +11,7 @@ class PatientCard extends StatelessWidget {
       required this.doctorName,
       required this.nurseName,
       required this.time,
-      required this.icon});
+      required this.icon, required this.onPressed});
 
   final String patientName;
   final String disease;
@@ -19,6 +19,7 @@ class PatientCard extends StatelessWidget {
   final String nurseName;
   final String time;
   final CircleAvatar icon;
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -47,13 +48,7 @@ class PatientCard extends StatelessWidget {
         ),
         leading: icon,
         trailing: IconButton(
-            onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const DetailScheduleNurse(),
-                  ));
-            },
+            onPressed: onPressed,
             icon: const Icon(Icons.arrow_forward_ios)),
       ),
     );

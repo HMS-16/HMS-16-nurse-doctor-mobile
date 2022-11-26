@@ -12,7 +12,9 @@ Color cSecondaryLightest = const Color.fromRGBO(244, 248, 253, 1);
 Color cWhiteDarker = const Color.fromRGBO(227, 227, 227, 1);
 Color cInfoLightest = const Color.fromRGBO(171, 227, 239, 1);
 Color cInfoLight = const Color.fromRGBO(86, 200, 222, 1);
-Color cPrimaryBase = const Color.fromRGBO(17, 83, 181, 1);
+Color cPrimaryBase = const Color(0xff1153B5);
 Color cSuccessBase = const Color.fromRGBO(41, 153, 29, 1);
+Color cPrimaryLight = const Color(0xff608CCE);
+Color cBlack = const Color(0xff000000);
 
 TextStyle textStyle = GoogleFonts.nunito();
