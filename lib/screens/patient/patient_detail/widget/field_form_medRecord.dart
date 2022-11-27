@@ -39,37 +39,21 @@ class FieldMedRecord extends StatelessWidget {
         ),
         SizedBox(height: 4),
         TextFormField(
-          // style: TextStyle(
-          //   color: Colors.black,
-          // ),
-          // maxLength: line,
           keyboardType: line != null ? TextInputType.multiline : null,
-          // expands: true,
-          maxLines: line,
-          // minLines: line,
+          maxLines: line ?? null,
           cursorColor: Colors.black12,
           decoration: InputDecoration(
-            // filled: true,
-            // fillColor: Colors.grey.shade300,
-            // suffixText: suffix,
-            // suffixStyle: TextStyle(color: Colors.transparent),
+            contentPadding: line == null ? EdgeInsets.only(left: 13) : null,
             suffixIcon: isSuffix
                 ? Align(
                     alignment: Alignment.center,
                     widthFactor: 1.0,
-                    // heightFactor: 5.0,
                     child: Text(
                       suffix!,
                       style: TextStyle(color: Colors.black45),
                     ),
                   )
                 : null,
-            // suffix: isSuffix
-            //     ? Padding(
-            //         padding: const EdgeInsets.only(right: 0, top: 14),
-            //         child: Text(suffix!),
-            //       )
-            //     : null,
             hintText: text,
             border: OutlineInputBorder(
               borderSide: BorderSide(
@@ -83,9 +67,6 @@ class FieldMedRecord extends StatelessWidget {
               ),
               borderRadius: BorderRadius.circular(12),
             ),
-            // constraints: BoxConstraints(
-            //   maxHeight: 43,
-            // ),
             hintStyle: TextStyle(
               color: Colors.black45,
               fontSize: 14,
