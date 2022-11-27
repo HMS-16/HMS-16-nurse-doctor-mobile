@@ -31,7 +31,7 @@ class _TileMedRecordState extends State<TileMedRecord> {
               textColor: Colors.black,
               backgroundColor: Color(0xffE3E3E3),
               collapsedBackgroundColor: Colors.white,
-              leading: Icon(Icons.account_circle),
+              leading: Icon(Icons.account_circle, size: 38),
               tilePadding: EdgeInsets.symmetric(vertical: 8,horizontal: 16),
               title: Text(
                 'Nurul Zakiah',

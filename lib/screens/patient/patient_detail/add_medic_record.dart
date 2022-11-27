@@ -45,6 +45,12 @@ class _AddMedRecordState extends State<AddMedRecord> {
           ),
           SizedBox(height: 10),
           FieldMedRecord(
+            title: 'Resting Heart Rate',
+            text: 'Resting Heart Rate',
+            suffix: 'bpm',
+          ),
+          SizedBox(height: 10),
+          FieldMedRecord(
             title: 'Breath Rate',
             text: 'Breath Rate',
             suffix: 'rpm',
