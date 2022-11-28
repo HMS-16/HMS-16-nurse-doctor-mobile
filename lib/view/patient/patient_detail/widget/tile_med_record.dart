@@ -16,17 +16,19 @@ class _TileMedRecordState extends State<TileMedRecord> {
       margin: EdgeInsets.symmetric(vertical: 10),
       decoration: BoxDecoration(
         boxShadow: [
-          BoxShadow(
-            blurRadius: 20,
-            spreadRadius: -18,
-          ),
+          if (!_customTileExpanded) ...[
+            BoxShadow(
+              blurRadius: 20,
+              spreadRadius: -17,
+            ),
+          ],
         ],
       ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(12),
-        child: Stack(
-          children: [
-            ExpansionTile(
+      child: Stack(
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(12),
+            child: ExpansionTile(
               iconColor: Colors.black54,
               textColor: Colors.black,
               backgroundColor: Color(0xffE3E3E3),
@@ -190,26 +192,26 @@ class _TileMedRecordState extends State<TileMedRecord> {
                 ),
               ],
             ),
-            Positioned(
-              top: 26,
-              child: Container(
-                width: 4,
-                height: _customTileExpanded ? 200 : 40,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                      Color(0xff0061E4),
-                      Color(0xffC0DBFF),
-                    ],
-                  ),
+          ),
+          Positioned(
+            top: 26,
+            child: Container(
+              width: 4,
+              height: _customTileExpanded ? 200 : 40,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Color(0xff0061E4),
+                    Color(0xffC0DBFF),
+                  ],
                 ),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

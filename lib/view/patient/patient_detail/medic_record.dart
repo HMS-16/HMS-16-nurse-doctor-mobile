@@ -1,7 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hms_16/screens/patient/patient_detail/widget/field_form_medRecord.dart';
-import 'package:hms_16/screens/patient/patient_detail/widget/tile_med_record.dart';
+import 'package:hms_16/view/patient/patient_detail/widget/tile_med_record.dart';
 import 'add_medic_record.dart';
 
 class MedicalRecord extends StatefulWidget {
@@ -21,7 +19,7 @@ class _MedicalRecordState extends State<MedicalRecord> {
         top: 10,
         left: 10,
         right: 10,
-        bottom: 80,
+        bottom: 70,
       ),
       children: [
         ElevatedButton.icon(
@@ -45,6 +43,13 @@ class _MedicalRecordState extends State<MedicalRecord> {
             style: TextStyle(fontSize: 13),
           ),
         ),
+        TileMedRecord(),
+        TileMedRecord(),
+        TileMedRecord(),
+        TileMedRecord(),
+        TileMedRecord(),
+        TileMedRecord(),
+        TileMedRecord(),
         TileMedRecord(),
         TileMedRecord(),
         TileMedRecord(),
