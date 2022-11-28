@@ -27,28 +27,60 @@ class _HomePageState extends State<HomePage> {
       body: Column(
         children: [
           Tile(
-            title: "Hi Dr. Abed",
-            subtitle: "Let's check your schedule today",
+            title: const Text(
+              "Hi Dr. Abed!",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+            ),
+            subtitle: const Text(
+              "Let's check your schedule today",
+              style: TextStyle(color: Colors.black, fontSize: 13),
+            ),
             trailing: Row(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                IconButton(onPressed: () {}, icon: Icon(Icons.notifications)),
+                IconButton(
+                    onPressed: () {},
+                    icon: const Icon(
+                      Icons.notifications_none,
+                      color: Colors.black,
+                    )),
                 CircleAvatar(
                   backgroundColor: Colors.grey.shade200,
-                  child: Text("MK"),
+                  child: const Text("MK"),
                 ),
               ],
             ),
           ),
           Tile(
-            title: "Patient Statistic",
-            subtitle: DateFormat("EEE, d MMM yy").format(DateTime.now()),
+            title: const Text(
+              "Patient Statistic",
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            subtitle: Text(DateFormat("EEE, d MMM yy").format(DateTime.now())),
             trailing: Row(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                TextButton(onPressed: () {}, child: Text("WEEK")),
-                TextButton(onPressed: () {}, child: Text("MONTH")),
-                TextButton(onPressed: () {}, child: Text("YEAR")),
+                TextButton(
+                    onPressed: () {},
+                    child: const Text(
+                      "WEEK",
+                      style: TextStyle(
+                          color: Colors.black, fontWeight: FontWeight.bold),
+                    )),
+                TextButton(
+                    onPressed: () {},
+                    child: const Text(
+                      "MONTH",
+                      style: TextStyle(
+                          color: Colors.grey, fontWeight: FontWeight.bold),
+                    )),
+                TextButton(
+                    onPressed: () {},
+                    child: const Text(
+                      "YEAR",
+                      style: TextStyle(
+                          color: Colors.grey, fontWeight: FontWeight.bold),
+                    )),
               ],
             ),
           ),
@@ -73,106 +105,197 @@ class _HomePageState extends State<HomePage> {
                   borderColor: Colors.transparent),
               series: <ChartSeries<ChartData, int>>[
                 SplineAreaSeries(
-                  splineType: SplineType.natural,
-                  dataSource: data,
-                  xValueMapper: (ChartData data, _) => data.day,
-                  yValueMapper: (ChartData data, _) => data.patient,
-                  color: Colors.grey.shade200,
-                ),
+                    splineType: SplineType.natural,
+                    dataSource: data,
+                    xValueMapper: (ChartData data, _) => data.day,
+                    yValueMapper: (ChartData data, _) => data.patient,
+                    color: Colors.grey.shade200,
+                    gradient: const LinearGradient(
+                        colors: [
+                          Color.fromRGBO(96, 140, 206, 1),
+                          Colors.white,
+                        ],
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter)),
                 SplineSeries(
                   dataSource: data,
-                  color: Colors.black,
+                  color: const Color.fromRGBO(96, 140, 206, 1),
                   width: 4,
-                  markerSettings: MarkerSettings(
-                      // color: Colors.black,
-                      borderWidth: 7,
+                  markerSettings: const MarkerSettings(
+                      width: 12,
+                      height: 12,
+                      color: Colors.black,
+                      borderWidth: 2,
                       shape: DataMarkerType.circle,
                       isVisible: true,
-                      borderColor: Colors.black),
+                      borderColor: Colors.white),
                   xValueMapper: (ChartData data, _) => data.day,
                   yValueMapper: (ChartData data, _) => data.patient,
                 )
               ],
             ),
           ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: const [
+              Text(
+                "Mon",
+                style: TextStyle(fontSize: 16),
+              ),
+              Text(
+                "Tue",
+                style: TextStyle(fontSize: 16),
+              ),
+              Text(
+                "Wed",
+                style: TextStyle(fontSize: 16),
+              ),
+              Text(
+                "Thu",
+                style: TextStyle(fontSize: 16),
+              ),
+              Text(
+                "Fri",
+                style: TextStyle(fontSize: 16),
+              ),
+            ],
+          ),
           Tile(
-              title: "Today's Schedule",
-              subtitle: DateFormat("EEE, d MMM yy").format(DateTime.now())),
+              title: const Text("Today's Schedule",
+                  style: TextStyle(fontWeight: FontWeight.bold)),
+              subtitle:
+                  Text(DateFormat("EEE, d MMM yy").format(DateTime.now()))),
           Expanded(
               child: ListView(
             children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Card(
-                  color: Colors.grey.shade300,
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                    child: Column(
-                      children: [
-                        Tile(
-                          leading: CircleAvatar(
-                              backgroundColor: Colors.grey.shade800),
-                          title: "Dummy 1",
-                          subtitle: "Headache",
-                          trailing: Container(
-                            padding: EdgeInsets.all(5),
-                            decoration: BoxDecoration(
-                                shape: BoxShape.circle, color: Colors.white),
-                            child: Icon(
-                              Icons.arrow_forward_ios,
-                              color: Colors.black,
-                              size: 20,
+                child: Stack(
+                  children: [
+                    Card(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)),
+                      elevation: 8,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 10, horizontal: 10),
+                        child: Column(
+                          children: [
+                            Tile(
+                              leading: CircleAvatar(
+                                  backgroundColor: Colors.grey.shade800),
+                              title: const Text(
+                                "Alief Rachman",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 15),
+                              ),
+                              subtitle: const Text("Headache"),
+                              trailing: Container(
+                                margin: const EdgeInsets.only(top: 40),
+                                padding: const EdgeInsets.all(5),
+                                child: const Icon(
+                                  Icons.arrow_forward_ios,
+                                  color: Colors.black,
+                                  size: 20,
+                                ),
+                              ),
                             ),
-                          ),
+                            Container(
+                              alignment: Alignment.centerLeft,
+                              margin: const EdgeInsets.fromLTRB(70, 10, 0, 20),
+                              child: Text(
+                                "1.30 pm - 2.30 pm",
+                                style: TextStyle(color: Colors.grey.shade600),
+                              ),
+                            )
+                          ],
                         ),
-                        Container(
-                          alignment: Alignment.centerLeft,
-                          margin: EdgeInsets.fromLTRB(70, 10, 0, 20),
-                          child: Text(
-                            "1.30 pm - 2.30 pm",
-                            style: TextStyle(color: Colors.grey.shade600),
-                          ),
-                        )
-                      ],
+                      ),
                     ),
-                  ),
+                    Positioned(
+                        top: 40,
+                        left: 5,
+                        child: Container(
+                          height: 70,
+                          width: 5,
+                          decoration: BoxDecoration(
+                              gradient: const LinearGradient(
+                                colors: [
+                                  Color.fromRGBO(0, 97, 228, 1),
+                                  Color.fromRGBO(192, 219, 255, 1),
+                                ],
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                              ),
+                              // color: Colors.blue,
+                              borderRadius: BorderRadius.circular(30)),
+                        ))
+                  ],
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Card(
-                  color: Colors.grey.shade300,
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                    child: Column(
-                      children: [
-                        Tile(
-                          leading: CircleAvatar(
-                              backgroundColor: Colors.grey.shade800),
-                          title: "Dummy 2",
-                          subtitle: "Headache",
-                          trailing: Container(
-                            padding: EdgeInsets.all(5),
-                            decoration: BoxDecoration(
-                                shape: BoxShape.circle, color: Colors.white),
-                            child: Icon(
-                              Icons.arrow_forward_ios,
-                              color: Colors.black,
-                              size: 20,
+                child: Stack(
+                  children: [
+                    Card(
+                      elevation: 8,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 10, horizontal: 10),
+                        child: Column(
+                          children: [
+                            Tile(
+                              leading: CircleAvatar(
+                                  backgroundColor: Colors.grey.shade800),
+                              title: const Text(
+                                "Nurul Zakiah",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 15),
+                              ),
+                              subtitle: const Text("Headache"),
+                              trailing: Container(
+                                padding: const EdgeInsets.all(5),
+                                margin: const EdgeInsets.only(top: 40),
+                                child: const Icon(
+                                  Icons.arrow_forward_ios,
+                                  color: Colors.black,
+                                  size: 20,
+                                ),
+                              ),
                             ),
-                          ),
+                            Container(
+                              alignment: Alignment.centerLeft,
+                              margin: const EdgeInsets.fromLTRB(70, 10, 0, 20),
+                              child: Text(
+                                "1.30 pm - 2.30 pm",
+                                style: TextStyle(color: Colors.grey.shade600),
+                              ),
+                            )
+                          ],
                         ),
-                        Container(
-                          alignment: Alignment.centerLeft,
-                          margin: EdgeInsets.fromLTRB(70, 10, 0, 20),
-                          child: Text(
-                            "1.30 pm - 2.30 pm",
-                            style: TextStyle(color: Colors.grey.shade600),
-                          ),
-                        )
-                      ],
+                      ),
                     ),
-                  ),
+                    Positioned(
+                        top: 40,
+                        left: 5,
+                        child: Container(
+                          height: 70,
+                          width: 5,
+                          decoration: BoxDecoration(
+                              gradient: const LinearGradient(
+                                colors: [
+                                  Color.fromRGBO(221, 159, 0, 1),
+                                  Color.fromRGBO(255, 233, 119, 1),
+                                ],
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                              ),
+                              // color: Colors.blue,
+                              borderRadius: BorderRadius.circular(30)),
+                        ))
+                  ],
                 ),
               )
             ],
@@ -184,8 +307,8 @@ class _HomePageState extends State<HomePage> {
 }
 
 class Tile extends StatelessWidget {
-  final String title;
-  final String subtitle;
+  final Widget title;
+  final Widget? subtitle;
   final Widget? trailing;
   final Widget? leading;
   const Tile({
@@ -199,8 +322,8 @@ class Tile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      title: Text(title),
-      subtitle: Text(subtitle),
+      title: title,
+      subtitle: subtitle,
       trailing: trailing,
       leading: leading,
     );

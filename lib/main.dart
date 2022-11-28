@@ -21,17 +21,17 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        elevatedButtonTheme: ElevatedButtonThemeData(style: ElevatedButton.styleFrom(
-          foregroundColor: Color.fromRGBO(17, 83, 181, 1)
-        )),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+            style: ElevatedButton.styleFrom(
+                foregroundColor: Color.fromRGBO(17, 83, 181, 1))),
         appBarTheme: AppBarTheme(
           backgroundColor: Colors.grey.shade200,
         ),
         scaffoldBackgroundColor: Colors.white,
-        iconTheme: IconThemeData(color: Colors.black),
-         textTheme: GoogleFonts.nunitoTextTheme(
-      Theme.of(context).textTheme,
-    ),
+        iconTheme: const IconThemeData(color: Colors.black),
+        textTheme: GoogleFonts.nunitoTextTheme(
+          Theme.of(context).textTheme,
+        ),
       ),
       home: LandingPage(),
     );

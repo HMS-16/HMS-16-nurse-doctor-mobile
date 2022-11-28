@@ -26,8 +26,8 @@ class _NavBarState extends State<NavBar> {
       bottomNavigationBar: BottomNavigationBar(
           currentIndex: currenticon,
           type: BottomNavigationBarType.fixed,
-          backgroundColor: Colors.grey.shade200,
-          selectedItemColor: Colors.black,
+          backgroundColor: Colors.grey.shade100,
+          selectedItemColor: Colors.blue,
           unselectedItemColor: Colors.black26,
           onTap: (value) {
             setState(() {
@@ -44,8 +44,8 @@ class _NavBarState extends State<NavBar> {
               label: "Patient",
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.date_range_outlined),
-              label: "My Schedule",
+              icon: Icon(Icons.person_pin_rounded),
+              label: "Schedule",
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.message),
