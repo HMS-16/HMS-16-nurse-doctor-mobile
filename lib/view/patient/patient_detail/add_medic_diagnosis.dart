@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'widget/field_form_medRecord.dart';
 
-class AddMedRecord extends StatefulWidget {
-  const AddMedRecord({super.key});
+class AddMedDiagnosis extends StatefulWidget {
+  const AddMedDiagnosis({super.key});
 
   @override
-  State<AddMedRecord> createState() => _AddMedRecordState();
+  State<AddMedDiagnosis> createState() => _AddMedDiagnosisState();
 }
 
-class _AddMedRecordState extends State<AddMedRecord> {
+class _AddMedDiagnosisState extends State<AddMedDiagnosis> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,7 +17,7 @@ class _AddMedRecordState extends State<AddMedRecord> {
         foregroundColor: Colors.black,
         centerTitle: true,
         title: Text(
-          'Medical Record',
+          'Medical Diagnosis',
           style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
         ),
         leading: GestureDetector(
@@ -29,46 +29,23 @@ class _AddMedRecordState extends State<AddMedRecord> {
         padding: EdgeInsets.all(10),
         children: [
           FieldMedRecord(
-            title: 'Height',
-            text: 'Height',
-            suffix: 'Kg',
+            title: 'Date',
+            text: 'MM/DD/YYYY',
+            isSuffix: false,
           ),
+          // SizedBox(height: 10),
           SizedBox(height: 10),
           FieldMedRecord(
-            title: 'Weight',
-            text: 'Weight',
-            suffix: 'Kg',
-          ),
-          SizedBox(height: 10),
-          FieldMedRecord(
-            title: 'Blood Pressure',
-            text: 'Blood Pressure',
-            suffix: 'mmHg',
-          ),
-          SizedBox(height: 10),
-          FieldMedRecord(
-            title: 'Body Temperature',
-            text: 'Body Temperature',
-            suffix: 'C',
-          ),
-          SizedBox(height: 10),
-          FieldMedRecord(
-            title: 'Resting Heart Rate',
-            text: 'Resting Heart Rate',
-            suffix: 'bpm',
-          ),
-          SizedBox(height: 10),
-          FieldMedRecord(
-            title: 'Breath Rate',
-            text: 'Breath Rate',
-            suffix: 'rpm',
-          ),
-          SizedBox(height: 10),
-          FieldMedRecord(
-            title: 'Note',
-            text: 'Add Note',
+            title: 'Diagnosis',
+            text: 'Add Diagnosis',
             line: 3,
-            isRequired: false,
+            isSuffix: false,
+          ),
+          SizedBox(height: 10),
+          FieldMedRecord(
+            title: 'Prescription',
+            text: 'Add Prescription',
+            line: 3,
             isSuffix: false,
           ),
           SizedBox(height: 10),

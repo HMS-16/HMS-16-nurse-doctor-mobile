@@ -18,7 +18,10 @@ class _PatientDetailState extends State<PatientDetail> {
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(110),
           child: AppBar(
-            title: const Text('Patient Detail'),
+            title: const Text(
+              'Patient Detail',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+            ),
             bottom: TabBar(
               labelColor: Color.fromRGBO(17, 83, 181, 1),
               unselectedLabelColor: Color.fromRGBO(96, 140, 206, 0.5),

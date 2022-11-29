@@ -1,8 +1,6 @@
-// import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hms_16/view/patient/patient_detail/add_medic_diagnosis.dart';
 import 'package:hms_16/view/patient/patient_detail/widget/tile_med_diagnosis.dart';
-import 'package:hms_16/view/patient/patient_detail/widget/tile_med_record.dart';
-import 'add_medic_record.dart';
 
 class MedicalDiagnosis extends StatefulWidget {
   const MedicalDiagnosis({super.key});
@@ -23,7 +21,12 @@ class _MedicalDiagnosisState extends State<MedicalDiagnosis> {
       ),
       children: [
         ElevatedButton.icon(
-          onPressed: (() {}),
+          onPressed: (() {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: ((context) => AddMedDiagnosis())),
+            );
+          }),
           style: ElevatedButton.styleFrom(
             backgroundColor: Color(0xff1153B5),
             foregroundColor: Colors.white,
