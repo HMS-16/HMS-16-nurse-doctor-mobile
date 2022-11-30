@@ -10,17 +10,23 @@ class PatientCard extends StatelessWidget {
     return Container(
       height: 110,
       width: 358,
-      decoration: const BoxDecoration(
-        borderRadius: BorderRadius.all(
+      decoration: BoxDecoration(
+        borderRadius: const BorderRadius.all(
           Radius.circular(15),
         ),
-        color: Color.fromRGBO(244, 248, 253, 1),
+        color: const Color.fromRGBO(253, 253, 253, 1),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            blurRadius: 10,
+          )
+        ],
       ),
       child: Row(
         children: [
           Container(
-            width: 5,
-            height: 70,
+            width: 3.5,
+            height: 60,
             decoration: const BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
