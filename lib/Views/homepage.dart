@@ -90,15 +90,15 @@ class _HomePageState extends State<HomePage> {
               borderWidth: 0,
               backgroundColor: Colors.transparent,
               primaryXAxis: NumericAxis(
-                  minimum: 1,
-                  maximum: 7,
-                  isVisible: false,
+                  // minimum: 1,
+                  // maximum: 7,
+                  // isVisible: false,
                   interval: 1,
                   borderWidth: 0,
                   borderColor: Colors.transparent),
               primaryYAxis: NumericAxis(
-                  minimum: 1,
-                  maximum: 20,
+                  // minimum: 1,
+                  // maximum: 20,
                   interval: 5,
                   isVisible: false,
                   borderWidth: 0,
@@ -134,31 +134,6 @@ class _HomePageState extends State<HomePage> {
                 )
               ],
             ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: const [
-              Text(
-                "Mon",
-                style: TextStyle(fontSize: 16),
-              ),
-              Text(
-                "Tue",
-                style: TextStyle(fontSize: 16),
-              ),
-              Text(
-                "Wed",
-                style: TextStyle(fontSize: 16),
-              ),
-              Text(
-                "Thu",
-                style: TextStyle(fontSize: 16),
-              ),
-              Text(
-                "Fri",
-                style: TextStyle(fontSize: 16),
-              ),
-            ],
           ),
           Tile(
               title: const Text("Today's Schedule",

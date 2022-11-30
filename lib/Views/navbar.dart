@@ -34,7 +34,7 @@ class _NavBarState extends State<NavBar> {
               currenticon = value;
             });
           },
-          items: [
+          items: const [
             BottomNavigationBarItem(
               icon: Icon(Icons.home),
               label: "Home",

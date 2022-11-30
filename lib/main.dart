@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hms_16/Views/navbar.dart';
-import 'package:hms_16/regis_login/Views/landing_page.dart';
+import 'package:hms_16/Views/splash.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
           Theme.of(context).textTheme,
         ),
       ),
-      home: LandingPage(),
+      home: SplashScreen(),
     );
   }
 }
