@@ -1,8 +1,10 @@
-import 'package:hms_16/Models/data.dart';
-import 'package:hms_16/Widgets/button.dart';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hms_16/Models/data.dart';
+import 'package:hms_16/Views/login_page.dart';
+import 'package:hms_16/Widgets/button.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class LandingPage extends StatefulWidget {
@@ -22,9 +24,9 @@ class _LandingPageState extends State<LandingPage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           CarouselSlider.builder(
-            // carouselController: controlSlider,
             itemCount: adddata.length,
             options: CarouselOptions(
+              autoPlay: true,
               viewportFraction: 1,
               onPageChanged: (index, reason) {
                 setState(() {
@@ -34,11 +36,10 @@ class _LandingPageState extends State<LandingPage> {
               initialPage: 0,
             ),
             itemBuilder: (context, index, pageindex) => CardItem(
-                netimage: adddata[index].networkimage,
-                deks: adddata[index].text),
+                netimage: adddata[index].urlimage, deks: adddata[index].text),
           ),
           SizedBox(
-            height: 10,
+            height: 40,
           ),
           AnimatedSmoothIndicator(
             activeIndex: activeIndex,
@@ -48,22 +49,15 @@ class _LandingPageState extends State<LandingPage> {
               dotHeight: 10,
             ),
           ),
-          Button(
-            bgcolor: Color.fromARGB(255, 205, 205, 205),
-            text: 'SIGN UP NOW!',
-            margin: EdgeInsets.only(top: 50),
-            onpressed: () {
-              // Navigator.push(context,
-              //     MaterialPageRoute(builder: (context) => SignUp1Page()));
-            },
+          SizedBox(
+            height: 40,
           ),
           Button(
-            text: "SIGN IN",
-            bgcolor: Colors.black,
-            margin: EdgeInsets.only(top: 15),
+            text: "Sign In",
+            margin: EdgeInsets.only(top: 5),
             onpressed: () {
-              // Navigator.push(context,
-              //     MaterialPageRoute(builder: (context) => LoginPage()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => LoginPage()));
             },
           ),
         ],
@@ -88,7 +82,7 @@ class CardItem extends StatelessWidget {
             height: 130,
             decoration: BoxDecoration(
                 image: DecorationImage(
-                    image: NetworkImage(netimage), fit: BoxFit.fitHeight)),
+                    image: AssetImage(netimage), fit: BoxFit.fitHeight)),
           ),
           Container(
               padding: const EdgeInsets.symmetric(horizontal: 20),

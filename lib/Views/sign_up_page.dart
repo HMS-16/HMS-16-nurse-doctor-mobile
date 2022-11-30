@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:hms_16/Widgets/button.dart';
 
 import 'login_page.dart';
 
-class SignUp1Page extends StatefulWidget {
-  const SignUp1Page({Key? key}) : super(key: key);
+class SignUpPage extends StatefulWidget {
+  const SignUpPage({Key? key}) : super(key: key);
 
   @override
-  State<SignUp1Page> createState() => _SignUp1PageState();
+  State<SignUpPage> createState() => _SignUpPageState();
 }
 
-class _SignUp1PageState extends State<SignUp1Page> {
+class _SignUpPageState extends State<SignUpPage> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,8 +21,8 @@ class _SignUp1PageState extends State<SignUp1Page> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Text(
-              "Sign up",
-              style: TextStyle(fontSize: 32, fontWeight: FontWeight.w400),
+              "Registration New User",
+              style: TextStyle(fontSize: 21, fontWeight: FontWeight.bold),
             ),
             const SizedBox(
               height: 44.0,
@@ -40,16 +42,14 @@ class _SignUp1PageState extends State<SignUp1Page> {
               height: 29.0,
             ),
             TextFormField(
-              decoration: InputDecoration(
-                  border: const OutlineInputBorder(),
-                  prefixIcon: const Icon(
-                    Icons.person,
+              decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  prefixIcon: Icon(
+                    Icons.shield_rounded,
                     color: Colors.black,
                   ),
-                  hintText: "Member ID",
-                  labelText: "Member ID",
-                  suffixIcon: IconButton(
-                      onPressed: () {}, icon: const Icon(Icons.visibility)),
+                  hintText: "Registration Number",
+                  labelText: "Registration Number",
                   floatingLabelBehavior: FloatingLabelBehavior.always),
             ),
             const SizedBox(
@@ -59,25 +59,11 @@ class _SignUp1PageState extends State<SignUp1Page> {
               decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   prefixIcon: Icon(
-                    Icons.person,
+                    Icons.email,
                     color: Colors.black,
                   ),
                   hintText: "Email",
                   labelText: "Email",
-                  floatingLabelBehavior: FloatingLabelBehavior.always),
-            ),
-            const SizedBox(
-              height: 29.0,
-            ),
-            TextFormField(
-              decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  prefixIcon: Icon(
-                    Icons.person,
-                    color: Colors.black,
-                  ),
-                  hintText: "Phone Number",
-                  labelText: "Phone Number",
                   floatingLabelBehavior: FloatingLabelBehavior.always),
             ),
             const SizedBox(
@@ -115,30 +101,20 @@ class _SignUp1PageState extends State<SignUp1Page> {
             const SizedBox(
               height: 34.0,
             ),
-            SizedBox(
-              width: MediaQuery.of(context).size.width,
-              height: 48,
-              child: ElevatedButton(
-                  onPressed: () {},
-                  style: const ButtonStyle(
-                      backgroundColor: MaterialStatePropertyAll(Colors.black)),
-                  child: const Text("LOGIN")),
-            ),
+
+            Button(
+                text: "Register",
+                onpressed: () {
+                  showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                            title: Text("Register New User"),
+                          ));
+                }),
             const SizedBox(
               height: 17.0,
             ),
-            TextButton(
-                onPressed: () {
-                  Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const LoginPage(),
-                      ));
-                },
-                child: const Text(
-                  "Already have an account? Log in here",
-                  style: TextStyle(color: Colors.black, fontSize: 12),
-                ))
+
           ],
         ),
       ),
