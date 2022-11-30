@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hms_16/Views/navbar.dart';
 import 'package:hms_16/Views/splash.dart';
 
 void main() {
@@ -23,17 +22,22 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         elevatedButtonTheme: ElevatedButtonThemeData(
             style: ElevatedButton.styleFrom(
-                foregroundColor: Color.fromRGBO(17, 83, 181, 1))),
-        appBarTheme: AppBarTheme(
-          backgroundColor: Colors.grey.shade200,
-        ),
+                foregroundColor: const Color.fromRGBO(17, 83, 181, 1))),
+        appBarTheme: const AppBarTheme(
+            iconTheme: IconThemeData(color: Colors.black),
+            elevation: 0,
+            backgroundColor: Colors.transparent,
+            titleTextStyle: TextStyle(
+                color: Colors.black,
+                fontSize: 18,
+                fontWeight: FontWeight.bold)),
         scaffoldBackgroundColor: Colors.white,
         iconTheme: const IconThemeData(color: Colors.black),
         textTheme: GoogleFonts.nunitoTextTheme(
           Theme.of(context).textTheme,
         ),
       ),
-      home: SplashScreen(),
+      home: const SplashScreen(),
     );
   }
 }

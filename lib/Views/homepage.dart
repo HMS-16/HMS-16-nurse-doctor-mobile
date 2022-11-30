@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hms_16/Models/chart_model.dart';
+import 'package:hms_16/Views/notification.dart';
+import 'package:hms_16/Views/profile.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
@@ -26,7 +28,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: Column(
         children: [
-          Tile(
+          ListTile(
             title: const Text(
               "Hi Dr. Abed!",
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
@@ -39,19 +41,34 @@ class _HomePageState extends State<HomePage> {
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const NotificationPage()));
+                    },
                     icon: const Icon(
                       Icons.notifications_none,
                       color: Colors.black,
                     )),
-                CircleAvatar(
-                  backgroundColor: Colors.grey.shade200,
-                  child: const Text("MK"),
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const ProfilePage(),
+                        ));
+                  },
+                  child: CircleAvatar(
+                    backgroundColor: Colors.grey.shade200,
+                    child:
+                        const Image(image: AssetImage("assets/Ellipse 17.png")),
+                  ),
                 ),
               ],
             ),
           ),
-          Tile(
+          ListTile(
             title: const Text(
               "Patient Statistic",
               style: TextStyle(fontWeight: FontWeight.bold),
@@ -103,7 +120,7 @@ class _HomePageState extends State<HomePage> {
                   isVisible: false,
                   borderWidth: 0,
                   borderColor: Colors.transparent),
-              series: <ChartSeries<ChartData, int>>[
+              series: <ChartSeries<ChartData, dynamic>>[
                 SplineAreaSeries(
                     splineType: SplineType.natural,
                     dataSource: data,
@@ -135,7 +152,7 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
           ),
-          Tile(
+          ListTile(
               title: const Text("Today's Schedule",
                   style: TextStyle(fontWeight: FontWeight.bold)),
               subtitle:
@@ -156,9 +173,12 @@ class _HomePageState extends State<HomePage> {
                             vertical: 10, horizontal: 10),
                         child: Column(
                           children: [
-                            Tile(
+                            ListTile(
                               leading: CircleAvatar(
-                                  backgroundColor: Colors.grey.shade800),
+                                  backgroundColor: Colors.grey.shade800,
+                                  child: const Image(
+                                      image:
+                                          AssetImage("assets/Ellipse 14.png"))),
                               title: const Text(
                                 "Alief Rachman",
                                 style: TextStyle(
@@ -221,9 +241,12 @@ class _HomePageState extends State<HomePage> {
                             vertical: 10, horizontal: 10),
                         child: Column(
                           children: [
-                            Tile(
+                            ListTile(
                               leading: CircleAvatar(
-                                  backgroundColor: Colors.grey.shade800),
+                                  backgroundColor: Colors.grey.shade800,
+                                  child: const Image(
+                                      image: AssetImage(
+                                          "assets/Ellipse 14 (1).png"))),
                               title: const Text(
                                 "Nurul Zakiah",
                                 style: TextStyle(
@@ -277,30 +300,6 @@ class _HomePageState extends State<HomePage> {
           ))
         ],
       ),
-    );
-  }
-}
-
-class Tile extends StatelessWidget {
-  final Widget title;
-  final Widget? subtitle;
-  final Widget? trailing;
-  final Widget? leading;
-  const Tile({
-    Key? key,
-    required this.title,
-    required this.subtitle,
-    this.trailing,
-    this.leading,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      title: title,
-      subtitle: subtitle,
-      trailing: trailing,
-      leading: leading,
     );
   }
 }
