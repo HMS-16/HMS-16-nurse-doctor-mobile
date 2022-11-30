@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'widget/field_form_medRecord.dart';
+import 'package:hms_16/widget/field_form_medical.dart';
 
 class AddMedDiagnosis extends StatefulWidget {
   const AddMedDiagnosis({super.key});
@@ -28,27 +28,27 @@ class _AddMedDiagnosisState extends State<AddMedDiagnosis> {
       body: ListView(
         padding: EdgeInsets.all(10),
         children: [
-          FieldMedRecord(
+          FieldMedical(
             title: 'Date',
             text: 'MM/DD/YYYY',
             isSuffix: false,
           ),
           // SizedBox(height: 10),
           SizedBox(height: 10),
-          FieldMedRecord(
+          FieldMedical(
             title: 'Diagnosis',
             text: 'Add Diagnosis',
             line: 3,
             isSuffix: false,
           ),
           SizedBox(height: 10),
-          FieldMedRecord(
+          FieldMedical(
             title: 'Prescription',
             text: 'Add Prescription',
             line: 3,
             isSuffix: false,
           ),
-          SizedBox(height: 10),
+          SizedBox(height: 15),
           ElevatedButton(
             onPressed: (() {}),
             style: ElevatedButton.styleFrom(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hms_16/view/patient/patient_detail/medic_diagnosis.dart';
-import 'package:hms_16/view/patient/patient_detail/medic_record.dart';
+import 'package:hms_16/views/patient/medic_record.dart';
+import 'package:hms_16/views/patient/medic_diagnosis.dart';
 
 class PatientDetail extends StatefulWidget {
   const PatientDetail({super.key});

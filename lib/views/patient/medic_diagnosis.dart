@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hms_16/view/patient/patient_detail/add_medic_diagnosis.dart';
-import 'package:hms_16/view/patient/patient_detail/widget/tile_med_diagnosis.dart';
+import 'package:hms_16/widget/tile_med_diagnosis.dart';
+import 'package:hms_16/views/patient/add_medic_diagnosis.dart';
 
 class MedicalDiagnosis extends StatefulWidget {
   const MedicalDiagnosis({super.key});

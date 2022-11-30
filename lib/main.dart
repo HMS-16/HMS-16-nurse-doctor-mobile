@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hms_16/view/patient/patient_detail/patient_detail.dart';
+import 'package:hms_16/views/patient/patient_detail.dart';
 
 void main() {
   runApp(const MyApp());

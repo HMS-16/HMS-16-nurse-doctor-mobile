@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'widget/field_form_medRecord.dart';
+import 'package:hms_16/widget/field_form_medical.dart';
 
 class AddMedRecord extends StatefulWidget {
   const AddMedRecord({super.key});
@@ -28,50 +28,50 @@ class _AddMedRecordState extends State<AddMedRecord> {
       body: ListView(
         padding: EdgeInsets.all(10),
         children: [
-          FieldMedRecord(
+          FieldMedical(
             title: 'Height',
             text: 'Height',
             suffix: 'Kg',
           ),
           SizedBox(height: 10),
-          FieldMedRecord(
+          FieldMedical(
             title: 'Weight',
             text: 'Weight',
             suffix: 'Kg',
           ),
           SizedBox(height: 10),
-          FieldMedRecord(
+          FieldMedical(
             title: 'Blood Pressure',
             text: 'Blood Pressure',
             suffix: 'mmHg',
           ),
           SizedBox(height: 10),
-          FieldMedRecord(
+          FieldMedical(
             title: 'Body Temperature',
             text: 'Body Temperature',
             suffix: 'C',
           ),
           SizedBox(height: 10),
-          FieldMedRecord(
+          FieldMedical(
             title: 'Resting Heart Rate',
             text: 'Resting Heart Rate',
             suffix: 'bpm',
           ),
           SizedBox(height: 10),
-          FieldMedRecord(
+          FieldMedical(
             title: 'Breath Rate',
             text: 'Breath Rate',
             suffix: 'rpm',
           ),
           SizedBox(height: 10),
-          FieldMedRecord(
+          FieldMedical(
             title: 'Note',
             text: 'Add Note',
             line: 3,
             isRequired: false,
             isSuffix: false,
           ),
-          SizedBox(height: 10),
+          SizedBox(height: 15),
           ElevatedButton(
             onPressed: (() {}),
             style: ElevatedButton.styleFrom(

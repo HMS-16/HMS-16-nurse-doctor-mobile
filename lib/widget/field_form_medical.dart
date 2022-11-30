@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class FieldMedRecord extends StatelessWidget {
-  FieldMedRecord({
+class FieldMedical extends StatelessWidget {
+  FieldMedical({
     super.key,
     required this.title,
     required this.text,

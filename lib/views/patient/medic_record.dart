@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hms_16/view/patient/patient_detail/widget/tile_med_record.dart';
-import 'add_medic_record.dart';
+import 'package:hms_16/widget/tile_med_record.dart';
+import 'package:hms_16/views/patient/add_medic_record.dart';
 
 class MedicalRecord extends StatefulWidget {
   const MedicalRecord({super.key});
