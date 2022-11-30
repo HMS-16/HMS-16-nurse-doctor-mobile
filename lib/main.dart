@@ -1,3 +1,4 @@
+import 'package:hms_16/Views/landing_page.dart';
 import 'package:flutter/material.dart';
 import 'package:hms_16/screens/patient/patient_screen/patient_screen.dart';
 
@@ -11,6 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+<<<<<<< HEAD
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -18,6 +20,10 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: const PatientScreen(),
+=======
+      theme: ThemeData(),
+      home: LandingPage(),
+>>>>>>> origin/regis_login
     );
   }
 }
