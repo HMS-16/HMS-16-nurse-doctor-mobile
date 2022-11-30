@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:hms_16/screens/patient/patient_detail/appointment/completed_appointment.dart';
+import 'package:hms_16/screens/patient/patient_detail/appointment/upcoming_appointment.dart';
+
 import '../patient_detail/widget/text_box.dart';
 
 class PatientProfile extends StatefulWidget {
@@ -32,24 +35,78 @@ class _PatientProfileState extends State<PatientProfile> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Column(
-                        children: const [
-                          Text("5"),
-                          Text("Completed"),
-                          Text("Appointment"),
-                        ],
+                      TextButton(
+                        style: TextButton.styleFrom(
+                          foregroundColor: const Color.fromRGBO(17, 83, 181, 1),
+                        ),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            PageRouteBuilder(
+                              transitionsBuilder: (context, animation,
+                                  secondaryAnimation, child) {
+                                return SlideTransition(
+                                  position: animation.drive(
+                                    Tween(
+                                        begin: const Offset(1.0, 0.0),
+                                        end: Offset.zero),
+                                  ),
+                                  child: child,
+                                );
+                              },
+                              pageBuilder:
+                                  (context, animation, secondaryAnimation) {
+                                return const CompletedAppointment();
+                              },
+                            ),
+                          );
+                        },
+                        child: Column(
+                          children: const [
+                            Text("4"),
+                            Text("Completed"),
+                            Text("Appointment"),
+                          ],
+                        ),
                       ),
                       Container(
                         width: 1.5,
                         height: 50,
                         color: Colors.black,
                       ),
-                      Column(
-                        children: const [
-                          Text("1"),
-                          Text("Upcoming"),
-                          Text("Appointment"),
-                        ],
+                      TextButton(
+                        style: TextButton.styleFrom(
+                          foregroundColor: const Color.fromRGBO(17, 83, 181, 1),
+                        ),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            PageRouteBuilder(
+                              transitionsBuilder: (context, animation,
+                                  secondaryAnimation, child) {
+                                return SlideTransition(
+                                  position: animation.drive(
+                                    Tween(
+                                        begin: const Offset(1.0, 0.0),
+                                        end: Offset.zero),
+                                  ),
+                                  child: child,
+                                );
+                              },
+                              pageBuilder:
+                                  (context, animation, secondaryAnimation) {
+                                return const UpcomingAppointment();
+                              },
+                            ),
+                          );
+                        },
+                        child: Column(
+                          children: const [
+                            Text("2"),
+                            Text("Upcoming"),
+                            Text("Appointment"),
+                          ],
+                        ),
                       ),
                     ],
                   ),
@@ -64,6 +121,7 @@ class _PatientProfileState extends State<PatientProfile> {
               ),
             ),
             const TextBox(
+              height: 43,
               width: double.infinity,
               child: Text('Hansi Flick'),
             ),
@@ -74,6 +132,7 @@ class _PatientProfileState extends State<PatientProfile> {
               ),
             ),
             const TextBox(
+              height: 43,
               width: double.infinity,
               child: Text('Jamal Musiala'),
             ),
@@ -90,6 +149,7 @@ class _PatientProfileState extends State<PatientProfile> {
                       ),
                     ),
                     TextBox(
+                      height: 43,
                       width: 166,
                       child: Text('Male'),
                     ),
@@ -100,6 +160,7 @@ class _PatientProfileState extends State<PatientProfile> {
                       ),
                     ),
                     TextBox(
+                      height: 43,
                       width: 166,
                       child: Text('O'),
                     ),
@@ -115,6 +176,7 @@ class _PatientProfileState extends State<PatientProfile> {
                       ),
                     ),
                     TextBox(
+                      height: 43,
                       width: 166,
                       child: Text('Tokyo, 08-25-2000'),
                     ),
@@ -125,6 +187,7 @@ class _PatientProfileState extends State<PatientProfile> {
                       ),
                     ),
                     TextBox(
+                      height: 43,
                       width: 166,
                       child: Text('Process'),
                     ),
@@ -139,6 +202,7 @@ class _PatientProfileState extends State<PatientProfile> {
               ),
             ),
             const TextBox(
+              height: 43,
               width: 166,
               child: Text('22 Years'),
             ),
@@ -149,6 +213,7 @@ class _PatientProfileState extends State<PatientProfile> {
               ),
             ),
             const TextBox(
+              height: 43,
               width: double.infinity,
               child: Text('Jl. Jalan No.3, Kota Tiga'),
             ),
@@ -159,6 +224,7 @@ class _PatientProfileState extends State<PatientProfile> {
               ),
             ),
             const TextBox(
+              height: 43,
               width: double.infinity,
               child: Text('+62 0813 1313 1313'),
             ),
@@ -169,6 +235,7 @@ class _PatientProfileState extends State<PatientProfile> {
               ),
             ),
             const TextBox(
+              height: 43,
               width: double.infinity,
               child: Text('November 10, 2022'),
             ),
@@ -178,67 +245,93 @@ class _PatientProfileState extends State<PatientProfile> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            Container(
-              padding: const EdgeInsets.all(12),
+            TextBox(
               width: double.infinity,
-              height: 120,
-              margin: const EdgeInsets.all(2),
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(12),
-                ),
-                color: Color.fromRGBO(236, 236, 236, 1),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text('Experiencing symptoms :'),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        children: [
-                          Row(
-                            children: const [
-                              Icon(
-                                Icons.circle,
-                                size: 10.0,
-                              ),
-                              SizedBox(width: 10),
-                              Text('Red on the Throat'),
-                            ],
-                          ),
-                          Row(
-                            children: const [
-                              Icon(
-                                Icons.circle,
-                                size: 10.0,
-                              ),
-                              SizedBox(width: 10),
-                              Text('The salivary glands are enlarged'),
-                            ],
-                          ),
-                          Row(
-                            children: const [
-                              Icon(
-                                Icons.circle,
-                                size: 10.0,
-                              ),
-                              SizedBox(width: 10),
-                              Text('Mild respiratory distress'),
-                            ],
-                          ),
-                        ],
+              height: 130,
+              child: Padding(
+                padding: const EdgeInsets.all(4),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text('Experiencing symptoms :'),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          children: [
+                            Row(
+                              children: const [
+                                Icon(
+                                  Icons.circle,
+                                  size: 10.0,
+                                ),
+                                SizedBox(width: 10),
+                                Text('Red on the Throat'),
+                              ],
+                            ),
+                            Row(
+                              children: const [
+                                Icon(
+                                  Icons.circle,
+                                  size: 10.0,
+                                ),
+                                SizedBox(width: 10),
+                                Text('The salivary glands are enlarged'),
+                              ],
+                            ),
+                            Row(
+                              children: const [
+                                Icon(
+                                  Icons.circle,
+                                  size: 10.0,
+                                ),
+                                SizedBox(width: 10),
+                                Text('Mild respiratory distress'),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
             const SizedBox(height: 16),
             ElevatedButton(
-              onPressed: () {
-                Navigator.pop(context);
+              onPressed: () async {
+                await showDialog<void>(
+                  context: context,
+                  barrierDismissible: true,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: const Text(
+                        'Are you sure to end case this patient?',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.w600),
+                      ),
+                      actions: <Widget>[
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.white),
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: const Text("Yes"),
+                        ),
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.white),
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: const Text("No"),
+                        ),
+                      ],
+                    );
+                  },
+                );
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color.fromRGBO(155, 26, 26, 1),

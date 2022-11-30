@@ -5,17 +5,19 @@ class TextBox extends StatelessWidget {
     Key? key,
     required this.child,
     required this.width,
+    this.height,
   }) : super(key: key);
 
   final Widget? child;
   final double width;
+  final double? height;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(12),
       width: width,
-      height: 43,
+      height: height,
       margin: const EdgeInsets.all(2),
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.all(

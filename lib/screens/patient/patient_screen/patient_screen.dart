@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hms_16/screens/patient/patient_detail/patient_detail.dart';
 import 'package:hms_16/screens/patient/patient_screen/widget/patient_card.dart';
+
+import '../patient_detail/patient_detail.dart';
 
 class PatientScreen extends StatefulWidget {
   const PatientScreen({super.key});
@@ -29,31 +30,24 @@ class _PatientScreenState extends State<PatientScreen> {
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const SizedBox(
-                  width: 310,
-                  height: 48,
-                  child: TextField(
-                    decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.search),
-                      label: Text('Search'),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(15),
-                        ),
-                      ),
+          children: const [
+            SizedBox(
+              width: double.infinity,
+              height: 48,
+              child: TextField(
+                decoration: InputDecoration(
+                  prefixIcon: Icon(Icons.search),
+                  label: Text('Search'),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(15),
                     ),
                   ),
                 ),
-                IconButton(
-                    onPressed: () {}, icon: const Icon(Icons.filter_list))
-              ],
+              ),
             ),
-            const SizedBox(height: 24),
-            const PatientList(),
+            SizedBox(height: 24),
+            PatientList(),
           ],
         ),
       ),
