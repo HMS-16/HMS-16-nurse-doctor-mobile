@@ -11,6 +11,7 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -100,6 +101,7 @@ class _SignUpPageState extends State<SignUpPage> {
             const SizedBox(
               height: 34.0,
             ),
+
             Button(
                 text: "Register",
                 onpressed: () {
@@ -112,6 +114,7 @@ class _SignUpPageState extends State<SignUpPage> {
             const SizedBox(
               height: 17.0,
             ),
+
           ],
         ),
       ),
