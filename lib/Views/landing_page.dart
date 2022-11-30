@@ -53,7 +53,7 @@ class _LandingPageState extends State<LandingPage> {
           ),
           Button(
             text: "Sign In",
-            margin: EdgeInsets.only(top: 15),
+            margin: EdgeInsets.only(top: 5),
             onpressed: () {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => LoginPage()));
