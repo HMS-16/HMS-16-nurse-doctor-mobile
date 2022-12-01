@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hms_16/models/chart_model.dart';
 import 'package:hms_16/style/theme.dart';
+import 'package:hms_16/views/notification.dart';
+import 'package:hms_16/views/profile.dart';
+import 'package:hms_16/widget/navpush_transition.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
@@ -46,11 +49,15 @@ class _HomePageState extends State<HomePage> {
         ),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              navPushTransition(context, const NotificationPage());
+            },
             icon: const Icon(Icons.notifications_none),
           ),
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              navPushTransition(context, const ProfilePage());
+            },
             icon: const Icon(Icons.account_circle_outlined),
           ),
         ],

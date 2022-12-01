@@ -25,12 +25,12 @@ class _AddMedDiagnosisState extends State<AddMedDiagnosis> {
               fontSize: 20, fontWeight: FontWeight.w600, color: cBlackBase),
         ),
         leading: GestureDetector(
-          child: Icon(Icons.close),
+          child: const Icon(Icons.close),
           onTap: () => Navigator.pop(context),
         ),
       ),
       body: ListView(
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         children: [
           FieldMedical(
             title: 'Date',
@@ -38,32 +38,32 @@ class _AddMedDiagnosisState extends State<AddMedDiagnosis> {
             isSuffix: false,
           ),
           // SizedBox(height: 10),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           FieldMedical(
             title: 'Diagnosis',
             text: 'Add Diagnosis',
             line: 3,
             isSuffix: false,
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           FieldMedical(
             title: 'Prescription',
             text: 'Add Prescription',
             line: 3,
             isSuffix: false,
           ),
-          SizedBox(height: 15),
+          const SizedBox(height: 15),
           ElevatedButton(
             onPressed: (() {}),
             style: ElevatedButton.styleFrom(
-              backgroundColor: Color(0xff1153B5),
+              backgroundColor: const Color(0xff1153B5),
               foregroundColor: Colors.white,
-              minimumSize: Size(double.infinity, 50),
+              minimumSize: const Size(double.infinity, 50),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
               ),
             ),
-            child: Text('Save'),
+            child: const Text('Save'),
           ),
         ],
       ),

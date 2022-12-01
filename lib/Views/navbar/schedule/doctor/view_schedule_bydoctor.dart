@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hms_16/style/theme.dart';
 import 'package:hms_16/views/navbar/schedule/doctor/detail_schedule_bydoctor.dart';
-import 'package:hms_16/views/navbar/schedule/nurse/change_schedule_bynurse.dart';
 import 'package:hms_16/views/navbar/schedule/nurse/view_schedule_bynurse.dart';
 import 'package:hms_16/widget/navpush_transition.dart';
 import 'package:hms_16/widget/patientSchedule_card.dart';
@@ -63,7 +62,7 @@ class _ViewScheduleDoctorState extends State<ViewScheduleDoctor> {
                 )),
             CircleAvatar(
               backgroundColor: cInfoLightest,
-              child: Text("MK"),
+              child: const Text("MK"),
             ),
           ],
         ),
@@ -116,7 +115,6 @@ class _ViewScheduleDoctorState extends State<ViewScheduleDoctor> {
                             prevDate;
                           });
                           // final dateChanged = selectedDate.day - 1;
-                          print(prevDate);
                         },
                         icon: const Icon(Icons.arrow_back_ios)),
                     title: TextButton(
@@ -136,7 +134,6 @@ class _ViewScheduleDoctorState extends State<ViewScheduleDoctor> {
                       onPressed: () {
                         setState(() {
                           nextDate;
-                          print(nextDate);
                         });
                       },
                       icon: const Icon(Icons.arrow_forward_ios),
@@ -148,7 +145,7 @@ class _ViewScheduleDoctorState extends State<ViewScheduleDoctor> {
               PatientScheduleCard(
                 disease: "Headache",
                 doctorName: "Abednego",
-                icon: CircleAvatar(),
+                icon: const CircleAvatar(),
                 patientName: "Alief Rachman",
                 nurseName: "Nastasya",
                 time: "1.30 pm - 2.30 pm",
@@ -163,7 +160,7 @@ class _ViewScheduleDoctorState extends State<ViewScheduleDoctor> {
               PatientScheduleCard(
                 disease: "Stomatch ache",
                 doctorName: "Abednego",
-                icon: CircleAvatar(),
+                icon: const CircleAvatar(),
                 patientName: "Nurul Zakiah",
                 nurseName: "Nastasya",
                 time: "1.30 pm - 2.30 pm",
@@ -179,7 +176,7 @@ class _ViewScheduleDoctorState extends State<ViewScheduleDoctor> {
               PatientScheduleCard(
                 disease: "Stomatch ache",
                 doctorName: "Abednego",
-                icon: CircleAvatar(),
+                icon: const CircleAvatar(),
                 patientName: "Nurul Zakiah",
                 nurseName: "Nastasya",
                 time: "1.30 pm - 2.30 pm",

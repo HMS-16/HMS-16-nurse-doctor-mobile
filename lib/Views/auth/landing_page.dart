@@ -1,6 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:hms_16/models/data.dart';
 import 'package:hms_16/style/theme.dart';
 import 'package:hms_16/widget/button.dart';
@@ -23,7 +22,7 @@ class _LandingPageState extends State<LandingPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16),
+        padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -48,12 +47,12 @@ class _LandingPageState extends State<LandingPage> {
             AnimatedSmoothIndicator(
               activeIndex: activeIndex,
               count: adddata.length,
-              effect: JumpingDotEffect(
+              effect: const JumpingDotEffect(
                 dotWidth: 10,
                 dotHeight: 10,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Button(

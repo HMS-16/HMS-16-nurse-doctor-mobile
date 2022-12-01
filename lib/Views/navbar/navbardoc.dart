@@ -5,7 +5,7 @@ import 'package:hms_16/views/navbar/patient/patient_screen.dart';
 import 'package:hms_16/views/navbar/schedule/doctor/view_schedule_bydoctor.dart';
 
 class NavBarDoc extends StatefulWidget {
-  NavBarDoc({super.key});
+  const NavBarDoc({super.key});
 
   @override
   State<NavBarDoc> createState() => _NavBarDocState();
@@ -14,10 +14,10 @@ class NavBarDoc extends StatefulWidget {
 class _NavBarDocState extends State<NavBarDoc> {
   int currenticon = 0;
   final screen = [
-    HomePage(),
-    PatientScreen(),
-    ViewScheduleDoctor(),
-    Message(),
+    const HomePage(),
+    const PatientScreen(),
+    const ViewScheduleDoctor(),
+    const Message(),
   ];
 
   @override
@@ -34,7 +34,7 @@ class _NavBarDocState extends State<NavBarDoc> {
               currenticon = value;
             });
           },
-          items: [
+          items: const [
             BottomNavigationBarItem(
               icon: Icon(Icons.home),
               label: "Home",

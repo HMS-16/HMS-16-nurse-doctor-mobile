@@ -62,7 +62,7 @@ class _ViewScheduleNurseState extends State<ViewScheduleNurse> {
                 )),
             CircleAvatar(
               backgroundColor: cInfoLightest,
-              child: Text("MK"),
+              child: const Text("MK"),
             ),
           ],
         ),
@@ -115,7 +115,6 @@ class _ViewScheduleNurseState extends State<ViewScheduleNurse> {
                             prevDate;
                           });
                           // final dateChanged = selectedDate.day - 1;
-                          print(prevDate);
                         },
                         icon: const Icon(Icons.arrow_back_ios)),
                     title: TextButton(
@@ -135,7 +134,6 @@ class _ViewScheduleNurseState extends State<ViewScheduleNurse> {
                       onPressed: () {
                         setState(() {
                           nextDate;
-                          print(nextDate);
                         });
                       },
                       icon: const Icon(Icons.arrow_forward_ios),
@@ -147,7 +145,7 @@ class _ViewScheduleNurseState extends State<ViewScheduleNurse> {
               PatientScheduleCard(
                 disease: "Headache",
                 doctorName: "Abednego",
-                icon: CircleAvatar(),
+                icon: const CircleAvatar(),
                 patientName: "Alief Rachman",
                 nurseName: "Nastasya",
                 time: "1.30 pm - 2.30 pm",
@@ -162,7 +160,7 @@ class _ViewScheduleNurseState extends State<ViewScheduleNurse> {
               PatientScheduleCard(
                 disease: "Stomatch ache",
                 doctorName: "Abednego",
-                icon: CircleAvatar(),
+                icon: const CircleAvatar(),
                 patientName: "Nurul Zakiah",
                 nurseName: "Nastasya",
                 time: "1.30 pm - 2.30 pm",
@@ -178,7 +176,7 @@ class _ViewScheduleNurseState extends State<ViewScheduleNurse> {
               PatientScheduleCard(
                 disease: "Stomatch ache",
                 doctorName: "Abednego",
-                icon: CircleAvatar(),
+                icon: const CircleAvatar(),
                 patientName: "Nurul Zakiah",
                 nurseName: "Nastasya",
                 time: "1.30 pm - 2.30 pm",

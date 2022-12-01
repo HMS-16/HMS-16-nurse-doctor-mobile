@@ -15,7 +15,7 @@ class _MedicalDiagnosisState extends State<MedicalDiagnosis> {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      padding: EdgeInsets.only(
+      padding: const EdgeInsets.only(
         top: 10,
         left: 10,
         right: 10,
@@ -31,29 +31,29 @@ class _MedicalDiagnosisState extends State<MedicalDiagnosis> {
             // );
           }),
           style: ElevatedButton.styleFrom(
-            backgroundColor: Color(0xff1153B5),
+            backgroundColor: const Color(0xff1153B5),
             foregroundColor: Colors.white,
-            minimumSize: Size(double.infinity, 50),
+            minimumSize: const Size(double.infinity, 50),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12),
             ),
           ),
-          icon: Icon(Icons.add),
+          icon: const Icon(Icons.add),
           label: Text(
             'Add Medical Diagnosis',
             style: textStyle.copyWith(fontSize: 13),
           ),
         ),
-        TileMedDiagnosis(),
-        TileMedDiagnosis(),
-        TileMedDiagnosis(),
-        TileMedDiagnosis(),
-        TileMedDiagnosis(),
-        TileMedDiagnosis(),
-        TileMedDiagnosis(),
-        TileMedDiagnosis(),
-        TileMedDiagnosis(),
-        TileMedDiagnosis(),
+        const TileMedDiagnosis(),
+        const TileMedDiagnosis(),
+        const TileMedDiagnosis(),
+        const TileMedDiagnosis(),
+        const TileMedDiagnosis(),
+        const TileMedDiagnosis(),
+        const TileMedDiagnosis(),
+        const TileMedDiagnosis(),
+        const TileMedDiagnosis(),
+        const TileMedDiagnosis(),
       ],
     );
   }

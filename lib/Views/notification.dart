@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hms_16/style/theme.dart';
 
 class NotificationPage extends StatelessWidget {
   const NotificationPage({super.key});
@@ -7,9 +8,13 @@ class NotificationPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          "Notifications",
-          style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20),
+        iconTheme: IconThemeData(color: cBlack),
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        title: Text(
+          'Notifications',
+          style: textStyle.copyWith(
+              fontSize: 20, fontWeight: FontWeight.w600, color: cBlackBase),
         ),
         actions: [
           IconButton(onPressed: () {}, icon: const Icon(Icons.more_vert))

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:hms_16/style/theme.dart';
 import 'package:hms_16/views/auth/forgot_password_page3.dart';
 import 'package:hms_16/widget/button.dart';
@@ -25,9 +24,9 @@ class ForgotPassword2 extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 10),
             child: Image(
-              image: AssetImage(
+              image: const AssetImage(
                 "assets/forgot_password.png",
               ),
               fit: BoxFit.contain,
@@ -36,8 +35,8 @@ class ForgotPassword2 extends StatelessWidget {
             ),
           ),
           Container(
-            margin: EdgeInsets.symmetric(vertical: 30),
-            padding: EdgeInsets.symmetric(horizontal: 5),
+            margin: const EdgeInsets.symmetric(vertical: 30),
+            padding: const EdgeInsets.symmetric(horizontal: 5),
             child: Text(
               "Enter the verification code we just sent you on your email addrress",
               textAlign: TextAlign.center,
@@ -48,32 +47,32 @@ class ForgotPassword2 extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                margin: EdgeInsets.symmetric(horizontal: 5),
+                margin: const EdgeInsets.symmetric(horizontal: 5),
                 height: 50,
                 width: 50,
                 color: Colors.grey.shade400,
               ),
               Container(
-                margin: EdgeInsets.symmetric(horizontal: 5),
+                margin: const EdgeInsets.symmetric(horizontal: 5),
                 height: 50,
                 width: 50,
                 color: Colors.grey.shade400,
               ),
               Container(
-                margin: EdgeInsets.symmetric(horizontal: 5),
+                margin: const EdgeInsets.symmetric(horizontal: 5),
                 height: 50,
                 width: 50,
                 color: Colors.grey.shade400,
               ),
               Container(
-                margin: EdgeInsets.symmetric(horizontal: 5),
+                margin: const EdgeInsets.symmetric(horizontal: 5),
                 height: 50,
                 width: 50,
                 color: Colors.grey.shade400,
               )
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 30,
           ),
           Text(
@@ -82,7 +81,7 @@ class ForgotPassword2 extends StatelessWidget {
           ),
           Button(
               text: "VERIFY",
-              margin: EdgeInsets.only(top: 30),
+              margin: const EdgeInsets.only(top: 30),
               onpressed: () {
                 navPushTransition(context, const ForgotPassword3());
                 // Navigator.push(

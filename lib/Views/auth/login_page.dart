@@ -25,7 +25,7 @@ class _LoginPageState extends State<LoginPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 170,
               ),
               Text(
@@ -43,7 +43,7 @@ class _LoginPageState extends State<LoginPage> {
                 decoration: InputDecoration(
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10)),
-                    prefixIcon: Icon(
+                    prefixIcon: const Icon(
                       Icons.email_outlined,
                       color: Colors.black,
                     ),
@@ -60,30 +60,30 @@ class _LoginPageState extends State<LoginPage> {
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    prefixIcon: Icon(
+                    prefixIcon: const Icon(
                       Icons.lock,
                       color: Colors.black,
                     ),
                     suffixIcon: IconButton(
-                        onPressed: () {}, icon: Icon(Icons.visibility)),
+                        onPressed: () {}, icon: const Icon(Icons.visibility)),
                     hintText: "Password",
                     labelText: "Password",
                     floatingLabelBehavior: FloatingLabelBehavior.always),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 26.0,
               ),
               Button(
                   text: "Sign In",
                   onpressed: () {
-                    navPushTransition(context, SignUpPage());
+                    navPushTransition(context, const SignUpPage());
                     // Navigator.push(
                     //     context,
                     //     MaterialPageRoute(
                     //       builder: (context) => const SignUpPage(),
                     //     ));
                   }),
-              SizedBox(
+              const SizedBox(
                 height: 15.0,
               ),
               TextButton(

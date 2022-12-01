@@ -12,12 +12,10 @@ class MedicalRecord extends StatefulWidget {
 }
 
 class _MedicalRecordState extends State<MedicalRecord> {
-  bool _customTileExpanded = false;
-
   @override
   Widget build(BuildContext context) {
     return ListView(
-      padding: EdgeInsets.only(
+      padding: const EdgeInsets.only(
         top: 10,
         left: 10,
         right: 10,
@@ -33,30 +31,30 @@ class _MedicalRecordState extends State<MedicalRecord> {
             // );
           }),
           style: ElevatedButton.styleFrom(
-            backgroundColor: Color(0xff1153B5),
+            backgroundColor: const Color(0xff1153B5),
             foregroundColor: Colors.white,
-            minimumSize: Size(double.infinity, 50),
+            minimumSize: const Size(double.infinity, 50),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12),
             ),
           ),
-          icon: Icon(Icons.add),
+          icon: const Icon(Icons.add),
           label: Text(
             'Add Medical Record',
             style:
                 textStyle.copyWith(fontSize: 14, fontWeight: FontWeight.w600),
           ),
         ),
-        TileMedRecord(),
-        TileMedRecord(),
-        TileMedRecord(),
-        TileMedRecord(),
-        TileMedRecord(),
-        TileMedRecord(),
-        TileMedRecord(),
-        TileMedRecord(),
-        TileMedRecord(),
-        TileMedRecord(),
+        const TileMedRecord(),
+        const TileMedRecord(),
+        const TileMedRecord(),
+        const TileMedRecord(),
+        const TileMedRecord(),
+        const TileMedRecord(),
+        const TileMedRecord(),
+        const TileMedRecord(),
+        const TileMedRecord(),
+        const TileMedRecord(),
       ],
     );
   }

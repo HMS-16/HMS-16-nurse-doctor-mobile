@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:hms_16/style/theme.dart';
 import 'package:hms_16/views/auth/forgot_password_page2.dart';
 import 'package:hms_16/widget/button.dart';
@@ -25,9 +24,9 @@ class ForgotPassword1 extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 10),
             child: Image(
-              image: AssetImage(
+              image: const AssetImage(
                 "assets/forgot_password.png",
               ),
               fit: BoxFit.contain,
@@ -36,28 +35,28 @@ class ForgotPassword1 extends StatelessWidget {
             ),
           ),
           Container(
-            margin: EdgeInsets.symmetric(vertical: 70),
+            margin: const EdgeInsets.symmetric(vertical: 70),
             child: Text(
               "Please enter your email address",
               style: textStyle.copyWith(fontSize: 15),
             ),
           ),
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 10),
             child: TextFormField(
               decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                label: Text("Email"),
+                border: const OutlineInputBorder(),
+                label: const Text("Email"),
                 labelStyle: textStyle.copyWith(color: Colors.black),
                 hintText: "Email",
-                prefixIcon: Icon(Icons.email),
+                prefixIcon: const Icon(Icons.email),
               ),
             ),
           ),
           Button(
               text: "Send",
               bgcolor: Colors.blueAccent,
-              margin: EdgeInsets.only(top: 30),
+              margin: const EdgeInsets.only(top: 30),
               onpressed: () {
                 navPushTransition(context, const ForgotPassword2());
                 // Navigator.push(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hms_16/style/theme.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -7,7 +8,14 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Profile"),
+        iconTheme: IconThemeData(color: cBlack),
+        elevation: 0,
+        backgroundColor: Colors.white,
+        title: Text(
+          'Profile',
+          style: textStyle.copyWith(
+              fontSize: 20, fontWeight: FontWeight.w600, color: cBlackBase),
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(
