@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hms_16/Views/navbar.dart';
+import 'package:hms_16/views/auth/landing_page.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -20,7 +20,7 @@ class _SplashScreenState extends State<SplashScreen> {
           ),
         ),
       ),
-      nextScreen: NavBar(),
+      nextScreen: LandingPage(),
       splashTransition: SplashTransition.fadeTransition,
       backgroundColor: Colors.white,
       splashIconSize: 450,

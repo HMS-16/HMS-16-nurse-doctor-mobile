@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hms_16/Views/forgot_password_page3.dart';
-import 'package:hms_16/Widgets/button.dart';
+import 'package:hms_16/views/auth/forgot_password_page3.dart';
+import 'package:hms_16/widget/button.dart';
 
 class ForgotPassword2 extends StatelessWidget {
   const ForgotPassword2({super.key});
@@ -76,7 +76,7 @@ class ForgotPassword2 extends StatelessWidget {
           ),
           Button(
               text: "VERIFY",
-              bgcolor: Colors.blueAccent,
+              bgcolor: Colors.black,
               margin: EdgeInsets.only(top: 30),
               onpressed: () {
                 Navigator.push(

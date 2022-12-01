@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hms_16/style/theme.dart';
 
 class TileMedRecord extends StatefulWidget {
   const TileMedRecord({super.key});
@@ -18,7 +19,7 @@ class _TileMedRecordState extends State<TileMedRecord> {
         boxShadow: [
           if (!_customTileExpanded) ...[
             BoxShadow(
-              color: Color(0xff6F6F6F1F),
+              color: cWhiteDark,
               blurRadius: 20,
               spreadRadius: -8,
             ),
@@ -52,18 +53,18 @@ class _TileMedRecordState extends State<TileMedRecord> {
                           SizedBox(height: 5),
                           Text(
                             'Nov 2, 2022',
-                            style: TextStyle(fontSize: 12),
+                            style: textStyle.copyWith(fontSize: 12),
                           ),
                           SizedBox(height: 4),
                           Text(
                             'Nurul Zakiah',
-                            style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.w500),
+                            style: textStyle.copyWith(
+                                fontSize: 16, fontWeight: FontWeight.w600),
                           ),
                           SizedBox(height: 4),
                           Text(
                             'Specialist - Nurse',
-                            style: TextStyle(fontSize: 12),
+                            style: textStyle.copyWith(fontSize: 12),
                           ),
                         ],
                       )
@@ -72,13 +73,13 @@ class _TileMedRecordState extends State<TileMedRecord> {
                         children: [
                           Text(
                             'Nurul Zakiah',
-                            style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.w500),
+                            style: textStyle.copyWith(
+                                fontSize: 16, fontWeight: FontWeight.w600),
                           ),
                           SizedBox(height: 6),
                           Text(
                             'Nov 2, 2022',
-                            style: TextStyle(fontSize: 12),
+                            style: textStyle.copyWith(fontSize: 12),
                           ),
                         ],
                       ),
@@ -92,7 +93,10 @@ class _TileMedRecordState extends State<TileMedRecord> {
                       shrinkWrap: true,
                       children: [
                         Text.rich(
-                          style: TextStyle(fontSize: 12),
+                          style: textStyle.copyWith(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w400,
+                              color: cBlackBase),
                           TextSpan(
                             text: 'detail note : ',
                             children: [
@@ -105,7 +109,7 @@ class _TileMedRecordState extends State<TileMedRecord> {
                         SizedBox(height: 10),
                         Text(
                           'Medical Measurement',
-                          style: TextStyle(
+                          style: textStyle.copyWith(
                             fontSize: 14,
                             fontWeight: FontWeight.w700,
                           ),
@@ -117,12 +121,12 @@ class _TileMedRecordState extends State<TileMedRecord> {
                             SizedBox(width: 10),
                             Text(
                               'Height',
-                              style: TextStyle(fontSize: 12),
+                              style: textStyle.copyWith(fontSize: 12),
                             ),
                             Spacer(),
                             Text(
                               '150 cm',
-                              style: TextStyle(fontSize: 12),
+                              style: textStyle.copyWith(fontSize: 12),
                             ),
                           ],
                         ),
@@ -132,12 +136,12 @@ class _TileMedRecordState extends State<TileMedRecord> {
                             SizedBox(width: 10),
                             Text(
                               'Weight',
-                              style: TextStyle(fontSize: 12),
+                              style: textStyle.copyWith(fontSize: 12),
                             ),
                             Spacer(),
                             Text(
                               '54 kg',
-                              style: TextStyle(fontSize: 12),
+                              style: textStyle.copyWith(fontSize: 12),
                             ),
                           ],
                         ),
@@ -147,12 +151,12 @@ class _TileMedRecordState extends State<TileMedRecord> {
                             SizedBox(width: 10),
                             Text(
                               'Blood Pressure',
-                              style: TextStyle(fontSize: 12),
+                              style: textStyle.copyWith(fontSize: 12),
                             ),
                             Spacer(),
                             Text(
                               '180/120 mmHg',
-                              style: TextStyle(fontSize: 12),
+                              style: textStyle.copyWith(fontSize: 12),
                             ),
                           ],
                         ),
@@ -162,12 +166,12 @@ class _TileMedRecordState extends State<TileMedRecord> {
                             SizedBox(width: 10),
                             Text(
                               'Sugar Analysis',
-                              style: TextStyle(fontSize: 12),
+                              style: textStyle.copyWith(fontSize: 12),
                             ),
                             Spacer(),
                             Text(
                               '110 mg/dL',
-                              style: TextStyle(fontSize: 12),
+                              style: textStyle.copyWith(fontSize: 12),
                             ),
                           ],
                         ),
@@ -177,12 +181,12 @@ class _TileMedRecordState extends State<TileMedRecord> {
                             SizedBox(width: 10),
                             Text(
                               'Body Temperature',
-                              style: TextStyle(fontSize: 12),
+                              style: textStyle.copyWith(fontSize: 12),
                             ),
                             Spacer(),
                             Text(
                               '36 C',
-                              style: TextStyle(fontSize: 12),
+                              style: textStyle.copyWith(fontSize: 12),
                             ),
                           ],
                         ),
@@ -192,12 +196,12 @@ class _TileMedRecordState extends State<TileMedRecord> {
                             SizedBox(width: 10),
                             Text(
                               'Resting Heart Rate',
-                              style: TextStyle(fontSize: 12),
+                              style: textStyle.copyWith(fontSize: 12),
                             ),
                             Spacer(),
                             Text(
                               '80 bpm',
-                              style: TextStyle(fontSize: 12),
+                              style: textStyle.copyWith(fontSize: 12),
                             ),
                           ],
                         ),
@@ -207,12 +211,12 @@ class _TileMedRecordState extends State<TileMedRecord> {
                             SizedBox(width: 10),
                             Text(
                               'Breath Rate',
-                              style: TextStyle(fontSize: 12),
+                              style: textStyle.copyWith(fontSize: 12),
                             ),
                             Spacer(),
                             Text(
                               '16 rpm',
-                              style: TextStyle(fontSize: 12),
+                              style: textStyle.copyWith(fontSize: 12),
                             ),
                           ],
                         ),

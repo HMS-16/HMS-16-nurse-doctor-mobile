@@ -1,55 +1,78 @@
 import 'package:flutter/material.dart';
-import 'package:hms_16/pages/nurse/schedule/detail_schedule_bynurse.dart';
-
 import 'package:hms_16/style/theme.dart';
 
 class PatientCard extends StatelessWidget {
-  const PatientCard(
-      {super.key,
-      required this.patientName,
-      required this.disease,
-      required this.doctorName,
-      required this.nurseName,
-      required this.time,
-      required this.icon, required this.onPressed});
-
-  final String patientName;
-  final String disease;
-  final String doctorName;
-  final String nurseName;
-  final String time;
-  final CircleAvatar icon;
-  final VoidCallback onPressed;
+  const PatientCard({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 20),
-      margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-      decoration: BoxDecoration(boxShadow: [
-        BoxShadow(
-          color: Colors.black.withOpacity(0.1),
-          blurRadius: 10,
-        )
-      ], borderRadius: BorderRadius.circular(15), color: cWhiteBase),
-      child: ListTile(
-        title: Text(
-          patientName,
-          style: textStyle.copyWith(fontSize: 16, fontWeight: FontWeight.w600),
+      height: 110,
+      width: 358,
+      padding: EdgeInsets.symmetric(vertical: 12),
+      decoration: BoxDecoration(
+        borderRadius: const BorderRadius.all(
+          Radius.circular(15),
         ),
-        subtitle: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(disease),
-            Text("Doctor : $doctorName"),
-            Text("Nurse : $nurseName"),
-            Text(time),
-          ],
-        ),
-        leading: icon,
-        trailing: IconButton(
-            onPressed: onPressed,
-            icon: const Icon(Icons.arrow_forward_ios)),
+        color: const Color.fromRGBO(253, 253, 253, 1),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            blurRadius: 10,
+          )
+        ],
+      ),
+      child: Row(
+        children: [
+          Container(
+            width: 3.5,
+            height: 60,
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Colors.blue,
+                  Colors.white,
+                ],
+              ),
+            ),
+          ),
+          Expanded(
+            child: ListTile(
+              leading: const CircleAvatar(),
+              title: Text(
+                'Patient 1',
+                style: textStyle.copyWith(
+                    fontWeight: FontWeight.w700,
+                    fontSize: 14,
+                    color: cBlackBase),
+              ),
+              subtitle: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Headache',
+                    style: textStyle.copyWith(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 12,
+                        color: cBlackLightest),
+                  ),
+                  SizedBox(height: 20),
+                  Text(
+                    '1.30 pm - 2.30 pm',
+                    style: textStyle.copyWith(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 12,
+                        color: cBlackLightest),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

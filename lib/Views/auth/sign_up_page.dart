@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hms_16/Widgets/button.dart';
-
-import 'login_page.dart';
+import 'package:hms_16/views/navbar/navbar.dart';
+import 'package:hms_16/widget/button.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key}) : super(key: key);
@@ -11,7 +10,6 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -101,20 +99,18 @@ class _SignUpPageState extends State<SignUpPage> {
             const SizedBox(
               height: 34.0,
             ),
-
             Button(
                 text: "Register",
                 onpressed: () {
-                  showDialog(
-                      context: context,
-                      builder: (context) => AlertDialog(
-                            title: Text("Register New User"),
-                          ));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => NavBar(),
+                      ));
                 }),
             const SizedBox(
               height: 17.0,
             ),
-
           ],
         ),
       ),
