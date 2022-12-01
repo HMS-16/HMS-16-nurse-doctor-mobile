@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hms_16/views/navbar/patient/appointment/completed_appointment.dart';
 import 'package:hms_16/views/navbar/patient/appointment/upcoming_appointment.dart';
+import 'package:hms_16/widget/navpush_transition.dart';
 import 'package:hms_16/widget/text_box.dart';
 
 class PatientProfile extends StatefulWidget {
@@ -39,26 +40,28 @@ class _PatientProfileState extends State<PatientProfile> {
                           foregroundColor: const Color.fromRGBO(17, 83, 181, 1),
                         ),
                         onPressed: () {
-                          Navigator.push(
-                            context,
-                            PageRouteBuilder(
-                              transitionsBuilder: (context, animation,
-                                  secondaryAnimation, child) {
-                                return SlideTransition(
-                                  position: animation.drive(
-                                    Tween(
-                                        begin: const Offset(1.0, 0.0),
-                                        end: Offset.zero),
-                                  ),
-                                  child: child,
-                                );
-                              },
-                              pageBuilder:
-                                  (context, animation, secondaryAnimation) {
-                                return const CompletedAppointment();
-                              },
-                            ),
-                          );
+                          navPushTransition(
+                              context, const CompletedAppointment());
+                          // Navigator.push(
+                          //   context,
+                          //   PageRouteBuilder(
+                          //     transitionsBuilder: (context, animation,
+                          //         secondaryAnimation, child) {
+                          //       return SlideTransition(
+                          //         position: animation.drive(
+                          //           Tween(
+                          //               begin: const Offset(1.0, 0.0),
+                          //               end: Offset.zero),
+                          //         ),
+                          //         child: child,
+                          //       );
+                          //     },
+                          //     pageBuilder:
+                          //         (context, animation, secondaryAnimation) {
+                          //       return const CompletedAppointment();
+                          //     },
+                          //   ),
+                          // );
                         },
                         child: Column(
                           children: const [
@@ -78,26 +81,28 @@ class _PatientProfileState extends State<PatientProfile> {
                           foregroundColor: const Color.fromRGBO(17, 83, 181, 1),
                         ),
                         onPressed: () {
-                          Navigator.push(
-                            context,
-                            PageRouteBuilder(
-                              transitionsBuilder: (context, animation,
-                                  secondaryAnimation, child) {
-                                return SlideTransition(
-                                  position: animation.drive(
-                                    Tween(
-                                        begin: const Offset(1.0, 0.0),
-                                        end: Offset.zero),
-                                  ),
-                                  child: child,
-                                );
-                              },
-                              pageBuilder:
-                                  (context, animation, secondaryAnimation) {
-                                return const UpcomingAppointment();
-                              },
-                            ),
-                          );
+                          navPushTransition(
+                              context, const UpcomingAppointment());
+                          // Navigator.push(
+                          //   context,
+                          //   PageRouteBuilder(
+                          //     transitionsBuilder: (context, animation,
+                          //         secondaryAnimation, child) {
+                          //       return SlideTransition(
+                          //         position: animation.drive(
+                          //           Tween(
+                          //               begin: const Offset(1.0, 0.0),
+                          //               end: Offset.zero),
+                          //         ),
+                          //         child: child,
+                          //       );
+                          //     },
+                          //     pageBuilder:
+                          //         (context, animation, secondaryAnimation) {
+                          //       return const UpcomingAppointment();
+                          //     },
+                          //   ),
+                          // );
                         },
                         child: Column(
                           children: const [

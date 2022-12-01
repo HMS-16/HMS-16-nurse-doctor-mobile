@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hms_16/style/theme.dart';
 import 'package:hms_16/views/navbar/schedule/nurse/view_schedule_bynurse.dart';
+import 'package:hms_16/widget/duration_dialog.dart';
 import 'package:intl/intl.dart';
 
 class ChangeDoctorByNurse extends StatelessWidget {
@@ -81,40 +82,8 @@ class ChangeDoctorByNurse extends StatelessWidget {
                                       backgroundColor: cPrimaryBase,
                                     ),
                                     onPressed: () async {
-                                      await showDialog<void>(
-                                        context: context,
-                                        barrierDismissible: true,
-                                        builder: (BuildContext context) {
-                                          return AlertDialog(
-                                            title: Text(
-                                              'Doctor has been successfully changed!',
-                                              textAlign: TextAlign.center,
-                                              style: textStyle.copyWith(
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.w600),
-                                            ),
-                                            content: Image.asset(
-                                                "assets/images/winner_people_flat_icons.jpeg"),
-                                            actions: <Widget>[
-                                              ElevatedButton(
-                                                style: ElevatedButton.styleFrom(
-                                                    backgroundColor:
-                                                        cPrimaryBase,
-                                                    fixedSize: Size.fromWidth(
-                                                      MediaQuery.of(context)
-                                                          .size
-                                                          .width,
-                                                    )),
-                                                onPressed: () {
-                                                  Navigator.pop(context);
-                                                },
-                                                child: const Text("Ok"),
-                                              ),
-                                            ],
-                                          );
-                                        },
-                                      );
-                                      Navigator.pop(context);
+                                      durationDialog(context,
+                                          "Doctor has been successfully changed!");
                                     },
                                     child: Text(
                                       "Yes",

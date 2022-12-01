@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hms_16/style/theme.dart';
 import 'package:hms_16/views/navbar/schedule/doctor/view_schedule_bydoctor.dart';
 import 'package:hms_16/views/navbar/schedule/nurse/detail_schedule_bynurse.dart';
+import 'package:hms_16/widget/navpush_transition.dart';
 import 'package:hms_16/widget/patientSchedule_card.dart';
 import 'package:intl/intl.dart';
 
@@ -151,10 +152,11 @@ class _ViewScheduleNurseState extends State<ViewScheduleNurse> {
                 nurseName: "Nastasya",
                 time: "1.30 pm - 2.30 pm",
                 onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const DetailScheduleNurse()));
+                  navPushTransition(context, const DetailScheduleNurse());
+                  // Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //         builder: (context) => const DetailScheduleNurse()));
                 },
               ),
               PatientScheduleCard(
@@ -165,11 +167,12 @@ class _ViewScheduleNurseState extends State<ViewScheduleNurse> {
                 nurseName: "Nastasya",
                 time: "1.30 pm - 2.30 pm",
                 onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const DetailScheduleNurse(),
-                      ));
+                  navPushTransition(context, const DetailScheduleNurse());
+                  // Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //       builder: (context) => const DetailScheduleNurse(),
+                  //     ));
                 },
               ),
               PatientScheduleCard(
@@ -180,11 +183,12 @@ class _ViewScheduleNurseState extends State<ViewScheduleNurse> {
                 nurseName: "Nastasya",
                 time: "1.30 pm - 2.30 pm",
                 onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const DetailScheduleNurse(),
-                      ));
+                  navPushTransition(context, const DetailScheduleNurse());
+                  // Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //       builder: (context) => const DetailScheduleNurse(),
+                  //     ));
                 },
               ),
             ],

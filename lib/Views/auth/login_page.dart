@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:hms_16/style/theme.dart';
 import 'package:hms_16/views/auth/forgot_password_page1.dart';
 import 'package:hms_16/views/auth/sign_up_page.dart';
 import 'package:hms_16/widget/button.dart';
+import 'package:hms_16/widget/navpush_transition.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -26,9 +28,12 @@ class _LoginPageState extends State<LoginPage> {
               SizedBox(
                 height: 170,
               ),
-              const Text(
+              Text(
                 "Sign In",
-                style: TextStyle(color: Colors.black, fontSize: 32),
+                style: textStyle.copyWith(
+                    color: cBlackBase,
+                    fontSize: 24,
+                    fontWeight: FontWeight.w700),
               ),
               const SizedBox(
                 height: 56,
@@ -71,26 +76,31 @@ class _LoginPageState extends State<LoginPage> {
               Button(
                   text: "Sign In",
                   onpressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const SignUpPage(),
-                        ));
+                    navPushTransition(context, SignUpPage());
+                    // Navigator.push(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //       builder: (context) => const SignUpPage(),
+                    //     ));
                   }),
               SizedBox(
                 height: 15.0,
               ),
               TextButton(
                   onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const ForgotPassword1(),
-                        ));
+                    navPushTransition(context, const ForgotPassword1());
+                    // Navigator.push(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //       builder: (context) => const ForgotPassword1(),
+                    //     ));
                   },
-                  child: const Text(
+                  child: Text(
                     "Forgot Password?",
-                    style: TextStyle(color: Colors.black, fontSize: 15),
+                    style: textStyle.copyWith(
+                        color: cPrimaryBase,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400),
                   )),
               const SizedBox(
                 height: 63.0,

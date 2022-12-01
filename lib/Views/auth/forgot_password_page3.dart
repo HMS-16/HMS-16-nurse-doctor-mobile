@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hms_16/style/theme.dart';
 import 'package:hms_16/widget/button.dart';
 
 class ForgotPassword3 extends StatelessWidget {
@@ -9,10 +10,13 @@ class ForgotPassword3 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.grey.shade200,
+        iconTheme: IconThemeData(color: cBlack),
+        elevation: 0,
+        backgroundColor: Colors.transparent,
         title: Text(
-          "Forgot Password",
-          style: GoogleFonts.balsamiqSans(fontSize: 20, color: Colors.black),
+          'Forgot Password',
+          style: textStyle.copyWith(
+              fontSize: 20, fontWeight: FontWeight.w600, color: cBlackBase),
         ),
       ),
       body: Column(
@@ -22,7 +26,7 @@ class ForgotPassword3 extends StatelessWidget {
             margin: EdgeInsets.symmetric(vertical: 70),
             child: Text(
               "Create your new password",
-              style: GoogleFonts.balsamiqSans(fontSize: 15),
+              style: textStyle.copyWith(fontSize: 15),
             ),
           ),
           Container(
@@ -31,8 +35,7 @@ class ForgotPassword3 extends StatelessWidget {
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 label: Text("New Password"),
-                labelStyle: GoogleFonts.balsamiqSans(
-                    textStyle: TextStyle(color: Colors.black)),
+                labelStyle: textStyle.copyWith(color: Colors.black),
                 hintText: "Create new password",
                 prefixIcon: Icon(Icons.email),
                 suffixIcon: Icon(Icons.lock),
@@ -48,8 +51,7 @@ class ForgotPassword3 extends StatelessWidget {
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 label: Text("Confirm New Password"),
-                labelStyle: GoogleFonts.balsamiqSans(
-                    textStyle: TextStyle(color: Colors.black)),
+                labelStyle: textStyle.copyWith(color: Colors.black),
                 hintText: "Confirm new password",
                 prefixIcon: Icon(Icons.email),
                 suffixIcon: Icon(Icons.lock),

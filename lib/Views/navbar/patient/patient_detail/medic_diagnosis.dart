@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hms_16/style/theme.dart';
 import 'package:hms_16/views/navbar/patient/add_medic_diagnosis.dart';
+import 'package:hms_16/widget/navpush_transition.dart';
 import 'package:hms_16/widget/tile_med_diagnosis.dart';
 
 class MedicalDiagnosis extends StatefulWidget {
@@ -23,10 +24,11 @@ class _MedicalDiagnosisState extends State<MedicalDiagnosis> {
       children: [
         ElevatedButton.icon(
           onPressed: (() {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: ((context) => AddMedDiagnosis())),
-            );
+            navPushTransition(context, const AddMedDiagnosis());
+            // Navigator.push(
+            //   context,
+            //   MaterialPageRoute(builder: ((context) => AddMedDiagnosis())),
+            // );
           }),
           style: ElevatedButton.styleFrom(
             backgroundColor: Color(0xff1153B5),

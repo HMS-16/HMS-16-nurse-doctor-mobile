@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hms_16/style/theme.dart';
 import 'package:hms_16/views/navbar/patient/patient_detail/patient_detail.dart';
+import 'package:hms_16/widget/navpush_transition.dart';
 
 class DetailScheduleDoctor extends StatelessWidget {
   const DetailScheduleDoctor({super.key});
@@ -90,11 +91,12 @@ class DetailScheduleDoctor extends StatelessWidget {
                     ),
                     IconButton(
                       onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const PatientDetail(),
-                            ));
+                        navPushTransition(context, const PatientDetail());
+                        // Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //       builder: (context) => const PatientDetail(),
+                        //     ));
                       },
                       icon: Icon(
                         Icons.arrow_forward,

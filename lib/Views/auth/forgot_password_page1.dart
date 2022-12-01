@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hms_16/style/theme.dart';
 import 'package:hms_16/views/auth/forgot_password_page2.dart';
 import 'package:hms_16/widget/button.dart';
+import 'package:hms_16/widget/navpush_transition.dart';
 
 class ForgotPassword1 extends StatelessWidget {
   const ForgotPassword1({super.key});
@@ -10,10 +12,13 @@ class ForgotPassword1 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.grey.shade200,
+        iconTheme: IconThemeData(color: cBlack),
+        elevation: 0,
+        backgroundColor: Colors.transparent,
         title: Text(
-          "Forgot Password",
-          style: GoogleFonts.balsamiqSans(fontSize: 20, color: Colors.black),
+          'Forgot Password',
+          style: textStyle.copyWith(
+              fontSize: 20, fontWeight: FontWeight.w600, color: cBlackBase),
         ),
       ),
       body: Column(
@@ -22,8 +27,8 @@ class ForgotPassword1 extends StatelessWidget {
           Container(
             padding: EdgeInsets.symmetric(horizontal: 10),
             child: Image(
-              image: NetworkImage(
-                "https://cdn.dribbble.com/users/1622791/screenshots/11174104/flutter_intro.png",
+              image: AssetImage(
+                "assets/forgot_password.png",
               ),
               fit: BoxFit.contain,
               width: MediaQuery.of(context).size.width,
@@ -34,7 +39,7 @@ class ForgotPassword1 extends StatelessWidget {
             margin: EdgeInsets.symmetric(vertical: 70),
             child: Text(
               "Please enter your email address",
-              style: GoogleFonts.balsamiqSans(fontSize: 15),
+              style: textStyle.copyWith(fontSize: 15),
             ),
           ),
           Container(
@@ -43,8 +48,7 @@ class ForgotPassword1 extends StatelessWidget {
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 label: Text("Email"),
-                labelStyle: GoogleFonts.balsamiqSans(
-                    textStyle: TextStyle(color: Colors.black)),
+                labelStyle: textStyle.copyWith(color: Colors.black),
                 hintText: "Email",
                 prefixIcon: Icon(Icons.email),
               ),
@@ -55,11 +59,12 @@ class ForgotPassword1 extends StatelessWidget {
               bgcolor: Colors.blueAccent,
               margin: EdgeInsets.only(top: 30),
               onpressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const ForgotPassword2(),
-                    ));
+                navPushTransition(context, const ForgotPassword2());
+                // Navigator.push(
+                //     context,
+                //     MaterialPageRoute(
+                //       builder: (context) => const ForgotPassword2(),
+                //     ));
               })
         ],
       ),

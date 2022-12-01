@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hms_16/style/theme.dart';
 import 'package:hms_16/views/auth/forgot_password_page3.dart';
 import 'package:hms_16/widget/button.dart';
+import 'package:hms_16/widget/navpush_transition.dart';
 
 class ForgotPassword2 extends StatelessWidget {
   const ForgotPassword2({super.key});
@@ -10,10 +12,13 @@ class ForgotPassword2 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.grey.shade200,
+        iconTheme: IconThemeData(color: cBlack),
+        elevation: 0,
+        backgroundColor: Colors.transparent,
         title: Text(
-          "Forget Password",
-          style: GoogleFonts.balsamiqSans(fontSize: 20, color: Colors.black),
+          'Forgot Password',
+          style: textStyle.copyWith(
+              fontSize: 20, fontWeight: FontWeight.w600, color: cBlackBase),
         ),
       ),
       body: Column(
@@ -22,8 +27,9 @@ class ForgotPassword2 extends StatelessWidget {
           Container(
             padding: EdgeInsets.symmetric(horizontal: 10),
             child: Image(
-              image: NetworkImage(
-                  "https://user-images.githubusercontent.com/51419598/152648731-567997ec-ac1c-4a9c-a816-a1fb1882abbe.png"),
+              image: AssetImage(
+                "assets/forgot_password.png",
+              ),
               fit: BoxFit.contain,
               width: MediaQuery.of(context).size.width,
               height: 100,
@@ -35,7 +41,7 @@ class ForgotPassword2 extends StatelessWidget {
             child: Text(
               "Enter the verification code we just sent you on your email addrress",
               textAlign: TextAlign.center,
-              style: GoogleFonts.balsamiqSans(fontSize: 15),
+              style: textStyle.copyWith(fontSize: 15),
             ),
           ),
           Row(
@@ -72,18 +78,18 @@ class ForgotPassword2 extends StatelessWidget {
           ),
           Text(
             "If you don't receive a code! Resend code",
-            style: GoogleFonts.balsamiqSans(),
+            style: textStyle,
           ),
           Button(
               text: "VERIFY",
-              bgcolor: Colors.black,
               margin: EdgeInsets.only(top: 30),
               onpressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const ForgotPassword3(),
-                    ));
+                navPushTransition(context, const ForgotPassword3());
+                // Navigator.push(
+                //     context,
+                //     MaterialPageRoute(
+                //       builder: (context) => const ForgotPassword3(),
+                //     ));
               })
         ],
       ),

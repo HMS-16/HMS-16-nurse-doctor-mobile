@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hms_16/style/theme.dart';
 
 class Button extends StatelessWidget {
   final String text;
@@ -20,12 +21,11 @@ class Button extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       margin: margin,
       height: 48,
-      padding: EdgeInsets.symmetric(horizontal: 20),
       child: ElevatedButton(
           style: ElevatedButton.styleFrom(
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-            backgroundColor: bgcolor,
+            backgroundColor: cPrimaryBase,
             foregroundColor: Colors.white,
           ),
           onPressed: onpressed,

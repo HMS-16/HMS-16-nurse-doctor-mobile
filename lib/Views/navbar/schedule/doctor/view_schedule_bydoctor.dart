@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hms_16/style/theme.dart';
 import 'package:hms_16/views/navbar/schedule/doctor/detail_schedule_bydoctor.dart';
+import 'package:hms_16/views/navbar/schedule/nurse/change_schedule_bynurse.dart';
 import 'package:hms_16/views/navbar/schedule/nurse/view_schedule_bynurse.dart';
+import 'package:hms_16/widget/navpush_transition.dart';
 import 'package:hms_16/widget/patientSchedule_card.dart';
 import 'package:intl/intl.dart';
 
@@ -151,10 +153,11 @@ class _ViewScheduleDoctorState extends State<ViewScheduleDoctor> {
                 nurseName: "Nastasya",
                 time: "1.30 pm - 2.30 pm",
                 onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const DetailScheduleDoctor()));
+                  navPushTransition(context, const DetailScheduleDoctor());
+                  // Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //         builder: (context) => const DetailScheduleDoctor()));
                 },
               ),
               PatientScheduleCard(
@@ -165,11 +168,12 @@ class _ViewScheduleDoctorState extends State<ViewScheduleDoctor> {
                 nurseName: "Nastasya",
                 time: "1.30 pm - 2.30 pm",
                 onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const DetailScheduleDoctor(),
-                      ));
+                  navPushTransition(context, const DetailScheduleDoctor());
+                  // Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //       builder: (context) => const DetailScheduleDoctor(),
+                  // ));
                 },
               ),
               PatientScheduleCard(

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:hms_16/style/theme.dart';
 import 'package:hms_16/views/navbar/navbar.dart';
 import 'package:hms_16/widget/button.dart';
+import 'package:hms_16/widget/navpush_transition.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key}) : super(key: key);
@@ -18,9 +20,10 @@ class _SignUpPageState extends State<SignUpPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text(
+            Text(
               "Registration New User",
-              style: TextStyle(fontSize: 21, fontWeight: FontWeight.bold),
+              style:
+                  textStyle.copyWith(fontSize: 21, fontWeight: FontWeight.bold),
             ),
             const SizedBox(
               height: 44.0,
@@ -102,11 +105,12 @@ class _SignUpPageState extends State<SignUpPage> {
             Button(
                 text: "Register",
                 onpressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => NavBar(),
-                      ));
+                  navPushTransition(context, NavBar());
+                  // Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //       builder: (context) => NavBar(),
+                  //     ));
                 }),
             const SizedBox(
               height: 17.0,

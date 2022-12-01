@@ -3,6 +3,7 @@ import 'package:hms_16/style/theme.dart';
 import 'package:hms_16/views/navbar/patient/patient_detail/patient_detail.dart';
 import 'package:hms_16/views/navbar/schedule/nurse/change_doctor_bynurse.dart';
 import 'package:hms_16/views/navbar/schedule/nurse/change_schedule_bynurse.dart';
+import 'package:hms_16/widget/navpush_transition.dart';
 
 class DetailScheduleNurse extends StatelessWidget {
   const DetailScheduleNurse({super.key});
@@ -92,11 +93,12 @@ class DetailScheduleNurse extends StatelessWidget {
                     ),
                     IconButton(
                       onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const PatientDetail(),
-                            ));
+                        navPushTransition(context, const PatientDetail());
+                        // Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //       builder: (context) => const PatientDetail(),
+                        //     ));
                       },
                       icon: Icon(
                         Icons.arrow_forward,
@@ -192,11 +194,12 @@ class DetailScheduleNurse extends StatelessWidget {
                     ),
                     trailing: TextButton(
                       onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const ChangeDoctorByNurse(),
-                            ));
+                        navPushTransition(context, const ChangeDoctorByNurse());
+                        // Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //       builder: (context) => const ChangeDoctorByNurse(),
+                        //     ));
                       },
                       child: Text(
                         "Change",
@@ -288,12 +291,14 @@ class DetailScheduleNurse extends StatelessWidget {
                     ),
                     trailing: TextButton(
                       onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  const ChangeScheduleByNurse(),
-                            ));
+                        navPushTransition(
+                            context, const ChangeScheduleByNurse());
+                        // Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //       builder: (context) =>
+                        //           const ChangeScheduleByNurse(),
+                        //     ));
                       },
                       child: Text(
                         "Change",

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hms_16/style/theme.dart';
 import 'package:hms_16/views/navbar/patient/patient_detail/patient_detail.dart';
+import 'package:hms_16/widget/navpush_transition.dart';
 import 'package:hms_16/widget/patient_card.dart';
 
 class PatientScreen extends StatefulWidget {
@@ -77,23 +78,24 @@ class PatientList extends StatelessWidget {
         itemBuilder: (context, index) {
           return InkWell(
             onTap: () {
-              Navigator.push(
-                context,
-                PageRouteBuilder(
-                  transitionsBuilder:
-                      (context, animation, secondaryAnimation, child) {
-                    return SlideTransition(
-                      position: animation.drive(
-                        Tween(begin: const Offset(1.0, 0.0), end: Offset.zero),
-                      ),
-                      child: child,
-                    );
-                  },
-                  pageBuilder: (context, animation, secondaryAnimation) {
-                    return const PatientDetail();
-                  },
-                ),
-              );
+              navPushTransition(context, const PatientDetail());
+              // Navigator.push(
+              //   context,
+              //   PageRouteBuilder(
+              //     transitionsBuilder:
+              //         (context, animation, secondaryAnimation, child) {
+              //       return SlideTransition(
+              //         position: animation.drive(
+              //           Tween(begin: const Offset(1.0, 0.0), end: Offset.zero),
+              //         ),
+              //         child: child,
+              //       );
+              //     },
+              //     pageBuilder: (context, animation, secondaryAnimation) {
+              //       return const PatientDetail();
+              //     },
+              //   ),
+              // );
             },
             child: const PatientCard(),
           );
