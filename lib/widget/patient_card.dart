@@ -11,7 +11,7 @@ class PatientCard extends StatelessWidget {
     return Container(
       height: 110,
       width: 358,
-      padding: EdgeInsets.symmetric(vertical: 12),
+      padding: const EdgeInsets.symmetric(vertical: 12),
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.all(
           Radius.circular(15),
@@ -28,7 +28,7 @@ class PatientCard extends StatelessWidget {
         children: [
           Container(
             width: 3.5,
-            height: 60,
+            height: 50,
             decoration: const BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
@@ -42,7 +42,11 @@ class PatientCard extends StatelessWidget {
           ),
           Expanded(
             child: ListTile(
-              leading: const CircleAvatar(),
+              leading: const Icon(
+                Icons.account_circle,
+                color: Colors.blue,
+                size: 35,
+              ),
               title: Text(
                 'Patient 1',
                 style: textStyle.copyWith(
@@ -60,7 +64,7 @@ class PatientCard extends StatelessWidget {
                         fontSize: 12,
                         color: cBlackLightest),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Text(
                     '1.30 pm - 2.30 pm',
                     style: textStyle.copyWith(

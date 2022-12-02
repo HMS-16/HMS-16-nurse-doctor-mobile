@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hms_16/views/navbar/patient/appointment/completed_appointment.dart';
-import 'package:hms_16/views/navbar/patient/appointment/upcoming_appointment.dart';
-import 'package:hms_16/widget/navpush_transition.dart';
+import 'package:hms_16/style/theme.dart';
+import 'package:hms_16/widget/duration_dialog.dart';
 import 'package:hms_16/widget/text_box.dart';
 
 class PatientProfile extends StatefulWidget {
@@ -22,112 +21,35 @@ class _PatientProfileState extends State<PatientProfile> {
           children: [
             Center(
               child: Column(
-                children: [
-                  const Text(
+                children: const [
+                  Text(
                     "Nama Pasien",
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const Text('123456789'),
-                  const SizedBox(height: 10),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      TextButton(
-                        style: TextButton.styleFrom(
-                          foregroundColor: const Color.fromRGBO(17, 83, 181, 1),
-                        ),
-                        onPressed: () {
-                          navPushTransition(
-                              context, const CompletedAppointment());
-                          // Navigator.push(
-                          //   context,
-                          //   PageRouteBuilder(
-                          //     transitionsBuilder: (context, animation,
-                          //         secondaryAnimation, child) {
-                          //       return SlideTransition(
-                          //         position: animation.drive(
-                          //           Tween(
-                          //               begin: const Offset(1.0, 0.0),
-                          //               end: Offset.zero),
-                          //         ),
-                          //         child: child,
-                          //       );
-                          //     },
-                          //     pageBuilder:
-                          //         (context, animation, secondaryAnimation) {
-                          //       return const CompletedAppointment();
-                          //     },
-                          //   ),
-                          // );
-                        },
-                        child: Column(
-                          children: const [
-                            Text("4"),
-                            Text("Completed"),
-                            Text("Appointment"),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        width: 1.5,
-                        height: 50,
-                        color: Colors.black,
-                      ),
-                      TextButton(
-                        style: TextButton.styleFrom(
-                          foregroundColor: const Color.fromRGBO(17, 83, 181, 1),
-                        ),
-                        onPressed: () {
-                          navPushTransition(
-                              context, const UpcomingAppointment());
-                          // Navigator.push(
-                          //   context,
-                          //   PageRouteBuilder(
-                          //     transitionsBuilder: (context, animation,
-                          //         secondaryAnimation, child) {
-                          //       return SlideTransition(
-                          //         position: animation.drive(
-                          //           Tween(
-                          //               begin: const Offset(1.0, 0.0),
-                          //               end: Offset.zero),
-                          //         ),
-                          //         child: child,
-                          //       );
-                          //     },
-                          //     pageBuilder:
-                          //         (context, animation, secondaryAnimation) {
-                          //       return const UpcomingAppointment();
-                          //     },
-                          //   ),
-                          // );
-                        },
-                        child: Column(
-                          children: const [
-                            Text("2"),
-                            Text("Upcoming"),
-                            Text("Appointment"),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
+                  Text('123456789'),
                 ],
               ),
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 20),
             const Text(
               'Doctor',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const TextBox(
+            TextBox(
               height: 43,
               width: double.infinity,
-              child: Text('Hansi Flick'),
+              child: Text(
+                'Hansi Flick',
+                style: Theme.of(context)
+                    .textTheme
+                    .subtitle1!
+                    .copyWith(color: cWhiteLast),
+              ),
             ),
             const Text(
               'Nurse',
@@ -135,18 +57,24 @@ class _PatientProfileState extends State<PatientProfile> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const TextBox(
+            TextBox(
               height: 43,
               width: double.infinity,
-              child: Text('Jamal Musiala'),
+              child: Text(
+                'Jamal Musiala',
+                style: Theme.of(context)
+                    .textTheme
+                    .subtitle1!
+                    .copyWith(color: cWhiteLast),
+              ),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
-                    Text(
+                  children: [
+                    const Text(
                       'Gender',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
@@ -155,9 +83,15 @@ class _PatientProfileState extends State<PatientProfile> {
                     TextBox(
                       height: 43,
                       width: 166,
-                      child: Text('Male'),
+                      child: Text(
+                        'Male',
+                        style: Theme.of(context)
+                            .textTheme
+                            .subtitle1!
+                            .copyWith(color: cWhiteLast),
+                      ),
                     ),
-                    Text(
+                    const Text(
                       'Blood Type',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
@@ -166,14 +100,20 @@ class _PatientProfileState extends State<PatientProfile> {
                     TextBox(
                       height: 43,
                       width: 166,
-                      child: Text('O'),
+                      child: Text(
+                        'O',
+                        style: Theme.of(context)
+                            .textTheme
+                            .subtitle1!
+                            .copyWith(color: cWhiteLast),
+                      ),
                     ),
                   ],
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
-                    Text(
+                  children: [
+                    const Text(
                       'Date of Birth',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
@@ -182,9 +122,15 @@ class _PatientProfileState extends State<PatientProfile> {
                     TextBox(
                       height: 43,
                       width: 166,
-                      child: Text('Tokyo, 08-25-2000'),
+                      child: Text(
+                        'Tokyo, 08-25-2000',
+                        style: Theme.of(context)
+                            .textTheme
+                            .subtitle1!
+                            .copyWith(color: cWhiteLast),
+                      ),
                     ),
-                    Text(
+                    const Text(
                       'Status',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
@@ -193,7 +139,13 @@ class _PatientProfileState extends State<PatientProfile> {
                     TextBox(
                       height: 43,
                       width: 166,
-                      child: Text('Process'),
+                      child: Text(
+                        'Process',
+                        style: Theme.of(context)
+                            .textTheme
+                            .subtitle1!
+                            .copyWith(color: cWhiteLast),
+                      ),
                     ),
                   ],
                 ),
@@ -205,10 +157,16 @@ class _PatientProfileState extends State<PatientProfile> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const TextBox(
+            TextBox(
               height: 43,
               width: 166,
-              child: Text('22 Years'),
+              child: Text(
+                '22 Years',
+                style: Theme.of(context)
+                    .textTheme
+                    .subtitle1!
+                    .copyWith(color: cWhiteLast),
+              ),
             ),
             const Text(
               'Address',
@@ -216,10 +174,16 @@ class _PatientProfileState extends State<PatientProfile> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const TextBox(
+            TextBox(
               height: 43,
               width: double.infinity,
-              child: Text('Jl. Jalan No.3, Kota Tiga'),
+              child: Text(
+                'Jl. Jalan No.3, Kota Tiga',
+                style: Theme.of(context)
+                    .textTheme
+                    .subtitle1!
+                    .copyWith(color: cWhiteLast),
+              ),
             ),
             const Text(
               'Phone Number',
@@ -227,10 +191,16 @@ class _PatientProfileState extends State<PatientProfile> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const TextBox(
+            TextBox(
               height: 43,
               width: double.infinity,
-              child: Text('+62 0813 1313 1313'),
+              child: Text(
+                '+62 813 1313 1313',
+                style: Theme.of(context)
+                    .textTheme
+                    .subtitle1!
+                    .copyWith(color: cWhiteLast),
+              ),
             ),
             const Text(
               'Register Date',
@@ -238,10 +208,16 @@ class _PatientProfileState extends State<PatientProfile> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const TextBox(
+            TextBox(
               height: 43,
               width: double.infinity,
-              child: Text('November 10, 2022'),
+              child: Text(
+                'November 10, 2022',
+                style: Theme.of(context)
+                    .textTheme
+                    .subtitle1!
+                    .copyWith(color: cWhiteLast),
+              ),
             ),
             const Text(
               'Case Description',
@@ -251,46 +227,73 @@ class _PatientProfileState extends State<PatientProfile> {
             ),
             TextBox(
               width: double.infinity,
-              height: 130,
+              height: 140,
               child: Padding(
                 padding: const EdgeInsets.all(4),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text('Experiencing symptoms :'),
+                    Text(
+                      'Experiencing symptoms :',
+                      style: Theme.of(context)
+                          .textTheme
+                          .subtitle1!
+                          .copyWith(color: cWhiteLast),
+                    ),
                     Expanded(
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Column(
                           children: [
                             Row(
-                              children: const [
+                              children: [
                                 Icon(
                                   Icons.circle,
                                   size: 10.0,
+                                  color: cWhiteLast,
                                 ),
-                                SizedBox(width: 10),
-                                Text('Red on the Throat'),
+                                const SizedBox(width: 10),
+                                Text(
+                                  'Red on the Throat',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .subtitle1!
+                                      .copyWith(color: cWhiteLast),
+                                ),
                               ],
                             ),
                             Row(
-                              children: const [
+                              children: [
                                 Icon(
                                   Icons.circle,
                                   size: 10.0,
+                                  color: cWhiteLast,
                                 ),
-                                SizedBox(width: 10),
-                                Text('The salivary glands are enlarged'),
+                                const SizedBox(width: 10),
+                                Text(
+                                  'The salivary glands are enlarged',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .subtitle1!
+                                      .copyWith(color: cWhiteLast),
+                                ),
                               ],
                             ),
                             Row(
-                              children: const [
+                              children: [
                                 Icon(
                                   Icons.circle,
                                   size: 10.0,
+                                  color: cWhiteLast,
                                 ),
-                                SizedBox(width: 10),
-                                Text('Mild respiratory distress'),
+                                const SizedBox(width: 10),
+                                Text(
+                                  'Mild respiratory distress',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .subtitle1!
+                                      .copyWith(color: cWhiteLast),
+                                ),
                               ],
                             ),
                           ],
@@ -309,28 +312,80 @@ class _PatientProfileState extends State<PatientProfile> {
                   barrierDismissible: true,
                   builder: (BuildContext context) {
                     return AlertDialog(
-                      title: const Text(
+                      title: Text(
                         'Are you sure to end case this patient?',
                         textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.w600),
+                        style: textStyle.copyWith(
+                            fontSize: 15, fontWeight: FontWeight.w500),
+                      ),
+                      content: Image(
+                        image: const AssetImage(
+                          "assets/images/succes.png",
+                        ),
+                        fit: BoxFit.contain,
+                        width: MediaQuery.of(context).size.width,
+                        height: 150,
                       ),
                       actions: <Widget>[
-                        ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.white),
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          child: const Text("Yes"),
-                        ),
-                        ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.white),
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          child: const Text("No"),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Expanded(
+                              child: SizedBox(
+                                height: 50,
+                                width: double.infinity,
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(12),
+                                    ),
+                                    backgroundColor: cPrimaryBase,
+                                  ),
+                                  onPressed: () async {
+                                    durationDialog(
+                                        context, "End case succesfully!");
+                                  },
+                                  child: Text(
+                                    "Yes",
+                                    style: textStyle.copyWith(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 10.0,
+                            ),
+                            Expanded(
+                              child: SizedBox(
+                                height: 50,
+                                width: double.infinity,
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    shape: RoundedRectangleBorder(
+                                        side: BorderSide(
+                                            width: 1, color: cPrimaryBase),
+                                        borderRadius:
+                                            BorderRadius.circular(12)),
+                                    backgroundColor: cWhiteBase,
+                                  ),
+                                  onPressed: () async {
+                                    Navigator.pop(context);
+                                  },
+                                  child: Text(
+                                    "No",
+                                    style: textStyle.copyWith(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w600,
+                                        color: cPrimaryBase),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     );

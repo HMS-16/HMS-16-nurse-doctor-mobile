@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hms_16/Views/notification.dart';
+import 'package:hms_16/Views/profile.dart';
 import 'package:hms_16/style/theme.dart';
 import 'package:hms_16/views/navbar/patient/patient_detail/patient_detail.dart';
 import 'package:hms_16/widget/navpush_transition.dart';
@@ -27,11 +29,15 @@ class _PatientScreenState extends State<PatientScreen> {
         ),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              navPushTransition(context, const NotificationPage());
+            },
             icon: const Icon(Icons.notifications_none),
           ),
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              navPushTransition(context, ProfilePage());
+            },
             icon: const Icon(Icons.account_circle_outlined),
           ),
         ],
