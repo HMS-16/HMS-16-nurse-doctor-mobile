@@ -1,8 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:hms_16/Views/forgot_password_page2.dart';
 import 'package:hms_16/Widgets/button.dart';
-import 'package:hms_16/Views/forgot_password_page2.dart';
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ForgotPassword1 extends StatelessWidget {
   const ForgotPassword1({super.key});
@@ -24,11 +23,10 @@ class ForgotPassword1 extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 10),
             child: Image(
               image: NetworkImage(
-                "https://cdn.dribbble.com/users/1622791/screenshots/11174104/flutter_intro.png",
-              ),
+                  "https://user-images.githubusercontent.com/51419598/152648731-567997ec-ac1c-4a9c-a816-a1fb1882abbe.png"),
               fit: BoxFit.contain,
               width: MediaQuery.of(context).size.width,
-              height: 200,
+              height: 100,
             ),
           ),
           Container(
@@ -52,8 +50,8 @@ class ForgotPassword1 extends StatelessWidget {
             ),
           ),
           Button(
-              text: "Send",
-              bgcolor: Colors.blueAccent,
+              text: "SEND",
+              bgcolor: Colors.black,
               margin: EdgeInsets.only(top: 30),
               onpressed: () {
                 Navigator.push(

@@ -76,7 +76,7 @@ class ForgotPassword2 extends StatelessWidget {
           ),
           Button(
               text: "VERIFY",
-              bgcolor: Colors.black,
+              bgcolor: Colors.blueAccent,
               margin: EdgeInsets.only(top: 30),
               onpressed: () {
                 Navigator.push(

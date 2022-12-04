@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hms_16/Widgets/button.dart';
@@ -29,7 +30,9 @@ class ForgotPassword3 extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 10),
             child: TextFormField(
               decoration: InputDecoration(
-                border: OutlineInputBorder(),
+
+                border:
+                    OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
                 label: Text("New Password"),
                 labelStyle: GoogleFonts.balsamiqSans(
                     textStyle: TextStyle(color: Colors.black)),
@@ -46,7 +49,8 @@ class ForgotPassword3 extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 10),
             child: TextFormField(
               decoration: InputDecoration(
-                border: OutlineInputBorder(),
+                border:
+                    OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
                 label: Text("Confirm New Password"),
                 labelStyle: GoogleFonts.balsamiqSans(
                     textStyle: TextStyle(color: Colors.black)),

@@ -65,20 +65,20 @@ class _LoginPageState extends State<LoginPage> {
                     labelText: "Password",
                     floatingLabelBehavior: FloatingLabelBehavior.always),
               ),
-              const SizedBox(
+              SizedBox(
                 height: 26.0,
               ),
               Button(
                   text: "Sign In",
                   onpressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const SignUpPage(),
-                        ));
+                    // Navigator.push(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //       builder: (context) => const SignUpPage(),
+                    //     ));
                   }),
-              const SizedBox(
-                height: 30.0,
+              SizedBox(
+                height: 15.0,
               ),
               TextButton(
                   onPressed: () {
