@@ -1,21 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:hms_16/views/patient/patient_detail.dart';
+import 'package:hms_16/Views/navbar/patient/patient_detail/patient_detail.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        useMaterial3: true,
-      ),
-      home: const PatientDetail(),
+      home: PatientDetail(),
     );
   }
 }
