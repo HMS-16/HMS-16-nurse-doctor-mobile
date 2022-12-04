@@ -78,7 +78,7 @@ class _LoginPageState extends State<LoginPage> {
                         ));
                   }),
               const SizedBox(
-                height: 26.0,
+                height: 30.0,
               ),
               TextButton(
                   onPressed: () {

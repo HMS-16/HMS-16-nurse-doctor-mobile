@@ -1,5 +1,5 @@
-import 'package:hms_16/Views/landing_page.dart';
 import 'package:flutter/material.dart';
+import 'package:hms_16/Views/landing_page.dart';
 
 void main() {
   runApp(const MyApp());

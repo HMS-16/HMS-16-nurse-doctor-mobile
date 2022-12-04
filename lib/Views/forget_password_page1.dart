@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hms_16/Widgets/button.dart';
+import 'package:hms_16/Views/forgot_password_page2.dart';
 
 class ForgotPassword1 extends StatelessWidget {
   const ForgotPassword1({super.key});
@@ -53,11 +54,11 @@ class ForgotPassword1 extends StatelessWidget {
               bgcolor: Colors.blueAccent,
               margin: EdgeInsets.only(top: 30),
               onpressed: () {
-                // Navigator.push(
-                //     context,
-                //     MaterialPageRoute(
-                //       builder: (context) => const ForgotPassword2(),
-                //     ));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const ForgotPassword2(),
+                    ));
               })
         ],
       ),
