@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hms_16/style/theme.dart';
+import 'package:hms_16/views/navbar/navbar.dart';
 import 'package:hms_16/views/navbar/schedule/doctor/detail_schedule_bydoctor.dart';
 import 'package:hms_16/views/navbar/schedule/nurse/view_schedule_bynurse.dart';
 import 'package:hms_16/widget/navpush_transition.dart';
@@ -53,7 +54,7 @@ class _ViewScheduleDoctorState extends State<ViewScheduleDoctor> {
                   Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const ViewScheduleNurse(),
+                        builder: (context) => const NavBar(),
                       ));
                 },
                 icon: Icon(

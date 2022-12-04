@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:hms_16/Views/navbar/schedule/nurse/change_schedule_bynurse.dart';
 import 'package:hms_16/style/theme.dart';
+import 'package:hms_16/views/navbar/navbardoc.dart';
 import 'package:hms_16/views/navbar/schedule/doctor/view_schedule_bydoctor.dart';
 import 'package:hms_16/views/navbar/schedule/nurse/detail_schedule_bynurse.dart';
 import 'package:hms_16/widget/navpush_transition.dart';
@@ -53,7 +55,7 @@ class _ViewScheduleNurseState extends State<ViewScheduleNurse> {
                   Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const ViewScheduleDoctor(),
+                        builder: (context) => const NavBarDoc(),
                       ));
                 },
                 icon: Icon(
@@ -110,11 +112,13 @@ class _ViewScheduleNurseState extends State<ViewScheduleNurse> {
                 child: ListTile(
                     leading: IconButton(
                         onPressed: () {
+                          final changeData =
+                              selectedDate.millisecondsSinceEpoch - 86400000;
+                          DateTime cvData =
+                              DateTime.fromMillisecondsSinceEpoch(changeData);
                           setState(() {
-                            // addDate;
-                            prevDate;
+                            selectedDate = cvData;
                           });
-                          // final dateChanged = selectedDate.day - 1;
                         },
                         icon: const Icon(Icons.arrow_back_ios)),
                     title: TextButton(
@@ -132,8 +136,12 @@ class _ViewScheduleNurseState extends State<ViewScheduleNurse> {
                     ),
                     trailing: IconButton(
                       onPressed: () {
+                        final changeData =
+                            selectedDate.millisecondsSinceEpoch + 86400000;
+                        DateTime cvData =
+                            DateTime.fromMillisecondsSinceEpoch(changeData);
                         setState(() {
-                          nextDate;
+                          selectedDate = cvData;
                         });
                       },
                       icon: const Icon(Icons.arrow_forward_ios),
@@ -148,29 +156,13 @@ class _ViewScheduleNurseState extends State<ViewScheduleNurse> {
                 icon: const CircleAvatar(),
                 patientName: "Alief Rachman",
                 nurseName: "Nastasya",
-                time: "1.30 pm - 2.30 pm",
+                time: "$valueDropdown",
                 onPressed: () {
                   navPushTransition(context, const DetailScheduleNurse());
                   // Navigator.push(
                   //     context,
                   //     MaterialPageRoute(
                   //         builder: (context) => const DetailScheduleNurse()));
-                },
-              ),
-              PatientScheduleCard(
-                disease: "Stomatch ache",
-                doctorName: "Abednego",
-                icon: const CircleAvatar(),
-                patientName: "Nurul Zakiah",
-                nurseName: "Nastasya",
-                time: "1.30 pm - 2.30 pm",
-                onPressed: () {
-                  navPushTransition(context, const DetailScheduleNurse());
-                  // Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //       builder: (context) => const DetailScheduleNurse(),
-                  //     ));
                 },
               ),
               PatientScheduleCard(

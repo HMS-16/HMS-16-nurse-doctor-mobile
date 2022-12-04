@@ -7,9 +7,11 @@ void durationDialog(BuildContext context, String text) async {
   });
   await showDialog<void>(
     context: context,
-    barrierDismissible: true,
+    barrierDismissible: false,
     builder: (BuildContext context) {
       return AlertDialog(
+        shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(15))),
         title: Text(
           text,
           textAlign: TextAlign.center,
@@ -19,5 +21,6 @@ void durationDialog(BuildContext context, String text) async {
       );
     },
   );
+  Navigator.pop(context);
   Navigator.pop(context);
 }
