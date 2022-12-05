@@ -5,9 +5,14 @@ import 'package:hms_16/views/navbar/schedule/nurse/change_doctor_bynurse.dart';
 import 'package:hms_16/views/navbar/schedule/nurse/change_schedule_bynurse.dart';
 import 'package:hms_16/widget/navpush_transition.dart';
 
-class DetailScheduleNurse extends StatelessWidget {
+class DetailScheduleNurse extends StatefulWidget {
   const DetailScheduleNurse({super.key});
 
+  @override
+  State<DetailScheduleNurse> createState() => _DetailScheduleNurseState();
+}
+
+class _DetailScheduleNurseState extends State<DetailScheduleNurse> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,97 +70,38 @@ class DetailScheduleNurse extends StatelessWidget {
                           fontSize: 12,
                           fontWeight: FontWeight.w400),
                     ),
-                    Text(
-                      "Last Appointment : Sep 23, 2022",
-                      style: textStyle.copyWith(
-                          color: cBlackBase,
-                          fontSize: 12,
-                          fontWeight: FontWeight.w400),
-                    ),
-                    Text(
-                      "Next Appointment : Sep 30, 2022",
-                      style: textStyle.copyWith(
-                          color: cBlackBase,
-                          fontSize: 12,
-                          fontWeight: FontWeight.w400),
-                    ),
                   ],
                 ),
                 subtitle: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Text(
-                      "View Patient Detail",
-                      style: textStyle.copyWith(
-                          color: cPrimaryBase,
-                          fontSize: 12,
-                          fontWeight: FontWeight.w700),
+                    Expanded(
+                      flex: 6,
+                      child: Text(
+                        "View Patient Detail",
+                        style: textStyle.copyWith(
+                            color: cPrimaryBase,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w700),
+                      ),
                     ),
-                    IconButton(
-                      onPressed: () {
-                        navPushTransition(context, const PatientDetail());
-                        // Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //       builder: (context) => const PatientDetail(),
-                        //     ));
-                      },
-                      icon: Icon(
-                        Icons.arrow_forward,
-                        color: cIcon,
+                    Expanded(
+                      flex: 1,
+                      child: IconButton(
+                        onPressed: () {
+                          navPushTransition(context, const PatientDetail());
+                          // Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //       builder: (context) => const PatientDetail(),
+                          //     ));
+                        },
+                        icon: Icon(
+                          Icons.arrow_forward,
+                          color: cIcon,
+                        ),
                       ),
                     )
-                  ],
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 12.0,
-            ),
-            Container(
-              padding: const EdgeInsets.symmetric(vertical: 12),
-              margin: const EdgeInsets.symmetric(horizontal: 16),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12), color: cWhiteDarker),
-              child: ListTile(
-                title: Text(
-                  "Note",
-                  style: textStyle.copyWith(
-                      color: cBlackBase,
-                      fontWeight: FontWeight.w700,
-                      fontSize: 14),
-                ),
-                subtitle: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Experiencing symptoms :",
-                      style: textStyle.copyWith(
-                          color: cBlackBase,
-                          fontWeight: FontWeight.w400,
-                          fontSize: 14),
-                    ),
-                    Text(
-                      "- Red on the throat",
-                      style: textStyle.copyWith(
-                          color: cBlackBase,
-                          fontWeight: FontWeight.w400,
-                          fontSize: 14),
-                    ),
-                    Text(
-                      "- The salivary glands are enlarged",
-                      style: textStyle.copyWith(
-                          color: cBlackBase,
-                          fontWeight: FontWeight.w400,
-                          fontSize: 14),
-                    ),
-                    Text(
-                      "- Mild respiratory distress",
-                      style: textStyle.copyWith(
-                          color: cBlackBase,
-                          fontWeight: FontWeight.w400,
-                          fontSize: 14),
-                    ),
                   ],
                 ),
               ),
@@ -175,40 +121,50 @@ class DetailScheduleNurse extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    "Doctor",
-                    style: textStyle.copyWith(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
-                        color: cBlackLightest),
-                  ),
-                  ListTile(
-                    leading: const SizedBox(
-                        width: 53, height: 53, child: CircleAvatar()),
-                    title: Text(
-                      "Abednego",
-                      style: textStyle.copyWith(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                          color: cBlackBase),
-                    ),
-                    trailing: TextButton(
-                      onPressed: () {
-                        navPushTransition(context, const ChangeDoctorByNurse());
-                        // Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //       builder: (context) => const ChangeDoctorByNurse(),
-                        //     ));
-                      },
-                      child: Text(
-                        "Change",
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Doctor",
                         style: textStyle.copyWith(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w700,
-                            color: cPrimaryBase),
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400,
+                            color: cBlackLightest),
                       ),
-                    ),
+                      const SizedBox(
+                        height: 5.0,
+                      ),
+                      Row(
+                        children: [
+                          const SizedBox(
+                              width: 53, height: 53, child: CircleAvatar()),
+                          Expanded(
+                            child: ListTile(
+                              title: Text(
+                                "Abednego",
+                                style: textStyle.copyWith(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                    color: cBlackBase),
+                              ),
+                              trailing: TextButton(
+                                onPressed: () {
+                                  navPushTransition(
+                                      context, const ChangeDoctorByNurse());
+                                },
+                                child: Text(
+                                  "Change",
+                                  style: textStyle.copyWith(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w700,
+                                      color: cPrimaryBase),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -235,26 +191,57 @@ class DetailScheduleNurse extends StatelessWidget {
                         fontWeight: FontWeight.w400,
                         color: cBlackLightest),
                   ),
-                  ListTile(
-                    leading: const SizedBox(
-                        width: 53, height: 53, child: CircleAvatar()),
-                    title: Text(
-                      "Natasya",
-                      style: textStyle.copyWith(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                          color: cBlackBase),
-                    ),
-                    trailing: TextButton(
-                      onPressed: () {},
-                      child: Text(
-                        "Change",
-                        style: textStyle.copyWith(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w700,
-                            color: cPrimaryBase),
+                  const SizedBox(
+                    height: 5.0,
+                  ),
+                  Row(
+                    children: [
+                      const SizedBox(
+                          width: 53, height: 53, child: CircleAvatar()),
+                      Expanded(
+                        child: ListTile(
+                          title: Text(
+                            "Natasya",
+                            style: textStyle.copyWith(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400,
+                                color: cBlackBase),
+                          ),
+                          trailing: TextButton(
+                            onPressed: () async {
+                              Future.delayed(const Duration(seconds: 2), () {
+                                Navigator.pop(context);
+                              });
+                              await showDialog<void>(
+                                context: context,
+                                barrierDismissible: false,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    shape: const RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(15))),
+                                    title: Text(
+                                      "Coming soon!",
+                                      textAlign: TextAlign.center,
+                                      style: textStyle.copyWith(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w600),
+                                    ),
+                                  );
+                                },
+                              );
+                            },
+                            child: Text(
+                              "Change",
+                              style: textStyle.copyWith(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w700,
+                                  color: cPrimaryBase),
+                            ),
+                          ),
+                        ),
                       ),
-                    ),
+                    ],
                   ),
                 ],
               ),
@@ -281,34 +268,40 @@ class DetailScheduleNurse extends StatelessWidget {
                         fontWeight: FontWeight.w400,
                         color: cBlackLightest),
                   ),
-                  ListTile(
-                    title: Text(
-                      "1.30 - 2.30 pm",
-                      style: textStyle.copyWith(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                          color: cBlackBase),
-                    ),
-                    trailing: TextButton(
-                      onPressed: () {
-                        navPushTransition(
-                            context, const ChangeScheduleByNurse());
-                        // Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //       builder: (context) =>
-                        //           const ChangeScheduleByNurse(),
-                        //     ));
-                      },
-                      child: Text(
-                        "Change",
+                  Row(
+                    children: [
+                      Text(
+                        "$valueDropdown",
                         style: textStyle.copyWith(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w700,
-                            color: cPrimaryBase),
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400,
+                            color: cBlackBase),
                       ),
-                    ),
-                  ),
+                      Expanded(
+                        child: ListTile(
+                          trailing: TextButton(
+                            onPressed: () {
+                              navPushTransition(
+                                  context, const ChangeScheduleByNurse());
+                              // Navigator.push(
+                              //     context,
+                              //     MaterialPageRoute(
+                              //       builder: (context) =>
+                              //           const ChangeScheduleByNurse(),
+                              //     ));
+                            },
+                            child: Text(
+                              "Change",
+                              style: textStyle.copyWith(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w700,
+                                  color: cPrimaryBase),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  )
                 ],
               ),
             )

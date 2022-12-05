@@ -16,10 +16,10 @@ class _MedicalRecordState extends State<MedicalRecord> {
   Widget build(BuildContext context) {
     return ListView(
       padding: const EdgeInsets.only(
-        top: 10,
-        left: 10,
-        right: 10,
-        bottom: 70,
+        top: 12,
+        left: 16,
+        right: 16,
+        bottom: 12,
       ),
       children: [
         ElevatedButton.icon(

@@ -16,10 +16,10 @@ class _MedicalDiagnosisState extends State<MedicalDiagnosis> {
   Widget build(BuildContext context) {
     return ListView(
       padding: const EdgeInsets.only(
-        top: 10,
-        left: 10,
-        right: 10,
-        bottom: 70,
+        top: 12,
+        left: 16,
+        right: 16,
+        bottom: 12,
       ),
       children: [
         ElevatedButton.icon(
@@ -41,7 +41,7 @@ class _MedicalDiagnosisState extends State<MedicalDiagnosis> {
           icon: const Icon(Icons.add),
           label: Text(
             'Add Medical Diagnosis',
-            style: textStyle.copyWith(fontSize: 13),
+            style: textStyle.copyWith(fontSize: 14, fontWeight: FontWeight.w600),
           ),
         ),
         const TileMedDiagnosis(),

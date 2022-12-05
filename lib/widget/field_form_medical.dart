@@ -7,15 +7,15 @@ class FieldMedical extends StatelessWidget {
     required this.text,
     this.suffix,
     this.line,
-    this.isRequired = true,
-    this.isSuffix = true,
+    this.iconRequired = true,
+    // this.isSuffix = true,
   });
   String title;
   String text;
   String? suffix;
   int? line;
-  bool isSuffix;
-  bool isRequired;
+  // bool isSuffix;
+  bool iconRequired;
 
   @override
   Widget build(BuildContext context) {
@@ -28,9 +28,9 @@ class FieldMedical extends StatelessWidget {
             text: title,
             style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700),
             children: [
-              if (isRequired) ...[
+              if (iconRequired) ...[
                 TextSpan(
-                  text: '*',
+                  text: ' *',
                   style: TextStyle(color: Colors.red),
                 ),
               ]
@@ -44,7 +44,7 @@ class FieldMedical extends StatelessWidget {
           cursorColor: Colors.black12,
           decoration: InputDecoration(
             contentPadding: line == null ? EdgeInsets.only(left: 13) : null,
-            suffixIcon: isSuffix
+            suffixIcon: suffix != null
                 ? Align(
                     alignment: Alignment.center,
                     widthFactor: 1.0,

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+// import 'package:hms_16/Views/navbar/patient/patient_detail/patient_detail.dart';
 import 'package:hms_16/style/theme.dart';
+import 'package:hms_16/widget/dialog_validation.dart';
 import 'package:hms_16/widget/field_form_medical.dart';
 
 class AddMedRecord extends StatefulWidget {
@@ -30,7 +32,7 @@ class _AddMedRecordState extends State<AddMedRecord> {
         ),
       ),
       body: ListView(
-        padding: const EdgeInsets.all(10),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         children: [
           FieldMedical(
             title: 'Height',
@@ -72,12 +74,33 @@ class _AddMedRecordState extends State<AddMedRecord> {
             title: 'Note',
             text: 'Add Note',
             line: 3,
-            isRequired: false,
-            isSuffix: false,
+            iconRequired: false,
+            // isSuffix: false,
           ),
           const SizedBox(height: 15),
           ElevatedButton(
-            onPressed: (() {}),
+            onPressed: (() {
+              dialogValidation(
+                context: context,
+                onPressedYes: () {
+                  Navigator.pop(context);
+                  dialogValidation(
+                    context: context,
+                    isValidation: false,
+                    title: 'New Medical Successfully Saved!',
+                    newPage: () {
+                      Future.delayed(Duration(seconds: 2),(() {
+                        Navigator.pop(context);
+                        Navigator.pop(context);
+                      }));
+                      // Navigator.pop(context);
+                    },
+                  );
+                  // durationDialog(context, 'New Medical Successfully Saved!');
+                },
+                title: 'are you sure to save a medical?',
+              );
+            }),
             style: ElevatedButton.styleFrom(
               backgroundColor: const Color(0xff1153B5),
               foregroundColor: Colors.white,
