@@ -104,6 +104,7 @@ class _ChangeScheduleByNurseState extends State<ChangeScheduleByNurse> {
                   textStyle.copyWith(fontWeight: FontWeight.w700, fontSize: 12),
             ),
             DropdownButtonFormField<String>(
+              // dropdownColor: Colors.red,
               decoration: InputDecoration(
                   fillColor: cSecondaryLightest,
                   filled: true,
@@ -133,103 +134,145 @@ class _ChangeScheduleByNurseState extends State<ChangeScheduleByNurse> {
                   )
                   .toList(),
             ),
+            const SizedBox(
+              height: 20.0,
+            ),
             SizedBox(
               width: MediaQuery.of(context).size.width,
+              height: 51,
               child: ElevatedButton(
-                style: ButtonStyle(
-                    backgroundColor: MaterialStatePropertyAll(cSuccessBase)),
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: cPrimaryBase,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12))),
                 onPressed: () async {
                   await showDialog<void>(
                     context: context,
-                    barrierDismissible: true,
+                    barrierDismissible: false,
                     builder: (BuildContext context) {
                       return AlertDialog(
+                        actionsPadding: const EdgeInsets.only(
+                            bottom: 32, right: 20, left: 20),
+                        shape: const RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(15))),
                         content: SingleChildScrollView(
-                            child: ListTile(
-                          leading: const SizedBox(
-                              height: 30, width: 30, child: CircleAvatar()),
-                          title: Column(
+                          child: Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('Schedule Available',
-                                  style: textStyle.copyWith(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 16)),
-                              Text(
-                                  DateFormat('EEEE, MMMM d')
-                                      .format(selectedDate),
-                                  style: textStyle.copyWith(
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 12,
-                                      color: cBlackLightest)),
-                              Text(valueDropdown,
-                                  style: textStyle.copyWith(
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 12,
-                                      color: cBlackLightest)),
-                              const SizedBox(
-                                height: 20.0,
+                              Column(
+                                children: const [
+                                  SizedBox(
+                                    height: 3.0,
+                                  ),
+                                  SizedBox(
+                                      height: 30,
+                                      width: 30,
+                                      child: CircleAvatar()),
+                                ],
                               ),
-                              Text(
-                                  "Your schedule has been successfully changed!",
-                                  style: textStyle.copyWith(
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 12,
-                                      color: cBlackLightest)),
+                              const SizedBox(
+                                width: 15.0,
+                              ),
+                              Flexible(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Text(
+                                      "Schedule Available",
+                                      style: textStyle.copyWith(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w600,
+                                          color: cBlack),
+                                    ),
+                                    Text(
+                                      DateFormat('EEEE, MMMM d')
+                                          .format(selectedDate),
+                                      style: textStyle.copyWith(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w600,
+                                          color: cBlackLightest),
+                                    ),
+                                    Text(
+                                      valueDropdown,
+                                      style: textStyle.copyWith(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w600,
+                                          color: cBlackLightest),
+                                    ),
+                                    Text(
+                                      "Are you sure you want to change your schedule?",
+                                      style: textStyle.copyWith(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w400,
+                                          color: cBlackLightest),
+                                    ),
+                                  ],
+                                ),
+                              ),
                             ],
                           ),
-                        )),
+                        ),
                         actions: <Widget>[
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width,
-                            child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: cPrimaryBase,
+                          Row(
+                            children: [
+                              Expanded(
+                                child: SizedBox(
+                                  height: 50,
+                                  width: double.infinity,
+                                  child: ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(12)),
+                                      backgroundColor: cPrimaryBase,
+                                    ),
+                                    onPressed: () async {
+                                      durationDialog(context,
+                                          "Schedule has been successfully changed!");
+                                    },
+                                    child: Text(
+                                      "Yes",
+                                      style: textStyle.copyWith(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w600,
+                                          color: Colors.white),
+                                    ),
+                                  ),
+                                ),
                               ),
-                              onPressed: () async {
-                                durationDialog(context,
-                                    "Schedule has been successfully changed!");
-                                // await showDialog<void>(
-                                //   context: context,
-                                //   barrierDismissible: true,
-                                //   builder: (BuildContext context) {
-                                //     return AlertDialog(
-                                //       title: Text(
-                                //         'Schedule has been successfully changed!',
-                                //         textAlign: TextAlign.center,
-                                //         style: textStyle.copyWith(
-                                //             fontSize: 16,
-                                //             fontWeight: FontWeight.w600),
-                                //       ),
-                                //       content: Image.asset(
-                                //           "assets/images/winner_people_flat_icons.jpeg"),
-                                //       actions: <Widget>[
-                                //         ElevatedButton(
-                                //           style: ElevatedButton.styleFrom(
-                                //               backgroundColor: cPrimaryBase,
-                                //               fixedSize: Size.fromWidth(
-                                //                 MediaQuery.of(context)
-                                //                     .size
-                                //                     .width,
-                                //               )),
-                                //           onPressed: () {
-                                //             Navigator.pop(context);
-                                //           },
-                                //           child: const Text("Ok"),
-                                //         ),
-                                //       ],
-                                //     );
-                                //   },
-                                // );
-                                // Navigator.pop(context);
-                              },
-                              child: Text("Save Schedule Changes",
-                                  style: textStyle.copyWith(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w600,
-                                      color: Colors.white)),
-                            ),
+                              const SizedBox(
+                                width: 10.0,
+                              ),
+                              Expanded(
+                                child: SizedBox(
+                                  height: 50,
+                                  width: double.infinity,
+                                  child: ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      shape: RoundedRectangleBorder(
+                                          side: BorderSide(
+                                              width: 1, color: cPrimaryBase),
+                                          borderRadius:
+                                              BorderRadius.circular(12)),
+                                      backgroundColor: cWhiteBase,
+                                    ),
+                                    onPressed: () async {
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text(
+                                      "No",
+                                      style: textStyle.copyWith(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w600,
+                                          color: cPrimaryBase),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ],
                       );

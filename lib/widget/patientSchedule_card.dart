@@ -32,23 +32,89 @@ class PatientScheduleCard extends StatelessWidget {
           blurRadius: 10,
         )
       ], borderRadius: BorderRadius.circular(15), color: cWhiteBase),
-      child: ListTile(
-        title: Text(
-          patientName,
-          style: textStyle.copyWith(fontSize: 16, fontWeight: FontWeight.w600),
-        ),
-        subtitle: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(disease),
-            Text("Doctor : $doctorName"),
-            Text("Nurse : $nurseName"),
-            Text(time),
-          ],
-        ),
-        leading: icon,
-        trailing: IconButton(
-            onPressed: onPressed, icon: const Icon(Icons.arrow_forward_ios)),
+      child: Row(
+        children: [
+          Container(
+            width: 3.5,
+            height: 80,
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Colors.blue,
+                  Colors.white,
+                ],
+              ),
+            ),
+          ),
+          const SizedBox(
+            width: 10.0,
+          ),
+          const SizedBox(
+            height: 30.0,
+          ),
+          SizedBox(width: 30, height: 30, child: icon),
+          const SizedBox(
+            width: 20.0,
+          ),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          patientName,
+                          style: textStyle.copyWith(
+                              fontSize: 16, fontWeight: FontWeight.w600),
+                        ),
+                        Text(
+                          disease,
+                          style: textStyle.copyWith(
+                            color: cBlackLightest,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                        Text(
+                          "Doctor : $doctorName",
+                          style: textStyle.copyWith(
+                              color: cBlackBase,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w400),
+                        ),
+                        Text(
+                          "Nurse : $nurseName",
+                          style: textStyle.copyWith(
+                              color: cBlackBase,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w400),
+                        ),
+                        Text(
+                          time,
+                          style: textStyle.copyWith(
+                              color: cBlackLightest,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w400),
+                        ),
+                      ],
+                    ),
+                    Expanded(
+                      child: ListTile(
+                          trailing: IconButton(
+                              onPressed: onPressed,
+                              icon: const Icon(Icons.arrow_forward_ios))),
+                    ),
+                  ],
+                )
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

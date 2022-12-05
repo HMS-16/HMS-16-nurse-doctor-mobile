@@ -63,20 +63,6 @@ class DetailScheduleDoctor extends StatelessWidget {
                           fontSize: 12,
                           fontWeight: FontWeight.w400),
                     ),
-                    Text(
-                      "Last Appointment : Sep 23, 2022",
-                      style: textStyle.copyWith(
-                          color: cBlackBase,
-                          fontSize: 12,
-                          fontWeight: FontWeight.w400),
-                    ),
-                    Text(
-                      "Next Appointment : Sep 30, 2022",
-                      style: textStyle.copyWith(
-                          color: cBlackBase,
-                          fontSize: 12,
-                          fontWeight: FontWeight.w400),
-                    ),
                   ],
                 ),
                 subtitle: Row(
