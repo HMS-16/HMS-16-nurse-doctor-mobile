@@ -3,8 +3,15 @@ import 'package:hms_16/style/theme.dart';
 
 class PatientCard extends StatelessWidget {
   const PatientCard({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+    required this.patientName,
+    required this.disease,
+    required this.time,
+  });
+
+  final String patientName;
+  final String disease;
+  final String time;
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +55,7 @@ class PatientCard extends StatelessWidget {
                 size: 35,
               ),
               title: Text(
-                'Patient 1',
+                patientName,
                 style: textStyle.copyWith(
                     fontWeight: FontWeight.w700,
                     fontSize: 14,
@@ -58,7 +65,7 @@ class PatientCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Headache',
+                    disease,
                     style: textStyle.copyWith(
                         fontWeight: FontWeight.w400,
                         fontSize: 12,
@@ -66,7 +73,7 @@ class PatientCard extends StatelessWidget {
                   ),
                   const SizedBox(height: 20),
                   Text(
-                    '1.30 pm - 2.30 pm',
+                    time,
                     style: textStyle.copyWith(
                         fontWeight: FontWeight.w400,
                         fontSize: 12,
