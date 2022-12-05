@@ -17,5 +17,6 @@ Color cPrimaryBase = const Color(0xff1153B5);
 Color cSuccessBase = const Color.fromRGBO(41, 153, 29, 1);
 Color cPrimaryLight = const Color(0xff608CCE);
 Color cBlack = const Color(0xff000000);
+Color cWhiteLast = const Color(0xff6D6D6D);
 
 TextStyle textStyle = GoogleFonts.nunito();

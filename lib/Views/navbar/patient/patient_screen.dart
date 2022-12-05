@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:hms_16/Models/patient_model.dart';
+import 'package:hms_16/Views/navbar/patient/patient_detail/patient_view_model.dart';
+import 'package:hms_16/Views/notification.dart';
+import 'package:hms_16/Views/profile.dart';
 import 'package:hms_16/style/theme.dart';
 import 'package:hms_16/views/navbar/patient/patient_detail/patient_detail.dart';
 import 'package:hms_16/widget/navpush_transition.dart';
 import 'package:hms_16/widget/patient_card.dart';
+import 'package:provider/provider.dart';
 
 class PatientScreen extends StatefulWidget {
   const PatientScreen({super.key});
@@ -27,11 +32,15 @@ class _PatientScreenState extends State<PatientScreen> {
         ),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              navPushTransition(context, const NotificationPage());
+            },
             icon: const Icon(Icons.notifications_none),
           ),
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              navPushTransition(context, ProfilePage());
+            },
             icon: const Icon(Icons.account_circle_outlined),
           ),
         ],
@@ -39,8 +48,8 @@ class _PatientScreenState extends State<PatientScreen> {
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
-          children: const [
-            SizedBox(
+          children: [
+            const SizedBox(
               width: double.infinity,
               height: 48,
               child: TextField(
@@ -55,8 +64,10 @@ class _PatientScreenState extends State<PatientScreen> {
                 ),
               ),
             ),
-            SizedBox(height: 24),
-            PatientList(),
+            const SizedBox(height: 24),
+            Consumer<PatientViewModel>(builder: (context, value, child) {
+              return PatientList(persons: value.persons);
+            }),
           ],
         ),
       ),
@@ -65,9 +76,9 @@ class _PatientScreenState extends State<PatientScreen> {
 }
 
 class PatientList extends StatelessWidget {
-  const PatientList({
-    Key? key,
-  }) : super(key: key);
+  final List<PatientModel> persons;
+
+  const PatientList({super.key, required this.persons});
 
   @override
   Widget build(BuildContext context) {
@@ -76,31 +87,20 @@ class PatientList extends StatelessWidget {
         shrinkWrap: true,
         scrollDirection: Axis.vertical,
         itemBuilder: (context, index) {
+          final person = persons.elementAt(index);
           return InkWell(
             onTap: () {
+              context.read<PatientViewModel>().selectedPerson(person);
               navPushTransition(context, const PatientDetail());
-              // Navigator.push(
-              //   context,
-              //   PageRouteBuilder(
-              //     transitionsBuilder:
-              //         (context, animation, secondaryAnimation, child) {
-              //       return SlideTransition(
-              //         position: animation.drive(
-              //           Tween(begin: const Offset(1.0, 0.0), end: Offset.zero),
-              //         ),
-              //         child: child,
-              //       );
-              //     },
-              //     pageBuilder: (context, animation, secondaryAnimation) {
-              //       return const PatientDetail();
-              //     },
-              //   ),
-              // );
             },
-            child: const PatientCard(),
+            child: PatientCard(
+              patientName: person.name,
+              disease: person.disease,
+              time: '1 pm - 3 pm',
+            ),
           );
         },
-        itemCount: 15,
+        itemCount: persons.length,
         separatorBuilder: (context, index) => const SizedBox(height: 20),
       ),
     );

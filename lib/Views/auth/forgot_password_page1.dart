@@ -20,52 +20,54 @@ class ForgotPassword1 extends StatelessWidget {
               fontSize: 20, fontWeight: FontWeight.w600, color: cBlackBase),
         ),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: Image(
-              image: const AssetImage(
-                "assets/forgot_password.png",
-              ),
-              fit: BoxFit.contain,
-              width: MediaQuery.of(context).size.width,
-              height: 200,
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.symmetric(vertical: 70),
-            child: Text(
-              "Please enter your email address",
-              style: textStyle.copyWith(fontSize: 15),
-            ),
-          ),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: TextFormField(
-              decoration: InputDecoration(
-                border: const OutlineInputBorder(),
-                label: const Text("Email"),
-                labelStyle: textStyle.copyWith(color: Colors.black),
-                hintText: "Email",
-                prefixIcon: const Icon(Icons.email),
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Image(
+                image: const AssetImage(
+                  "assets/forgot_password.png",
+                ),
+                fit: BoxFit.contain,
+                width: MediaQuery.of(context).size.width,
+                height: 200,
               ),
             ),
-          ),
-          Button(
-              text: "Send",
-              bgcolor: Colors.blueAccent,
-              margin: const EdgeInsets.only(top: 30),
-              onpressed: () {
-                navPushTransition(context, const ForgotPassword2());
-                // Navigator.push(
-                //     context,
-                //     MaterialPageRoute(
-                //       builder: (context) => const ForgotPassword2(),
-                //     ));
-              })
-        ],
+            Container(
+              margin: const EdgeInsets.symmetric(vertical: 70),
+              child: Text(
+                "Please enter your email address",
+                style: textStyle.copyWith(fontSize: 15),
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: TextFormField(
+                decoration: InputDecoration(
+                  border: const OutlineInputBorder(),
+                  label: const Text("Email"),
+                  labelStyle: textStyle.copyWith(color: Colors.black),
+                  hintText: "Email",
+                  prefixIcon: const Icon(Icons.email),
+                ),
+              ),
+            ),
+            Button(
+                text: "Send",
+                bgcolor: Colors.blueAccent,
+                margin: const EdgeInsets.only(top: 30),
+                onpressed: () {
+                  navPushTransition(context, const ForgotPassword2());
+                  // Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //       builder: (context) => const ForgotPassword2(),
+                  //     ));
+                })
+          ],
+        ),
       ),
     );
   }
