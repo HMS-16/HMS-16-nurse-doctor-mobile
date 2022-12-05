@@ -12,91 +12,263 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+  late String email, password;
+
+  TextEditingController controllerEmail = TextEditingController();
+  TextEditingController controllerPassword = TextEditingController();
+
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              "Registration New User",
-              style:
-                  textStyle.copyWith(fontSize: 21, fontWeight: FontWeight.bold),
+            Center(
+              child: Text(
+                "Register New User",
+                style: textStyle.copyWith(
+                    color: cBlackBase,
+                    fontSize: 24,
+                    fontWeight: FontWeight.w700),
+              ),
             ),
             const SizedBox(
-              height: 44.0,
+              height: 25,
+            ),
+            Row(
+              children: [
+                Text(
+                  "User ",
+                  style: textStyle.copyWith(color: cBlackBase, fontSize: 14),
+                ),
+                Text(
+                  "*",
+                  style: textStyle.copyWith(color: cRed, fontSize: 14),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 8,
             ),
             TextFormField(
-              decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  prefixIcon: Icon(
-                    Icons.person,
+              controller: controllerPassword,
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return 'Please a Enter Name';
+                }
+                return null;
+              },
+              decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  prefixIcon: const Icon(
+                    Icons.verified_user,
                     color: Colors.black,
                   ),
                   hintText: "Name",
-                  labelText: "Name",
                   floatingLabelBehavior: FloatingLabelBehavior.always),
             ),
             const SizedBox(
-              height: 29.0,
+              height: 12.0,
+            ),
+            Row(
+              children: [
+                Text(
+                  "Registration Number ",
+                  style: textStyle.copyWith(color: cBlackBase, fontSize: 14),
+                ),
+                Text(
+                  "*",
+                  style: textStyle.copyWith(color: cRed, fontSize: 14),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 8,
             ),
             TextFormField(
-              decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  prefixIcon: Icon(
-                    Icons.shield_rounded,
+              controller: controllerPassword,
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return 'Please a Enter Number';
+                }
+                return null;
+              },
+              decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  prefixIcon: const Icon(
+                    Icons.verified_user,
                     color: Colors.black,
                   ),
                   hintText: "Registration Number",
-                  labelText: "Registration Number",
                   floatingLabelBehavior: FloatingLabelBehavior.always),
             ),
             const SizedBox(
-              height: 29.0,
+              height: 8,
+            ),
+            Row(
+              children: [
+                Text(
+                  "Role ",
+                  style: textStyle.copyWith(color: cBlackBase, fontSize: 14),
+                ),
+                Text(
+                  "*",
+                  style: textStyle.copyWith(color: cRed, fontSize: 14),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 8,
             ),
             TextFormField(
-              decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  prefixIcon: Icon(
-                    Icons.email,
+              controller: controllerPassword,
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return 'Please a Enter Role';
+                }
+                return null;
+              },
+              decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  prefixIcon: const Icon(
+                    Icons.supervised_user_circle,
+                    color: Colors.black,
+                  ),
+                  hintText: "Role",
+                  floatingLabelBehavior: FloatingLabelBehavior.always),
+            ),
+            const SizedBox(
+              height: 12.0,
+            ),
+            Row(
+              children: [
+                Text(
+                  "Email ",
+                  style: textStyle.copyWith(color: cBlackBase, fontSize: 14),
+                ),
+                Text(
+                  "*",
+                  style: textStyle.copyWith(color: cRed, fontSize: 14),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 8,
+            ),
+            TextFormField(
+              controller: controllerEmail,
+              keyboardType: TextInputType.emailAddress,
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return 'Please a Enter';
+                }
+                if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
+                    .hasMatch(value)) {
+                  return 'Please a valid Email';
+                }
+                return null;
+              },
+              onSaved: (value) {
+                email = value!;
+              },
+              decoration: InputDecoration(
+                  errorStyle: textStyle.copyWith(color: Colors.red),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  prefixIcon: const Icon(
+                    Icons.email_outlined,
                     color: Colors.black,
                   ),
                   hintText: "Email",
-                  labelText: "Email",
+                  floatingLabelBehavior: FloatingLabelBehavior.auto),
+            ),
+            const SizedBox(
+              height: 12.0,
+            ),
+            Row(
+              children: [
+                Text(
+                  "Password ",
+                  style: textStyle.copyWith(color: cBlackBase, fontSize: 14),
+                ),
+                Text(
+                  "*",
+                  style: textStyle.copyWith(color: cRed, fontSize: 14),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 8,
+            ),
+            TextFormField(
+              controller: controllerPassword,
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return 'Please a Enter Password';
+                }
+                return null;
+              },
+              decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  prefixIcon: const Icon(
+                    Icons.lock,
+                    color: Colors.black,
+                  ),
+                  suffixIcon: IconButton(
+                      onPressed: () {}, icon: const Icon(Icons.visibility)),
+                  hintText: ("Password"),
                   floatingLabelBehavior: FloatingLabelBehavior.always),
             ),
             const SizedBox(
-              height: 29.0,
+              height: 12.0,
             ),
-            TextFormField(
-              decoration: InputDecoration(
-                  border: const OutlineInputBorder(),
-                  prefixIcon: const Icon(
-                    Icons.person,
-                    color: Colors.black,
-                  ),
-                  hintText: "Password",
-                  labelText: "Password",
-                  suffixIcon: IconButton(
-                      onPressed: () {}, icon: const Icon(Icons.visibility)),
-                  floatingLabelBehavior: FloatingLabelBehavior.always),
+            Row(
+              children: [
+                Text(
+                  "Confirm Password ",
+                  style: textStyle.copyWith(color: cBlackBase, fontSize: 14),
+                ),
+                Text(
+                  "*",
+                  style: textStyle.copyWith(color: cRed, fontSize: 14),
+                ),
+              ],
             ),
             const SizedBox(
-              height: 29.0,
+              height: 8,
             ),
             TextFormField(
+              controller: controllerPassword,
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return 'Please a Enter Password';
+                }
+                return null;
+              },
               decoration: InputDecoration(
-                  border: const OutlineInputBorder(),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
                   prefixIcon: const Icon(
-                    Icons.person,
+                    Icons.lock,
                     color: Colors.black,
                   ),
-                  hintText: "Confirm Password",
-                  labelText: "Confirm Password",
                   suffixIcon: IconButton(
                       onPressed: () {}, icon: const Icon(Icons.visibility)),
+                  hintText: ("Confirm Password"),
                   floatingLabelBehavior: FloatingLabelBehavior.always),
             ),
             const SizedBox(

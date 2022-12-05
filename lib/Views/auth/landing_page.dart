@@ -22,13 +22,14 @@ class _LandingPageState extends State<LandingPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             CarouselSlider.builder(
               itemCount: adddata.length,
               options: CarouselOptions(
+                height: 400,
                 autoPlay: true,
                 viewportFraction: 1,
                 onPageChanged: (index, reason) {
@@ -41,19 +42,16 @@ class _LandingPageState extends State<LandingPage> {
               itemBuilder: (context, index, pageindex) => CardItem(
                   netimage: adddata[index].urlimage, deks: adddata[index].text),
             ),
-            const SizedBox(
-              height: 30.0,
-            ),
             AnimatedSmoothIndicator(
               activeIndex: activeIndex,
               count: adddata.length,
-              effect: const JumpingDotEffect(
+              effect: const ExpandingDotsEffect(
                 dotWidth: 10,
                 dotHeight: 10,
               ),
             ),
             const SizedBox(
-              height: 20,
+              height: 50,
             ),
             Button(
               text: "Sign In",

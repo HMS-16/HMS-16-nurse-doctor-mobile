@@ -9,6 +9,8 @@ class ForgotPassword1 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    late String email;
+    TextEditingController controllerEmail = TextEditingController();
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(color: cBlack),
@@ -20,52 +22,96 @@ class ForgotPassword1 extends StatelessWidget {
               fontSize: 20, fontWeight: FontWeight.w600, color: cBlackBase),
         ),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: Image(
-              image: const AssetImage(
-                "assets/forgot_password.png",
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              child: Image(
+                image: const AssetImage(
+                  "assets/Email-campaign-pana1.png",
+                ),
+                fit: BoxFit.contain,
+                width: MediaQuery.of(context).size.width,
+                height: 200,
               ),
-              fit: BoxFit.contain,
-              width: MediaQuery.of(context).size.width,
-              height: 200,
             ),
-          ),
-          Container(
-            margin: const EdgeInsets.symmetric(vertical: 70),
-            child: Text(
-              "Please enter your email address",
-              style: textStyle.copyWith(fontSize: 15),
+            const SizedBox(
+              height: 50,
             ),
-          ),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: TextFormField(
+            Center(
+              child: Text(
+                "Please Enter Your Email Address",
+                style: textStyle.copyWith(
+                    color: cBlackBase,
+                    fontSize: 13,
+                    fontWeight: FontWeight.w500),
+              ),
+            ),
+            const SizedBox(
+              height: 30,
+            ),
+            Row(
+              children: [
+                Text(
+                  "Email ",
+                  style: textStyle.copyWith(color: cBlackBase, fontSize: 14),
+                ),
+                Text(
+                  "*",
+                  style: textStyle.copyWith(color: cRed, fontSize: 14),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 8,
+            ),
+            TextFormField(
+              controller: controllerEmail,
+              keyboardType: TextInputType.emailAddress,
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return 'Please a Enter';
+                }
+                if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
+                    .hasMatch(value)) {
+                  return 'Please a valid Email';
+                }
+                return null;
+              },
+              onSaved: (value) {
+                email = value!;
+              },
               decoration: InputDecoration(
-                border: const OutlineInputBorder(),
-                label: const Text("Email"),
-                labelStyle: textStyle.copyWith(color: Colors.black),
-                hintText: "Email",
-                prefixIcon: const Icon(Icons.email),
-              ),
+                  errorStyle: textStyle.copyWith(color: Colors.red),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  prefixIcon: const Icon(
+                    Icons.email_outlined,
+                    color: Colors.black,
+                  ),
+                  hintText: "Email",
+                  floatingLabelBehavior: FloatingLabelBehavior.auto),
             ),
-          ),
-          Button(
-              text: "Send",
-              bgcolor: Colors.blueAccent,
-              margin: const EdgeInsets.only(top: 30),
-              onpressed: () {
-                navPushTransition(context, const ForgotPassword2());
-                // Navigator.push(
-                //     context,
-                //     MaterialPageRoute(
-                //       builder: (context) => const ForgotPassword2(),
-                //     ));
-              })
-        ],
+            // const SizedBox(
+            //   height: 3.0,
+            // ),
+            Button(
+                text: "Send",
+                bgcolor: Colors.blueAccent,
+                margin: const EdgeInsets.only(top: 30),
+                onpressed: () {
+                  navPushTransition(context, const ForgotPassword2());
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const ForgotPassword2(),
+                      ));
+                })
+          ],
+        ),
       ),
     );
   }

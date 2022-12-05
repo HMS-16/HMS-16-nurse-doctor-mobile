@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hms_16/Views/auth/forgot_password_page2.dart';
+import 'package:hms_16/Views/auth/forgot_password_page3.dart';
 import 'package:hms_16/style/theme.dart';
 import 'package:hms_16/views/auth/forgot_password_page1.dart';
 import 'package:hms_16/views/auth/sign_up_page.dart';
@@ -19,6 +21,7 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController controllerPassword = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
+  late final TextStyle? errorStyle;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,20 +30,37 @@ class _LoginPageState extends State<LoginPage> {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(
-                height: 170,
+                height: 220,
               ),
-              Text(
-                "Sign In",
-                style: textStyle.copyWith(
-                    color: cBlackBase,
-                    fontSize: 24,
-                    fontWeight: FontWeight.w700),
+              Center(
+                child: Text(
+                  "Sign In",
+                  style: textStyle.copyWith(
+                      color: cBlackBase,
+                      fontSize: 34,
+                      fontWeight: FontWeight.w700),
+                ),
               ),
               const SizedBox(
-                height: 56,
+                height: 40,
+              ),
+              Row(
+                children: [
+                  Text(
+                    "Email ",
+                    style: textStyle.copyWith(color: cBlackBase, fontSize: 14),
+                  ),
+                  Text(
+                    "*",
+                    style: textStyle.copyWith(color: cRed, fontSize: 14),
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 8,
               ),
               TextFormField(
                 controller: controllerEmail,
@@ -59,18 +79,34 @@ class _LoginPageState extends State<LoginPage> {
                   email = value!;
                 },
                 decoration: InputDecoration(
+                    errorStyle: textStyle.copyWith(color: Colors.red),
                     border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10)),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                     prefixIcon: const Icon(
                       Icons.email_outlined,
                       color: Colors.black,
                     ),
                     hintText: "Email",
-                    labelText: "Email",
-                    floatingLabelBehavior: FloatingLabelBehavior.always),
+                    floatingLabelBehavior: FloatingLabelBehavior.auto),
               ),
               const SizedBox(
-                height: 34.0,
+                height: 12.0,
+              ),
+              Row(
+                children: [
+                  Text(
+                    "Password ",
+                    style: textStyle.copyWith(color: cBlackBase, fontSize: 14),
+                  ),
+                  Text(
+                    "*",
+                    style: textStyle.copyWith(color: cRed, fontSize: 14),
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 8,
               ),
               TextFormField(
                 controller: controllerPassword,
@@ -82,16 +118,17 @@ class _LoginPageState extends State<LoginPage> {
                 },
                 decoration: InputDecoration(
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide(
+                          color: cSuccessBase,
+                        )),
                     prefixIcon: const Icon(
                       Icons.lock,
                       color: Colors.black,
                     ),
                     suffixIcon: IconButton(
                         onPressed: () {}, icon: const Icon(Icons.visibility)),
-                    hintText: "Password",
-                    labelText: "Password",
+                    hintText: ("Password"),
                     floatingLabelBehavior: FloatingLabelBehavior.always),
               ),
               const SizedBox(
@@ -112,13 +149,12 @@ class _LoginPageState extends State<LoginPage> {
               ),
               TextButton(
                   onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      print("successful");
-
-                      return;
-                    } else {
-                      print("UnSuccessfull");
-                    }
+                    // if (_formKey.currentState!.validate()) {
+                    //   print("successful");
+                    //   return;
+                    // } else {
+                    //   print("UnSuccessfull");
+                    // }
                     navPushTransition(context, const ForgotPassword1());
                     Navigator.push(
                         context,
@@ -126,12 +162,14 @@ class _LoginPageState extends State<LoginPage> {
                           builder: (context) => const ForgotPassword1(),
                         ));
                   },
-                  child: Text(
-                    "Forgot Password?",
-                    style: textStyle.copyWith(
-                        color: cPrimaryBase,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400),
+                  child: Center(
+                    child: Text(
+                      "Forgot Password?",
+                      style: textStyle.copyWith(
+                          color: cPrimaryBase,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400),
+                    ),
                   )),
               const SizedBox(
                 height: 63.0,
