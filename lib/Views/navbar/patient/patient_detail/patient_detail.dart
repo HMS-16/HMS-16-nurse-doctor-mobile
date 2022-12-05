@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:hms_16/style/theme.dart';
 import 'package:hms_16/views/navbar/patient/patient_detail/medic_diagnosis.dart';
 import 'package:hms_16/views/navbar/patient/patient_detail/medic_record.dart';
-import 'package:hms_16/views/navbar/patient/patient_detail/patient_profile.dart';
 
 class PatientDetail extends StatefulWidget {
   const PatientDetail({super.key});
@@ -52,7 +51,7 @@ class _PatientDetailState extends State<PatientDetail> {
                 Tab(
                   child: Text(
                     'Medical\nDiagnose',
-                    maxLines: 2,
+                    // maxLines: 2,
                     textAlign: TextAlign.center,
                     style: textStyle.copyWith(
                         fontSize: 14, fontWeight: FontWeight.w400),
@@ -64,7 +63,7 @@ class _PatientDetailState extends State<PatientDetail> {
         ),
         body: const TabBarView(
           children: [
-            PatientProfile(),
+            Icon(Icons.ac_unit),
             MedicalRecord(),
             MedicalDiagnosis(),
           ],
