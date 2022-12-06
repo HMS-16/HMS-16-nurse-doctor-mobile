@@ -1,6 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:hms_16/models/data.dart';
+import 'package:hms_16/model/data.dart';
 import 'package:hms_16/style/theme.dart';
 import 'package:hms_16/widget/button.dart';
 import 'package:hms_16/views/auth/login_page.dart';
