@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:hms_16/style/theme.dart';
+import 'package:hms_16/widget/duration_dialog.dart';
 
-class NotificationPage extends StatelessWidget {
+class NotificationPage extends StatefulWidget {
   const NotificationPage({super.key});
 
+  @override
+  State<NotificationPage> createState() => _NotificationPageState();
+}
+
+class _NotificationPageState extends State<NotificationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,7 +23,66 @@ class NotificationPage extends StatelessWidget {
               fontSize: 20, fontWeight: FontWeight.w600, color: cBlackBase),
         ),
         actions: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.more_vert))
+          PopupMenuButton(
+            onSelected: (value) {
+              setState(() {
+                showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                    content: Container(
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                        image: AssetImage("assets/images/succes.png"),
+                      )),
+                    ),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20)),
+                    title: Text("Are you sure to clear all notifications?"),
+                    actions: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20)),
+                                  backgroundColor: cPrimaryBase,
+                                  minimumSize: Size(130, 50)),
+                              onPressed: () {
+                                Navigator.pop(context);
+                                durationDialog(
+                                    context, "Notifications has been cleared!");
+                              },
+                              child: Text("Yes")),
+                          ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                  side: BorderSide(color: cPrimaryBase),
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20)),
+                                  backgroundColor: Colors.white,
+                                  minimumSize: Size(130, 50)),
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: Text(
+                                "No",
+                                style: TextStyle(color: Colors.black),
+                              )),
+                        ],
+                      ),
+                    ],
+                  ),
+                );
+              });
+            },
+            itemBuilder: (context) => [
+              PopupMenuItem(
+                value: 1,
+                child: Text("Clear all"),
+              )
+            ],
+          )
         ],
       ),
       body: Column(

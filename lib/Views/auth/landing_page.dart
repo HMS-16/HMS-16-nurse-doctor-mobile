@@ -91,7 +91,7 @@ class CardItem extends StatelessWidget {
               width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
                   image: DecorationImage(
-                      image: AssetImage(netimage), fit: BoxFit.fill)),
+                      image: AssetImage(netimage), fit: BoxFit.fitHeight)),
             ),
           ),
           const SizedBox(
