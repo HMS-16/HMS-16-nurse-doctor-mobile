@@ -1,9 +1,8 @@
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
-import 'package:hms_16/utils/constant.dart';
-import 'package:hms_16/screens/navbar/schedule/nurse/change_schedule_bynurse.dart';
 import 'package:hms_16/screens/notification.dart';
-import 'package:hms_16/screens/profile.dart';
-import 'package:hms_16/widget/home_card.dart';
+import 'package:hms_16/screens/profile/profile.dart';
+import 'package:hms_16/utils/constant.dart';
 import 'package:hms_16/widget/navpush_transition.dart';
 import 'package:intl/intl.dart';
 
@@ -18,68 +17,162 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        iconTheme: IconThemeData(color: cBlack),
-        elevation: 0,
-        automaticallyImplyLeading: false,
-        backgroundColor: Colors.transparent,
-        title: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Hi Dr. Abed!',
-              style: textStyle.copyWith(
-                  fontSize: 20, fontWeight: FontWeight.w600, color: cBlackBase),
+      body: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            floating: true,
+            bottom: PreferredSize(
+              preferredSize: const Size.fromHeight(100),
+              child: Container(
+                  margin: const EdgeInsets.only(
+                    bottom: 90,
+                    right: 100,
+                  ),
+                  child: Column(
+                    children: [
+                      Text("Welcome! Dr. Abed",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 24)),
+                      Text("Let's do our best for better life.",
+                          style: TextStyle(
+                            fontWeight: FontWeight.w400,
+                            fontSize: 18,
+                          ))
+                    ],
+                  )),
             ),
-            Text(
-              "Let's check your schedule today",
-              style: textStyle.copyWith(color: Colors.black, fontSize: 13),
+            backgroundColor: cInfoLight,
+            expandedHeight: 220,
+            flexibleSpace: const FlexibleSpaceBar(
+              background: Image(
+                  alignment: Alignment.bottomRight,
+                  image: AssetImage("assets/images/people_home.png")),
             ),
-          ],
-        ),
-        actions: [
-          IconButton(
-            onPressed: () {
-              navPushTransition(context, const NotificationPage());
-            },
-            icon: const Icon(Icons.notifications_none),
+            actions: [
+              IconButton(
+                onPressed: () {
+                  navPushTransition(context, const NotificationPage());
+                },
+                icon: const Icon(Icons.notifications_none),
+              ),
+              InkWell(
+                onTap: () {
+                  navPushTransition(context, const ProfilePage());
+                },
+                child: const CircleAvatar(
+                  // backgroundImage: AssetImage("assets/pp.png"),
+                  backgroundColor: Colors.transparent,
+                  child: Image(image: AssetImage("assets/images/avatar.png")),
+                ),
+              )
+            ],
           ),
-          IconButton(
-            onPressed: () {
-              navPushTransition(context, const ProfilePage());
-            },
-            icon: const Icon(Icons.account_circle_outlined),
+          SliverToBoxAdapter(
+            child: ListTile(
+              title: Text("Today's Appointment",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, letterSpacing: 0.4)),
+              subtitle: Text("Thu, Nov 10, 2022"),
+            ),
           ),
+          SliverList(
+              delegate: SliverChildBuilderDelegate((context, index) {
+            return const CardHomepage();
+          }, childCount: 7))
         ],
       ),
-      body: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: Column(
-          children: [
-            Tile(
-                title: Text("Today's Appointment",
-                    style: textStyle.copyWith(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 14,
-                        color: cBlack)),
-                subtitle: Text(
-                    DateFormat("EEE, MMM d, yyyy").format(DateTime.now()))),
-            HomeCard(
-              disease: "Headache",
-              doctorName: "Abednego",
-              patientName: "Alief Rachman",
-              nurseName: "Nastasya",
-              time: "$valueDropdown",
+    );
+  }
+}
+
+class CardHomepage extends StatelessWidget {
+  const CardHomepage({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Stack(
+        children: [
+          Card(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            elevation: 2,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+              child: Column(
+                children: [
+                  ListTile(
+                    leading: const CircleAvatar(
+                        backgroundColor: Colors.blue,
+                        child: Icon(
+                          Icons.person,
+                          color: Colors.white,
+                        )),
+                    title: const Text(
+                      "Alief Rachman",
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                    ),
+                    subtitle: const Text("Toothache"),
+                    trailing: Badge(
+                      badgeColor: const Color.fromRGBO(227, 236, 250, 1),
+                      padding: const EdgeInsets.all(10),
+                      shape: BadgeShape.square,
+                      borderRadius: BorderRadius.circular(10),
+                      toAnimate: false,
+                      badgeContent: const Text("Proccess"),
+                    ),
+                  ),
+                  Container(
+                    alignment: Alignment.centerLeft,
+                    margin: const EdgeInsets.fromLTRB(70, 0, 0, 5),
+                    child: const Text(
+                      "Doctor: Abednego",
+                      style: TextStyle(fontWeight: FontWeight.w500),
+                    ),
+                  ),
+                  Container(
+                    alignment: Alignment.centerLeft,
+                    margin: const EdgeInsets.fromLTRB(70, 0, 0, 5),
+                    child: const Text(
+                      "Nurse: Bella Algama",
+                      style: TextStyle(fontWeight: FontWeight.w500),
+                    ),
+                  ),
+                  Container(
+                    alignment: Alignment.centerLeft,
+                    margin: const EdgeInsets.fromLTRB(70, 10, 0, 20),
+                    child: Text(
+                      "1.30 pm - 2.30 pm",
+                      style: TextStyle(color: Colors.grey.shade600),
+                    ),
+                  )
+                ],
+              ),
             ),
-            HomeCard(
-              disease: "Headache",
-              doctorName: "Nurul Zakiah",
-              patientName: "Alief Rachman",
-              nurseName: "Nastasya",
-              time: "$valueDropdown",
-            ),
-          ],
-        ),
+          ),
+          Positioned(
+              top: 40,
+              left: 5,
+              child: Container(
+                height: 70,
+                width: 5,
+                decoration: BoxDecoration(
+                    gradient: const LinearGradient(
+                      colors: [
+                        Color.fromRGBO(0, 97, 228, 1),
+                        Color.fromRGBO(192, 219, 255, 1),
+                      ],
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                    ),
+                    // color: Colors.blue,
+                    borderRadius: BorderRadius.circular(30)),
+              ))
+        ],
       ),
     );
   }

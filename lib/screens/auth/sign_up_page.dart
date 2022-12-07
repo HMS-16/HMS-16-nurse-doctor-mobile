@@ -27,311 +27,319 @@ class _SignUpPageState extends State<SignUpPage> {
     String valueRole = listRole.first;
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: Form(
-          autovalidateMode: AutovalidateMode.always,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Center(
-                child: Text(
-                  "Register New User",
-                  style: textStyle.copyWith(
-                      color: cBlackBase,
-                      fontSize: 24,
-                      fontWeight: FontWeight.w700),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Form(
+            autovalidateMode: AutovalidateMode.always,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Center(
+                  child: Text(
+                    "Register New User",
+                    style: textStyle.copyWith(
+                        color: cBlackBase,
+                        fontSize: 24,
+                        fontWeight: FontWeight.w700),
+                  ),
                 ),
-              ),
-              const SizedBox(
-                height: 25,
-              ),
-              Row(
-                children: [
-                  Text(
-                    "User ",
-                    style: textStyle.copyWith(color: cBlackBase, fontSize: 14),
-                  ),
-                  Text(
-                    "*",
-                    style: textStyle.copyWith(color: cRed, fontSize: 14),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 8,
-              ),
-              TextFormField(
-                controller: controllerUser,
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'Name can not be empty';
-                  }
-                  if (!RegExp(r'^[aA-zZ]+$').hasMatch(value)) {
-                    return 'Name is invalid';
-                  }
-                  return null;
-                },
-                decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
+                const SizedBox(
+                  height: 25,
+                ),
+                Row(
+                  children: [
+                    Text(
+                      "User ",
+                      style:
+                          textStyle.copyWith(color: cBlackBase, fontSize: 14),
                     ),
-                    prefixIcon: Icon(
-                      Icons.person,
-                      color: cBlackBase,
+                    Text(
+                      "*",
+                      style: textStyle.copyWith(color: cRed, fontSize: 14),
                     ),
-                    hintText: "Name",
-                    floatingLabelBehavior: FloatingLabelBehavior.always),
-              ),
-              const SizedBox(
-                height: 12.0,
-              ),
-              Row(
-                children: [
-                  Text(
-                    "Registration Number ",
-                    style: textStyle.copyWith(color: cBlackBase, fontSize: 14),
-                  ),
-                  Text(
-                    "*",
-                    style: textStyle.copyWith(color: cRed, fontSize: 14),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 8,
-              ),
-              TextFormField(
-                controller: controllerRegNum,
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'Registration Number can not be empty';
-                  }
-                  if (!RegExp(r'^[0-9]+$').hasMatch(value)) {
-                    return 'Registration Number is Invalid';
-                  }
-                  if (!RegExp('.{8,}').hasMatch(value)) {
-                    return 'Registration Number length must be 8 char';
-                  }
-                  return null;
-                },
-                decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    prefixIcon: Icon(
-                      Icons.verified_user,
-                      color: cBlackBase,
-                    ),
-                    hintText: "Registration Number",
-                    floatingLabelBehavior: FloatingLabelBehavior.always),
-              ),
-              const SizedBox(
-                height: 8,
-              ),
-              Row(
-                children: [
-                  Text(
-                    "Role ",
-                    style: textStyle.copyWith(color: cBlackBase, fontSize: 14),
-                  ),
-                  Text(
-                    "*",
-                    style: textStyle.copyWith(color: cRed, fontSize: 14),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 8,
-              ),
-              DropdownButtonFormField<String>(
-                // dropdownColor: Colors.red,
-                decoration: InputDecoration(
-                    prefixIcon: Icon(
-                      Icons.supervised_user_circle,
-                      color: cBlackBase,
-                    ),
-                    enabledBorder: const OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(10)))),
-                isExpanded: true,
-                value: valueRole,
-                validator: (value) {
-                  if (valueRole.isEmpty) {
-                    return 'Role can not be empty';
-                  }
-                },
-                elevation: 0,
-                borderRadius: BorderRadius.circular(12),
-                style: textStyle.copyWith(
-                    fontSize: 14, fontWeight: FontWeight.w400),
-                onChanged: (value) {
-                  setState(() {
-                    valueRole = value!;
-                  });
-                },
-                items: listRole
-                    .map<DropdownMenuItem<String>>(
-                      (e) => DropdownMenuItem(
-                        value: e,
-                        child: Text(e,
-                            style: textStyle.copyWith(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400,
-                                color: cBlackLighter)),
+                  ],
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
+                TextFormField(
+                  controller: controllerUser,
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Name can not be empty';
+                    }
+                    if (!RegExp(r'^[aA-zZ]+$').hasMatch(value)) {
+                      return 'Name is invalid';
+                    }
+                    return null;
+                  },
+                  decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
                       ),
-                    )
-                    .toList(),
-              ),
-              const SizedBox(
-                height: 12.0,
-              ),
-              Row(
-                children: [
-                  Text(
-                    "Email ",
-                    style: textStyle.copyWith(color: cBlackBase, fontSize: 14),
-                  ),
-                  Text(
-                    "*",
-                    style: textStyle.copyWith(color: cRed, fontSize: 14),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 8,
-              ),
-              TextFormField(
-                controller: controllerEmail,
-                keyboardType: TextInputType.emailAddress,
-                validator: (value) {
-                  String msg =
-                      r"[a-z0-9!#%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$";
-                  if (value!.isEmpty) {
-                    return 'Email can not be empty';
-                  }
-                  if (!RegExp(msg).hasMatch(value)) {
-                    return 'Email is invalid';
-                  }
-                  return null;
-                },
-                onSaved: (value) {
-                  email = value!;
-                },
-                decoration: InputDecoration(
-                    errorStyle: textStyle.copyWith(color: Colors.red),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
+                      prefixIcon: Icon(
+                        Icons.person,
+                        color: cBlackBase,
+                      ),
+                      hintText: "Name",
+                      floatingLabelBehavior: FloatingLabelBehavior.always),
+                ),
+                const SizedBox(
+                  height: 12.0,
+                ),
+                Row(
+                  children: [
+                    Text(
+                      "Registration Number ",
+                      style:
+                          textStyle.copyWith(color: cBlackBase, fontSize: 14),
                     ),
-                    prefixIcon: Icon(
-                      Icons.email_outlined,
-                      color: cBlackBase,
+                    Text(
+                      "*",
+                      style: textStyle.copyWith(color: cRed, fontSize: 14),
                     ),
-                    hintText: "Email",
-                    floatingLabelBehavior: FloatingLabelBehavior.auto),
-              ),
-              const SizedBox(
-                height: 12.0,
-              ),
-              Row(
-                children: [
-                  Text(
-                    "Password ",
-                    style: textStyle.copyWith(color: cBlackBase, fontSize: 14),
-                  ),
-                  Text(
-                    "*",
-                    style: textStyle.copyWith(color: cRed, fontSize: 14),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 8,
-              ),
-              TextFormField(
-                controller: controllerPassword,
-                validator: (value) {
-                  String msg = '.{8,}';
-                  if (value!.isEmpty) {
-                    return 'Password must be filled';
-                  }
-                  if (!RegExp(msg).hasMatch(value)) {
-                    return 'Password length can’t be less than 8 char';
-                  }
-                  return null;
-                },
-                decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
+                  ],
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
+                TextFormField(
+                  controller: controllerRegNum,
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Registration Number can not be empty';
+                    }
+                    if (!RegExp(r'^[0-9]+$').hasMatch(value)) {
+                      return 'Registration Number is Invalid';
+                    }
+                    if (!RegExp('.{8,}').hasMatch(value)) {
+                      return 'Registration Number length must be 8 char';
+                    }
+                    return null;
+                  },
+                  decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      prefixIcon: Icon(
+                        Icons.verified_user,
+                        color: cBlackBase,
+                      ),
+                      hintText: "Registration Number",
+                      floatingLabelBehavior: FloatingLabelBehavior.always),
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
+                Row(
+                  children: [
+                    Text(
+                      "Role ",
+                      style:
+                          textStyle.copyWith(color: cBlackBase, fontSize: 14),
                     ),
-                    prefixIcon: Icon(
-                      Icons.lock,
-                      color: cBlackBase,
+                    Text(
+                      "*",
+                      style: textStyle.copyWith(color: cRed, fontSize: 14),
                     ),
-                    suffixIcon: IconButton(
-                        onPressed: () {}, icon: const Icon(Icons.visibility)),
-                    hintText: ("Password"),
-                    floatingLabelBehavior: FloatingLabelBehavior.always),
-              ),
-              const SizedBox(
-                height: 12.0,
-              ),
-              Row(
-                children: [
-                  Text(
-                    "Confirm Password ",
-                    style: textStyle.copyWith(color: cBlackBase, fontSize: 14),
-                  ),
-                  Text(
-                    "*",
-                    style: textStyle.copyWith(color: cRed, fontSize: 14),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 8,
-              ),
-              TextFormField(
-                controller: controllerSecPassword,
-                validator: (value) {
-                  String msg = '.{8,}';
-                  if (value!.isEmpty) {
-                    return 'Password must be filled';
-                  }
-                  if (!RegExp(msg).hasMatch(value)) {
-                    return 'Password length can’t be less than 8 char';
-                  }
-                  return null;
-                },
-                decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
+                  ],
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
+                DropdownButtonFormField<String>(
+                  // dropdownColor: Colors.red,
+                  decoration: InputDecoration(
+                      prefixIcon: Icon(
+                        Icons.supervised_user_circle,
+                        color: cBlackBase,
+                      ),
+                      enabledBorder: const OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10)))),
+                  isExpanded: true,
+                  value: valueRole,
+                  validator: (value) {
+                    if (valueRole.isEmpty) {
+                      return 'Role can not be empty';
+                    }
+                  },
+                  elevation: 0,
+                  borderRadius: BorderRadius.circular(12),
+                  style: textStyle.copyWith(
+                      fontSize: 14, fontWeight: FontWeight.w400),
+                  onChanged: (value) {
+                    setState(() {
+                      valueRole = value!;
+                    });
+                  },
+                  items: listRole
+                      .map<DropdownMenuItem<String>>(
+                        (e) => DropdownMenuItem(
+                          value: e,
+                          child: Text(e,
+                              style: textStyle.copyWith(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400,
+                                  color: cBlackLighter)),
+                        ),
+                      )
+                      .toList(),
+                ),
+                const SizedBox(
+                  height: 12.0,
+                ),
+                Row(
+                  children: [
+                    Text(
+                      "Email ",
+                      style:
+                          textStyle.copyWith(color: cBlackBase, fontSize: 14),
                     ),
-                    prefixIcon: Icon(
-                      Icons.lock,
-                      color: cBlackBase,
+                    Text(
+                      "*",
+                      style: textStyle.copyWith(color: cRed, fontSize: 14),
                     ),
-                    suffixIcon: IconButton(
-                        onPressed: () {}, icon: const Icon(Icons.visibility)),
-                    hintText: ("Confirm Password"),
-                    floatingLabelBehavior: FloatingLabelBehavior.always),
-              ),
-              const SizedBox(
-                height: 34.0,
-              ),
-              Button(
-                  text: "Register",
-                  onpressed: () {
-                    navPushTransition(context, const NavBar());
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const NavBar(),
-                        ));
-                  }),
-              const SizedBox(
-                height: 17.0,
-              ),
-            ],
+                  ],
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
+                TextFormField(
+                  controller: controllerEmail,
+                  keyboardType: TextInputType.emailAddress,
+                  validator: (value) {
+                    String msg =
+                        r"[a-z0-9!#%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$";
+                    if (value!.isEmpty) {
+                      return 'Email can not be empty';
+                    }
+                    if (!RegExp(msg).hasMatch(value)) {
+                      return 'Email is invalid';
+                    }
+                    return null;
+                  },
+                  onSaved: (value) {
+                    email = value!;
+                  },
+                  decoration: InputDecoration(
+                      errorStyle: textStyle.copyWith(color: Colors.red),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      prefixIcon: Icon(
+                        Icons.email_outlined,
+                        color: cBlackBase,
+                      ),
+                      hintText: "Email",
+                      floatingLabelBehavior: FloatingLabelBehavior.auto),
+                ),
+                const SizedBox(
+                  height: 12.0,
+                ),
+                Row(
+                  children: [
+                    Text(
+                      "Password ",
+                      style:
+                          textStyle.copyWith(color: cBlackBase, fontSize: 14),
+                    ),
+                    Text(
+                      "*",
+                      style: textStyle.copyWith(color: cRed, fontSize: 14),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
+                TextFormField(
+                  controller: controllerPassword,
+                  validator: (value) {
+                    String msg = '.{8,}';
+                    if (value!.isEmpty) {
+                      return 'Password must be filled';
+                    }
+                    if (!RegExp(msg).hasMatch(value)) {
+                      return 'Password length can’t be less than 8 char';
+                    }
+                    return null;
+                  },
+                  decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      prefixIcon: Icon(
+                        Icons.lock,
+                        color: cBlackBase,
+                      ),
+                      suffixIcon: IconButton(
+                          onPressed: () {}, icon: const Icon(Icons.visibility)),
+                      hintText: ("Password"),
+                      floatingLabelBehavior: FloatingLabelBehavior.always),
+                ),
+                const SizedBox(
+                  height: 12.0,
+                ),
+                Row(
+                  children: [
+                    Text(
+                      "Confirm Password ",
+                      style:
+                          textStyle.copyWith(color: cBlackBase, fontSize: 14),
+                    ),
+                    Text(
+                      "*",
+                      style: textStyle.copyWith(color: cRed, fontSize: 14),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
+                TextFormField(
+                  controller: controllerSecPassword,
+                  validator: (value) {
+                    String msg = '.{8,}';
+                    if (value!.isEmpty) {
+                      return 'Password must be filled';
+                    }
+                    if (!RegExp(msg).hasMatch(value)) {
+                      return 'Password length can’t be less than 8 char';
+                    }
+                    return null;
+                  },
+                  decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      prefixIcon: Icon(
+                        Icons.lock,
+                        color: cBlackBase,
+                      ),
+                      suffixIcon: IconButton(
+                          onPressed: () {}, icon: const Icon(Icons.visibility)),
+                      hintText: ("Confirm Password"),
+                      floatingLabelBehavior: FloatingLabelBehavior.always),
+                ),
+                const SizedBox(
+                  height: 34.0,
+                ),
+                Button(
+                    text: "Register",
+                    onpressed: () {
+                      navPushTransition(context, const NavBar());
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const NavBar(),
+                          ));
+                    }),
+                const SizedBox(
+                  height: 17.0,
+                ),
+              ],
+            ),
           ),
         ),
       ),
