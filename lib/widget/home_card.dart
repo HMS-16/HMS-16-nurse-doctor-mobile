@@ -2,22 +2,21 @@ import 'package:flutter/material.dart';
 
 import 'package:hms_16/utils/constant.dart';
 
-class PatientScheduleCard extends StatelessWidget {
-  const PatientScheduleCard(
-      {super.key,
-      required this.patientName,
-      required this.disease,
-      required this.doctorName,
-      required this.nurseName,
-      required this.time,
-      required this.onPressed});
+class HomeCard extends StatelessWidget {
+  const HomeCard({
+    super.key,
+    required this.patientName,
+    required this.disease,
+    required this.doctorName,
+    required this.nurseName,
+    required this.time,
+  });
 
   final String patientName;
   final String disease;
   final String doctorName;
   final String nurseName;
   final String time;
-  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -49,13 +48,10 @@ class PatientScheduleCard extends StatelessWidget {
           const SizedBox(
             width: 10.0,
           ),
-          const SizedBox(
-            height: 30.0,
-          ),
           Icon(
             Icons.account_circle,
-            color: cPrimaryBase,
             size: 32,
+            color: cPrimaryBase,
           ),
           const SizedBox(
             width: 20.0,
@@ -104,12 +100,6 @@ class PatientScheduleCard extends StatelessWidget {
                               fontWeight: FontWeight.w400),
                         ),
                       ],
-                    ),
-                    Expanded(
-                      child: ListTile(
-                          trailing: IconButton(
-                              onPressed: onPressed,
-                              icon: const Icon(Icons.arrow_forward_ios))),
                     ),
                   ],
                 )

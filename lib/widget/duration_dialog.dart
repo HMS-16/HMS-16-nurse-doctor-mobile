@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hms_16/style/theme.dart';
+import 'package:hms_16/utils/constant.dart';
 
 void durationDialog(BuildContext context, String text) async {
   Future.delayed(const Duration(seconds: 2), () {
@@ -17,10 +17,8 @@ void durationDialog(BuildContext context, String text) async {
           textAlign: TextAlign.center,
           style: textStyle.copyWith(fontSize: 16, fontWeight: FontWeight.w600),
         ),
-        content: Image.asset("assets/images/succes.png"),
+        content: Image.asset("assets/images/succes.png", scale: 3),
       );
     },
   );
-  Navigator.pop(context);
-  Navigator.pop(context);
 }

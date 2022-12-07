@@ -28,7 +28,7 @@ void dialogValidation(
                 title,
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
               ),
-              Image.asset('/images/succes.png', scale: 3),
+              Image.asset('assets/images/succes.png', scale: 3),
               isValidation
                   ? Row(
                       children: [

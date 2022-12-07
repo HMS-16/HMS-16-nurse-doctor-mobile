@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hms_16/style/theme.dart';
+import 'package:hms_16/utils/constant.dart';
 
 class TileMedRecord extends StatefulWidget {
   const TileMedRecord({super.key});
@@ -35,7 +35,7 @@ class _TileMedRecordState extends State<TileMedRecord> {
             textColor: Colors.black,
             backgroundColor: Color(0xffF2F2F2),
             collapsedBackgroundColor: Color(0xffFDFDFD),
-            tilePadding: EdgeInsets.symmetric(horizontal: 20,vertical: 10),
+            tilePadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             trailing: Icon(_customTileExpanded
                 ? Icons.keyboard_arrow_down
                 : Icons.keyboard_arrow_right),
@@ -46,7 +46,6 @@ class _TileMedRecordState extends State<TileMedRecord> {
                   'Tuesday, Nov 2, 2022',
                   style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
                 ),
-
                 SizedBox(height: 6),
                 Text(
                   '1.00 pm - 2.00 pm',
@@ -74,7 +73,6 @@ class _TileMedRecordState extends State<TileMedRecord> {
                           TextSpan(
                               text:
                                   'After examination, the results of the medical record showed that the patient had symptoms of the disease, namely redness of the throat, enlarged salivary glands and mild respiratory distress.'),
-
                         ],
                       ),
                     ),
@@ -89,7 +87,6 @@ class _TileMedRecordState extends State<TileMedRecord> {
                     SizedBox(height: 7),
                     Row(
                       children: [
-
                         Icon(Icons.circle, size: 18),
                         SizedBox(width: 10),
                         Text(
@@ -190,7 +187,6 @@ class _TileMedRecordState extends State<TileMedRecord> {
                         Text(
                           '16 rpm',
                           style: textStyle.copyWith(fontSize: 12),
-
                         ),
                       ],
                     ),
