@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hms_16/models/chart_model.dart';
+import 'package:hms_16/model/chart_model.dart';
 import 'package:hms_16/style/theme.dart';
 import 'package:hms_16/views/notification.dart';
 import 'package:hms_16/views/profile.dart';
