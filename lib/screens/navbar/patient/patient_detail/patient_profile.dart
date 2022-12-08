@@ -27,7 +27,7 @@ class _PatientProfileState extends State<PatientProfile> {
                   children: [
                     Text(
                       value.person!.name,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                       ),
@@ -226,114 +226,127 @@ class _PatientProfileState extends State<PatientProfile> {
                       .copyWith(color: cWhiteLast),
                 ),
               ),
-
               const SizedBox(height: 16),
-              //if
-              ElevatedButton(
-                onPressed: () async {
-                  await showDialog<void>(
-                    context: context,
-                    barrierDismissible: true,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        title: Text(
-                          'Are you sure to end case this patient?',
-                          textAlign: TextAlign.center,
-                          style: textStyle.copyWith(
-                              fontSize: 15, fontWeight: FontWeight.w500),
-                        ),
-                        content: Image(
-                          image: const AssetImage(
-                            "assets/images/succes.png",
-                          ),
-                          fit: BoxFit.contain,
-                          width: MediaQuery.of(context).size.width,
-                          height: 150,
-                        ),
-                        actions: <Widget>[
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Expanded(
-                                child: SizedBox(
-                                  height: 50,
-                                  width: double.infinity,
-                                  child: ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(12),
-                                      ),
-                                      backgroundColor: cPrimaryBase,
-                                    ),
-                                    onPressed: () async {
-                                      durationDialog(
-                                          context, "End case succesfully!");
-                                      Future.delayed(const Duration(seconds: 2),
-                                          () {
-                                        Navigator.pop(context);
-                                      });
-                                    },
-                                    child: Text(
-                                      "Yes",
-                                      style: textStyle.copyWith(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w600,
-                                        color: Colors.white,
+              Builder(builder: (context) {
+                final show = value.person!.progress;
+                if (show == true) {
+                  return ElevatedButton(
+                    onPressed: () async {
+                      // context.read<changestate>()
+
+                      await showDialog<void>(
+                        context: context,
+                        barrierDismissible: true,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: Text(
+                              'Are you sure to end case this patient?',
+                              textAlign: TextAlign.center,
+                              style: textStyle.copyWith(
+                                  fontSize: 15, fontWeight: FontWeight.w500),
+                            ),
+                            content: Image(
+                              image: const AssetImage(
+                                "assets/images/succes.png",
+                              ),
+                              fit: BoxFit.contain,
+                              width: MediaQuery.of(context).size.width,
+                              height: 150,
+                            ),
+                            actions: <Widget>[
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Expanded(
+                                    child: SizedBox(
+                                      height: 50,
+                                      width: double.infinity,
+                                      child: ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(12),
+                                          ),
+                                          backgroundColor: cPrimaryBase,
+                                        ),
+                                        onPressed: () async {
+                                          setState(() {
+                                            value.person!.progress = false;
+                                            print(value.person!.progress);
+                                          });
+                                          durationDialog(
+                                              context, "End case succesfully!");
+                                          Future.delayed(
+                                              const Duration(seconds: 2), () {
+                                            Navigator.pop(context);
+                                          });
+                                        },
+                                        child: Text(
+                                          "Yes",
+                                          style: textStyle.copyWith(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w600,
+                                            color: Colors.white,
+                                          ),
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
-                              ),
-                              const SizedBox(
-                                width: 10.0,
-                              ),
-                              Expanded(
-                                child: SizedBox(
-                                  height: 50,
-                                  width: double.infinity,
-                                  child: ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      shape: RoundedRectangleBorder(
-                                          side: BorderSide(
-                                              width: 1, color: cPrimaryBase),
-                                          borderRadius:
-                                              BorderRadius.circular(12)),
-                                      backgroundColor: cWhiteBase,
-                                    ),
-                                    onPressed: () async {
-                                      Navigator.pop(context);
-                                    },
-                                    child: Text(
-                                      "No",
-                                      style: textStyle.copyWith(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w600,
-                                          color: cPrimaryBase),
+                                  const SizedBox(
+                                    width: 10.0,
+                                  ),
+                                  Expanded(
+                                    child: SizedBox(
+                                      height: 50,
+                                      width: double.infinity,
+                                      child: ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          shape: RoundedRectangleBorder(
+                                              side: BorderSide(
+                                                  width: 1,
+                                                  color: cPrimaryBase),
+                                              borderRadius:
+                                                  BorderRadius.circular(12)),
+                                          backgroundColor: cWhiteBase,
+                                        ),
+                                        onPressed: () async {
+                                          Navigator.pop(context);
+                                        },
+                                        child: Text(
+                                          "No",
+                                          style: textStyle.copyWith(
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.w600,
+                                              color: cPrimaryBase),
+                                        ),
+                                      ),
                                     ),
                                   ),
-                                ),
+                                ],
                               ),
                             ],
-                          ),
-                        ],
+                          );
+                        },
                       );
                     },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromRGBO(155, 26, 26, 1),
+                      minimumSize: const Size.fromHeight(51),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                    child: const Text(
+                      'End Case',
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
                   );
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color.fromRGBO(155, 26, 26, 1),
-                  minimumSize: const Size.fromHeight(51),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                ),
-                child: const Text(
-                  'End Case',
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
-                ),
-              )
+                }
+                return SizedBox();
+              })
             ],
           );
         }),
