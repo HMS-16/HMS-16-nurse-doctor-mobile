@@ -43,6 +43,7 @@ dependencies:
   smooth_page_indicator: ^1.0.0+2
   provider: ^6.0.4
   flutter_otp_text_field: ^1.1.1
+  badges: ^2.0.3
 
 dev_dependencies:
   flutter_lints: ^2.0.0

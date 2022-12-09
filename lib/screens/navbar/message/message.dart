@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hms_16/utils/constant.dart';
 import 'package:hms_16/screens/notification.dart';
-import 'package:hms_16/screens/profile.dart';
+import 'package:hms_16/screens/profile/profile.dart';
 import 'package:hms_16/widget/navpush_transition.dart';
 
 class Message extends StatelessWidget {

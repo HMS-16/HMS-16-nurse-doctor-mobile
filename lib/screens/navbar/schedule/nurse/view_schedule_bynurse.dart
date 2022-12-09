@@ -3,7 +3,7 @@ import 'package:hms_16/screens/navbar/schedule/nurse/change_schedule_bynurse.dar
 import 'package:hms_16/utils/constant.dart';
 import 'package:hms_16/screens/navbar/schedule/nurse/detail_schedule_bynurse.dart';
 import 'package:hms_16/screens/notification.dart';
-import 'package:hms_16/screens/profile.dart';
+import 'package:hms_16/screens/profile/profile.dart';
 import 'package:hms_16/widget/navpush_transition.dart';
 import 'package:hms_16/widget/patientSchedule_card.dart';
 import 'package:intl/intl.dart';
