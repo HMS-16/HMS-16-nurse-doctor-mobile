@@ -4,7 +4,6 @@ import 'package:hms_16/screens/notification.dart';
 import 'package:hms_16/screens/profile/profile.dart';
 import 'package:hms_16/utils/constant.dart';
 import 'package:hms_16/widget/navpush_transition.dart';
-import 'package:intl/intl.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -17,57 +16,58 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: cWhiteBase,
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
-            floating: true,
-            bottom: PreferredSize(
-              preferredSize: const Size.fromHeight(100),
-              child: Container(
-                  margin: const EdgeInsets.only(
-                    bottom: 90,
-                    right: 100,
-                  ),
-                  child: Column(
-                    children: [
-                      Text("Welcome! Dr. Abed",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 24)),
-                      Text("Let's do our best for better life.",
-                          style: TextStyle(
-                            fontWeight: FontWeight.w400,
-                            fontSize: 18,
-                          ))
-                    ],
-                  )),
-            ),
-            backgroundColor: cInfoLight,
-            expandedHeight: 220,
-            flexibleSpace: const FlexibleSpaceBar(
-              background: Image(
-                  alignment: Alignment.bottomRight,
-                  image: AssetImage("assets/images/people_home.png")),
+            automaticallyImplyLeading: false,
+            title: RichText(
+              text: TextSpan(
+                children: <TextSpan>[
+                  TextSpan(
+                      text: "\nDr. Abed",
+                      style: TextStyle(
+                          fontWeight: FontWeight.w700,
+                          fontSize: 16,
+                          color: cBlack))
+                ],
+                text: "Welcome!",
+                style: TextStyle(
+                    fontWeight: FontWeight.w400, fontSize: 14, color: cBlack),
+              ),
             ),
             actions: [
               IconButton(
                 onPressed: () {
                   navPushTransition(context, const NotificationPage());
                 },
-                icon: const Icon(Icons.notifications_none),
+                icon: const Icon(Icons.notifications),
               ),
-              InkWell(
-                onTap: () {
-                  navPushTransition(context, const ProfilePage());
-                },
-                child: const CircleAvatar(
-                  // backgroundImage: AssetImage("assets/pp.png"),
-                  backgroundColor: Colors.transparent,
-                  child: Image(image: AssetImage("assets/images/avatar.png")),
+              Padding(
+                padding: const EdgeInsets.only(right: 16),
+                child: InkWell(
+                  onTap: () {
+                    navPushTransition(context, const ProfilePage());
+                  },
+                  child: const CircleAvatar(
+                    backgroundColor: Colors.transparent,
+                    child: Image(image: AssetImage("assets/images/avatar.png")),
+                  ),
                 ),
               )
             ],
+            iconTheme: IconThemeData(color: cBlack),
+            floating: true,
+            pinned: true,
+            backgroundColor: Color.fromRGBO(110, 169, 250, 1),
+            expandedHeight: 220,
+            flexibleSpace: const FlexibleSpaceBar(
+              background: Image(
+                  alignment: Alignment.bottomRight,
+                  image: AssetImage("assets/images/Banner.png")),
+            ),
           ),
-          SliverToBoxAdapter(
+          const SliverToBoxAdapter(
             child: ListTile(
               title: Text("Today's Appointment",
                   style: TextStyle(
@@ -97,61 +97,69 @@ class CardHomepage extends StatelessWidget {
       child: Stack(
         children: [
           Card(
+            shadowColor: Color.fromRGBO(111, 111, 111, 0.12),
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
             elevation: 2,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-              child: Column(
-                children: [
-                  ListTile(
-                    leading: const CircleAvatar(
-                        backgroundColor: Colors.blue,
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 10,
+                ),
+                ListTile(
+                  leading: Padding(
+                    padding: const EdgeInsets.fromLTRB(5, 10, 0, 0),
+                    child: CircleAvatar(
+                        backgroundColor: cPrimaryBase,
                         child: Icon(
                           Icons.person,
-                          color: Colors.white,
+                          color: cWhiteBase,
                         )),
-                    title: const Text(
-                      "Alief Rachman",
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-                    ),
-                    subtitle: const Text("Toothache"),
-                    trailing: Badge(
-                      badgeColor: const Color.fromRGBO(227, 236, 250, 1),
-                      padding: const EdgeInsets.all(10),
-                      shape: BadgeShape.square,
-                      borderRadius: BorderRadius.circular(10),
-                      toAnimate: false,
-                      badgeContent: const Text("Proccess"),
+                  ),
+                  title: const Text(
+                    "Alief Rachman",
+                    style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
+                  ),
+                  trailing: Badge(
+                    elevation: 0,
+                    badgeColor: const Color.fromRGBO(227, 236, 250, 1),
+                    padding: EdgeInsets.fromLTRB(10, 8, 10, 8),
+                    shape: BadgeShape.square,
+                    borderRadius: BorderRadius.circular(20),
+                    toAnimate: false,
+                    badgeContent: const Text(
+                      "Proccess",
+                      style: TextStyle(
+                          color: Color.fromRGBO(14, 69, 151, 1),
+                          fontWeight: FontWeight.w600),
                     ),
                   ),
-                  Container(
-                    alignment: Alignment.centerLeft,
-                    margin: const EdgeInsets.fromLTRB(70, 0, 0, 5),
-                    child: const Text(
-                      "Doctor: Abednego",
-                      style: TextStyle(fontWeight: FontWeight.w500),
-                    ),
+                ),
+                Container(
+                  alignment: Alignment.centerLeft,
+                  margin: const EdgeInsets.fromLTRB(70, 0, 0, 5),
+                  child: const Text(
+                    "Doctor: Abednego",
+                    style: TextStyle(fontWeight: FontWeight.w500),
                   ),
-                  Container(
-                    alignment: Alignment.centerLeft,
-                    margin: const EdgeInsets.fromLTRB(70, 0, 0, 5),
-                    child: const Text(
-                      "Nurse: Bella Algama",
-                      style: TextStyle(fontWeight: FontWeight.w500),
-                    ),
+                ),
+                Container(
+                  alignment: Alignment.centerLeft,
+                  margin: const EdgeInsets.fromLTRB(70, 0, 0, 5),
+                  child: const Text(
+                    "Nurse: Bella Algama",
+                    style: TextStyle(fontWeight: FontWeight.w500),
                   ),
-                  Container(
-                    alignment: Alignment.centerLeft,
-                    margin: const EdgeInsets.fromLTRB(70, 10, 0, 20),
-                    child: Text(
-                      "1.30 pm - 2.30 pm",
-                      style: TextStyle(color: Colors.grey.shade600),
-                    ),
-                  )
-                ],
-              ),
+                ),
+                Container(
+                  alignment: Alignment.centerLeft,
+                  margin: const EdgeInsets.fromLTRB(70, 0, 0, 20),
+                  child: Text(
+                    "1.30 pm - 2.30 pm",
+                    style: TextStyle(color: Colors.grey.shade600),
+                  ),
+                )
+              ],
             ),
           ),
           Positioned(
@@ -174,30 +182,6 @@ class CardHomepage extends StatelessWidget {
               ))
         ],
       ),
-    );
-  }
-}
-
-class Tile extends StatelessWidget {
-  final Widget title;
-  final Widget? subtitle;
-  final Widget? trailing;
-  final Widget? leading;
-  const Tile({
-    Key? key,
-    required this.title,
-    required this.subtitle,
-    this.trailing,
-    this.leading,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      title: title,
-      subtitle: subtitle,
-      trailing: trailing,
-      leading: leading,
     );
   }
 }

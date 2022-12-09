@@ -24,6 +24,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
+          
           textTheme: GoogleFonts.nunitoTextTheme(
             const TextTheme(
               subtitle1: TextStyle(fontWeight: FontWeight.w400),
