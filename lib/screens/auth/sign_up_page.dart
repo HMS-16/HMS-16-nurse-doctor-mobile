@@ -20,6 +20,7 @@ class _SignUpPageState extends State<SignUpPage> {
   TextEditingController controllerPassword = TextEditingController();
   TextEditingController controllerSecPassword = TextEditingController();
 
+  bool _hidePassword = false;
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -206,6 +207,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   height: 8,
                 ),
                 TextFormField(
+                  obscureText: !_hidePassword,
                   controller: controllerEmail,
                   keyboardType: TextInputType.emailAddress,
                   validator: (value) {
@@ -254,6 +256,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   height: 8,
                 ),
                 TextFormField(
+                  obscureText: !_hidePassword,
                   controller: controllerPassword,
                   validator: (value) {
                     String msg = '.{8,}';
@@ -274,7 +277,19 @@ class _SignUpPageState extends State<SignUpPage> {
                         color: cBlackBase,
                       ),
                       suffixIcon: IconButton(
-                          onPressed: () {}, icon: const Icon(Icons.visibility)),
+                        icon: Icon(
+                          // Based on passwordVisible state choose the icon
+                          _hidePassword
+                              ? Icons.visibility
+                              : Icons.visibility_off,
+                          color: Theme.of(context).primaryColorDark,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            _hidePassword = !_hidePassword;
+                          });
+                        },
+                      ),
                       hintText: ("Password"),
                       floatingLabelBehavior: FloatingLabelBehavior.always),
                 ),
@@ -298,6 +313,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   height: 8,
                 ),
                 TextFormField(
+                  obscureText: !_hidePassword,
                   controller: controllerSecPassword,
                   validator: (value) {
                     String msg = '.{8,}';
@@ -318,7 +334,19 @@ class _SignUpPageState extends State<SignUpPage> {
                         color: cBlackBase,
                       ),
                       suffixIcon: IconButton(
-                          onPressed: () {}, icon: const Icon(Icons.visibility)),
+                        icon: Icon(
+                          // Based on passwordVisible state choose the icon
+                          _hidePassword
+                              ? Icons.visibility
+                              : Icons.visibility_off,
+                          color: Theme.of(context).primaryColorDark,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            _hidePassword = !_hidePassword;
+                          });
+                        },
+                      ),
                       hintText: ("Confirm Password"),
                       floatingLabelBehavior: FloatingLabelBehavior.always),
                 ),

@@ -20,6 +20,7 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController controllerEmail = TextEditingController();
   TextEditingController controllerPassword = TextEditingController();
 
+  bool _hidePassword = false;
   final _formKey = GlobalKey<FormState>();
   late final TextStyle? errorStyle;
   @override
@@ -115,6 +116,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 TextFormField(
                   controller: controllerPassword,
+                  obscureText: !_hidePassword,
                   validator: (value) {
                     String msg = '.{8,}';
                     if (value!.isEmpty) {
@@ -136,7 +138,19 @@ class _LoginPageState extends State<LoginPage> {
                         color: Colors.black,
                       ),
                       suffixIcon: IconButton(
-                          onPressed: () {}, icon: const Icon(Icons.visibility)),
+                        icon: Icon(
+                          // Based on passwordVisible state choose the icon
+                          _hidePassword
+                              ? Icons.visibility
+                              : Icons.visibility_off,
+                          color: Theme.of(context).primaryColorDark,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            _hidePassword = !_hidePassword;
+                          });
+                        },
+                      ),
                       hintText: ("Password"),
                       floatingLabelBehavior: FloatingLabelBehavior.always),
                 ),
