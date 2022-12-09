@@ -3,6 +3,7 @@ import 'package:hms_16/Views/navbar/patient/patient_detail/patient_detail.dart';
 
 void main() => runApp(const MyApp());
 
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
