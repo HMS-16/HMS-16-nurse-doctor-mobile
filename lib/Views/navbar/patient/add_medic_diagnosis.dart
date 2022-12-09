@@ -12,6 +12,10 @@ class AddMedDiagnosis extends StatefulWidget {
 }
 
 class _AddMedDiagnosisState extends State<AddMedDiagnosis> {
+  final formKey = GlobalKey<FormState>();
+  final diagnoseCtrl = TextEditingController();
+  final prescriptionCtrl = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,64 +35,71 @@ class _AddMedDiagnosisState extends State<AddMedDiagnosis> {
           onTap: () => Navigator.pop(context),
         ),
       ),
-      body: ListView(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-        children: [
-          FieldMedical(
-            title: 'Date',
-            text: 'MM/DD/YYYY',
-            // isSuffix: false,
-          ),
-          // SizedBox(height: 10),
-          const SizedBox(height: 10),
-          FieldMedical(
-            title: 'Diagnosis',
-            text: 'Add Diagnosis',
-            line: 3,
-            // isSuffix: false,
-          ),
-          const SizedBox(height: 10),
-          FieldMedical(
-            title: 'Prescription',
-            text: 'Add Prescription',
-            line: 3,
-            // isSuffix: false,
-          ),
-          const SizedBox(height: 15),
-          ElevatedButton(
-            onPressed: (() {
-              dialogValidation(
-                context: context,
-                onPressedYes: (() {
-                  Navigator.pop(context);
+      body: Form(
+        key: formKey,
+        child: ListView(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          children: [
+            // FieldMedical(
+            //   title: 'Date',
+            //   text: 'MM/DD/YYYY',
+            //   isSuffix: false,
+            // ),
+            // SizedBox(height: 10),
+            const SizedBox(height: 10),
+            FieldMedical(
+              controller: diagnoseCtrl,
+              title: 'Diagnosis',
+              text: 'Add Diagnosis',
+              line: 3,
+              // isSuffix: false,
+            ),
+            const SizedBox(height: 10),
+            FieldMedical(
+              controller: prescriptionCtrl,
+              title: 'Prescription',
+              text: 'Add Prescription',
+              line: 3,
+              // isSuffix: false,
+            ),
+            const SizedBox(height: 15),
+            ElevatedButton(
+              onPressed: (() {
+                if (formKey.currentState!.validate()) {
                   dialogValidation(
                     context: context,
-                    isValidation: false,
-                    title: 'New Diagnose Successfully Saved!',
-                    newPage: (() {
-                      Future.delayed(Duration(seconds: 2),(() {
-                        Navigator.pop(context);
-                        Navigator.pop(context);
-                      }));
-                      // Navigator.pop(context);
+                    onPressedYes: (() {
+                      Navigator.pop(context);
+                      dialogValidation(
+                        context: context,
+                        isValidation: false,
+                        title: 'New Diagnose Successfully Saved!',
+                        newPage: (() {
+                          Future.delayed(Duration(seconds: 2), (() {
+                            Navigator.pop(context);
+                            Navigator.pop(context);
+                          }));
+                          // Navigator.pop(context);
+                        }),
+                      );
+                      // durationDialog(context, 'New Diagnose Successfully Saved!');
                     }),
+                    title: 'Are you sure to save the Diagnose?',
                   );
-                  // durationDialog(context, 'New Diagnose Successfully Saved!');
-                }),
-                title: 'Are you sure to save the Diagnose?',
-              );
-            }),
-            style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xff1153B5),
-              foregroundColor: Colors.white,
-              minimumSize: const Size(double.infinity, 50),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
+                }
+              }),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xff1153B5),
+                foregroundColor: Colors.white,
+                minimumSize: const Size(double.infinity, 50),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
               ),
+              child: const Text('Save'),
             ),
-            child: const Text('Save'),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -5,17 +5,19 @@ class FieldMedical extends StatelessWidget {
     super.key,
     required this.title,
     required this.text,
+    required this.controller,
     this.suffix,
     this.line,
-    this.iconRequired = true,
+    this.required = true,
     // this.isSuffix = true,
   });
   String title;
   String text;
   String? suffix;
   int? line;
+  TextEditingController controller;
   // bool isSuffix;
-  bool iconRequired;
+  bool required;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +30,7 @@ class FieldMedical extends StatelessWidget {
             text: title,
             style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700),
             children: [
-              if (iconRequired) ...[
+              if (required) ...[
                 TextSpan(
                   text: ' *',
                   style: TextStyle(color: Colors.red),
@@ -39,9 +41,19 @@ class FieldMedical extends StatelessWidget {
         ),
         SizedBox(height: 4),
         TextFormField(
+          autovalidateMode: AutovalidateMode.onUserInteraction,
           keyboardType: line != null ? TextInputType.multiline : null,
           maxLines: line ?? null,
           cursorColor: Colors.black12,
+          controller: controller,
+          validator: (value) {
+            if (!required) {
+              return null;
+            }
+            if (value!.isEmpty) {
+              return 'this field is required!';
+            }
+          },
           decoration: InputDecoration(
             contentPadding: line == null ? EdgeInsets.only(left: 13) : null,
             suffixIcon: suffix != null
