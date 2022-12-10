@@ -12,10 +12,10 @@ class ChangeScheduleByNurse extends StatefulWidget {
 }
 
 List<String> itemsSchedule = [
-  "1.30 pm - 2.30 pm",
-  "2.45 pm - 3.45 pm",
-  "6.00 pm - 7.00 pm",
-  "7.20 pm - 8.20 pm"
+  "1.00 pm - 1.30 pm",
+  "1.30 pm - 2.00 pm",
+  "2.00 pm - 2.30 pm",
+  "2.30 pm - 3.00 pm"
 ];
 String valueDropdown = itemsSchedule.first;
 
