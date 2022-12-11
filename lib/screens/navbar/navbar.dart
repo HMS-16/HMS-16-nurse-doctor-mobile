@@ -27,9 +27,9 @@ class _NavBarState extends State<NavBar> {
       bottomNavigationBar: BottomNavigationBar(
           currentIndex: currenticon,
           type: BottomNavigationBarType.fixed,
-          backgroundColor: Colors.grey.shade100,
+          backgroundColor: cWhiteBase,
           selectedItemColor: cPrimaryBase,
-          unselectedItemColor: Colors.black26,
+          unselectedItemColor: Color.fromRGBO(205, 205, 205, 1),
           onTap: (value) {
             setState(() {
               currenticon = value;

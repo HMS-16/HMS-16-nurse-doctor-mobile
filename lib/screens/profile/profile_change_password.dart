@@ -27,6 +27,7 @@ class ChangePasswordPage extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Form(
+          autovalidateMode: AutovalidateMode.always,
           key: _formKey,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
