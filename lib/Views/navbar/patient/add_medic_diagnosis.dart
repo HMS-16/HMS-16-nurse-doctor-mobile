@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-// import 'package:hms_16/Views/navbar/patient/patient_detail/patient_detail.dart';
+import 'package:hms_16/Models/treatment_model.dart';
 import 'package:hms_16/style/theme.dart';
+import 'package:hms_16/view_model/treatment_view_model.dart';
 import 'package:hms_16/widget/dialog_validation.dart';
 import 'package:hms_16/widget/field_form_medical.dart';
+import 'package:provider/provider.dart';
 
 class AddMedDiagnosis extends StatefulWidget {
   const AddMedDiagnosis({super.key});
@@ -26,7 +28,7 @@ class _AddMedDiagnosisState extends State<AddMedDiagnosis> {
         iconTheme: IconThemeData(color: cBlack),
         backgroundColor: Colors.white,
         title: Text(
-          'Medical Diagnosis',
+          'Medical Diagnose',
           style: textStyle.copyWith(
               fontSize: 20, fontWeight: FontWeight.w600, color: cBlackBase),
         ),
@@ -40,19 +42,13 @@ class _AddMedDiagnosisState extends State<AddMedDiagnosis> {
         child: ListView(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
           children: [
-            // FieldMedical(
-            //   title: 'Date',
-            //   text: 'MM/DD/YYYY',
-            //   isSuffix: false,
-            // ),
-            // SizedBox(height: 10),
             const SizedBox(height: 10),
             FieldMedical(
               controller: diagnoseCtrl,
               title: 'Diagnosis',
               text: 'Add Diagnosis',
               line: 3,
-              // isSuffix: false,
+              isNumeric: false,
             ),
             const SizedBox(height: 10),
             FieldMedical(
@@ -60,6 +56,7 @@ class _AddMedDiagnosisState extends State<AddMedDiagnosis> {
               title: 'Prescription',
               text: 'Add Prescription',
               line: 3,
+              isNumeric: false,
               // isSuffix: false,
             ),
             const SizedBox(height: 15),
@@ -69,6 +66,13 @@ class _AddMedDiagnosisState extends State<AddMedDiagnosis> {
                   dialogValidation(
                     context: context,
                     onPressedYes: (() {
+                      context.read<TreatmentViewModel>().insertTreatment(
+                            TreatmentModel(
+                              date: DateTime.now(),
+                              diagnose: diagnoseCtrl.text,
+                              prescription: prescriptionCtrl.text,
+                            ),
+                          );
                       Navigator.pop(context);
                       dialogValidation(
                         context: context,
@@ -79,10 +83,8 @@ class _AddMedDiagnosisState extends State<AddMedDiagnosis> {
                             Navigator.pop(context);
                             Navigator.pop(context);
                           }));
-                          // Navigator.pop(context);
                         }),
                       );
-                      // durationDialog(context, 'New Diagnose Successfully Saved!');
                     }),
                     title: 'Are you sure to save the Diagnose?',
                   );

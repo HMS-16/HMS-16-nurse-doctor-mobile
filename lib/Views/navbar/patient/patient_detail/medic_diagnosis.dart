@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hms_16/style/theme.dart';
+import 'package:hms_16/view_model/treatment_view_model.dart';
 import 'package:hms_16/views/navbar/patient/add_medic_diagnosis.dart';
 import 'package:hms_16/widget/navpush_transition.dart';
 import 'package:hms_16/widget/tile_med_diagnosis.dart';
+import 'package:provider/provider.dart';
 
 class MedicalDiagnosis extends StatefulWidget {
   const MedicalDiagnosis({super.key});
@@ -25,10 +27,6 @@ class _MedicalDiagnosisState extends State<MedicalDiagnosis> {
         ElevatedButton.icon(
           onPressed: (() {
             navPushTransition(context, const AddMedDiagnosis());
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(builder: ((context) => AddMedDiagnosis())),
-            // );
           }),
           style: ElevatedButton.styleFrom(
             backgroundColor: const Color(0xff1153B5),
@@ -44,16 +42,23 @@ class _MedicalDiagnosisState extends State<MedicalDiagnosis> {
             style: textStyle.copyWith(fontSize: 14, fontWeight: FontWeight.w600),
           ),
         ),
-        const TileMedDiagnosis(),
-        const TileMedDiagnosis(),
-        const TileMedDiagnosis(),
-        const TileMedDiagnosis(),
-        const TileMedDiagnosis(),
-        const TileMedDiagnosis(),
-        const TileMedDiagnosis(),
-        const TileMedDiagnosis(),
-        const TileMedDiagnosis(),
-        const TileMedDiagnosis(),
+        Consumer<TreatmentViewModel>(
+          builder: (context, value, child) {
+            return ListView.separated(
+              shrinkWrap: true,
+              separatorBuilder: (context, index) => SizedBox(height: 10),
+              itemCount: value.treatments.length,
+              itemBuilder: (context, index) {
+                final treatment = value.treatments[index];
+                return TileMedDiagnosis(
+                  date: treatment.date,
+                  diagnose: treatment.diagnose,
+                  prescription: treatment.prescription,
+                );
+              },
+            );
+          },
+        ),
       ],
     );
   }

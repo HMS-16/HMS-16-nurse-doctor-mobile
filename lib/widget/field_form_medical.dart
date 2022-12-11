@@ -8,7 +8,8 @@ class FieldMedical extends StatelessWidget {
     required this.controller,
     this.suffix,
     this.line,
-    this.required = true,
+    this.isRequired = true,
+    this.isNumeric = true,
     // this.isSuffix = true,
   });
   String title;
@@ -17,7 +18,8 @@ class FieldMedical extends StatelessWidget {
   int? line;
   TextEditingController controller;
   // bool isSuffix;
-  bool required;
+  bool isRequired;
+  bool isNumeric;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +32,7 @@ class FieldMedical extends StatelessWidget {
             text: title,
             style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700),
             children: [
-              if (required) ...[
+              if (isRequired) ...[
                 TextSpan(
                   text: ' *',
                   style: TextStyle(color: Colors.red),
@@ -47,11 +49,11 @@ class FieldMedical extends StatelessWidget {
           cursorColor: Colors.black12,
           controller: controller,
           validator: (value) {
-            if (!required) {
-              return null;
+            if (isRequired && value!.isEmpty) {
+                return 'this field is required!';
             }
-            if (value!.isEmpty) {
-              return 'this field is required!';
+            if (isNumeric && !RegExp(r'^\d+/?.?\d+$').hasMatch(value!)) {
+              return 'please input the correct format!';
             }
           },
           decoration: InputDecoration(

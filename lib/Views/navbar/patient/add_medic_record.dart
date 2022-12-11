@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-// import 'package:hms_16/Views/navbar/patient/patient_detail/patient_detail.dart';
+import 'package:hms_16/Models/condition_model.dart';
 import 'package:hms_16/style/theme.dart';
+import 'package:hms_16/view_model/condition_view_model.dart';
 import 'package:hms_16/widget/dialog_validation.dart';
 import 'package:hms_16/widget/field_form_medical.dart';
+import 'package:provider/provider.dart';
 
 class AddMedRecord extends StatefulWidget {
   const AddMedRecord({super.key});
@@ -16,6 +18,7 @@ class _AddMedRecordState extends State<AddMedRecord> {
   final heightCtrl = TextEditingController();
   final weightCtrl = TextEditingController();
   final bloodPressureCtrl = TextEditingController();
+  final sugarAnalysisCtrl = TextEditingController();
   final temperatureCtrl = TextEditingController();
   final restHeartRateCtrl = TextEditingController();
   final breathRateCtrl = TextEditingController();
@@ -67,6 +70,13 @@ class _AddMedRecordState extends State<AddMedRecord> {
             ),
             const SizedBox(height: 10),
             FieldMedical(
+              controller: sugarAnalysisCtrl,
+              title: 'Sugar Analysis',
+              text: 'Sugar Analysis',
+              suffix: 'mg/dL',
+            ),
+            const SizedBox(height: 10),
+            FieldMedical(
               controller: temperatureCtrl,
               title: 'Body Temperature',
               text: 'Body Temperature',
@@ -92,8 +102,8 @@ class _AddMedRecordState extends State<AddMedRecord> {
               title: 'Note',
               text: 'Add Note',
               line: 3,
-              required: false,
-              // isSuffix: false,
+              isRequired: false,
+              isNumeric: false,
             ),
             const SizedBox(height: 15),
             ElevatedButton(
@@ -102,6 +112,19 @@ class _AddMedRecordState extends State<AddMedRecord> {
                   dialogValidation(
                     context: context,
                     onPressedYes: () {
+                      context.read<ConditionViewModel>().insertCondition(
+                            ConditionModel(
+                              date: DateTime.now(),
+                              height: int.parse(heightCtrl.text),
+                              weight: int.parse(weightCtrl.text),
+                              bloodPressure: bloodPressureCtrl.text,
+                              sugarAnalysis: int.parse(sugarAnalysisCtrl.text),
+                              temperature: double.parse(temperatureCtrl.text),
+                              restHeartRate: int.parse(restHeartRateCtrl.text),
+                              breathRate: int.parse(breathRateCtrl.text),
+                              note: noteCtrl.text,
+                            ),
+                          );
                       Navigator.pop(context);
                       dialogValidation(
                         context: context,
@@ -112,10 +135,8 @@ class _AddMedRecordState extends State<AddMedRecord> {
                             Navigator.pop(context);
                             Navigator.pop(context);
                           }));
-                          // Navigator.pop(context);
                         },
                       );
-                      // durationDialog(context, 'New Medical Successfully Saved!');
                     },
                     title: 'are you sure to save a medical?',
                   );
