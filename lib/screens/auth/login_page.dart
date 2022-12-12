@@ -6,6 +6,7 @@ import 'package:hms_16/screens/auth/forgot_password_page1.dart';
 import 'package:hms_16/screens/auth/sign_up_page.dart';
 import 'package:hms_16/widget/button.dart';
 import 'package:hms_16/widget/navpush_transition.dart';
+import 'package:hms_16/module/login/login_repository.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -160,14 +161,15 @@ class _LoginPageState extends State<LoginPage> {
                 Button(
                     text: "Sign In",
                     onpressed: () {
+                      //fetchLogin();
                       navPushTransition(context, const SignUpPage());
-                      // if (!_formKey.currentState!.validate()) {
-                      //   ScaffoldMessenger.of(context)
-                      //       .showSnackBar(SnackBar(content: Text("Success")));
-                      // } else {
-                      //   ScaffoldMessenger.of(context)
-                      //       .showSnackBar(SnackBar(content: Text("Failled")));
-                      // }
+                      if (!_formKey.currentState!.validate()) {
+                        ScaffoldMessenger.of(context)
+                            .showSnackBar(SnackBar(content: Text("Success")));
+                      } else {
+                        ScaffoldMessenger.of(context)
+                            .showSnackBar(SnackBar(content: Text("Failled")));
+                      }
                     }),
                 const SizedBox(
                   height: 15.0,
