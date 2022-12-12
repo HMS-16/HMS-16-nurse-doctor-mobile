@@ -5,14 +5,20 @@ import 'package:hms_16/widget/button.dart';
 
 import '../../widget/navpush_transition.dart';
 
-class ForgotPassword3 extends StatelessWidget {
+class ForgotPassword3 extends StatefulWidget {
   const ForgotPassword3({super.key});
 
+  @override
+  State<ForgotPassword3> createState() => _ForgotPassword3State();
+}
+
+class _ForgotPassword3State extends State<ForgotPassword3> {
   @override
   Widget build(BuildContext context) {
     late String password;
     TextEditingController controllerPassword = TextEditingController();
 
+    bool _hidePassword = false;
     final _formKey = GlobalKey<FormState>();
     late final TextStyle? errorStyle;
     return Scaffold(
@@ -75,6 +81,7 @@ class ForgotPassword3 extends StatelessWidget {
                 height: 8,
               ),
               TextFormField(
+                obscureText: !_hidePassword,
                 validator: (value) {
                   String msg = '.{8,}';
                   if (value!.isEmpty) {
@@ -96,7 +103,17 @@ class ForgotPassword3 extends StatelessWidget {
                       color: Colors.black,
                     ),
                     suffixIcon: IconButton(
-                        onPressed: () {}, icon: const Icon(Icons.visibility)),
+                      icon: Icon(
+                        // Based on passwordVisible state choose the icon
+                        _hidePassword ? Icons.visibility : Icons.visibility_off,
+                        color: Theme.of(context).primaryColorDark,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _hidePassword = !_hidePassword;
+                        });
+                      },
+                    ),
                     hintText: "Create Password",
                     floatingLabelBehavior: FloatingLabelBehavior.auto),
               ),
@@ -119,6 +136,7 @@ class ForgotPassword3 extends StatelessWidget {
                 height: 8,
               ),
               TextFormField(
+                obscureText: !_hidePassword,
                 validator: (value) {
                   String msg = '.{8,}';
                   if (value!.isEmpty) {
@@ -140,7 +158,17 @@ class ForgotPassword3 extends StatelessWidget {
                       color: Colors.black,
                     ),
                     suffixIcon: IconButton(
-                        onPressed: () {}, icon: const Icon(Icons.visibility)),
+                      icon: Icon(
+                        // Based on passwordVisible state choose the icon
+                        _hidePassword ? Icons.visibility : Icons.visibility_off,
+                        color: Theme.of(context).primaryColorDark,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _hidePassword = !_hidePassword;
+                        });
+                      },
+                    ),
                     hintText: "Confirm New Password",
                     floatingLabelBehavior: FloatingLabelBehavior.auto),
               ),
