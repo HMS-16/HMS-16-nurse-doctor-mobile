@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hms_16/style/theme.dart';
+import 'package:hms_16/utils/constant.dart';
 
 class Button extends StatelessWidget {
   final String text;

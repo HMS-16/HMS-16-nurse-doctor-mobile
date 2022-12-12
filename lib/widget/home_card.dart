@@ -1,20 +1,15 @@
-import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 
 import 'package:hms_16/utils/constant.dart';
 
-class PatientScheduleCard extends StatelessWidget {
-  const PatientScheduleCard({
+class HomeCard extends StatelessWidget {
+  const HomeCard({
     super.key,
     required this.patientName,
     required this.disease,
     required this.doctorName,
     required this.nurseName,
     required this.time,
-    required this.lineColor,
-    required this.badgeText,
-    required this.paintBadge,
-    required this.fontColor,
   });
 
   final String patientName;
@@ -22,10 +17,6 @@ class PatientScheduleCard extends StatelessWidget {
   final String doctorName;
   final String nurseName;
   final String time;
-  final String badgeText;
-  final Color lineColor;
-  final Color paintBadge;
-  final Color fontColor;
 
   @override
   Widget build(BuildContext context) {
@@ -43,13 +34,12 @@ class PatientScheduleCard extends StatelessWidget {
           Container(
             width: 3.5,
             height: 80,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5),
+            decoration: const BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [
-                  lineColor,
+                  Colors.blue,
                   Colors.white,
                 ],
               ),
@@ -58,13 +48,10 @@ class PatientScheduleCard extends StatelessWidget {
           const SizedBox(
             width: 10.0,
           ),
-          const SizedBox(
-            height: 30.0,
-          ),
           Icon(
             Icons.account_circle,
-            color: cPrimaryBase,
             size: 32,
+            color: cPrimaryBase,
           ),
           const SizedBox(
             width: 20.0,
@@ -113,24 +100,6 @@ class PatientScheduleCard extends StatelessWidget {
                               fontWeight: FontWeight.w400),
                         ),
                       ],
-                    ),
-                    Expanded(
-                      child: ListTile(
-                        trailing: Badge(
-                          badgeColor: paintBadge,
-                          padding: const EdgeInsets.all(10),
-                          shape: BadgeShape.square,
-                          borderRadius: BorderRadius.circular(15),
-                          toAnimate: false,
-                          badgeContent: Text(
-                            badgeText,
-                            style: TextStyle(
-                              color: fontColor,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ),
                     ),
                   ],
                 )

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hms_16/Models/treatment_model.dart';
+import 'package:hms_16/model/treatment_model.dart';
 
 class TreatmentViewModel extends ChangeNotifier {
   List<TreatmentModel> _treatment = [];

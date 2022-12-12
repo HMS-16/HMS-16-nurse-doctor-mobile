@@ -50,7 +50,7 @@ class FieldMedical extends StatelessWidget {
           controller: controller,
           validator: (value) {
             if (isRequired && value!.isEmpty) {
-                return 'this field is required!';
+              return 'this field is required!';
             }
             if (isNumeric && !RegExp(r'^\d+/?.?\d+$').hasMatch(value!)) {
               return 'please input the correct format!';

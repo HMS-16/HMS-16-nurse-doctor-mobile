@@ -94,7 +94,8 @@ class _TileMedDiagnosisState extends State<TileMedDiagnosis> {
                     SizedBox(height: 5),
                     Text(
                       '${widget.diagnose}',
-                      style: TextStyle(fontSize: 13, fontWeight: FontWeight.w400),
+                      style:
+                          TextStyle(fontSize: 13, fontWeight: FontWeight.w400),
                     ),
                     SizedBox(height: 10),
                     Text(
@@ -107,7 +108,8 @@ class _TileMedDiagnosisState extends State<TileMedDiagnosis> {
                     SizedBox(height: 5),
                     Text(
                       '${widget.prescription}',
-                      style: TextStyle(fontSize: 13, fontWeight: FontWeight.w400),
+                      style:
+                          TextStyle(fontSize: 13, fontWeight: FontWeight.w400),
                     ),
                     SizedBox(height: 10),
                   ],
