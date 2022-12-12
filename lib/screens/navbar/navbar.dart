@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hms_16/screens/navbar/home/homepage.dart';
+import 'package:hms_16/screens/navbar/home/homepage_nurse.dart';
 import 'package:hms_16/screens/navbar/message/message.dart';
 import 'package:hms_16/screens/navbar/patient/patient_screen.dart';
 import 'package:hms_16/screens/navbar/schedule/nurse/view_schedule_bynurse.dart';
@@ -15,7 +15,7 @@ class NavBar extends StatefulWidget {
 class _NavBarState extends State<NavBar> {
   int currenticon = 0;
   final screen = [
-    const HomePage(),
+    const HomePageNurse(),
     const PatientScreen(),
     const ViewScheduleNurse(),
     const Message(),

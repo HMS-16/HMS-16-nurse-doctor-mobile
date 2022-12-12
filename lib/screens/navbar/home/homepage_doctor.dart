@@ -1,18 +1,19 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
+import 'package:hms_16/screens/navbar/schedule/doctor/view_schedule_bydoctor.dart';
 import 'package:hms_16/screens/notification.dart';
 import 'package:hms_16/screens/profile/profile.dart';
 import 'package:hms_16/utils/constant.dart';
 import 'package:hms_16/widget/navpush_transition.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class HomePageDoctor extends StatefulWidget {
+  const HomePageDoctor({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<HomePageDoctor> createState() => _HomePageDoctorState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageDoctorState extends State<HomePageDoctor> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -96,70 +97,75 @@ class CardHomepage extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: Stack(
         children: [
-          Card(
-            shadowColor: Color.fromRGBO(111, 111, 111, 0.12),
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-            elevation: 2,
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 10,
-                ),
-                ListTile(
-                  leading: Padding(
-                    padding: const EdgeInsets.fromLTRB(5, 10, 0, 0),
-                    child: CircleAvatar(
-                        backgroundColor: cPrimaryBase,
-                        child: Icon(
-                          Icons.person,
-                          color: cWhiteBase,
-                        )),
+          InkWell(
+            onTap: () {
+                    navPushTransition(context, ViewScheduleDoctor());
+                  },
+            child: Card(
+              shadowColor: Color.fromRGBO(111, 111, 111, 0.12),
+              shape:
+                  RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+              elevation: 2,
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 10,
                   ),
-                  title: const Text(
-                    "Alief Rachman",
-                    style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
-                  ),
-                  trailing: Badge(
-                    elevation: 0,
-                    badgeColor: const Color.fromRGBO(227, 236, 250, 1),
-                    padding: EdgeInsets.fromLTRB(10, 8, 10, 8),
-                    shape: BadgeShape.square,
-                    borderRadius: BorderRadius.circular(20),
-                    toAnimate: false,
-                    badgeContent: const Text(
-                      "Proccess",
-                      style: TextStyle(
-                          color: Color.fromRGBO(14, 69, 151, 1),
-                          fontWeight: FontWeight.w600),
+                  ListTile(
+                    leading: Padding(
+                      padding: const EdgeInsets.fromLTRB(5, 10, 0, 0),
+                      child: CircleAvatar(
+                          backgroundColor: cPrimaryBase,
+                          child: Icon(
+                            Icons.person,
+                            color: cWhiteBase,
+                          )),
+                    ),
+                    title: const Text(
+                      "Alief Rachman",
+                      style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
+                    ),
+                    trailing: Badge(
+                      elevation: 0,
+                      badgeColor: const Color.fromRGBO(227, 236, 250, 1),
+                      padding: EdgeInsets.fromLTRB(10, 8, 10, 8),
+                      shape: BadgeShape.square,
+                      borderRadius: BorderRadius.circular(20),
+                      toAnimate: false,
+                      badgeContent: const Text(
+                        "Proccess",
+                        style: TextStyle(
+                            color: Color.fromRGBO(14, 69, 151, 1),
+                            fontWeight: FontWeight.w600),
+                      ),
                     ),
                   ),
-                ),
-                Container(
-                  alignment: Alignment.centerLeft,
-                  margin: const EdgeInsets.fromLTRB(70, 0, 0, 5),
-                  child: const Text(
-                    "Doctor: Abednego",
-                    style: TextStyle(fontWeight: FontWeight.w500),
+                  Container(
+                    alignment: Alignment.centerLeft,
+                    margin: const EdgeInsets.fromLTRB(70, 0, 0, 5),
+                    child: const Text(
+                      "Doctor: Abednego",
+                      style: TextStyle(fontWeight: FontWeight.w500),
+                    ),
                   ),
-                ),
-                Container(
-                  alignment: Alignment.centerLeft,
-                  margin: const EdgeInsets.fromLTRB(70, 0, 0, 5),
-                  child: const Text(
-                    "Nurse: Bella Algama",
-                    style: TextStyle(fontWeight: FontWeight.w500),
+                  Container(
+                    alignment: Alignment.centerLeft,
+                    margin: const EdgeInsets.fromLTRB(70, 0, 0, 5),
+                    child: const Text(
+                      "Nurse: Bella Algama",
+                      style: TextStyle(fontWeight: FontWeight.w500),
+                    ),
                   ),
-                ),
-                Container(
-                  alignment: Alignment.centerLeft,
-                  margin: const EdgeInsets.fromLTRB(70, 0, 0, 20),
-                  child: Text(
-                    "1.30 pm - 2.30 pm",
-                    style: TextStyle(color: Colors.grey.shade600),
-                  ),
-                )
-              ],
+                  Container(
+                    alignment: Alignment.centerLeft,
+                    margin: const EdgeInsets.fromLTRB(70, 0, 0, 20),
+                    child: Text(
+                      "1.30 pm - 2.30 pm",
+                      style: TextStyle(color: Colors.grey.shade600),
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
           Positioned(
