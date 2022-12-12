@@ -35,14 +35,20 @@ class _PatientScreenState extends State<PatientScreen> {
             onPressed: () {
               navPushTransition(context, const NotificationPage());
             },
-            icon: const Icon(Icons.notifications_none),
+            icon: const Icon(Icons.notifications),
           ),
-          IconButton(
-            onPressed: () {
-              navPushTransition(context, ProfilePage());
-            },
-            icon: const Icon(Icons.account_circle_outlined),
-          ),
+          Padding(
+            padding: const EdgeInsets.only(right: 16),
+            child: InkWell(
+              onTap: () {
+                navPushTransition(context, const ProfilePage());
+              },
+              child: const CircleAvatar(
+                backgroundColor: Colors.transparent,
+                child: Image(image: AssetImage("assets/images/avatar.png")),
+              ),
+            ),
+          )
         ],
       ),
       body: Padding(
@@ -125,7 +131,13 @@ class PatientList extends StatelessWidget {
                 paintBadge: badgeColor,
                 patientName: person.name,
                 disease: person.disease,
-                time: '1 pm - 3 pm',
+                time: person.time == 0
+                    ? "1.00 pm - 1.30 pm"
+                    : person.time == 1
+                        ? "1.30 pm - 2.00 pm"
+                        : person.time == 2
+                            ? "2.00 pm - 2.30 pm"
+                            : "2.30 pm - 3.00 pm",
                 badgeText: condition,
               );
             }),

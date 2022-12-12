@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:hms_16/view_model/doctor_view_model.dart';
 import 'package:hms_16/utils/constant.dart';
 import 'package:hms_16/screens/navbar/schedule/nurse/view_schedule_bynurse.dart';
-import 'package:hms_16/view_model/patient2_view_model.dart';
 import 'package:hms_16/widget/duration_dialog.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -60,7 +59,7 @@ class _ChangeDoctorByNurseState extends State<ChangeDoctorByNurse> {
           const SizedBox(
             height: 10.0,
           ),
-          Consumer<PatientViewModel2>(
+          Consumer<DoctorViewModel>(
             builder: (context, value, child) {
               return Expanded(
                   child: ListView.builder(
@@ -104,15 +103,15 @@ class _ChangeDoctorByNurseState extends State<ChangeDoctorByNurse> {
                                           backgroundColor: cPrimaryBase,
                                         ),
                                         onPressed: () async {
-                                          setState(() {
-                                            value.persons2[index].doctor =
-                                                value.getlistDoctor[index].name;
-                                          });
-                                          print(
-                                              value.getlistDoctor[index].name);
-                                          print(value.persons2[index].doctor);
-                                          print(
-                                              "HASIL ======= ${value.getlistDoctor[index].name} ====== ${value.persons2[index].doctor}");
+                                          // setState(() {
+                                          //   value.persons2[index].doctor =
+                                          //       value.getlistDoctor[index].name;
+                                          // });
+                                          // print(
+                                          //     value.getlistDoctor[index].name);
+                                          // print(value.persons2[index].doctor);
+                                          // print(
+                                          //     "HASIL ======= ${value.getlistDoctor[index].name} ====== ${value.persons2[index].doctor}");
                                           durationDialog(context,
                                               "Doctor has been successfully changed!");
                                           Future.delayed(

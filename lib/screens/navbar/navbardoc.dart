@@ -16,7 +16,7 @@ class _NavBarDocState extends State<NavBarDoc> {
   final screen = [
     const HomePage(),
     const PatientScreen(),
-    const ViewScheduleDoctor(),
+    // const ViewScheduleDoctor(),
     const Message(),
   ];
 

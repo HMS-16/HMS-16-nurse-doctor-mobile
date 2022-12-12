@@ -25,7 +25,18 @@ class EditProfilePage extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.fromLTRB(30, 0, 5, 0),
-            child: Text("Name"),
+            child: Row(
+              children: [
+                Text(
+                  "Name ",
+                  style: textStyle.copyWith(color: cBlackBase, fontSize: 14),
+                ),
+                Text(
+                  "*",
+                  style: textStyle.copyWith(color: cRed, fontSize: 14),
+                ),
+              ],
+            ),
           ),
           BuildFormField(
             hint: "natasyan46",
@@ -33,7 +44,18 @@ class EditProfilePage extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(30, 0, 5, 0),
-            child: Text("Email"),
+            child: Row(
+              children: [
+                Text(
+                  "Email ",
+                  style: textStyle.copyWith(color: cBlackBase, fontSize: 14),
+                ),
+                Text(
+                  "*",
+                  style: textStyle.copyWith(color: cRed, fontSize: 14),
+                ),
+              ],
+            ),
           ),
           BuildFormField(
             hint: "nastasyan46@gmail",

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hms_16/screens/auth/sign_up_page.dart';
 import 'package:hms_16/screens/profile/edit_profile_page.dart';
 import 'package:hms_16/screens/profile/profile_change_password.dart';
 import 'package:hms_16/utils/constant.dart';
@@ -24,10 +25,10 @@ class ProfilePage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            ListTile(
+            const ListTile(
               leading: CircleAvatar(
-                child: Image(image: AssetImage("assets/images/avatar.png")),
                 backgroundColor: Colors.grey,
+                child: Image(image: AssetImage("assets/images/avatar.png")),
               ),
               title: Text(
                 "Abed Nego",
@@ -58,10 +59,10 @@ abednego1@gmail.com
             ),
             CardTile(
               onTap: () {
-                navPushTransition(context, EditProfilePage());
+                navPushTransition(context, const EditProfilePage());
               },
               title: 'Edit Profile',
-              subtitle: Text('Edit your account profile'),
+              subtitle: const Text('Edit your account profile'),
               icon: Icons.edit,
             ),
             CardTile(
@@ -69,14 +70,16 @@ abednego1@gmail.com
                 navPushTransition(context, ChangePasswordPage());
               },
               title: 'Change Password',
-              subtitle: Text('Change your password'),
+              subtitle: const Text('Change your password'),
               icon: Icons.lock,
             ),
-            SizedBox(
+            const SizedBox(
               height: 300,
             ),
             InkWell(
-              onTap: () {},
+              onTap: () {
+                navPushTransition(context, SignUpPage());
+              },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

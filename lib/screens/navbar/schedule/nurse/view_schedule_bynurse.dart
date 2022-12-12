@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:hms_16/model/patient_model.dart';
+import 'package:hms_16/screens/navbar/patient/patient_detail/patient_detail.dart';
 import 'package:hms_16/screens/navbar/schedule/nurse/change_schedule_bynurse.dart';
 import 'package:hms_16/utils/constant.dart';
 import 'package:hms_16/screens/navbar/schedule/nurse/detail_schedule_bynurse.dart';
 import 'package:hms_16/screens/notification.dart';
 import 'package:hms_16/screens/profile/profile.dart';
-import 'package:hms_16/view_model/patient2_view_model.dart';
+import 'package:hms_16/view_model/patient_view_model.dart';
 import 'package:hms_16/widget/navpush_transition.dart';
 import 'package:hms_16/widget/patientSchedule_card.dart';
+import 'package:hms_16/widget/patient_card.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
@@ -56,14 +59,20 @@ class _ViewScheduleNurseState extends State<ViewScheduleNurse> {
               onPressed: () {
                 navPushTransition(context, const NotificationPage());
               },
-              icon: const Icon(Icons.notifications_none),
+              icon: const Icon(Icons.notifications),
             ),
-            IconButton(
-              onPressed: () {
-                navPushTransition(context, const ProfilePage());
-              },
-              icon: const Icon(Icons.account_circle_outlined),
-            ),
+            Padding(
+              padding: const EdgeInsets.only(right: 16),
+              child: InkWell(
+                onTap: () {
+                  navPushTransition(context, const ProfilePage());
+                },
+                child: const CircleAvatar(
+                  backgroundColor: Colors.transparent,
+                  child: Image(image: AssetImage("assets/images/avatar.png")),
+                ),
+              ),
+            )
           ],
         ),
         body: Column(
@@ -146,58 +155,114 @@ class _ViewScheduleNurseState extends State<ViewScheduleNurse> {
             const SizedBox(
               height: 24.0,
             ),
-            Consumer<PatientViewModel2>(
-              builder: (context, value, child) {
-                return SchedulePatientList(schedulePatients: value.persons2);
-              },
-            ),
+            Consumer<PatientViewModel>(builder: (context, value, child) {
+              // return PatientList(persons: patients);
+              return PatientListSchedule(persons: patients);
+            }),
           ],
         ));
   }
 }
 
-class SchedulePatientList extends StatelessWidget {
-  final List<PatientModel2> schedulePatients;
-  const SchedulePatientList({super.key, required this.schedulePatients});
+class PatientListSchedule extends StatelessWidget {
+  final List<PatientModel> persons;
+
+  const PatientListSchedule({super.key, required this.persons});
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: ListView.builder(
-        itemCount: schedulePatients.length,
+        physics: const BouncingScrollPhysics(),
+        shrinkWrap: true,
         scrollDirection: Axis.vertical,
         itemBuilder: (context, index) {
-          final schedulePatient = schedulePatients.elementAt(index);
-          if (DateFormat("EEE, d-M-y").format(schedulePatient.schedule) ==
+          final person = persons.elementAt(index);
+          if (DateFormat("EEE, d-M-y").format(person.schedule) ==
               DateFormat("EEE, d-M-y").format(selectedDate)) {
-            return PatientScheduleCard(
-              patientName: schedulePatient.name,
-              disease: schedulePatient.disease,
-              doctorName: schedulePatient.doctor,
-              nurseName: schedulePatient.nurse,
-              time: schedulePatient.time == 0
-                  ? "1.00 pm - 1.30 pm"
-                  : schedulePatient.time == 1
-                      ? "1.30 pm - 2.00 pm"
-                      : schedulePatient.time == 2
-                          ? "2.00 pm - 2.30 pm"
-                          : "2.30 pm - 3.00 pm",
-              onPressed: () {
-                context
-                    .read<PatientViewModel2>()
-                    .selectPatient(schedulePatient);
+            return InkWell(
+              onTap: () {
+                context.read<PatientViewModel>().selectedPerson(person);
                 navPushTransition(context, const DetailScheduleNurse());
               },
+              child: Builder(builder: (context) {
+                Color lineColor = cPrimaryBase;
+                Color fontColor = cPrimaryDark;
+                Color badgeColor = cSecondaryLighter;
+                String condition = 'Process';
+
+                if (person.progress == false) {
+                  lineColor = cGreenLine;
+                  condition = 'Done';
+                  badgeColor = cSuccessLightest;
+                  fontColor = cSuccessDark;
+                }
+                return PatientScheduleCard(
+                  fontColor: fontColor,
+                  lineColor: lineColor,
+                  paintBadge: badgeColor,
+                  badgeText: condition,
+                  patientName: person.name,
+                  disease: person.disease,
+                  doctorName: person.doctor,
+                  nurseName: person.nurse,
+                  time: person.time == 0
+                      ? "1.00 pm - 1.30 pm"
+                      : person.time == 1
+                          ? "1.30 pm - 2.00 pm"
+                          : person.time == 2
+                              ? "2.00 pm - 2.30 pm"
+                              : "2.30 pm - 3.00 pm",
+                );
+              }),
             );
-            // } else if (DateFormat("EEE, d-M-y")
-            //         .format(schedulePatient.schedule) !=
-            //     DateFormat("EEE, d-M-y").format(selectedDate)) {
-            //   return Text("KOSONG");
-          } else {
-            return Container();
           }
+          return Container();
         },
+        itemCount: persons.length,
       ),
     );
   }
 }
+
+// class SchedulePatientList extends StatelessWidget {
+//   final List<PatientModel> schedulePatients;
+//   const SchedulePatientList({super.key, required this.schedulePatients});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Expanded(
+//       child: ListView.builder(
+//         itemCount: schedulePatients.length,
+//         scrollDirection: Axis.vertical,
+//         itemBuilder: (context, index) {
+//           final schedulePatient = schedulePatients.elementAt(index);
+//           if (DateFormat("EEE, d-M-y").format(schedulePatient.schedule) ==
+//               DateFormat("EEE, d-M-y").format(selectedDate)) {
+//             return PatientScheduleCard(
+//               patientName: schedulePatient.name,
+//               disease: schedulePatient.disease,
+//               doctorName: schedulePatient.doctor,
+//               nurseName: schedulePatient.nurse,
+//               time: schedulePatient.time == 0
+//                   ? "1.00 pm - 1.30 pm"
+//                   : schedulePatient.time == 1
+//                       ? "1.30 pm - 2.00 pm"
+//                       : schedulePatient.time == 2
+//                           ? "2.00 pm - 2.30 pm"
+//                           : "2.30 pm - 3.00 pm",
+//               onPressed: () {
+//                 context
+//                     .read<PatientViewModel>()
+//                     .selectedPerson(schedulePatient);
+//                 navPushTransition(context, const DetailScheduleNurse());
+//               },
+//             );
+//           } else {
+//             return Container();
+//           }
+//         },
+//       ),
+//     );
+//   }
+// }

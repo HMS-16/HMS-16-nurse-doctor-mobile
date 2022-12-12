@@ -3,7 +3,7 @@ import 'package:hms_16/utils/constant.dart';
 import 'package:hms_16/screens/navbar/patient/patient_detail/patient_detail.dart';
 import 'package:hms_16/screens/navbar/schedule/nurse/change_doctor_bynurse.dart';
 import 'package:hms_16/screens/navbar/schedule/nurse/change_schedule_bynurse.dart';
-import 'package:hms_16/view_model/patient2_view_model.dart';
+import 'package:hms_16/view_model/patient_view_model.dart';
 import 'package:hms_16/widget/navpush_transition.dart';
 import 'package:provider/provider.dart';
 
@@ -30,7 +30,7 @@ class _DetailScheduleNurseState extends State<DetailScheduleNurse> {
       ),
       body: SingleChildScrollView(
           scrollDirection: Axis.vertical,
-          child: Consumer<PatientViewModel2>(
+          child: Consumer<PatientViewModel>(
             builder: (context, value, child) {
               return Column(
                 children: [
@@ -58,7 +58,7 @@ class _DetailScheduleNurseState extends State<DetailScheduleNurse> {
                                 fontWeight: FontWeight.w700),
                           ),
                           Text(
-                            value.person2!.name,
+                            value.person!.name,
                             style: textStyle.copyWith(
                                 color: cBlackBase,
                                 fontSize: 16,
@@ -68,7 +68,7 @@ class _DetailScheduleNurseState extends State<DetailScheduleNurse> {
                             height: 12.0,
                           ),
                           Text(
-                            "Register Date : ${value.person2!.register}",
+                            "Register Date : ${value.person!.register}",
                             style: textStyle.copyWith(
                                 color: cBlackBase,
                                 fontSize: 12,
@@ -151,7 +151,7 @@ class _DetailScheduleNurseState extends State<DetailScheduleNurse> {
                                 Expanded(
                                   child: ListTile(
                                     title: Text(
-                                      value.person2!.doctor,
+                                      value.person!.doctor,
                                       style: textStyle.copyWith(
                                           fontSize: 14,
                                           fontWeight: FontWeight.w400,
@@ -214,7 +214,7 @@ class _DetailScheduleNurseState extends State<DetailScheduleNurse> {
                             Expanded(
                               child: ListTile(
                                 title: Text(
-                                  value.person2!.nurse,
+                                  value.person!.nurse,
                                   style: textStyle.copyWith(
                                       fontSize: 14,
                                       fontWeight: FontWeight.w400,
@@ -288,11 +288,11 @@ class _DetailScheduleNurseState extends State<DetailScheduleNurse> {
                         Row(
                           children: [
                             Text(
-                              value.person2!.time == 0
+                              value.person!.time == 0
                                   ? "1.00 pm - 1.30 pm"
-                                  : value.person2!.time == 1
+                                  : value.person!.time == 1
                                       ? "1.30 pm - 2.00 pm"
-                                      : value.person2!.time == 2
+                                      : value.person!.time == 2
                                           ? "2.00 pm - 2.30 pm"
                                           : "2.30 pm - 3.00 pm",
                               style: textStyle.copyWith(

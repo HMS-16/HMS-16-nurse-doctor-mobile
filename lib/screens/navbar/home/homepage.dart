@@ -1,10 +1,15 @@
-import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
+import 'package:hms_16/model/patient_model.dart';
+import 'package:hms_16/screens/navbar/schedule/nurse/detail_schedule_bynurse.dart';
 import 'package:hms_16/screens/notification.dart';
 import 'package:hms_16/screens/profile/profile.dart';
 import 'package:hms_16/utils/constant.dart';
+import 'package:hms_16/view_model/patient_view_model.dart';
 import 'package:hms_16/widget/navpush_transition.dart';
+import 'package:hms_16/widget/patientHome_card.dart';
+import 'package:hms_16/widget/patientSchedule_card.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -17,187 +22,136 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: cWhiteBase,
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
-            floating: true,
-            bottom: PreferredSize(
-              preferredSize: const Size.fromHeight(100),
-              child: Container(
-                  margin: const EdgeInsets.only(
-                    bottom: 90,
-                    right: 100,
-                  ),
-                  child: Column(
-                    children: [
-                      Text("Welcome! Dr. Abed",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 24)),
-                      Text("Let's do our best for better life.",
-                          style: TextStyle(
-                            fontWeight: FontWeight.w400,
-                            fontSize: 18,
-                          ))
-                    ],
-                  )),
-            ),
-            backgroundColor: cInfoLight,
-            expandedHeight: 220,
-            flexibleSpace: const FlexibleSpaceBar(
-              background: Image(
-                  alignment: Alignment.bottomRight,
-                  image: AssetImage("assets/images/people_home.png")),
+            automaticallyImplyLeading: false,
+            title: RichText(
+              text: TextSpan(
+                children: <TextSpan>[
+                  TextSpan(
+                      text: "\nDr. Abed",
+                      style: TextStyle(
+                          fontWeight: FontWeight.w700,
+                          fontSize: 16,
+                          color: cBlack))
+                ],
+                text: "Welcome!",
+                style: TextStyle(
+                    fontWeight: FontWeight.w400, fontSize: 14, color: cBlack),
+              ),
             ),
             actions: [
               IconButton(
                 onPressed: () {
                   navPushTransition(context, const NotificationPage());
                 },
-                icon: const Icon(Icons.notifications_none),
+                icon: const Icon(Icons.notifications),
               ),
-              InkWell(
-                onTap: () {
-                  navPushTransition(context, const ProfilePage());
-                },
-                child: const CircleAvatar(
-                  // backgroundImage: AssetImage("assets/pp.png"),
-                  backgroundColor: Colors.transparent,
-                  child: Image(image: AssetImage("assets/images/avatar.png")),
+              Padding(
+                padding: const EdgeInsets.only(right: 16),
+                child: InkWell(
+                  onTap: () {
+                    navPushTransition(context, const ProfilePage());
+                  },
+                  child: const CircleAvatar(
+                    backgroundColor: Colors.transparent,
+                    child: Image(image: AssetImage("assets/images/avatar.png")),
+                  ),
                 ),
               )
             ],
+            iconTheme: IconThemeData(color: cBlack),
+            floating: true,
+            pinned: true,
+            backgroundColor: const Color.fromRGBO(110, 169, 250, 1),
+            expandedHeight: 220,
+            flexibleSpace: const FlexibleSpaceBar(
+              background: Image(
+                  alignment: Alignment.bottomRight,
+                  image: AssetImage("assets/images/Banner.png")),
+            ),
           ),
           SliverToBoxAdapter(
             child: ListTile(
-              title: Text("Today's Appointment",
+              title: const Text("Today's Appointment",
                   style: TextStyle(
                       fontWeight: FontWeight.bold, letterSpacing: 0.4)),
-              subtitle: Text("Thu, Nov 10, 2022"),
+              subtitle: Text(DateFormat("EEE, MMM d, yyyy")
+                  .format(DateTime.now())
+                  .toString()),
             ),
           ),
           SliverList(
               delegate: SliverChildBuilderDelegate((context, index) {
-            return const CardHomepage();
-          }, childCount: 7))
+            return Consumer<PatientViewModel>(builder: (context, value, child) {
+              // return PatientList(persons: patients);
+              return PatientListHomeScreen(persons: patients);
+            });
+          }, childCount: 1))
         ],
       ),
     );
   }
 }
 
-class CardHomepage extends StatelessWidget {
-  const CardHomepage({
-    Key? key,
-  }) : super(key: key);
+class PatientListHomeScreen extends StatelessWidget {
+  final List<PatientModel> persons;
+
+  const PatientListHomeScreen({super.key, required this.persons});
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Stack(
-        children: [
-          Card(
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-            elevation: 2,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-              child: Column(
-                children: [
-                  ListTile(
-                    leading: const CircleAvatar(
-                        backgroundColor: Colors.blue,
-                        child: Icon(
-                          Icons.person,
-                          color: Colors.white,
-                        )),
-                    title: const Text(
-                      "Alief Rachman",
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-                    ),
-                    subtitle: const Text("Toothache"),
-                    trailing: Badge(
-                      badgeColor: const Color.fromRGBO(227, 236, 250, 1),
-                      padding: const EdgeInsets.all(10),
-                      shape: BadgeShape.square,
-                      borderRadius: BorderRadius.circular(10),
-                      toAnimate: false,
-                      badgeContent: const Text("Process"),
-                    ),
-                  ),
-                  Container(
-                    alignment: Alignment.centerLeft,
-                    margin: const EdgeInsets.fromLTRB(70, 0, 0, 5),
-                    child: const Text(
-                      "Doctor: Abednego",
-                      style: TextStyle(fontWeight: FontWeight.w500),
-                    ),
-                  ),
-                  Container(
-                    alignment: Alignment.centerLeft,
-                    margin: const EdgeInsets.fromLTRB(70, 0, 0, 5),
-                    child: const Text(
-                      "Nurse: Bella Algama",
-                      style: TextStyle(fontWeight: FontWeight.w500),
-                    ),
-                  ),
-                  Container(
-                    alignment: Alignment.centerLeft,
-                    margin: const EdgeInsets.fromLTRB(70, 10, 0, 20),
-                    child: Text(
-                      "1.30 pm - 2.30 pm",
-                      style: TextStyle(color: Colors.grey.shade600),
-                    ),
-                  )
-                ],
-              ),
-            ),
-          ),
-          Positioned(
-              top: 40,
-              left: 5,
-              child: Container(
-                height: 70,
-                width: 5,
-                decoration: BoxDecoration(
-                    gradient: const LinearGradient(
-                      colors: [
-                        Color.fromRGBO(0, 97, 228, 1),
-                        Color.fromRGBO(192, 219, 255, 1),
-                      ],
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                    ),
-                    // color: Colors.blue,
-                    borderRadius: BorderRadius.circular(30)),
-              ))
-        ],
+    return Expanded(
+      child: ListView.builder(
+        physics: const BouncingScrollPhysics(),
+        shrinkWrap: true,
+        scrollDirection: Axis.vertical,
+        itemBuilder: (context, index) {
+          final person = persons.elementAt(index);
+          if (DateFormat("EEE, d-M-y").format(person.schedule) ==
+              DateFormat("EEE, d-M-y").format(DateTime.now())) {
+            return InkWell(
+              onTap: () {
+                context.read<PatientViewModel>().selectedPerson(person);
+                navPushTransition(context, const DetailScheduleNurse());
+              },
+              child: Builder(builder: (context) {
+                Color lineColor = cPrimaryBase;
+                Color fontColor = cPrimaryDark;
+                Color badgeColor = cSecondaryLighter;
+                String condition = 'Process';
+
+                if (person.progress == false) {
+                  lineColor = cGreenLine;
+                  condition = 'Done';
+                  badgeColor = cSuccessLightest;
+                  fontColor = cSuccessDark;
+                }
+                return PatientHomeCard(
+                  fontColor: fontColor,
+                  lineColor: lineColor,
+                  paintBadge: badgeColor,
+                  badgeText: condition,
+                  patientName: person.name,
+                  doctorName: person.doctor,
+                  nurseName: person.nurse,
+                  time: person.time == 0
+                      ? "1.00 pm - 1.30 pm"
+                      : person.time == 1
+                          ? "1.30 pm - 2.00 pm"
+                          : person.time == 2
+                              ? "2.00 pm - 2.30 pm"
+                              : "2.30 pm - 3.00 pm",
+                );
+              }),
+            );
+          }
+          return Container();
+        },
+        itemCount: persons.length,
       ),
-    );
-  }
-}
-
-class Tile extends StatelessWidget {
-  final Widget title;
-  final Widget? subtitle;
-  final Widget? trailing;
-  final Widget? leading;
-  const Tile({
-    Key? key,
-    required this.title,
-    required this.subtitle,
-    this.trailing,
-    this.leading,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      title: title,
-      subtitle: subtitle,
-      trailing: trailing,
-      leading: leading,
     );
   }
 }

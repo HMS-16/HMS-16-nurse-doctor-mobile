@@ -3,6 +3,7 @@ import 'package:hms_16/screens/navbar/home/homepage.dart';
 import 'package:hms_16/screens/navbar/message/message.dart';
 import 'package:hms_16/screens/navbar/patient/patient_screen.dart';
 import 'package:hms_16/screens/navbar/schedule/nurse/view_schedule_bynurse.dart';
+import 'package:hms_16/utils/constant.dart';
 
 class NavBar extends StatefulWidget {
   const NavBar({super.key});
@@ -26,9 +27,9 @@ class _NavBarState extends State<NavBar> {
       bottomNavigationBar: BottomNavigationBar(
           currentIndex: currenticon,
           type: BottomNavigationBarType.fixed,
-          backgroundColor: Colors.grey.shade100,
-          selectedItemColor: Colors.blue,
-          unselectedItemColor: Colors.black26,
+          backgroundColor: cWhiteBase,
+          selectedItemColor: cPrimaryBase,
+          unselectedItemColor: Color.fromRGBO(205, 205, 205, 1),
           onTap: (value) {
             setState(() {
               currenticon = value;

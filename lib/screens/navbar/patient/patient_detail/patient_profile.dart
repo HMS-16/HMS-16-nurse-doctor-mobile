@@ -47,7 +47,7 @@ class _PatientProfileState extends State<PatientProfile> {
                 height: 43,
                 width: double.infinity,
                 child: Text(
-                  'Hansi Flick',
+                  value.person!.doctor,
                   style: Theme.of(context)
                       .textTheme
                       .subtitle1!
@@ -64,7 +64,7 @@ class _PatientProfileState extends State<PatientProfile> {
                 height: 43,
                 width: double.infinity,
                 child: Text(
-                  'Jamal Musiala',
+                  value.person!.nurse,
                   style: Theme.of(context)
                       .textTheme
                       .subtitle1!

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hms_16/screens/navbar/patient/patient_detail/patient_profile.dart';
-import 'package:hms_16/screens/navbar/patient/patient_detail/patient_profile2.dart';
 import 'package:hms_16/utils/constant.dart';
 import 'package:hms_16/screens/navbar/patient/patient_detail/medic_diagnosis.dart';
 import 'package:hms_16/screens/navbar/patient/patient_detail/medic_record.dart';
@@ -65,7 +64,7 @@ class _PatientDetailState extends State<PatientDetail> {
         ),
         body: const TabBarView(
           children: [
-            PatientProfile2(),
+            PatientProfile(),
             MedicalRecord(),
             MedicalDiagnosis(),
           ],
