@@ -123,7 +123,7 @@ class CardHomepage extends StatelessWidget {
                       shape: BadgeShape.square,
                       borderRadius: BorderRadius.circular(10),
                       toAnimate: false,
-                      badgeContent: const Text("Proccess"),
+                      badgeContent: const Text("Process"),
                     ),
                   ),
                   Container(

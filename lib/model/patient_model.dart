@@ -85,4 +85,18 @@ final List<PatientModel> patients = [
     'Sprain',
     true,
   ),
+  PatientModel(
+    'Philipp Lahm',
+    '2022P5',
+    'Male',
+    'O',
+    'Munich, 11-09-1983',
+    'Single',
+    '39',
+    'Jl. Munich Jerman',
+    '0813 1234 2121',
+    'July, 2022',
+    'Headache',
+    true,
+  ),
 ];

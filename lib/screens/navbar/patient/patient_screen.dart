@@ -49,11 +49,14 @@ class _PatientScreenState extends State<PatientScreen> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            const SizedBox(
+            SizedBox(
               width: double.infinity,
               height: 48,
               child: TextField(
-                decoration: InputDecoration(
+                onChanged: (value) {
+                  context.read<PatientViewModel>().searchPatient(value, value);
+                },
+                decoration: const InputDecoration(
                   prefixIcon: Icon(Icons.search),
                   label: Text('Search'),
                   border: OutlineInputBorder(
@@ -66,13 +69,23 @@ class _PatientScreenState extends State<PatientScreen> {
             ),
             const SizedBox(height: 24),
             Consumer<PatientViewModel>(builder: (context, value, child) {
-              return PatientList(persons: value.persons);
+              // return PatientList(persons: patients);
+              return _screenValidator(value.persons);
             }),
           ],
         ),
       ),
     );
   }
+}
+
+Widget _screenValidator(Iterable<PatientModel> patient) {
+  if (patient.isEmpty) {
+    return const Center(
+      child: Text("There is no Patient Matched"),
+    );
+  }
+  return PatientList(persons: patients);
 }
 
 class PatientList extends StatelessWidget {
@@ -84,6 +97,7 @@ class PatientList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: ListView.separated(
+        physics: const BouncingScrollPhysics(),
         shrinkWrap: true,
         scrollDirection: Axis.vertical,
         itemBuilder: (context, index) {
@@ -93,15 +107,32 @@ class PatientList extends StatelessWidget {
               context.read<PatientViewModel>().selectedPerson(person);
               navPushTransition(context, const PatientDetail());
             },
-            child: PatientCard(
-              patientName: person.name,
-              disease: person.disease,
-              time: '1 pm - 3 pm',
-            ),
+            child: Builder(builder: (context) {
+              Color lineColor = cPrimaryBase;
+              Color fontColor = cPrimaryDark;
+              Color badgeColor = cSecondaryLighter;
+              String condition = 'Process';
+
+              if (person.progress == false) {
+                lineColor = cGreenLine;
+                condition = 'Done';
+                badgeColor = cSuccessLightest;
+                fontColor = cSuccessDark;
+              }
+              return PatientCard(
+                fontColor: fontColor,
+                lineColor: lineColor,
+                paintBadge: badgeColor,
+                patientName: person.name,
+                disease: person.disease,
+                time: '1 pm - 3 pm',
+                badgeText: condition,
+              );
+            }),
           );
         },
         itemCount: persons.length,
-        separatorBuilder: (context, index) => const SizedBox(height: 20),
+        separatorBuilder: (context, index) => const SizedBox(height: 16),
       ),
     );
   }

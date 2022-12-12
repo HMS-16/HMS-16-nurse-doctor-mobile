@@ -1,3 +1,4 @@
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:hms_16/utils/constant.dart';
 
@@ -7,17 +8,25 @@ class PatientCard extends StatelessWidget {
     required this.patientName,
     required this.disease,
     required this.time,
+    required this.lineColor,
+    required this.badgeText,
+    required this.paintBadge,
+    required this.fontColor,
   });
 
   final String patientName;
   final String disease;
   final String time;
+  final String badgeText;
+  final Color lineColor;
+  final Color paintBadge;
+  final Color fontColor;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 110,
-      width: 358,
+      height: 105,
+      width: double.infinity,
       padding: const EdgeInsets.symmetric(vertical: 12),
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.all(
@@ -35,13 +44,14 @@ class PatientCard extends StatelessWidget {
         children: [
           Container(
             width: 3.5,
-            height: 50,
-            decoration: const BoxDecoration(
+            height: 41,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5),
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [
-                  Colors.blue,
+                  lineColor,
                   Colors.white,
                 ],
               ),
@@ -49,9 +59,9 @@ class PatientCard extends StatelessWidget {
           ),
           Expanded(
             child: ListTile(
-              leading: const Icon(
+              leading: Icon(
                 Icons.account_circle,
-                color: Colors.blue,
+                color: cPrimaryBase,
                 size: 35,
               ),
               title: Text(
@@ -61,25 +71,26 @@ class PatientCard extends StatelessWidget {
                     fontSize: 14,
                     color: cBlackBase),
               ),
-              subtitle: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    disease,
-                    style: textStyle.copyWith(
-                        fontWeight: FontWeight.w400,
-                        fontSize: 12,
-                        color: cBlackLightest),
+              subtitle: Text(
+                time,
+                style: textStyle.copyWith(
+                    fontWeight: FontWeight.w400,
+                    fontSize: 12,
+                    color: cBlackLightest),
+              ),
+              trailing: Badge(
+                badgeColor: paintBadge,
+                padding: const EdgeInsets.all(10),
+                shape: BadgeShape.square,
+                borderRadius: BorderRadius.circular(15),
+                toAnimate: false,
+                badgeContent: Text(
+                  badgeText,
+                  style: TextStyle(
+                    color: fontColor,
+                    fontWeight: FontWeight.bold,
                   ),
-                  const SizedBox(height: 20),
-                  Text(
-                    time,
-                    style: textStyle.copyWith(
-                        fontWeight: FontWeight.w400,
-                        fontSize: 12,
-                        color: cBlackLightest),
-                  ),
-                ],
+                ),
               ),
             ),
           ),
