@@ -102,7 +102,6 @@ class _AddMedRecordState extends State<AddMedRecord> {
               title: 'Note',
               text: 'Add Note',
               line: 3,
-              isRequired: false,
               isNumeric: false,
             ),
             const SizedBox(height: 15),
