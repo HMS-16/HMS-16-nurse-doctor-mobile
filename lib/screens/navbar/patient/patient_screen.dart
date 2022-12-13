@@ -166,13 +166,13 @@ class PatientList extends StatelessWidget {
                 paintBadge: badgeColor,
                 patientName: person.name,
                 disease: person.disease,
-                time: person.time == 0
-                    ? "1.00 pm - 1.30 pm"
-                    : person.time == 1
-                        ? "1.30 pm - 2.00 pm"
-                        : person.time == 2
-                            ? "2.00 pm - 2.30 pm"
-                            : "2.30 pm - 3.00 pm",
+                // time: person.time == 0
+                //     ? "1.00 pm - 1.30 pm"
+                //     : person.time == 1
+                //         ? "1.30 pm - 2.00 pm"
+                //         : person.time == 2
+                //             ? "2.00 pm - 2.30 pm"
+                //             : "2.30 pm - 3.00 pm",
                 badgeText: condition,
               );
             }),
