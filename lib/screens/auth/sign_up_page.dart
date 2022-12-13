@@ -27,7 +27,7 @@ class _SignUpPageState extends State<SignUpPage> {
     List<String> listRole = ["Doctor", "Nurse"];
     String valueRole = listRole.first;
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 16),

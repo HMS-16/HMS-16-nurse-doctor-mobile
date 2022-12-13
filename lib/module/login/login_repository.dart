@@ -1,35 +1,59 @@
 import 'dart:convert';
+import 'package:flutter/cupertino.dart';
+import 'package:hms_16/model/error_model.dart';
 import 'package:hms_16/model/login_model.dart';
-import 'package:http/http.dart' as http;
+import 'package:dio/dio.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-// class LoginRepository {
-//   Future<http.Response> login(String email, String password) {
-//     return http.post(Uri.parse("https://hms-api.fly.dev/v1/login"),
-//         headers: <String, String>{
-//           'Content-Type': "application/json; charset=UTF-8"
-//         },
-//         body:
-//             jsonEncode(<String, String>{'email': email, 'password': password}));
-//   }
-// }
+class LoginViewModel with ChangeNotifier {
+  Data? dataUser;
+  String? eror;
 
-abstract class LoginPageRepository {
-  Future<Login> fetchLogin(String email, String password);
-}
+  // Data _stateType = Data.loading;
+  // Data get stateType => _stateType;
 
-class ApiService extends LoginPageRepository {
-  static const String _baseUrl = 'https://hms-api.fly.dev/v1/admins/login';
+  void changeState(Data s) {
+    // _stateType = s;
+    notifyListeners();
+  }
 
-  @override
-  Future<Login> fetchLogin(String email, String password) async {
-    final response = await http.post(Uri.parse(_baseUrl),
-        body: {"email": email, "password": password});
-    if (response.statusCode == 200) {
-      print("login berhasil");
-      return Login.fromJson(json.decode(response.body));
-    } else {
-      print("login gagal");
-      throw Exception('Failed to load top headlines');
+  Future<void> signIn({required String email, required String pass}) async {
+    // changeState(DataState.loading);
+
+    try {
+      // changeState(DataState.loading);
+
+      var responseData = await Auth().login(email: email, password: pass);
+      if (responseData.statusCode == 200) {
+        LoginModel modelUser = LoginModel.fromJson(responseData.data);
+        final prefs = await SharedPreferences.getInstance();
+
+        dataUser = modelUser.data;
+        //token = modelUser.jwt;
+
+        var encodeUser = jsonEncode(dataUser);
+        //var encodeToken = jsonEncode(token);
+
+        //await prefs.setString('token', encodeToken);
+        await prefs.setString('user', encodeUser);
+        await prefs.setBool('isLogin', true);
+
+        notifyListeners();
+        changeState(Data.succes);
+      }
+    } on DioError catch (e) {
+      changeState(Data.error);
+      if (e.response!.statusCode != 503) {
+        ErrorModel error = ErrorModel.fromJson(e.response!.data);
+        eror = error.error;
+      } else {
+        eror = e.response!.statusCode!.toString() + ' Service Unavailable';
+        print(eror);
+        print(e.message.toString());
+      }
+      //print(e.response!.data.toString());
+      // debugPrint(error.error.toString());
+      notifyListeners();
     }
   }
 }

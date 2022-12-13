@@ -1,7 +1,11 @@
 import 'dart:convert';
 
-class Login {
-  Login({
+LoginModel loginFromJson(String str) => LoginModel.fromJson(json.decode(str));
+
+String logintoJson(LoginModel data) => json.encode(data.toJson());
+
+class LoginModel {
+  LoginModel({
     required this.data,
     required this.message,
     required this.token,
@@ -11,7 +15,7 @@ class Login {
   String message;
   String token;
 
-  factory Login.fromJson(Map<String, dynamic> json) => Login(
+  factory LoginModel.fromJson(Map<String, dynamic> json) => LoginModel(
         data: Data.fromJson(json["data"]),
         message: json["message"],
         token: json["token"],
@@ -30,21 +34,24 @@ class Data {
     required this.createdAt,
     required this.updatedAt,
     required this.username,
-    required this.phoneNum,
+    required this.email,
+    required this.role,
   });
 
   String id;
   DateTime createdAt;
   DateTime updatedAt;
   String username;
-  String phoneNum;
+  String email;
+  int role;
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
         id: json["id"],
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
         username: json["username"],
-        phoneNum: json["phone_num"],
+        email: json["email"],
+        role: json["role"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -52,6 +59,7 @@ class Data {
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),
         "username": username,
-        "phone_num": phoneNum,
+        "email": email,
+        "role": role,
       };
 }
