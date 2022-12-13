@@ -1,11 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:hms_16/model/patient_model.dart';
 
+enum ActionState {
+  none,
+  loading,
+  error,
+}
+
 class PatientViewModel extends ChangeNotifier {
-  Iterable<PatientModel> _patients = patients;
+  ActionState _state = ActionState.none;
+  List<PatientModel> _patients = patients;
   PatientModel? _patient;
 
-  Iterable<PatientModel> get persons => _patients;
+  ActionState get state => _state;
+
+  List<PatientModel> get persons => _patients;
   PatientModel? get person => _patient;
 
   void selectedPerson(PatientModel newPatient) {
@@ -13,12 +22,23 @@ class PatientViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void searchPatient(String title, String search) async {
+  void _changeState(ActionState state) {
+    _state = state;
+    notifyListeners();
+  }
+
+  void changeProgressPatient(status) {
+    _patient!.progress = status;
+    notifyListeners();
+  }
+
+  void searchPatient(String search) {
     final patientData = patients;
-    final searchPatient = patientData.where(
-      (patient) => patient.name.toLowerCase().contains(search.toLowerCase()),
-    );
-    _patients = searchPatient;
+    final searchPatient = patientData.where((patient) {
+      return patient.name.toLowerCase().contains(search.toLowerCase());
+    });
+
+    _patients = searchPatient.toList();
     notifyListeners();
   }
 }
