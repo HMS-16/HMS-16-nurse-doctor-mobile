@@ -10,6 +10,7 @@ import 'package:hms_16/module/login/login_repository.dart';
 import 'dart:convert';
 import 'package:hms_16/model/login_model.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -34,9 +35,9 @@ class _LoginPageState extends State<LoginPage> {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Form(
+            key: _formKey,
             autovalidateMode: AutovalidateMode.always,
             child: Column(
-              key: _formKey,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(
@@ -126,9 +127,9 @@ class _LoginPageState extends State<LoginPage> {
                     if (value!.isEmpty) {
                       return 'Password can not be empty';
                     }
-                    if (!RegExp(msg).hasMatch(value)) {
-                      return 'Password length can’t be less than 8 char';
-                    }
+                    // if (!RegExp(msg).hasMatch(value)) {
+                    //   return 'Password length can’t be less than 8 char';
+                    // }
                     return null;
                   },
                   decoration: InputDecoration(
@@ -164,15 +165,18 @@ class _LoginPageState extends State<LoginPage> {
                 Button(
                     text: "Sign In",
                     onpressed: () {
-                      fetchLogin("azhar", "shaffa");
-                      // navPushTransition(context, const SignUpPage());
-                      // if (!_formKey.currentState!.validate()) {
-                      //   ScaffoldMessenger.of(context)
-                      //       .showSnackBar(SnackBar(content: Text("Success")));
-                      // } else {
-                      //   ScaffoldMessenger.of(context)
-                      //       .showSnackBar(SnackBar(content: Text("Failled")));
-                      // }
+                      if (_formKey.currentState!.validate()) {
+                        context.read<LoginViewModel>().signIn(
+                              email: controllerEmail.text,
+                              pass: controllerPassword.text,
+                            );
+                        navPushTransition(context, const SignUpPage());
+                        ScaffoldMessenger.of(context)
+                            .showSnackBar(SnackBar(content: Text("Success")));
+                      } else {
+                        ScaffoldMessenger.of(context)
+                            .showSnackBar(SnackBar(content: Text("Failed")));
+                      }
                     }),
                 const SizedBox(
                   height: 15.0,
@@ -199,19 +203,5 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
-  }
-}
-
-const String _baseUrl = 'https://hms-api.fly.dev/v1/login';
-
-Future<Login> fetchLogin(email, password) async {
-  final response = await http.post(Uri.parse(_baseUrl),
-      body: {"username": email, "password": password});
-  if (response.statusCode == 200) {
-    print("login berhasil");
-    return Login.fromJson(json.decode(response.body));
-  } else {
-    print("login gagal");
-    throw Exception('Failed to load top headlines');
   }
 }

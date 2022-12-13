@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
+import 'package:hms_16/api/auth.dart';
 import 'package:hms_16/model/error_model.dart';
 import 'package:hms_16/model/login_model.dart';
 import 'package:dio/dio.dart';
@@ -10,7 +11,7 @@ class LoginViewModel with ChangeNotifier {
   String? eror;
 
   // Data _stateType = Data.loading;
-  // Data get stateType => _stateType;
+  //Data get stateType => _stateType;
 
   void changeState(Data s) {
     // _stateType = s;
@@ -18,7 +19,7 @@ class LoginViewModel with ChangeNotifier {
   }
 
   Future<void> signIn({required String email, required String pass}) async {
-    // changeState(DataState.loading);
+    //changeState(DataState.loading);
 
     try {
       // changeState(DataState.loading);
@@ -27,22 +28,26 @@ class LoginViewModel with ChangeNotifier {
       if (responseData.statusCode == 200) {
         LoginModel modelUser = LoginModel.fromJson(responseData.data);
         final prefs = await SharedPreferences.getInstance();
+        print(modelUser);
 
         dataUser = modelUser.data;
-        //token = modelUser.jwt;
+        print(dataUser);
+        final token = modelUser.token;
+        print(token);
 
         var encodeUser = jsonEncode(dataUser);
-        //var encodeToken = jsonEncode(token);
+        print(encodeUser);
+        //var token = jsonEncode(token);
 
-        //await prefs.setString('token', encodeToken);
+        await prefs.setString('token', token);
         await prefs.setString('user', encodeUser);
         await prefs.setBool('isLogin', true);
 
         notifyListeners();
-        changeState(Data.succes);
+        // changeState(Data.succes);
       }
     } on DioError catch (e) {
-      changeState(Data.error);
+      //changeState(Data.error);
       if (e.response!.statusCode != 503) {
         ErrorModel error = ErrorModel.fromJson(e.response!.data);
         eror = error.error;
