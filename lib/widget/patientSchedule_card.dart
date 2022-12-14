@@ -1,23 +1,31 @@
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 
 import 'package:hms_16/utils/constant.dart';
 
 class PatientScheduleCard extends StatelessWidget {
-  const PatientScheduleCard(
-      {super.key,
-      required this.patientName,
-      required this.disease,
-      required this.doctorName,
-      required this.nurseName,
-      required this.time,
-      required this.onPressed});
+  const PatientScheduleCard({
+    super.key,
+    required this.patientName,
+    // required this.disease,
+    required this.doctorName,
+    required this.nurseName,
+    required this.time,
+    required this.lineColor,
+    required this.badgeText,
+    required this.paintBadge,
+    required this.fontColor,
+  });
 
   final String patientName;
-  final String disease;
+  // final String disease;
   final String doctorName;
   final String nurseName;
   final String time;
-  final VoidCallback onPressed;
+  final String badgeText;
+  final Color lineColor;
+  final Color paintBadge;
+  final Color fontColor;
 
   @override
   Widget build(BuildContext context) {
@@ -35,12 +43,13 @@ class PatientScheduleCard extends StatelessWidget {
           Container(
             width: 3.5,
             height: 80,
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5),
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [
-                  Colors.blue,
+                  lineColor,
                   Colors.white,
                 ],
               ),
@@ -74,14 +83,14 @@ class PatientScheduleCard extends StatelessWidget {
                           style: textStyle.copyWith(
                               fontSize: 16, fontWeight: FontWeight.w600),
                         ),
-                        Text(
-                          disease,
-                          style: textStyle.copyWith(
-                            color: cBlackLightest,
-                            fontSize: 12,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
+                        // Text(
+                        //   disease,
+                        //   style: textStyle.copyWith(
+                        //     color: cBlackLightest,
+                        //     fontSize: 12,
+                        //     fontWeight: FontWeight.w400,
+                        //   ),
+                        // ),
                         Text(
                           "Doctor : $doctorName",
                           style: textStyle.copyWith(
@@ -107,9 +116,20 @@ class PatientScheduleCard extends StatelessWidget {
                     ),
                     Expanded(
                       child: ListTile(
-                          trailing: IconButton(
-                              onPressed: onPressed,
-                              icon: const Icon(Icons.arrow_forward_ios))),
+                        trailing: Badge(
+                          elevation: 0,
+                          badgeColor: paintBadge,
+                          padding: EdgeInsets.fromLTRB(10, 8, 10, 8),
+                          shape: BadgeShape.square,
+                          borderRadius: BorderRadius.circular(20),
+                          toAnimate: false,
+                          badgeContent: Text(
+                            badgeText,
+                            style: TextStyle(
+                                color: fontColor, fontWeight: FontWeight.w600),
+                          ),
+                        ),
+                      ),
                     ),
                   ],
                 )

@@ -5,6 +5,7 @@ import 'package:hms_16/utils/constant.dart';
 import 'package:hms_16/widget/button.dart';
 import 'package:hms_16/screens/auth/login_page.dart';
 import 'package:hms_16/widget/navpush_transition.dart';
+import 'package:hms_16/widget/navreplace_transition.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class LandingPage extends StatefulWidget {
@@ -57,9 +58,7 @@ class _LandingPageState extends State<LandingPage> {
               text: "Sign In",
               // margin: EdgeInsets.only(top: 15),
               onpressed: () {
-                navPushTransition(context, const LoginPage());
-                // Navigator.push(context,
-                //     MaterialPageRoute(builder: (context) => LoginPage()));
+                navReplaceTransition(context, const LoginPage());
               },
             ),
           ],
@@ -89,7 +88,7 @@ class CardItem extends StatelessWidget {
               width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
                   image: DecorationImage(
-                      image: AssetImage(netimage), fit: BoxFit.fill)),
+                      image: AssetImage(netimage), fit: BoxFit.fitHeight)),
             ),
           ),
           const SizedBox(

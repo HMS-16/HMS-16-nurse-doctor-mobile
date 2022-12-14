@@ -5,17 +5,17 @@ class FieldMedical extends StatelessWidget {
     super.key,
     required this.title,
     required this.text,
+    required this.controller,
     this.suffix,
     this.line,
-    this.iconRequired = true,
-    // this.isSuffix = true,
+    this.isNumeric = true,
   });
   String title;
   String text;
   String? suffix;
   int? line;
-  // bool isSuffix;
-  bool iconRequired;
+  TextEditingController controller;
+  bool isNumeric;
 
   @override
   Widget build(BuildContext context) {
@@ -28,20 +28,28 @@ class FieldMedical extends StatelessWidget {
             text: title,
             style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700),
             children: [
-              if (iconRequired) ...[
-                TextSpan(
-                  text: ' *',
-                  style: TextStyle(color: Colors.red),
-                ),
-              ]
+              TextSpan(
+                text: ' *',
+                style: TextStyle(color: Colors.red),
+              ),
             ],
           ),
         ),
         SizedBox(height: 4),
         TextFormField(
+          autovalidateMode: AutovalidateMode.onUserInteraction,
           keyboardType: line != null ? TextInputType.multiline : null,
           maxLines: line ?? null,
           cursorColor: Colors.black12,
+          controller: controller,
+          validator: (value) {
+            if (value!.isEmpty) {
+              return '$title can not be empty';
+            }
+            if (isNumeric && !RegExp(r'^\d+/?.?\d+$').hasMatch(value)) {
+              return '$title is invalid';
+            }
+          },
           decoration: InputDecoration(
             contentPadding: line == null ? EdgeInsets.only(left: 13) : null,
             suffixIcon: suffix != null

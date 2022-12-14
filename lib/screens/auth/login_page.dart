@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:hms_16/screens/auth/forgot_password_page2.dart';
-import 'package:hms_16/screens/auth/forgot_password_page3.dart';
 import 'package:hms_16/utils/constant.dart';
 import 'package:hms_16/screens/auth/forgot_password_page1.dart';
 import 'package:hms_16/screens/auth/sign_up_page.dart';
 import 'package:hms_16/widget/button.dart';
 import 'package:hms_16/widget/navpush_transition.dart';
+import 'package:hms_16/module/login/login_repository.dart';
+import 'package:hms_16/widget/navreplace_transition.dart';
+import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -20,8 +21,8 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController controllerEmail = TextEditingController();
   TextEditingController controllerPassword = TextEditingController();
 
+  bool _hidePassword = false;
   final _formKey = GlobalKey<FormState>();
-  late final TextStyle? errorStyle;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,9 +30,9 @@ class _LoginPageState extends State<LoginPage> {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Form(
+            key: _formKey,
             autovalidateMode: AutovalidateMode.always,
             child: Column(
-              key: _formKey,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(
@@ -115,6 +116,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 TextFormField(
                   controller: controllerPassword,
+                  obscureText: !_hidePassword,
                   validator: (value) {
                     String msg = '.{8,}';
                     if (value!.isEmpty) {
@@ -136,7 +138,19 @@ class _LoginPageState extends State<LoginPage> {
                         color: Colors.black,
                       ),
                       suffixIcon: IconButton(
-                          onPressed: () {}, icon: const Icon(Icons.visibility)),
+                        icon: Icon(
+                          // Based on passwordVisible state choose the icon
+                          _hidePassword
+                              ? Icons.visibility
+                              : Icons.visibility_off,
+                          color: Theme.of(context).primaryColorDark,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            _hidePassword = !_hidePassword;
+                          });
+                        },
+                      ),
                       hintText: ("Password"),
                       floatingLabelBehavior: FloatingLabelBehavior.always),
                 ),
@@ -146,13 +160,19 @@ class _LoginPageState extends State<LoginPage> {
                 Button(
                     text: "Sign In",
                     onpressed: () {
-                      navPushTransition(context, const SignUpPage());
-                      // if (!_formKey.currentState!.validate()) {
+                      if (_formKey.currentState!.validate()) {
+                        context.read<LoginViewModel>().signIn(
+                              email: controllerEmail.text,
+                              pass: controllerPassword.text,
+                              context: context,
+                            );
+                        // ScaffoldMessenger.of(context)
+                        //     .showSnackBar(SnackBar(content: Text("Success")));
+                        // navPushTransition(context, const SignUpPage());
+                      }
+                      // else {
                       //   ScaffoldMessenger.of(context)
-                      //       .showSnackBar(SnackBar(content: Text("Success")));
-                      // } else {
-                      //   ScaffoldMessenger.of(context)
-                      //       .showSnackBar(SnackBar(content: Text("Failled")));
+                      //       .showSnackBar(SnackBar(content: Text("Failed")));
                       // }
                     }),
                 const SizedBox(
