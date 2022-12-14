@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hms_16/utils/constant.dart';
 import 'package:hms_16/screens/navbar/navbar.dart';
 import 'package:hms_16/widget/button.dart';
 import 'package:hms_16/widget/navpush_transition.dart';
+import 'package:hms_16/model/register_model.dart';
+import 'package:hms_16/module/register/register_repository.dart';
+import 'package:provider/provider.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key}) : super(key: key);
@@ -207,7 +211,6 @@ class _SignUpPageState extends State<SignUpPage> {
                   height: 8,
                 ),
                 TextFormField(
-                  obscureText: !_hidePassword,
                   controller: controllerEmail,
                   keyboardType: TextInputType.emailAddress,
                   validator: (value) {
@@ -355,8 +358,24 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
                 Button(
                     text: "Register",
-                    onpressed: () {
+                    onpressed: () async {
                       navPushTransition(context, const NavBar());
+                      var viewModel = Provider.of<RegisterViewModel>(context,
+                          listen: false);
+
+                      var data = Datum(
+                        username: controllerUser.text,
+                        email: controllerEmail.text,
+                        phoneNum: controllerRegNum.text,
+                        role: listRole.indexOf(valueRole) + 1,
+                      );
+
+                      await viewModel.register(data);
+                      Navigator.pop(context);
+                      Fluttertoast.showToast(
+                          msg: viewModel.message,
+                          backgroundColor: Colors.white,
+                          textColor: cPrimaryBase);
                       Navigator.push(
                           context,
                           MaterialPageRoute(

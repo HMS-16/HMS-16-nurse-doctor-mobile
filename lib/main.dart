@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hms_16/model/login_model.dart';
 import 'package:hms_16/module/login/login_repository.dart';
+import 'package:hms_16/module/register/register_repository.dart';
 import 'package:hms_16/view_model/patient_view_model.dart';
 import 'package:hms_16/view_model/doctor_view_model.dart';
 import 'package:hms_16/screens/splash.dart';
@@ -24,6 +25,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => LoginViewModel(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => RegisterViewModel(),
         ),
       ],
       child: MaterialApp(
