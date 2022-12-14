@@ -7,4 +7,9 @@ class DoctorViewModel extends ChangeNotifier {
 
   List<DoctorModel> get getlistDoctor => _listDoctors;
   DoctorModel? get getdoctorModel => _doctorModel;
+
+  void selectedDoctor(DoctorModel doctorModel) {
+    _doctorModel = doctorModel;
+    notifyListeners();
+  }
 }

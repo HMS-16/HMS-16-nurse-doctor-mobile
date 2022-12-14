@@ -52,7 +52,15 @@ class _MedicalRecordState extends State<MedicalRecord> {
               itemBuilder: (context, index) {
                 final condition = value.conditions[index];
                 return TileMedRecord(
+                  nurse: condition.nurse,
                   date: condition.date,
+                  time: condition.time == 0
+                      ? "1.00 pm - 1.30 pm"
+                      : condition.time == 1
+                          ? "1.30 pm - 2.00 pm"
+                          : condition.time == 2
+                              ? "2.00 pm - 2.30 pm"
+                              : "2.30 pm - 3.00 pm",
                   height: condition.height,
                   weight: condition.weight,
                   bloodPressure: condition.bloodPressure,

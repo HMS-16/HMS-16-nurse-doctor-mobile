@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hms_16/model/treatment_model.dart';
 import 'package:hms_16/utils/constant.dart';
+import 'package:hms_16/view_model/patient_view_model.dart';
 import 'package:hms_16/view_model/treatment_view_model.dart';
 import 'package:hms_16/widget/dialog_validation.dart';
 import 'package:hms_16/widget/field_form_medical.dart';
@@ -68,7 +69,9 @@ class _AddMedDiagnosisState extends State<AddMedDiagnosis> {
                     onPressedYes: (() {
                       context.read<TreatmentViewModel>().insertTreatment(
                             TreatmentModel(
-                              date: DateTime.now(),
+                              doctor: context.read<PatientViewModel>().person!.doctor,
+                              date: context.read<PatientViewModel>().person!.schedule,
+                              time: context.read<PatientViewModel>().person!.time,
                               diagnose: diagnoseCtrl.text,
                               prescription: prescriptionCtrl.text,
                             ),

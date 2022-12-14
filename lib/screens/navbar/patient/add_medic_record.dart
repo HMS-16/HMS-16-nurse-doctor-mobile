@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hms_16/model/condition_model.dart';
 import 'package:hms_16/utils/constant.dart';
 import 'package:hms_16/view_model/condition_view_model.dart';
+import 'package:hms_16/view_model/patient_view_model.dart';
 import 'package:hms_16/widget/dialog_validation.dart';
 import 'package:hms_16/widget/field_form_medical.dart';
 import 'package:provider/provider.dart';
@@ -113,7 +114,9 @@ class _AddMedRecordState extends State<AddMedRecord> {
                     onPressedYes: () {
                       context.read<ConditionViewModel>().insertCondition(
                             ConditionModel(
-                              date: DateTime.now(),
+                              nurse: context.read<PatientViewModel>().person!.nurse,
+                              date: context.read<PatientViewModel>().person!.schedule,
+                              time: context.read<PatientViewModel>().person!.time,
                               height: int.parse(heightCtrl.text),
                               weight: int.parse(weightCtrl.text),
                               bloodPressure: bloodPressureCtrl.text,

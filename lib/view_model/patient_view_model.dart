@@ -13,7 +13,7 @@ class PatientViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void searchPatient(String title, String search) async {
+  void searchPatient(String search) async {
     final patientData = patients;
     final searchPatient = patientData.where(
       // (patient) => patient.name.toLowerCase().contains(search.toLowerCase()),
@@ -23,8 +23,18 @@ class PatientViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  changeDoctor(index,doctor) {
-    _patients[index].doctor = doctor;
+  changeDoctor(doctor) {
+    _patient!.doctor = doctor;
+    notifyListeners();
+  }
+
+  changeSchedule(schedule) {
+    _patient!.time = schedule;
+    notifyListeners();
+  }
+
+  changeProgressPatient(status) {
+    _patient!.progress = status;
     notifyListeners();
   }
 }

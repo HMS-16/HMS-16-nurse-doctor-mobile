@@ -60,7 +60,7 @@ class _PatientScreenState extends State<PatientScreen> {
               height: 48,
               child: TextField(
                 onChanged: (value) {
-                  context.read<PatientViewModel>().searchPatient(value, value);
+                  context.read<PatientViewModel>().searchPatient(value);
                 },
                 decoration: const InputDecoration(
                   prefixIcon: Icon(Icons.search),
@@ -85,9 +85,9 @@ class _PatientScreenState extends State<PatientScreen> {
   }
 }
 
-Widget _screenValidator(Iterable<PatientModel> patient) {
+Widget _screenValidator(List<PatientModel> patient) {
   if (patient.isNotEmpty) {
-    return PatientList(persons: patients);
+    return PatientList(persons: patient);
   }
   if (patient.isEmpty) {
     return const Center(
