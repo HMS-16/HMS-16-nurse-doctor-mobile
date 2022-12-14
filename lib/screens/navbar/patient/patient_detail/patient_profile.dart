@@ -72,108 +72,112 @@ class _PatientProfileState extends State<PatientProfile> {
                 ),
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        'Gender',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          'Gender',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                      ),
-                      TextBox(
-                        height: 43,
-                        width: 166,
-                        child: Text(
-                          value.person!.gender,
-                          style: Theme.of(context)
-                              .textTheme
-                              .subtitle1!
-                              .copyWith(color: cWhiteLast),
-                        ),
-                      ),
-                      const Text(
-                        'Blood Type',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      TextBox(
-                        height: 43,
-                        width: 166,
-                        child: Text(
-                          value.person!.bloodType,
-                          style: Theme.of(context)
-                              .textTheme
-                              .subtitle1!
-                              .copyWith(color: cWhiteLast),
-                        ),
-                      ),
-                    ],
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        'Date of Birth',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      TextBox(
-                        height: 43,
-                        width: 166,
-                        child: SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
+                        TextBox(
+                          height: 43,
+                          width: double.maxFinite,
                           child: Text(
-                            value.person!.dateBirth,
-                            softWrap: false,
+                            value.person!.gender,
                             style: Theme.of(context)
                                 .textTheme
                                 .subtitle1!
                                 .copyWith(color: cWhiteLast),
                           ),
                         ),
-                      ),
-                      const Text(
-                        'Status',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      TextBox(
-                        height: 43,
-                        width: 166,
-                        child: Text(
-                          value.person!.status,
-                          style: Theme.of(context)
-                              .textTheme
-                              .subtitle1!
-                              .copyWith(color: cWhiteLast),
-                        ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          'Date of Birth',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        TextBox(
+                          height: 43,
+                          width: double.maxFinite,
+                          child: SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Text(
+                              value.person!.dateBirth,
+                              softWrap: false,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .subtitle1!
+                                  .copyWith(color: cWhiteLast),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
                 ],
               ),
-              const Text(
-                'Age',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              TextBox(
-                height: 43,
-                width: 166,
-                child: Text(
-                  '${value.person!.age} Years',
-                  style: Theme.of(context)
-                      .textTheme
-                      .subtitle1!
-                      .copyWith(color: cWhiteLast),
-                ),
+              Row(
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          'Blood Type',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        TextBox(
+                          height: 43,
+                          width: double.maxFinite,
+                          child: Text(
+                            value.person!.bloodType,
+                            style: Theme.of(context)
+                                .textTheme
+                                .subtitle1!
+                                .copyWith(color: cWhiteLast),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          'Status',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        TextBox(
+                          height: 43,
+                          width: double.maxFinite,
+                          child: Text(
+                            value.person!.status,
+                            style: Theme.of(context)
+                                .textTheme
+                                .subtitle1!
+                                .copyWith(color: cWhiteLast),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
               const Text(
                 'Address',
@@ -271,10 +275,9 @@ class _PatientProfileState extends State<PatientProfile> {
                                           backgroundColor: cPrimaryBase,
                                         ),
                                         onPressed: () async {
-                                          setState(() {
-                                            value.person!.progress = false;
-                                            print(value.person!.progress);
-                                          });
+                                          context
+                                              .read<PatientViewModel>()
+                                              .changeProgressPatient(false);
                                           durationDialog(
                                               context, "End case succesfully!");
                                           Future.delayed(
@@ -345,7 +348,7 @@ class _PatientProfileState extends State<PatientProfile> {
                     ),
                   );
                 }
-                return SizedBox();
+                return const SizedBox.shrink();
               })
             ],
           );
