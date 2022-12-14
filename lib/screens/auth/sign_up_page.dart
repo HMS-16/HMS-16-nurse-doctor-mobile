@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hms_16/utils/constant.dart';
 import 'package:hms_16/screens/navbar/navbar.dart';
 import 'package:hms_16/widget/button.dart';
 import 'package:hms_16/widget/navpush_transition.dart';
+import 'package:hms_16/model/register_model.dart';
+import 'package:hms_16/module/register/register_repository.dart';
+import 'package:provider/provider.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key}) : super(key: key);
@@ -27,7 +31,7 @@ class _SignUpPageState extends State<SignUpPage> {
     List<String> listRole = ["Doctor", "Nurse"];
     String valueRole = listRole.first;
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -208,7 +212,10 @@ class _SignUpPageState extends State<SignUpPage> {
                   height: 8,
                 ),
                 TextFormField(
+<<<<<<< HEAD
                   // obscureText: !_hidePassword,
+=======
+>>>>>>> origin/regis_login_fix
                   controller: controllerEmail,
                   keyboardType: TextInputType.emailAddress,
                   validator: (value) {
@@ -359,6 +366,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
                 Button(
                     text: "Register",
+<<<<<<< HEAD
                     onpressed: () {
                       // if (_formKey.currentState!.validate()) {
                       navPushTransition(context, const NavBar());
@@ -368,6 +376,31 @@ class _SignUpPageState extends State<SignUpPage> {
                       //     MaterialPageRoute(
                       //       builder: (context) => const NavBar(),
                       //     ));
+=======
+                    onpressed: () async {
+                      navPushTransition(context, const NavBar());
+                      var viewModel = Provider.of<RegisterViewModel>(context,
+                          listen: false);
+
+                      var data = Datum(
+                        username: controllerUser.text,
+                        email: controllerEmail.text,
+                        phoneNum: controllerRegNum.text,
+                        role: listRole.indexOf(valueRole) + 1,
+                      );
+
+                      await viewModel.register(data);
+                      Navigator.pop(context);
+                      Fluttertoast.showToast(
+                          msg: viewModel.message,
+                          backgroundColor: Colors.white,
+                          textColor: cPrimaryBase);
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const NavBar(),
+                          ));
+>>>>>>> origin/regis_login_fix
                     }),
                 const SizedBox(
                   height: 17.0,
