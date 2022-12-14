@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hms_16/screens/navbar/message/roomchat.dart';
 import 'package:hms_16/utils/constant.dart';
 import 'package:hms_16/screens/notification.dart';
-import 'package:hms_16/screens/profile/profile.dart';
+import 'package:hms_16/screens/profile/profile_doc.dart';
 import 'package:hms_16/widget/navpush_transition.dart';
 
 class Message extends StatelessWidget {
@@ -30,7 +30,7 @@ class Message extends StatelessWidget {
           ),
           IconButton(
             onPressed: () {
-              navPushTransition(context, const ProfilePage());
+              navPushTransition(context, const ProfileDoctorPage());
             },
             icon: const Icon(Icons.account_circle_outlined),
           ),

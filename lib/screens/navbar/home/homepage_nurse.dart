@@ -2,7 +2,7 @@ import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:hms_16/screens/navbar/schedule/nurse/view_schedule_bynurse.dart';
 import 'package:hms_16/screens/notification.dart';
-import 'package:hms_16/screens/profile/profile.dart';
+import 'package:hms_16/screens/profile/profile_nurse.dart';
 import 'package:hms_16/utils/constant.dart';
 import 'package:hms_16/widget/navpush_transition.dart';
 
@@ -48,7 +48,7 @@ class _HomePageNurseState extends State<HomePageNurse> {
                 padding: const EdgeInsets.only(right: 16),
                 child: InkWell(
                   onTap: () {
-                    navPushTransition(context, const ProfilePage());
+                    navPushTransition(context, const ProfileNursePage());
                   },
                   child: const CircleAvatar(
                     backgroundColor: Colors.transparent,

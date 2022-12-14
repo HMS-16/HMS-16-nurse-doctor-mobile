@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hms_16/screens/navbar/schedule/nurse/change_schedule_bynurse.dart';
+import 'package:hms_16/screens/profile/profile_nurse.dart';
 import 'package:hms_16/utils/constant.dart';
 import 'package:hms_16/screens/navbar/schedule/nurse/detail_schedule_bynurse.dart';
 import 'package:hms_16/screens/notification.dart';
-import 'package:hms_16/screens/profile/profile.dart';
+import 'package:hms_16/screens/profile/profile_doc.dart';
 import 'package:hms_16/widget/navpush_transition.dart';
 import 'package:hms_16/widget/patientSchedule_card.dart';
 import 'package:intl/intl.dart';
@@ -58,7 +59,7 @@ class _ViewScheduleNurseState extends State<ViewScheduleNurse> {
             ),
             IconButton(
               onPressed: () {
-                navPushTransition(context, ProfilePage());
+                navPushTransition(context, ProfileNursePage());
               },
               icon: const Icon(Icons.account_circle_outlined),
             ),

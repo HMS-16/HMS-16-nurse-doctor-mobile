@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:hms_16/screens/profile/profile_nurse.dart';
 import 'package:hms_16/view_model/patient_view_model.dart';
 import 'package:hms_16/screens/notification.dart';
-import 'package:hms_16/screens/profile/profile.dart';
+import 'package:hms_16/screens/profile/profile_doc.dart';
 import 'package:hms_16/model/patient_model.dart';
 import 'package:hms_16/utils/constant.dart';
 import 'package:hms_16/screens/navbar/patient/patient_detail/patient_detail.dart';
@@ -39,7 +40,7 @@ class _PatientScreenState extends State<PatientScreen> {
           ),
           IconButton(
             onPressed: () {
-              navPushTransition(context, ProfilePage());
+              navPushTransition(context, ProfileNursePage());
             },
             icon: const Icon(Icons.account_circle_outlined),
           ),
