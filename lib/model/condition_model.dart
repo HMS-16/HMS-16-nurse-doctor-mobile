@@ -1,5 +1,7 @@
 class ConditionModel {
+  String nurse;
   DateTime date;
+  int time;
   int height;
   int weight;
   String bloodPressure;
@@ -10,7 +12,9 @@ class ConditionModel {
   String? note;
 
   ConditionModel({
+    required this.nurse,
     required this.date,
+    required this.time,
     required this.height,
     required this.weight,
     required this.bloodPressure,

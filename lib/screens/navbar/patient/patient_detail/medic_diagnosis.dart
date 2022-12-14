@@ -52,7 +52,15 @@ class _MedicalDiagnosisState extends State<MedicalDiagnosis> {
               itemBuilder: (context, index) {
                 final treatment = value.treatments[index];
                 return TileMedDiagnosis(
+                  doctor: treatment.doctor,
                   date: treatment.date,
+                  time: treatment.time == 0
+                      ? "1.00 pm - 1.30 pm"
+                      : treatment.time == 1
+                          ? "1.30 pm - 2.00 pm"
+                          : treatment.time == 2
+                              ? "2.00 pm - 2.30 pm"
+                              : "2.30 pm - 3.00 pm",
                   diagnose: treatment.diagnose,
                   prescription: treatment.prescription,
                 );

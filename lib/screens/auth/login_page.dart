@@ -118,12 +118,12 @@ class _LoginPageState extends State<LoginPage> {
                   controller: controllerPassword,
                   obscureText: !_hidePassword,
                   validator: (value) {
-                    String msg = '.{8,}';
+                    String msg = '.{5,}';
                     if (value!.isEmpty) {
                       return 'Password can not be empty';
                     }
                     if (!RegExp(msg).hasMatch(value)) {
-                      return 'Password length can’t be less than 8 char';
+                      return 'Password length can’t be less than 5 char';
                     }
                     return null;
                   },

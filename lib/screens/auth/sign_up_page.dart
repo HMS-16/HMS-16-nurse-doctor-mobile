@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:hms_16/module/login/login_repository.dart';
 import 'package:hms_16/utils/constant.dart';
 import 'package:hms_16/screens/navbar/navbar.dart';
 import 'package:hms_16/widget/button.dart';
@@ -18,6 +19,7 @@ class SignUpPage extends StatefulWidget {
 
 class _SignUpPageState extends State<SignUpPage> {
   late String email, password;
+  String msgPassword = '.{5,}';
 
   TextEditingController controllerEmail = TextEditingController();
   TextEditingController controllerUser = TextEditingController();
@@ -121,8 +123,8 @@ class _SignUpPageState extends State<SignUpPage> {
                     if (!RegExp(r'^[0-9]+$').hasMatch(value)) {
                       return 'Registration Number is Invalid';
                     }
-                    if (!RegExp('.{8,}').hasMatch(value)) {
-                      return 'Registration Number length must be 8 char';
+                    if (!RegExp('.{16,}').hasMatch(value)) {
+                      return 'Registration Number length must be 16 char';
                     }
                     return null;
                   },
@@ -267,12 +269,12 @@ class _SignUpPageState extends State<SignUpPage> {
                   obscureText: !_hidePassword,
                   controller: controllerPassword,
                   validator: (value) {
-                    String msg = '.{8,}';
+                    // String msg = '.{8,}';
                     if (value!.isEmpty) {
                       return 'Password must be filled';
                     }
-                    if (!RegExp(msg).hasMatch(value)) {
-                      return 'Password length can’t be less than 8 char';
+                    if (!RegExp(msgPassword).hasMatch(value)) {
+                      return 'Password length can’t be less than 5 char';
                     }
                     return null;
                   },
@@ -324,12 +326,12 @@ class _SignUpPageState extends State<SignUpPage> {
                   obscureText: !_hideConfirmPassword,
                   controller: controllerSecPassword,
                   validator: (value) {
-                    String msg = '.{8,}';
+                    // String msg = '.{5,}';
                     if (value!.isEmpty) {
                       return 'Confirm password must be filled';
                     }
-                    if (!RegExp(msg).hasMatch(value)) {
-                      return 'Confirm password length can’t be less than 8 char';
+                    if (!RegExp(msgPassword).hasMatch(value)) {
+                      return 'Confirm password length can’t be less than 5 char';
                     }
                     if (controllerSecPassword.text != controllerPassword.text) {
                       return 'Confirm password doesn’t match';
@@ -368,17 +370,25 @@ class _SignUpPageState extends State<SignUpPage> {
                     text: "Register",
                     onpressed: () async {
                       if (_formKey.currentState!.validate()) {
-                        navReplaceTransition(context, const NavBar());
+                        // navReplaceTransition(context, const NavBar());
                         // var viewModel = Provider.of<RegisterViewModel>(context,
                         //     listen: false);
 
                         var data = Datum(
                           username: controllerUser.text,
+                          password: controllerPassword.text,
                           email: controllerEmail.text,
-                          phoneNum: controllerRegNum.text,
+                          strNum: controllerRegNum.text,
+                          // phoneNum: controllerRegNum.text,
                           role: listRole.indexOf(valueRole) + 1,
                         );
-                        print(data.toJson());
+                        // print(data.toJson());
+
+                        context.read<RegisterViewModel>().register(
+                              data,
+                              context.read<LoginViewModel>().tokenBearer!,
+                              context,
+                            );
 
                         // await viewModel.register(data);
                         // ScaffoldMessenger.of(context).showSnackBar(

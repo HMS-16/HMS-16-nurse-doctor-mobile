@@ -1,11 +1,11 @@
 import 'dart:convert';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hms_16/api/auth.dart';
 import 'package:hms_16/model/error_model.dart';
 import 'package:hms_16/model/login_model.dart';
 import 'package:dio/dio.dart';
 import 'package:hms_16/screens/auth/sign_up_page.dart';
+import 'package:hms_16/screens/navbar/navbar.dart';
 import 'package:hms_16/widget/navpush_transition.dart';
 import 'package:hms_16/widget/navreplace_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -13,6 +13,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 class LoginViewModel with ChangeNotifier {
   Data? dataUser;
   String? eror;
+  String? tokenBearer;
+  String? idUser;
 
   // Data _stateType = Data.loading;
   //Data get stateType => _stateType;
@@ -40,22 +42,28 @@ class LoginViewModel with ChangeNotifier {
         dataUser = modelUser.data;
         // print(dataUser);
         final token = modelUser.token;
+        tokenBearer = token;
         print(token);
 
         var encodeUser = jsonEncode(dataUser);
         print(encodeUser);
         //var token = jsonEncode(token);
 
-        await prefs.setString('token', token);
-        await prefs.setString('user', encodeUser);
-        await prefs.setBool('isLogin', true);
+        // await prefs.setString('token', token);
+        // await prefs.setString('idUser', dataUser!.id);
+        // await prefs.setBool('isLogin', true);
         // print(responseData.statusCode);
         // print(responseData.statusMessage);
         // print(responseData.data);
 
         // ScaffoldMessenger.of(context)
         //     .showSnackBar(SnackBar(content: Text("Success")));
-        navReplaceTransition(context, const SignUpPage());
+        if (dataUser!.role == 3) {
+          navReplaceTransition(context, const SignUpPage());
+        } else {
+          idUser = dataUser!.id;
+          navReplaceTransition(context, const NavBar());
+        }
 
         notifyListeners();
         // changeState(Data.succes);

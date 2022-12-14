@@ -23,27 +23,35 @@ class RegisterModel {
 class Datum {
   Datum({
     required this.username,
+    required this.password,
     required this.email,
-    required this.phoneNum,
+    required this.strNum,
+    // required this.phoneNum,
     required this.role,
   });
 
   String username;
+  String password;
   String email;
-  String phoneNum;
+  String strNum;
+  // String phoneNum;
   int role;
 
   factory Datum.fromJson(Map<String, dynamic> json) => Datum(
         username: json["username"],
+        password: json["password"],
         email: json["email"],
-        phoneNum: json["phone_num"],
+        strNum: json["str_num"],
+        // phoneNum: json["phone_num"],
         role: json["role"],
       );
 
   Map<String, dynamic> toJson() => {
         "username": username,
+        "password": password,
         "email": email,
-        "phone_num": phoneNum,
+        "str_num": strNum,
+        // "phone_num": phoneNum,
         "role": role,
       };
 }
