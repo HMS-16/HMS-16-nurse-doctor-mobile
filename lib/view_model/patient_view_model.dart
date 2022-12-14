@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hms_16/model/patient_model.dart';
 
-<<<<<<< HEAD
 enum ActionState {
   none,
   loading,
@@ -15,12 +14,6 @@ class PatientViewModel extends ChangeNotifier {
 
   ActionState get state => _state;
 
-=======
-class PatientViewModel extends ChangeNotifier {
-  List<PatientModel> _patients = patients;
-  PatientModel? _patient;
-
->>>>>>> origin/insertCondition
   List<PatientModel> get persons => _patients;
   PatientModel? get person => _patient;
 
@@ -29,7 +22,6 @@ class PatientViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-<<<<<<< HEAD
   void _changeState(ActionState state) {
     _state = state;
     notifyListeners();
@@ -49,30 +41,14 @@ class PatientViewModel extends ChangeNotifier {
     _patients = searchPatient.toList();
     notifyListeners();
   }
-=======
-  void searchPatient(String title, String search) async {
-    final patientData = patients;
-    final searchPatient = patientData.where(
-      // (patient) => patient.name.toLowerCase().contains(search.toLowerCase()),
-      (patient) => patient.name.toLowerCase().contains(search.toLowerCase()),
-    );
-    _patients = searchPatient.toList();
-    notifyListeners();
-  }
 
-  changeDoctor(doctor) {
+  void changeDoctor(doctor) {
     _patient!.doctor = doctor;
     notifyListeners();
   }
 
-  changeSchedule(schedule) {
+  void changeSchedule(schedule) {
     _patient!.time = schedule;
     notifyListeners();
   }
-
-  changeProgressPatient(status) {
-    _patient!.progress = status;
-    notifyListeners();
-  }
->>>>>>> origin/insertCondition
 }

@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:hms_16/screens/auth/forgot_password_page2.dart';
-import 'package:hms_16/screens/auth/forgot_password_page3.dart';
 import 'package:hms_16/utils/constant.dart';
 import 'package:hms_16/screens/auth/forgot_password_page1.dart';
 import 'package:hms_16/screens/auth/sign_up_page.dart';
 import 'package:hms_16/widget/button.dart';
 import 'package:hms_16/widget/navpush_transition.dart';
 import 'package:hms_16/module/login/login_repository.dart';
-import 'dart:convert';
-import 'package:hms_16/model/login_model.dart';
-import 'package:http/http.dart' as http;
+import 'package:hms_16/widget/navreplace_transition.dart';
 import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
@@ -27,7 +23,6 @@ class _LoginPageState extends State<LoginPage> {
 
   bool _hidePassword = false;
   final _formKey = GlobalKey<FormState>();
-  late final TextStyle? errorStyle;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -127,9 +122,9 @@ class _LoginPageState extends State<LoginPage> {
                     if (value!.isEmpty) {
                       return 'Password can not be empty';
                     }
-                    // if (!RegExp(msg).hasMatch(value)) {
-                    //   return 'Password length can’t be less than 8 char';
-                    // }
+                    if (!RegExp(msg).hasMatch(value)) {
+                      return 'Password length can’t be less than 8 char';
+                    }
                     return null;
                   },
                   decoration: InputDecoration(
@@ -170,7 +165,7 @@ class _LoginPageState extends State<LoginPage> {
                               email: controllerEmail.text,
                               pass: controllerPassword.text,
                             );
-                        navPushTransition(context, const SignUpPage());
+                        navReplaceTransition(context, const SignUpPage());
                         ScaffoldMessenger.of(context)
                             .showSnackBar(SnackBar(content: Text("Success")));
                       } else {

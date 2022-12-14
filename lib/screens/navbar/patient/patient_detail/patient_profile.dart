@@ -179,113 +179,6 @@ class _PatientProfileState extends State<PatientProfile> {
                   ),
                 ],
               ),
-<<<<<<< HEAD
-=======
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //   children: [
-              //     Column(
-              //       crossAxisAlignment: CrossAxisAlignment.start,
-              //       children: [
-              //         const Text(
-              //           'Gender',
-              //           style: TextStyle(
-              //             fontWeight: FontWeight.bold,
-              //           ),
-              //         ),
-              //         TextBox(
-              //           height: 43,
-              //           width: 166,
-              //           child: Text(
-              //             value.person!.gender,
-              //             style: Theme.of(context)
-              //                 .textTheme
-              //                 .subtitle1!
-              //                 .copyWith(color: cWhiteLast),
-              //           ),
-              //         ),
-              //         const Text(
-              //           'Blood Type',
-              //           style: TextStyle(
-              //             fontWeight: FontWeight.bold,
-              //           ),
-              //         ),
-              //         TextBox(
-              //           height: 43,
-              //           width: 166,
-              //           child: Text(
-              //             value.person!.bloodType,
-              //             style: Theme.of(context)
-              //                 .textTheme
-              //                 .subtitle1!
-              //                 .copyWith(color: cWhiteLast),
-              //           ),
-              //         ),
-              //       ],
-              //     ),
-              //     Column(
-              //       crossAxisAlignment: CrossAxisAlignment.start,
-              //       children: [
-              //         const Text(
-              //           'Date of Birth',
-              //           style: TextStyle(
-              //             fontWeight: FontWeight.bold,
-              //           ),
-              //         ),
-              //         TextBox(
-              //           height: 43,
-              //           width: 166,
-              //           child: SingleChildScrollView(
-              //             scrollDirection: Axis.horizontal,
-              //             child: Text(
-              //               value.person!.dateBirth,
-              //               softWrap: false,
-              //               style: Theme.of(context)
-              //                   .textTheme
-              //                   .subtitle1!
-              //                   .copyWith(color: cWhiteLast),
-              //             ),
-              //           ),
-              //         ),
-              //         const Text(
-              //           'Status',
-              //           style: TextStyle(
-              //             fontWeight: FontWeight.bold,
-              //           ),
-              //         ),
-              //         TextBox(
-              //           height: 43,
-              //           width: 166,
-              //           child: Text(
-              //             value.person!.status,
-              //             style: Theme.of(context)
-              //                 .textTheme
-              //                 .subtitle1!
-              //                 .copyWith(color: cWhiteLast),
-              //           ),
-              //         ),
-              //       ],
-              //     ),
-              //   ],
-              // ),
-              // const Text(
-              //   'Age',
-              //   style: TextStyle(
-              //     fontWeight: FontWeight.bold,
-              //   ),
-              // ),
-              // TextBox(
-              //   height: 43,
-              //   width: MediaQuery.of(context).size.width / 2.2,
-              //   child: Text(
-              //     '${value.person!.age} Years',
-              //     style: Theme.of(context)
-              //         .textTheme
-              //         .subtitle1!
-              //         .copyWith(color: cWhiteLast),
-              //   ),
-              // ),
->>>>>>> origin/insertCondition
               const Text(
                 'Address',
                 style: TextStyle(
@@ -382,20 +275,14 @@ class _PatientProfileState extends State<PatientProfile> {
                                           backgroundColor: cPrimaryBase,
                                         ),
                                         onPressed: () async {
-<<<<<<< HEAD
                                           context
                                               .read<PatientViewModel>()
                                               .changeProgressPatient(false);
-=======
-                                          setState(() {
-                                            value.person!.progress = false;
-                                            print(value.person!.progress);
-                                          });
->>>>>>> origin/insertCondition
                                           durationDialog(
                                               context, "End case succesfully!");
                                           Future.delayed(
                                               const Duration(seconds: 2), () {
+                                            Navigator.pop(context);
                                             Navigator.pop(context);
                                           });
                                         },
@@ -462,11 +349,7 @@ class _PatientProfileState extends State<PatientProfile> {
                     ),
                   );
                 }
-<<<<<<< HEAD
                 return const SizedBox.shrink();
-=======
-                return SizedBox();
->>>>>>> origin/insertCondition
               })
             ],
           );

@@ -3,10 +3,7 @@ import 'package:hms_16/model/patient_model.dart';
 import 'package:hms_16/view_model/doctor_view_model.dart';
 import 'package:hms_16/utils/constant.dart';
 import 'package:hms_16/screens/navbar/schedule/nurse/view_schedule_bynurse.dart';
-<<<<<<< HEAD
-=======
 import 'package:hms_16/view_model/patient_view_model.dart';
->>>>>>> origin/insertCondition
 import 'package:hms_16/widget/duration_dialog.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -21,10 +18,7 @@ class ChangeDoctorByNurse extends StatefulWidget {
 class _ChangeDoctorByNurseState extends State<ChangeDoctorByNurse> {
   @override
   Widget build(BuildContext context) {
-<<<<<<< HEAD
-=======
     final patientProvider = Provider.of<PatientViewModel>(context);
->>>>>>> origin/insertCondition
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(color: cBlack),
@@ -114,23 +108,14 @@ class _ChangeDoctorByNurseState extends State<ChangeDoctorByNurse> {
                                           backgroundColor: cPrimaryBase,
                                         ),
                                         onPressed: () async {
-<<<<<<< HEAD
-<<<<<<< HEAD
-                                          // setState(() {
-                                          //   value.persons2[index].doctor =
-=======
-                                          context.read<PatientViewModel>().changeDoctor(index, value.getlistDoctor[index].name);
-=======
                                           context
                                               .read<PatientViewModel>()
                                               .changeDoctor(value
                                                   .getlistDoctor[index].name);
                                           print(
                                               value.getlistDoctor[index].name);
->>>>>>> origin/fixing_changedoctornschedule
                                           // setState(() {
                                           //   patientProvider.persons[index].doctor =
->>>>>>> origin/insertCondition
                                           //       value.getlistDoctor[index].name;
                                           // });
                                           // print(

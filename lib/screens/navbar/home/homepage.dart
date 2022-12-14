@@ -63,22 +63,14 @@ class _HomePageState extends State<HomePage> {
               )
             ],
             iconTheme: IconThemeData(color: cBlack),
-<<<<<<< HEAD
-            floating: true,
-=======
             // floating: true,
->>>>>>> origin/insertCondition
             pinned: true,
             backgroundColor: const Color.fromRGBO(110, 169, 250, 1),
             expandedHeight: 220,
             flexibleSpace: const FlexibleSpaceBar(
               background: Image(
-<<<<<<< HEAD
-                  alignment: Alignment.bottomRight,
-=======
                   // alignment: Alignment.bottomRight,
                   fit: BoxFit.cover,
->>>>>>> origin/insertCondition
                   image: AssetImage("assets/images/Banner.png")),
             ),
           ),
@@ -93,16 +85,6 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           SliverList(
-<<<<<<< HEAD
-            delegate: SliverChildBuilderDelegate((context, index) {
-              return Consumer<PatientViewModel>(
-                  builder: (context, value, child) {
-                // return PatientList(persons: patients);
-                return PatientListHomeScreen(persons: patients);
-              });
-            }, childCount: 7),
-          ),
-=======
             delegate: SliverChildBuilderDelegate(
               (context, index) {
                 return Consumer<PatientViewModel>(
@@ -114,7 +96,6 @@ class _HomePageState extends State<HomePage> {
               childCount: 1,
             ),
           )
->>>>>>> origin/insertCondition
         ],
       ),
     );
@@ -130,18 +111,13 @@ class PatientListHomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.builder(
       physics: const BouncingScrollPhysics(),
-<<<<<<< HEAD
-      shrinkWrap: true,
-      padding: EdgeInsets.zero,
-=======
       padding: EdgeInsets.zero,
       shrinkWrap: true,
->>>>>>> origin/insertCondition
       scrollDirection: Axis.vertical,
       itemBuilder: (context, index) {
         final person = persons.elementAt(index);
         if (DateFormat("EEE, d-M-y").format(person.schedule) ==
-            DateFormat("EEE, d-M-y").format(DateTime.now())) {
+            DateFormat("EEE, d-M-y").format(DateTime(2022, 12, 12))) {
           return InkWell(
             onTap: () {
               context.read<PatientViewModel>().selectedPerson(person);
@@ -178,11 +154,7 @@ class PatientListHomeScreen extends StatelessWidget {
             }),
           );
         }
-<<<<<<< HEAD
-        return Container();
-=======
         return SizedBox();
->>>>>>> origin/insertCondition
       },
       itemCount: persons.length,
     );

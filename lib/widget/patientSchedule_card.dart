@@ -117,17 +117,17 @@ class PatientScheduleCard extends StatelessWidget {
                     Expanded(
                       child: ListTile(
                         trailing: Badge(
-                          badgeColor: paintBadge,
-                          padding: const EdgeInsets.all(10),
+                          elevation: 0,
+                          badgeColor: const Color.fromRGBO(227, 236, 250, 1),
+                          padding: EdgeInsets.fromLTRB(10, 8, 10, 8),
                           shape: BadgeShape.square,
-                          borderRadius: BorderRadius.circular(15),
+                          borderRadius: BorderRadius.circular(20),
                           toAnimate: false,
-                          badgeContent: Text(
-                            badgeText,
+                          badgeContent: const Text(
+                            "Proccess",
                             style: TextStyle(
-                              color: fontColor,
-                              fontWeight: FontWeight.bold,
-                            ),
+                                color: Color.fromRGBO(14, 69, 151, 1),
+                                fontWeight: FontWeight.w600),
                           ),
                         ),
                       ),
