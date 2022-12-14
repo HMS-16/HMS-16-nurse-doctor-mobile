@@ -5,7 +5,7 @@ class ConditionViewModel extends ChangeNotifier {
   List<ConditionModel> _condition = [];
   List<ConditionModel> get conditions => _condition;
 
-  insertCondition(ConditionModel newCondition) {
+  void insertCondition(ConditionModel newCondition) {
     FocusManager.instance.primaryFocus?.unfocus();
     _condition = [newCondition, ..._condition];
     notifyListeners();

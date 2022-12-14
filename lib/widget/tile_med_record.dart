@@ -45,7 +45,7 @@ class _TileMedRecordState extends State<TileMedRecord> {
     // final endTime = DateFormat('jm').format(end);
 
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 10),
+      // margin: EdgeInsets.symmetric(vertical: 10),
       decoration: BoxDecoration(
         boxShadow: [
           if (!_customTileExpanded) ...[

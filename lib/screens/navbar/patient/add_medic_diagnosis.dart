@@ -70,6 +70,7 @@ class _AddMedDiagnosisState extends State<AddMedDiagnosis> {
                       context.read<TreatmentViewModel>().insertTreatment(
                             TreatmentModel(
                               doctor: context.read<PatientViewModel>().person!.doctor,
+                              patient: context.read<PatientViewModel>().person!.name,
                               date: context.read<PatientViewModel>().person!.schedule,
                               time: context.read<PatientViewModel>().person!.time,
                               diagnose: diagnoseCtrl.text,
