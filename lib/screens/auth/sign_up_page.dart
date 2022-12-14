@@ -381,22 +381,12 @@ class _SignUpPageState extends State<SignUpPage> {
                           // phoneNum: controllerRegNum.text,
                           role: listRole.indexOf(valueRole) + 1,
                         );
-                        print(data.toJson());
-                        print(valueRole);
 
-                        // context.read<RegisterViewModel>().register(
-                        //       data,
-                        //       context.read<LoginViewModel>().tokenBearer!,
-                        //       context,
-                        //     );
-
-                        // await viewModel.register(data);
-                        // ScaffoldMessenger.of(context).showSnackBar(
-                        //     SnackBar(content: Text(viewModel.message)));
-                        // Fluttertoast.showToast(
-                        //     msg: viewModel.message,
-                        //     backgroundColor: Colors.white,
-                        //     textColor: cPrimaryBase);
+                        context.read<RegisterViewModel>().register(
+                              data,
+                              context.read<LoginViewModel>().tokenBearer!,
+                              context,
+                            );
                       } else {
                         print("error");
                       }
