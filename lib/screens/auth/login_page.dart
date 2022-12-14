@@ -169,14 +169,16 @@ class _LoginPageState extends State<LoginPage> {
                         context.read<LoginViewModel>().signIn(
                               email: controllerEmail.text,
                               pass: controllerPassword.text,
+                              context: context,
                             );
-                        navPushTransition(context, const SignUpPage());
-                        ScaffoldMessenger.of(context)
-                            .showSnackBar(SnackBar(content: Text("Success")));
-                      } else {
-                        ScaffoldMessenger.of(context)
-                            .showSnackBar(SnackBar(content: Text("Failed")));
+                        // ScaffoldMessenger.of(context)
+                        //     .showSnackBar(SnackBar(content: Text("Success")));
+                        // navPushTransition(context, const SignUpPage());
                       }
+                      // else {
+                      //   ScaffoldMessenger.of(context)
+                      //       .showSnackBar(SnackBar(content: Text("Failed")));
+                      // }
                     }),
                 const SizedBox(
                   height: 15.0,
