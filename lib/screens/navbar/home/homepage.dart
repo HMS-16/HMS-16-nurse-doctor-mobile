@@ -117,7 +117,7 @@ class PatientListHomeScreen extends StatelessWidget {
       itemBuilder: (context, index) {
         final person = persons.elementAt(index);
         if (DateFormat("EEE, d-M-y").format(person.schedule) ==
-            DateFormat("EEE, d-M-y").format(DateTime(2022, 12, 12))) {
+            DateFormat("EEE, d-M-y").format(DateTime.now())) {
           return InkWell(
             onTap: () {
               context.read<PatientViewModel>().selectedPerson(person);

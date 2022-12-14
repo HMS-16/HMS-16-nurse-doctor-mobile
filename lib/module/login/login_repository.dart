@@ -1,9 +1,13 @@
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:hms_16/api/auth.dart';
 import 'package:hms_16/model/error_model.dart';
 import 'package:hms_16/model/login_model.dart';
 import 'package:dio/dio.dart';
+import 'package:hms_16/screens/auth/sign_up_page.dart';
+import 'package:hms_16/widget/navpush_transition.dart';
+import 'package:hms_16/widget/navreplace_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginViewModel with ChangeNotifier {
@@ -18,7 +22,10 @@ class LoginViewModel with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> signIn({required String email, required String pass}) async {
+  Future<void> signIn(
+      {required String email,
+      required String pass,
+      required BuildContext context}) async {
     //changeState(DataState.loading);
 
     try {
@@ -28,10 +35,10 @@ class LoginViewModel with ChangeNotifier {
       if (responseData.statusCode == 200) {
         LoginModel modelUser = LoginModel.fromJson(responseData.data);
         final prefs = await SharedPreferences.getInstance();
-        print(modelUser);
+        // print(modelUser);
 
         dataUser = modelUser.data;
-        print(dataUser);
+        // print(dataUser);
         final token = modelUser.token;
         print(token);
 
@@ -42,15 +49,27 @@ class LoginViewModel with ChangeNotifier {
         await prefs.setString('token', token);
         await prefs.setString('user', encodeUser);
         await prefs.setBool('isLogin', true);
+        // print(responseData.statusCode);
+        // print(responseData.statusMessage);
+        // print(responseData.data);
+
+        // ScaffoldMessenger.of(context)
+        //     .showSnackBar(SnackBar(content: Text("Success")));
+        navReplaceTransition(context, const SignUpPage());
 
         notifyListeners();
         // changeState(Data.succes);
       }
     } on DioError catch (e) {
       //changeState(Data.error);
+      // print(e.response!.statusCode);
+      // print(e.response!.statusMessage);
+      // print(e.response!.redirects);
       if (e.response!.statusCode != 503) {
-        ErrorModel error = ErrorModel.fromJson(e.response!.data);
-        eror = error.error;
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text("email or password is invalid")));
+        // ErrorModel error = ErrorModel.fromJson(e.response!.data);
+        // eror = error.error;
       } else {
         eror = e.response!.statusCode!.toString() + ' Service Unavailable';
         print(eror);

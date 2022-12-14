@@ -26,6 +26,7 @@ class _SignUpPageState extends State<SignUpPage> {
   TextEditingController controllerSecPassword = TextEditingController();
 
   bool _hidePassword = false;
+  bool _hideConfirmPassword = false;
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -37,6 +38,7 @@ class _SignUpPageState extends State<SignUpPage> {
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Form(
+            key: _formKey,
             autovalidateMode: AutovalidateMode.always,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -319,15 +321,18 @@ class _SignUpPageState extends State<SignUpPage> {
                   height: 8,
                 ),
                 TextFormField(
-                  obscureText: !_hidePassword,
+                  obscureText: !_hideConfirmPassword,
                   controller: controllerSecPassword,
                   validator: (value) {
                     String msg = '.{8,}';
                     if (value!.isEmpty) {
-                      return 'Password must be filled';
+                      return 'Confirm password must be filled';
                     }
                     if (!RegExp(msg).hasMatch(value)) {
-                      return 'Password length can’t be less than 8 char';
+                      return 'Confirm password length can’t be less than 8 char';
+                    }
+                    if (controllerSecPassword.text != controllerPassword.text) {
+                      return 'Confirm password doesn’t match';
                     }
                     return null;
                   },
@@ -342,14 +347,14 @@ class _SignUpPageState extends State<SignUpPage> {
                       suffixIcon: IconButton(
                         icon: Icon(
                           // Based on passwordVisible state choose the icon
-                          _hidePassword
+                          _hideConfirmPassword
                               ? Icons.visibility
                               : Icons.visibility_off,
                           color: Theme.of(context).primaryColorDark,
                         ),
                         onPressed: () {
                           setState(() {
-                            _hidePassword = !_hidePassword;
+                            _hideConfirmPassword = !_hideConfirmPassword;
                           });
                         },
                       ),
@@ -364,8 +369,8 @@ class _SignUpPageState extends State<SignUpPage> {
                     onpressed: () async {
                       if (_formKey.currentState!.validate()) {
                         navReplaceTransition(context, const NavBar());
-                        var viewModel = Provider.of<RegisterViewModel>(context,
-                            listen: false);
+                        // var viewModel = Provider.of<RegisterViewModel>(context,
+                        //     listen: false);
 
                         var data = Datum(
                           username: controllerUser.text,
@@ -373,14 +378,17 @@ class _SignUpPageState extends State<SignUpPage> {
                           phoneNum: controllerRegNum.text,
                           role: listRole.indexOf(valueRole) + 1,
                         );
+                        print(data.toJson());
 
-                        await viewModel.register(data);
-                        ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text(viewModel.message)));
+                        // await viewModel.register(data);
+                        // ScaffoldMessenger.of(context).showSnackBar(
+                        //     SnackBar(content: Text(viewModel.message)));
                         // Fluttertoast.showToast(
                         //     msg: viewModel.message,
                         //     backgroundColor: Colors.white,
                         //     textColor: cPrimaryBase);
+                      } else {
+                        print("error");
                       }
                     }),
                 const SizedBox(

@@ -52,7 +52,7 @@ final List<PatientModel> patients = [
       true,
       doctor: "Alief",
       nurse: "Nurul Zakiah",
-      schedule: DateTime(2022, 12, 10),
+      schedule: DateTime(2022, 12, 14),
       time: 2),
   PatientModel(
       'Bastian Schweinsteiger',
@@ -67,7 +67,7 @@ final List<PatientModel> patients = [
       'January, 2022',
       'Indigestion',
       true,
-      schedule: DateTime(2022, 12, 11),
+      schedule: DateTime(2022, 12, 13),
       doctor: "Abednego",
       nurse: "Nastasya",
       time: 1),
@@ -103,6 +103,6 @@ final List<PatientModel> patients = [
       true,
       doctor: "Rewina",
       nurse: "Mitha",
-      schedule: DateTime(2022, 12, 12),
+      schedule: DateTime(2022, 12, 14),
       time: 0),
 ];

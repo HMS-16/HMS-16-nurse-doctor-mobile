@@ -108,16 +108,15 @@ class PatientHomeCard extends StatelessWidget {
                       child: ListTile(
                         trailing: Badge(
                           elevation: 0,
-                          badgeColor: const Color.fromRGBO(227, 236, 250, 1),
+                          badgeColor: paintBadge,
                           padding: EdgeInsets.fromLTRB(10, 8, 10, 8),
                           shape: BadgeShape.square,
                           borderRadius: BorderRadius.circular(20),
                           toAnimate: false,
-                          badgeContent: const Text(
-                            "Proccess",
+                          badgeContent: Text(
+                            badgeText,
                             style: TextStyle(
-                                color: Color.fromRGBO(14, 69, 151, 1),
-                                fontWeight: FontWeight.w600),
+                                color: fontColor, fontWeight: FontWeight.w600),
                           ),
                         ),
                       ),
