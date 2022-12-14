@@ -15,7 +15,7 @@ class NavBar extends StatefulWidget {
 class _NavBarState extends State<NavBar> {
   int currenticon = 0;
   final screen = [
-    const HomePageNurse(),
+    HomePageNurse(),
     const PatientScreen(),
     const ViewScheduleNurse(),
     const Message(),

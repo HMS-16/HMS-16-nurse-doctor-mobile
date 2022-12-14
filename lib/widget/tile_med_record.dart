@@ -1,8 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:hms_16/utils/constant.dart';
+import 'package:intl/intl.dart';
 
 class TileMedRecord extends StatefulWidget {
-  const TileMedRecord({super.key});
+  TileMedRecord({
+    super.key,
+    required this.nurse,
+    required this.date,
+    required this.time,
+    required this.height,
+    required this.weight,
+    required this.bloodPressure,
+    required this.sugarAnalysis,
+    required this.temperature,
+    required this.restHeartRate,
+    required this.breathRate,
+    this.note,
+  });
+  String nurse;
+  DateTime date;
+  String time;
+  int height;
+  int weight;
+  String bloodPressure;
+  int sugarAnalysis;
+  double temperature;
+  int restHeartRate;
+  int breathRate;
+  String? note;
 
   @override
   State<TileMedRecord> createState() => _TileMedRecordState();
@@ -13,6 +38,12 @@ class _TileMedRecordState extends State<TileMedRecord> {
 
   @override
   Widget build(BuildContext context) {
+    // final dateNow = widget.date;
+    final tanggal = DateFormat('EEEE, LLL d, y').format(widget.date);
+    // final startTime = DateFormat('jm').format(widget.date);
+    // final end = dateNow.add(Duration(hours: 1));
+    // final endTime = DateFormat('jm').format(end);
+
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
       decoration: BoxDecoration(
@@ -43,14 +74,21 @@ class _TileMedRecordState extends State<TileMedRecord> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Tuesday, Nov 2, 2022',
+                  '$tanggal',
                   style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
                 ),
                 SizedBox(height: 6),
                 Text(
-                  '1.00 pm - 2.00 pm',
+                  widget.time,
                   style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
                 ),
+                if (_customTileExpanded) ...[
+                  SizedBox(height: 5),
+                  Text(
+                    'Nurse - ${widget.nurse}',
+                    style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
+                  ),
+                ]
               ],
             ),
             onExpansionChanged: (bool expanded) {
@@ -70,9 +108,7 @@ class _TileMedRecordState extends State<TileMedRecord> {
                       TextSpan(
                         text: 'detail note : ',
                         children: [
-                          TextSpan(
-                              text:
-                                  'After examination, the results of the medical record showed that the patient had symptoms of the disease, namely redness of the throat, enlarged salivary glands and mild respiratory distress.'),
+                          TextSpan(text: '${widget.note}'),
                         ],
                       ),
                     ),
@@ -95,7 +131,7 @@ class _TileMedRecordState extends State<TileMedRecord> {
                         ),
                         Spacer(),
                         Text(
-                          '150 cm',
+                          '${widget.height} cm',
                           style: textStyle.copyWith(fontSize: 12),
                         ),
                       ],
@@ -110,7 +146,7 @@ class _TileMedRecordState extends State<TileMedRecord> {
                         ),
                         Spacer(),
                         Text(
-                          '54 kg',
+                          '${widget.weight} kg',
                           style: textStyle.copyWith(fontSize: 12),
                         ),
                       ],
@@ -125,7 +161,7 @@ class _TileMedRecordState extends State<TileMedRecord> {
                         ),
                         Spacer(),
                         Text(
-                          '180/120 mmHg',
+                          '${widget.bloodPressure} mmHg',
                           style: textStyle.copyWith(fontSize: 12),
                         ),
                       ],
@@ -140,7 +176,7 @@ class _TileMedRecordState extends State<TileMedRecord> {
                         ),
                         Spacer(),
                         Text(
-                          '110 mg/dL',
+                          '${widget.sugarAnalysis} mg/dL',
                           style: textStyle.copyWith(fontSize: 12),
                         ),
                       ],
@@ -155,7 +191,7 @@ class _TileMedRecordState extends State<TileMedRecord> {
                         ),
                         Spacer(),
                         Text(
-                          '36 C',
+                          '${widget.temperature} C',
                           style: textStyle.copyWith(fontSize: 12),
                         ),
                       ],
@@ -170,7 +206,7 @@ class _TileMedRecordState extends State<TileMedRecord> {
                         ),
                         Spacer(),
                         Text(
-                          '80 bpm',
+                          '${widget.restHeartRate} bpm',
                           style: textStyle.copyWith(fontSize: 12),
                         ),
                       ],
@@ -185,7 +221,7 @@ class _TileMedRecordState extends State<TileMedRecord> {
                         ),
                         Spacer(),
                         Text(
-                          '16 rpm',
+                          '${widget.breathRate} rpm',
                           style: textStyle.copyWith(fontSize: 12),
                         ),
                       ],

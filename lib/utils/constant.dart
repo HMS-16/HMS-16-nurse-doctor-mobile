@@ -16,8 +16,13 @@ Color cInfoLight = const Color.fromRGBO(86, 200, 222, 1);
 Color cPrimaryBase = const Color(0xff1153B5);
 Color cSuccessBase = const Color.fromRGBO(41, 153, 29, 1);
 Color cPrimaryLight = const Color(0xff608CCE);
+Color cPrimaryDark = const Color(0xff0E4597);
 Color cBlack = const Color(0xff000000);
 Color cWhiteLast = const Color(0xff6D6D6D);
 Color cRed = const Color(0xff9B1A1A);
+Color cGreenLine = const Color(0xff14FF00);
+Color cSuccessLightest = const Color(0xffB8DDB4);
+Color cSuccessDark = const Color(0xff228018);
+Color cSecondaryLighter = const Color(0xffE3ECFA);
 
 TextStyle textStyle = GoogleFonts.nunito();

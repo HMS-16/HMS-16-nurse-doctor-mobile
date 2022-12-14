@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hms_16/utils/constant.dart';
 import 'package:hms_16/screens/navbar/schedule/nurse/view_schedule_bynurse.dart';
+import 'package:hms_16/view_model/patient_view_model.dart';
 import 'package:hms_16/widget/duration_dialog.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class ChangeScheduleByNurse extends StatefulWidget {
   const ChangeScheduleByNurse({super.key});
@@ -12,12 +14,14 @@ class ChangeScheduleByNurse extends StatefulWidget {
 }
 
 List<String> itemsSchedule = [
-  "1.30 pm - 2.30 pm",
-  "2.45 pm - 3.45 pm",
-  "6.00 pm - 7.00 pm",
-  "7.20 pm - 8.20 pm"
+  "1.00 pm - 1.30 pm",
+  "1.30 pm - 2.00 pm",
+  "2.00 pm - 2.30 pm",
+  "2.30 pm - 3.00 pm"
 ];
+List<int> itemsScheduleint = [0, 1, 2, 3];
 String valueDropdown = itemsSchedule.first;
+int valueDropdownint = itemsScheduleint.first;
 
 class _ChangeScheduleByNurseState extends State<ChangeScheduleByNurse> {
   @override
@@ -39,12 +43,14 @@ class _ChangeScheduleByNurseState extends State<ChangeScheduleByNurse> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              DateFormat('EEEE, MMMM d').format(selectedDate),
-              style: textStyle.copyWith(
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
-                color: cBlackBase,
+            Center(
+              child: Text(
+                DateFormat('EEEE, MMMM d').format(selectedDate),
+                style: textStyle.copyWith(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                  color: cBlackBase,
+                ),
               ),
             ),
             const SizedBox(
@@ -103,29 +109,37 @@ class _ChangeScheduleByNurseState extends State<ChangeScheduleByNurse> {
               style:
                   textStyle.copyWith(fontWeight: FontWeight.w700, fontSize: 12),
             ),
-            DropdownButtonFormField<String>(
+            DropdownButtonFormField<int>(
               // dropdownColor: Colors.red,
               decoration: InputDecoration(
                   fillColor: cSecondaryLightest,
                   filled: true,
+                  border: const OutlineInputBorder(borderSide: BorderSide.none),
                   enabledBorder:
-                      const UnderlineInputBorder(borderSide: BorderSide.none)),
+                      const OutlineInputBorder(borderSide: BorderSide.none)),
               isExpanded: true,
-              value: valueDropdown,
+              value: valueDropdownint,
               elevation: 0,
               borderRadius: BorderRadius.circular(12),
               style:
                   textStyle.copyWith(fontSize: 14, fontWeight: FontWeight.w400),
               onChanged: (value) {
                 setState(() {
-                  valueDropdown = value!;
+                  valueDropdownint = value!;
                 });
               },
-              items: itemsSchedule
-                  .map<DropdownMenuItem<String>>(
+              items: itemsScheduleint
+                  .map<DropdownMenuItem<int>>(
                     (e) => DropdownMenuItem(
                       value: e,
-                      child: Text(e,
+                      child: Text(
+                          e == 0
+                              ? "1.00 pm - 1.30 pm"
+                              : e == 1
+                                  ? "1.30 pm - 2.00 pm"
+                                  : e == 2
+                                      ? "2.00 pm - 2.30 pm"
+                                      : "2.30 pm - 3.00 pm",
                           style: textStyle.copyWith(
                               fontSize: 14,
                               fontWeight: FontWeight.w400,
@@ -196,7 +210,13 @@ class _ChangeScheduleByNurseState extends State<ChangeScheduleByNurse> {
                                           color: cBlackLightest),
                                     ),
                                     Text(
-                                      valueDropdown,
+                                      valueDropdownint == 0
+                                          ? "1.00 pm - 1.30 pm"
+                                          : valueDropdownint == 1
+                                              ? "1.30 pm - 2.00 pm"
+                                              : valueDropdownint == 2
+                                                  ? "2.00 pm - 2.30 pm"
+                                                  : "2.30 pm - 3.00 pm",
                                       style: textStyle.copyWith(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w600,
@@ -230,6 +250,9 @@ class _ChangeScheduleByNurseState extends State<ChangeScheduleByNurse> {
                                       backgroundColor: cPrimaryBase,
                                     ),
                                     onPressed: () async {
+                                      context
+                                          .read<PatientViewModel>()
+                                          .changeSchedule(valueDropdownint);
                                       durationDialog(context,
                                           "Schedule has been successfully changed!");
                                       Future.delayed(const Duration(seconds: 2),

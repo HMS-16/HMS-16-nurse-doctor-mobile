@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hms_16/screens/navbar/message/roomchat.dart';
+import 'package:hms_16/screens/profile/profile_nurse.dart';
 import 'package:hms_16/utils/constant.dart';
 import 'package:hms_16/screens/notification.dart';
 import 'package:hms_16/screens/profile/profile_doc.dart';
@@ -26,11 +27,11 @@ class Message extends StatelessWidget {
             onPressed: () {
               navPushTransition(context, const NotificationPage());
             },
-            icon: const Icon(Icons.notifications_none),
+            icon: const Icon(Icons.notifications),
           ),
           IconButton(
             onPressed: () {
-              navPushTransition(context, const ProfileDoctorPage());
+              navPushTransition(context, const ProfileNursePage());
             },
             icon: const Icon(Icons.account_circle_outlined),
           ),
@@ -73,16 +74,18 @@ class Message extends StatelessWidget {
               trailing: Column(
                 children: [
                   Text("8:15 am"),
-                  Container(
-                    margin: EdgeInsets.only(top: 8, right: 30),
-                    child: CircleAvatar(
-                      backgroundColor: cPrimaryBase,
-                      child: Text(
-                        "1",
-                        style: TextStyle(
-                            fontSize: 10, fontWeight: FontWeight.bold),
+                  Expanded(
+                    child: Container(
+                      margin: EdgeInsets.only(top: 8, right: 30),
+                      child: CircleAvatar(
+                        backgroundColor: cPrimaryBase,
+                        child: Text(
+                          "1",
+                          style: TextStyle(
+                              fontSize: 10, fontWeight: FontWeight.bold),
+                        ),
+                        maxRadius: 12,
                       ),
-                      maxRadius: 12,
                     ),
                   )
                 ],

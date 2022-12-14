@@ -1,7 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class TileMedDiagnosis extends StatefulWidget {
-  const TileMedDiagnosis({super.key});
+  TileMedDiagnosis({
+    super.key,
+    required this.doctor,
+    required this.date,
+    required this.time,
+    required this.diagnose,
+    required this.prescription,
+  });
+  String doctor;
+  DateTime date;
+  String time;
+  String diagnose;
+  String prescription;
 
   @override
   State<TileMedDiagnosis> createState() => _TileMedDiagnosisState();
@@ -12,6 +25,12 @@ class _TileMedDiagnosisState extends State<TileMedDiagnosis> {
 
   @override
   Widget build(BuildContext context) {
+    // final dateNow = widget.date;
+    final tanggal = DateFormat('EEEE, LLL d, y').format(widget.date);
+    // final startTime = DateFormat('jm').format(widget.date);
+    // final end = dateNow.add(Duration(hours: 1));
+    // final endTime = DateFormat('jm').format(end);
+
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
       decoration: BoxDecoration(
@@ -35,7 +54,7 @@ class _TileMedDiagnosisState extends State<TileMedDiagnosis> {
             backgroundColor: Color(0xffF2F2F2),
             // collapsedBackgroundColor: Colors.amber,
             collapsedBackgroundColor: Color(0xffFDFDFD),
-            tilePadding: EdgeInsets.symmetric(horizontal: 20,vertical: 10),
+            tilePadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             trailing: Icon(_customTileExpanded
                 ? Icons.keyboard_arrow_down
                 : Icons.keyboard_arrow_right),
@@ -43,14 +62,21 @@ class _TileMedDiagnosisState extends State<TileMedDiagnosis> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Tuesday, Nov 2, 2022',
+                  '$tanggal',
                   style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
                 ),
                 SizedBox(height: 6),
                 Text(
-                  '1.00 pm - 2.00 pm',
+                  widget.time,
                   style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
                 ),
+                if (_customTileExpanded) ...[
+                  SizedBox(height: 5),
+                  Text(
+                    'Doctor - ${widget.doctor}',
+                    style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
+                  ),
+                ]
               ],
             ),
             onExpansionChanged: (bool expanded) {
@@ -63,23 +89,17 @@ class _TileMedDiagnosisState extends State<TileMedDiagnosis> {
                   shrinkWrap: true,
                   children: [
                     Text(
-                      'Diagnosis',
+                      'Diagnose',
                       style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w700,
                       ),
                     ),
                     SizedBox(height: 5),
-                    Text.rich(
-                      style: TextStyle(fontSize: 12),
-                      TextSpan(
-                        text: 'detail note : ',
-                        children: [
-                          TextSpan(
-                              text:
-                                  'After examination, the results of the medical record showed that the patient had symptoms of the disease, namely redness of the throat, enlarged salivary glands and mild respiratory distress.'),
-                        ],
-                      ),
+                    Text(
+                      '${widget.diagnose}',
+                      style:
+                          TextStyle(fontSize: 13, fontWeight: FontWeight.w400),
                     ),
                     SizedBox(height: 10),
                     Text(
@@ -90,16 +110,10 @@ class _TileMedDiagnosisState extends State<TileMedDiagnosis> {
                       ),
                     ),
                     SizedBox(height: 5),
-                    Text.rich(
-                      style: TextStyle(fontSize: 12),
-                      TextSpan(
-                        text: 'detail note : ',
-                        children: [
-                          TextSpan(
-                              text:
-                                  'After examination, the results of the medical record showed that the patient had symptoms of the disease, namely redness of the throat, enlarged salivary glands and mild respiratory distress.'),
-                        ],
-                      ),
+                    Text(
+                      '${widget.prescription}',
+                      style:
+                          TextStyle(fontSize: 13, fontWeight: FontWeight.w400),
                     ),
                     SizedBox(height: 10),
                   ],

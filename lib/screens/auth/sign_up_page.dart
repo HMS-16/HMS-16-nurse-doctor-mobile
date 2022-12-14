@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:hms_16/module/login/login_repository.dart';
 import 'package:hms_16/utils/constant.dart';
 import 'package:hms_16/screens/navbar/navbar.dart';
 import 'package:hms_16/widget/button.dart';
 import 'package:hms_16/widget/navpush_transition.dart';
+import 'package:hms_16/model/register_model.dart';
+import 'package:hms_16/module/register/register_repository.dart';
+import 'package:hms_16/widget/navreplace_transition.dart';
+import 'package:provider/provider.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key}) : super(key: key);
@@ -13,6 +19,7 @@ class SignUpPage extends StatefulWidget {
 
 class _SignUpPageState extends State<SignUpPage> {
   late String email, password;
+  String msgPassword = '.{5,}';
 
   TextEditingController controllerEmail = TextEditingController();
   TextEditingController controllerUser = TextEditingController();
@@ -20,17 +27,20 @@ class _SignUpPageState extends State<SignUpPage> {
   TextEditingController controllerPassword = TextEditingController();
   TextEditingController controllerSecPassword = TextEditingController();
 
+  bool _hidePassword = false;
+  bool _hideConfirmPassword = false;
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     List<String> listRole = ["Doctor", "Nurse"];
     String valueRole = listRole.first;
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Form(
+            key: _formKey,
             autovalidateMode: AutovalidateMode.always,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -50,7 +60,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 Row(
                   children: [
                     Text(
-                      "User ",
+                      "Name",
                       style:
                           textStyle.copyWith(color: cBlackBase, fontSize: 14),
                     ),
@@ -113,8 +123,8 @@ class _SignUpPageState extends State<SignUpPage> {
                     if (!RegExp(r'^[0-9]+$').hasMatch(value)) {
                       return 'Registration Number is Invalid';
                     }
-                    if (!RegExp('.{8,}').hasMatch(value)) {
-                      return 'Registration Number length must be 8 char';
+                    if (!RegExp('.{16,}').hasMatch(value)) {
+                      return 'Registration Number length must be 16 char';
                     }
                     return null;
                   },
@@ -155,6 +165,8 @@ class _SignUpPageState extends State<SignUpPage> {
                         Icons.supervised_user_circle,
                         color: cBlackBase,
                       ),
+                      border: const OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10))),
                       enabledBorder: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10)))),
                   isExpanded: true,
@@ -254,14 +266,15 @@ class _SignUpPageState extends State<SignUpPage> {
                   height: 8,
                 ),
                 TextFormField(
+                  obscureText: !_hidePassword,
                   controller: controllerPassword,
                   validator: (value) {
-                    String msg = '.{8,}';
+                    // String msg = '.{8,}';
                     if (value!.isEmpty) {
                       return 'Password must be filled';
                     }
-                    if (!RegExp(msg).hasMatch(value)) {
-                      return 'Password length can’t be less than 8 char';
+                    if (!RegExp(msgPassword).hasMatch(value)) {
+                      return 'Password length can’t be less than 5 char';
                     }
                     return null;
                   },
@@ -274,7 +287,19 @@ class _SignUpPageState extends State<SignUpPage> {
                         color: cBlackBase,
                       ),
                       suffixIcon: IconButton(
-                          onPressed: () {}, icon: const Icon(Icons.visibility)),
+                        icon: Icon(
+                          // Based on passwordVisible state choose the icon
+                          _hidePassword
+                              ? Icons.visibility
+                              : Icons.visibility_off,
+                          color: Theme.of(context).primaryColorDark,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            _hidePassword = !_hidePassword;
+                          });
+                        },
+                      ),
                       hintText: ("Password"),
                       floatingLabelBehavior: FloatingLabelBehavior.always),
                 ),
@@ -298,14 +323,18 @@ class _SignUpPageState extends State<SignUpPage> {
                   height: 8,
                 ),
                 TextFormField(
+                  obscureText: !_hideConfirmPassword,
                   controller: controllerSecPassword,
                   validator: (value) {
-                    String msg = '.{8,}';
+                    // String msg = '.{5,}';
                     if (value!.isEmpty) {
-                      return 'Password must be filled';
+                      return 'Confirm password must be filled';
                     }
-                    if (!RegExp(msg).hasMatch(value)) {
-                      return 'Password length can’t be less than 8 char';
+                    if (!RegExp(msgPassword).hasMatch(value)) {
+                      return 'Confirm password length can’t be less than 5 char';
+                    }
+                    if (controllerSecPassword.text != controllerPassword.text) {
+                      return 'Confirm password doesn’t match';
                     }
                     return null;
                   },
@@ -318,7 +347,19 @@ class _SignUpPageState extends State<SignUpPage> {
                         color: cBlackBase,
                       ),
                       suffixIcon: IconButton(
-                          onPressed: () {}, icon: const Icon(Icons.visibility)),
+                        icon: Icon(
+                          // Based on passwordVisible state choose the icon
+                          _hideConfirmPassword
+                              ? Icons.visibility
+                              : Icons.visibility_off,
+                          color: Theme.of(context).primaryColorDark,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            _hideConfirmPassword = !_hideConfirmPassword;
+                          });
+                        },
+                      ),
                       hintText: ("Confirm Password"),
                       floatingLabelBehavior: FloatingLabelBehavior.always),
                 ),
@@ -327,13 +368,39 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
                 Button(
                     text: "Register",
-                    onpressed: () {
-                      navPushTransition(context, const NavBar());
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const NavBar(),
-                          ));
+                    onpressed: () async {
+                      navReplaceTransition(context, NavBar());
+                      // if (_formKey.currentState!.validate()) {
+                      //   // navReplaceTransition(context, const NavBar());
+                      //   // var viewModel = Provider.of<RegisterViewModel>(context,
+                      //   //     listen: false);
+
+                      //   var data = Datum(
+                      //     username: controllerUser.text,
+                      //     password: controllerPassword.text,
+                      //     email: controllerEmail.text,
+                      //     strNum: controllerRegNum.text,
+                      //     // phoneNum: controllerRegNum.text,
+                      //     role: listRole.indexOf(valueRole) + 1,
+                      //   );
+                      //   // print(data.toJson());
+
+                      //   context.read<RegisterViewModel>().register(
+                      //         data,
+                      //         context.read<LoginViewModel>().tokenBearer!,
+                      //         context,
+                      //       );
+
+                      //   // await viewModel.register(data);
+                      //   // ScaffoldMessenger.of(context).showSnackBar(
+                      //   //     SnackBar(content: Text(viewModel.message)));
+                      //   // Fluttertoast.showToast(
+                      //   //     msg: viewModel.message,
+                      //   //     backgroundColor: Colors.white,
+                      //   //     textColor: cPrimaryBase);
+                      // } else {
+                      //   print("error");
+                      // }
                     }),
                 const SizedBox(
                   height: 17.0,

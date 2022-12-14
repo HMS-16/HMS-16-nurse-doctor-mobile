@@ -99,12 +99,12 @@ class CardHomepage extends StatelessWidget {
         children: [
           InkWell(
             onTap: () {
-                    navPushTransition(context, ViewScheduleDoctor());
-                  },
+              navPushTransition(context, ViewScheduleDoctor());
+            },
             child: Card(
               shadowColor: Color.fromRGBO(111, 111, 111, 0.12),
-              shape:
-                  RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20)),
               elevation: 2,
               child: Column(
                 children: [
@@ -123,7 +123,8 @@ class CardHomepage extends StatelessWidget {
                     ),
                     title: const Text(
                       "Alief Rachman",
-                      style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
+                      style:
+                          TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
                     ),
                     trailing: Badge(
                       elevation: 0,

@@ -23,9 +23,9 @@ class _SplashScreenState extends State<SplashScreen> {
       nextScreen: LandingPage(),
       splashTransition: SplashTransition.fadeTransition,
       backgroundColor: Colors.white,
-      splashIconSize: 450,
-      duration: 500,
-      animationDuration: const Duration(seconds: 3),
+      splashIconSize: 500,
+      duration: 1000,
+      animationDuration: const Duration(seconds: 2),
     );
   }
 }
