@@ -7,8 +7,11 @@ import 'package:hms_16/utils/constant.dart';
 import 'package:hms_16/screens/navbar/patient/patient_detail/patient_detail.dart';
 import 'package:hms_16/widget/navpush_transition.dart';
 import 'package:hms_16/widget/patient_card.dart';
+<<<<<<< HEAD
 import 'package:hms_16/widget/status/error_max.dart';
 import 'package:hms_16/widget/status/loading_max.dart';
+=======
+>>>>>>> origin/insertCondition
 import 'package:provider/provider.dart';
 
 class PatientScreen extends StatefulWidget {
@@ -22,6 +25,7 @@ class _PatientScreenState extends State<PatientScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+<<<<<<< HEAD
         appBar: AppBar(
           automaticallyImplyLeading: false,
           iconTheme: IconThemeData(color: cBlack),
@@ -93,16 +97,77 @@ class MyWidget extends StatelessWidget {
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.all(
                     Radius.circular(15),
+=======
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        iconTheme: IconThemeData(color: cBlack),
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        title: Text(
+          'Patient',
+          style: textStyle.copyWith(
+              fontSize: 20, fontWeight: FontWeight.w600, color: cBlackBase),
+        ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              navPushTransition(context, const NotificationPage());
+            },
+            icon: const Icon(Icons.notifications),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(right: 16),
+            child: InkWell(
+              onTap: () {
+                navPushTransition(context, const ProfilePage());
+              },
+              child: const CircleAvatar(
+                backgroundColor: Colors.transparent,
+                child: Image(image: AssetImage("assets/images/avatar.png")),
+              ),
+            ),
+          )
+        ],
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            SizedBox(
+              width: double.infinity,
+              height: 48,
+              child: TextField(
+                onChanged: (value) {
+                  context.read<PatientViewModel>().searchPatient(value, value);
+                },
+                decoration: const InputDecoration(
+                  prefixIcon: Icon(Icons.search),
+                  label: Text('Search'),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(15),
+                    ),
+>>>>>>> origin/insertCondition
                   ),
                 ),
               ),
             ),
+<<<<<<< HEAD
           ),
           const SizedBox(height: 24),
           Consumer<PatientViewModel>(builder: (context, value, child) {
             return _screenValidator(value.persons);
           }),
         ],
+=======
+            const SizedBox(height: 24),
+            Consumer<PatientViewModel>(builder: (context, value, child) {
+              // return PatientList(persons: patients);
+              return _screenValidator(value.persons);
+            }),
+          ],
+        ),
+>>>>>>> origin/insertCondition
       ),
     );
   }
@@ -110,6 +175,7 @@ class MyWidget extends StatelessWidget {
 
 Widget _screenValidator(Iterable<PatientModel> patient) {
   if (patient.isNotEmpty) {
+<<<<<<< HEAD
     return PatientList(persons: patient.toList());
   } else if (patient.isEmpty) {
     return Center(
@@ -126,6 +192,15 @@ Widget _screenValidator(Iterable<PatientModel> patient) {
     );
   }
 
+=======
+    return PatientList(persons: patients);
+  }
+  if (patient.isEmpty) {
+    return const Center(
+      child: Text("There is no Patient Matched"),
+    );
+  }
+>>>>>>> origin/insertCondition
   return PatientList(persons: patients);
 }
 

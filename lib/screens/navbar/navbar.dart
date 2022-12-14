@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 import 'package:hms_16/screens/navbar/home/homepage_nurse.dart';
+=======
+import 'package:hms_16/screens/navbar/home/homepage.dart';
+>>>>>>> origin/insertCondition
 import 'package:hms_16/screens/navbar/message/message.dart';
 import 'package:hms_16/screens/navbar/patient/patient_screen.dart';
 import 'package:hms_16/screens/navbar/schedule/nurse/view_schedule_bynurse.dart';

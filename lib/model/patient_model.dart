@@ -103,6 +103,6 @@ final List<PatientModel> patients = [
       true,
       doctor: "Rewina",
       nurse: "Mitha",
-      schedule: DateTime(2022, 12, 11),
+      schedule: DateTime(2022, 12, 12),
       time: 0),
 ];

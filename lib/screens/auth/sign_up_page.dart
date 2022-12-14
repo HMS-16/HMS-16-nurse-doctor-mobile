@@ -32,6 +32,7 @@ class _SignUpPageState extends State<SignUpPage> {
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Form(
+            key: _formKey,
             autovalidateMode: AutovalidateMode.always,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -207,7 +208,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   height: 8,
                 ),
                 TextFormField(
-                  obscureText: !_hidePassword,
+                  // obscureText: !_hidePassword,
                   controller: controllerEmail,
                   keyboardType: TextInputType.emailAddress,
                   validator: (value) {
@@ -323,6 +324,9 @@ class _SignUpPageState extends State<SignUpPage> {
                     if (!RegExp(msg).hasMatch(value)) {
                       return 'Password length can’t be less than 8 char';
                     }
+                    if (controllerSecPassword.text != controllerPassword.text) {
+                      return 'Password not same';
+                    }
                     return null;
                   },
                   decoration: InputDecoration(
@@ -356,12 +360,14 @@ class _SignUpPageState extends State<SignUpPage> {
                 Button(
                     text: "Register",
                     onpressed: () {
+                      // if (_formKey.currentState!.validate()) {
                       navPushTransition(context, const NavBar());
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const NavBar(),
-                          ));
+                      // }
+                      // Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //       builder: (context) => const NavBar(),
+                      //     ));
                     }),
                 const SizedBox(
                   height: 17.0,
