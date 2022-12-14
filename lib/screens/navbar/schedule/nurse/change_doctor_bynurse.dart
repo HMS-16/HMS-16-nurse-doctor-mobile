@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hms_16/model/patient_model.dart';
 import 'package:hms_16/view_model/doctor_view_model.dart';
 import 'package:hms_16/utils/constant.dart';
 import 'package:hms_16/screens/navbar/schedule/nurse/view_schedule_bynurse.dart';
@@ -74,9 +75,11 @@ class _ChangeDoctorByNurseState extends State<ChangeDoctorByNurse> {
                 itemCount: value.getlistDoctor.length,
                 itemBuilder: (context, index) {
                   final dataProvider = value.getlistDoctor[index];
-                  if (DateFormat('EEE, d MMM y')
-                          .format(dataProvider.dateTime!) ==
-                      DateFormat('EEE, d MMM y').format(selectedDate)) {
+                  //  if (DateFormat('EEE, d MMM y')
+                  //             .format(dataProvider.dateTime!) ==
+                  //         DateFormat('EEE, d MMM y').format(selectedDate) &&
+                  //     patientProvider.person!.time == dataProvider.startTime)
+                  if (dataProvider.startTime == patientProvider.person!.time) {
                     return GestureDetector(
                       onTap: () async {
                         await showDialog<void>(
@@ -112,10 +115,19 @@ class _ChangeDoctorByNurseState extends State<ChangeDoctorByNurse> {
                                         ),
                                         onPressed: () async {
 <<<<<<< HEAD
+<<<<<<< HEAD
                                           // setState(() {
                                           //   value.persons2[index].doctor =
 =======
                                           context.read<PatientViewModel>().changeDoctor(index, value.getlistDoctor[index].name);
+=======
+                                          context
+                                              .read<PatientViewModel>()
+                                              .changeDoctor(value
+                                                  .getlistDoctor[index].name);
+                                          print(
+                                              value.getlistDoctor[index].name);
+>>>>>>> origin/fixing_changedoctornschedule
                                           // setState(() {
                                           //   patientProvider.persons[index].doctor =
 >>>>>>> origin/insertCondition
@@ -237,14 +249,14 @@ class _ChangeDoctorByNurseState extends State<ChangeDoctorByNurse> {
                                               height: 20.0,
                                             ),
                                             Text(
-                                                dataProvider.startTime == 1
+                                                dataProvider.startTime == 0
                                                     ? "1.00 pm - 1.30 pm"
                                                     : dataProvider.startTime ==
-                                                            2
+                                                            1
                                                         ? "1.30 pm - 2.00 pm"
                                                         : dataProvider
                                                                     .startTime ==
-                                                                3
+                                                                2
                                                             ? "2.00 pm - 2.30 pm"
                                                             : "2.30 pm - 3.00 pm",
                                                 style: textStyle.copyWith(
