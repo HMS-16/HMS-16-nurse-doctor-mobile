@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hms_16/module/login/login_repository.dart';
-import 'package:hms_16/utils/constant.dart';
-import 'package:hms_16/screens/navbar/navbar.dart';
-import 'package:hms_16/widget/button.dart';
-import 'package:hms_16/widget/navpush_transition.dart';
-import 'package:hms_16/model/register_model.dart';
 import 'package:hms_16/module/register/register_repository.dart';
+import 'package:hms_16/screens/auth/login_page.dart';
+import 'package:hms_16/services/shared_services.dart';
+import 'package:hms_16/utils/constant.dart';
+import 'package:hms_16/widget/button.dart';
+import 'package:hms_16/model/register_model.dart';
 import 'package:hms_16/widget/navreplace_transition.dart';
 import 'package:provider/provider.dart';
 
@@ -16,6 +15,10 @@ class SignUpPage extends StatefulWidget {
   @override
   State<SignUpPage> createState() => _SignUpPageState();
 }
+
+List<String> listRole = ["Doctor", "Nurse"];
+
+String valueRole = "Choose role";
 
 class _SignUpPageState extends State<SignUpPage> {
   late String email, password;
@@ -32,10 +35,7 @@ class _SignUpPageState extends State<SignUpPage> {
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    List<String> listRole = ["Doctor", "Nurse"];
-    String valueRole = listRole.first;
     return Scaffold(
-      resizeToAvoidBottomInset: true,
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -45,6 +45,9 @@ class _SignUpPageState extends State<SignUpPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                const SizedBox(
+                  height: 30.0,
+                ),
                 Center(
                   child: Text(
                     "Register New User",
@@ -170,9 +173,10 @@ class _SignUpPageState extends State<SignUpPage> {
                       enabledBorder: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10)))),
                   isExpanded: true,
-                  value: valueRole,
+                  // value: valueRole,
+                  hint: Text(valueRole),
                   validator: (value) {
-                    if (valueRole.isEmpty) {
+                    if (valueRole == "Choose role") {
                       return 'Role can not be empty';
                     }
                   },
@@ -382,27 +386,42 @@ class _SignUpPageState extends State<SignUpPage> {
                           // phoneNum: controllerRegNum.text,
                           role: listRole.indexOf(valueRole) + 1,
                         );
-                        // print(data.toJson());
 
                         context.read<RegisterViewModel>().register(
                               data,
                               context.read<LoginViewModel>().tokenBearer!,
                               context,
                             );
-
-                        // await viewModel.register(data);
-                        // ScaffoldMessenger.of(context).showSnackBar(
-                        //     SnackBar(content: Text(viewModel.message)));
-                        // Fluttertoast.showToast(
-                        //     msg: viewModel.message,
-                        //     backgroundColor: Colors.white,
-                        //     textColor: cPrimaryBase);
                       } else {
                         print("error");
                       }
                     }),
                 const SizedBox(
-                  height: 17.0,
+                  height: 10.0,
+                ),
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: 48,
+                  child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10)),
+                        backgroundColor: cWhiteDark,
+                        foregroundColor: Colors.white,
+                      ),
+                      onPressed: () {
+                        final prefs = SharedService();
+                        prefs.deleteToken();
+                        prefs.deleteRole();
+                        navReplaceTransition(context, const LoginPage());
+                      },
+                      child: const Text(
+                        "Logout",
+                        style: TextStyle(color: Colors.black),
+                      )),
+                ),
+                const SizedBox(
+                  height: 10.0,
                 ),
               ],
             ),
