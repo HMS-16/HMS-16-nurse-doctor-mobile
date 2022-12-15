@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:hms_16/model/doctor_model.dart';
 import 'package:hms_16/model/patient_model.dart';
+import 'package:hms_16/screens/navbar/patient/patient_detail/patient_detail.dart';
+import 'package:hms_16/screens/navbar/schedule/nurse/change_schedule_bynurse.dart';
+import 'package:hms_16/screens/profile/profile_nurse.dart';
 import 'package:hms_16/utils/constant.dart';
 import 'package:hms_16/screens/navbar/schedule/nurse/detail_schedule_bynurse.dart';
 import 'package:hms_16/screens/notification.dart';
-import 'package:hms_16/screens/profile/profile.dart';
 import 'package:hms_16/view_model/doctor_view_model.dart';
 import 'package:hms_16/view_model/patient_view_model.dart';
 import 'package:hms_16/widget/navpush_transition.dart';
@@ -64,7 +66,7 @@ class _ViewScheduleNurseState extends State<ViewScheduleNurse> {
               padding: const EdgeInsets.only(right: 16),
               child: InkWell(
                 onTap: () {
-                  navPushTransition(context, const ProfilePage());
+                  navPushTransition(context, const ProfileNursePage());
                 },
                 child: const CircleAvatar(
                   backgroundColor: Colors.transparent,

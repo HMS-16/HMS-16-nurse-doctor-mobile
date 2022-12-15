@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hms_16/screens/navbar/message/roomchat.dart';
+import 'package:hms_16/screens/profile/profile_nurse.dart';
 import 'package:hms_16/utils/constant.dart';
 import 'package:hms_16/screens/notification.dart';
-import 'package:hms_16/screens/profile/profile.dart';
+import 'package:hms_16/screens/profile/profile_doc.dart';
 import 'package:hms_16/widget/navpush_transition.dart';
 
 class Message extends StatelessWidget {
@@ -28,18 +29,12 @@ class Message extends StatelessWidget {
             },
             icon: const Icon(Icons.notifications),
           ),
-          Padding(
-            padding: const EdgeInsets.only(right: 16),
-            child: InkWell(
-              onTap: () {
-                navPushTransition(context, const ProfilePage());
-              },
-              child: const CircleAvatar(
-                backgroundColor: Colors.transparent,
-                child: Image(image: AssetImage("assets/images/avatar.png")),
-              ),
-            ),
-          )
+          IconButton(
+            onPressed: () {
+              navPushTransition(context, const ProfileNursePage());
+            },
+            icon: const Icon(Icons.account_circle_outlined),
+          ),
         ],
       ),
       body: Padding(
