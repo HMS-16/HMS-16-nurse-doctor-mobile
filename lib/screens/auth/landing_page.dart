@@ -55,7 +55,7 @@ class _LandingPageState extends State<LandingPage> {
               height: 50,
             ),
             Button(
-              text: "Sign In",
+              child: Text("Sign In"),
               // margin: EdgeInsets.only(top: 15),
               onpressed: () {
                 navReplaceTransition(context, const LoginPage());

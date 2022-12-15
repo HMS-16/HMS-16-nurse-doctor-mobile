@@ -49,35 +49,35 @@ class _DetailScheduleNurseState extends State<DetailScheduleNurse> {
                         borderRadius: BorderRadius.circular(24),
                         color: cSecondaryLightest),
                     child: ListTile(
-                      title: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Patient",
-                            style: textStyle.copyWith(
-                                color: cBlackBase,
-                                fontSize: 12,
-                                fontWeight: FontWeight.w700),
-                          ),
-                          Text(
-                            value.person!.name,
-                            style: textStyle.copyWith(
-                                color: cBlackBase,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600),
-                          ),
-                          const SizedBox(
-                            height: 12.0,
-                          ),
-                          Text(
-                            "Register Date : ${value.person!.register}",
-                            style: textStyle.copyWith(
-                                color: cBlackBase,
-                                fontSize: 12,
-                                fontWeight: FontWeight.w400),
-                          ),
-                        ],
-                      ),
+                      // title: Column(
+                      //   crossAxisAlignment: CrossAxisAlignment.start,
+                      //   children: [
+                      //     Text(
+                      //       "Patient",
+                      //       style: textStyle.copyWith(
+                      //           color: cBlackBase,
+                      //           fontSize: 12,
+                      //           fontWeight: FontWeight.w700),
+                      //     ),
+                      //     Text(
+                      //       value.person!.name,
+                      //       style: textStyle.copyWith(
+                      //           color: cBlackBase,
+                      //           fontSize: 16,
+                      //           fontWeight: FontWeight.w600),
+                      //     ),
+                      //     const SizedBox(
+                      //       height: 12.0,
+                      //     ),
+                      //     Text(
+                      //       "Register Date : ${value.person!.register}",
+                      //       style: textStyle.copyWith(
+                      //           color: cBlackBase,
+                      //           fontSize: 12,
+                      //           fontWeight: FontWeight.w400),
+                      //     ),
+                      //   ],
+                      // ),
                       subtitle: Row(
                         // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
@@ -152,28 +152,29 @@ class _DetailScheduleNurseState extends State<DetailScheduleNurse> {
                                     child: CircleAvatar()),
                                 Expanded(
                                   child: ListTile(
-                                      title: Text(
-                                        value.person!.doctor,
-                                        style: textStyle.copyWith(
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w400,
-                                            color: cBlackBase),
+                                      // title: Text(
+                                      //   value.person!.doctor,
+                                      //   style: textStyle.copyWith(
+                                      //       fontSize: 14,
+                                      //       fontWeight: FontWeight.w400,
+                                      //       color: cBlackBase),
+                                      // ),
+                                      // trailing: value.person!.progress
+                                      //     ? TextButton(
+                                      //         onPressed: () {
+                                      //           navPushTransition(context,
+                                      //               const ChangeDoctorByNurse());
+                                      //         },
+                                      //         child: Text(
+                                      //           "Change",
+                                      //           style: textStyle.copyWith(
+                                      //               fontSize: 12,
+                                      //               fontWeight: FontWeight.w700,
+                                      //               color: cPrimaryBase),
+                                      //         ),
+                                      //       )
+                                      //     : Text(""),
                                       ),
-                                      trailing: value.person!.progress
-                                          ? TextButton(
-                                              onPressed: () {
-                                                navPushTransition(context,
-                                                    const ChangeDoctorByNurse());
-                                              },
-                                              child: Text(
-                                                "Change",
-                                                style: textStyle.copyWith(
-                                                    fontSize: 12,
-                                                    fontWeight: FontWeight.w700,
-                                                    color: cPrimaryBase),
-                                              ),
-                                            )
-                                          : Text("")),
                                 ),
                               ],
                             ),
@@ -216,53 +217,54 @@ class _DetailScheduleNurseState extends State<DetailScheduleNurse> {
                                 width: 53, height: 53, child: CircleAvatar()),
                             Expanded(
                               child: ListTile(
-                                  title: Text(
-                                    value.person!.nurse,
-                                    style: textStyle.copyWith(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w400,
-                                        color: cBlackBase),
+                                  // title: Text(
+                                  //   value.person!.nurse,
+                                  //   style: textStyle.copyWith(
+                                  //     fontSize: 14,
+                                  //     fontWeight: FontWeight.w400,
+                                  //     color: cBlackBase,
+                                  //   ),
+                                  // ),
+                                  // trailing: value.person!.progress
+                                  //     ? TextButton(
+                                  //         onPressed: () async {
+                                  //           Future.delayed(
+                                  //               const Duration(seconds: 2), () {
+                                  //             Navigator.pop(context);
+                                  //           });
+                                  //           await showDialog<void>(
+                                  //             context: context,
+                                  //             barrierDismissible: false,
+                                  //             builder: (BuildContext context) {
+                                  //               return AlertDialog(
+                                  //                 shape:
+                                  //                     const RoundedRectangleBorder(
+                                  //                         borderRadius:
+                                  //                             BorderRadius.all(
+                                  //                                 Radius.circular(
+                                  //                                     15))),
+                                  //                 title: Text(
+                                  //                   "Coming soon!",
+                                  //                   textAlign: TextAlign.center,
+                                  //                   style: textStyle.copyWith(
+                                  //                       fontSize: 16,
+                                  //                       fontWeight:
+                                  //                           FontWeight.w600),
+                                  //                 ),
+                                  //               );
+                                  //             },
+                                  //           );
+                                  //         },
+                                  //         child: Text(
+                                  //           "Change",
+                                  //           style: textStyle.copyWith(
+                                  //               fontSize: 12,
+                                  //               fontWeight: FontWeight.w700,
+                                  //               color: cPrimaryBase),
+                                  //         ),
+                                  //       )
+                                  //     : Text(""),
                                   ),
-                                  trailing: value.person!.progress
-                                      ? TextButton(
-                                          onPressed: () async {
-                                            Future.delayed(
-                                                const Duration(seconds: 2), () {
-                                              Navigator.pop(context);
-                                            });
-                                            await showDialog<void>(
-                                              context: context,
-                                              barrierDismissible: false,
-                                              builder: (BuildContext context) {
-                                                return AlertDialog(
-                                                  shape:
-                                                      const RoundedRectangleBorder(
-                                                          borderRadius:
-                                                              BorderRadius.all(
-                                                                  Radius
-                                                                      .circular(
-                                                                          15))),
-                                                  title: Text(
-                                                    "Coming soon!",
-                                                    textAlign: TextAlign.center,
-                                                    style: textStyle.copyWith(
-                                                        fontSize: 16,
-                                                        fontWeight:
-                                                            FontWeight.w600),
-                                                  ),
-                                                );
-                                              },
-                                            );
-                                          },
-                                          child: Text(
-                                            "Change",
-                                            style: textStyle.copyWith(
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.w700,
-                                                color: cPrimaryBase),
-                                          ),
-                                        )
-                                      : Text("")),
                             ),
                           ],
                         ),
@@ -296,36 +298,37 @@ class _DetailScheduleNurseState extends State<DetailScheduleNurse> {
                         ),
                         Row(
                           children: [
-                            Text(
-                              value.person!.time == 0
-                                  ? "1.00 pm - 1.30 pm"
-                                  : value.person!.time == 1
-                                      ? "1.30 pm - 2.00 pm"
-                                      : value.person!.time == 2
-                                          ? "2.00 pm - 2.30 pm"
-                                          : "2.30 pm - 3.00 pm",
-                              style: textStyle.copyWith(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400,
-                                  color: cBlackBase),
-                            ),
+                            // Text(
+                            //   value.person!.time == 0
+                            //       ? "1.00 pm - 1.30 pm"
+                            //       : value.person!.time == 1
+                            //           ? "1.30 pm - 2.00 pm"
+                            //           : value.person!.time == 2
+                            //               ? "2.00 pm - 2.30 pm"
+                            //               : "2.30 pm - 3.00 pm",
+                            //   style: textStyle.copyWith(
+                            //       fontSize: 14,
+                            //       fontWeight: FontWeight.w400,
+                            //       color: cBlackBase),
+                            // ),
                             Expanded(
                               child: ListTile(
-                                  trailing: value.person!.progress
-                                      ? TextButton(
-                                          onPressed: () {
-                                            navPushTransition(context,
-                                                const ChangeScheduleByNurse());
-                                          },
-                                          child: Text(
-                                            "Change",
-                                            style: textStyle.copyWith(
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.w700,
-                                                color: cPrimaryBase),
-                                          ),
-                                        )
-                                      : Text("")),
+                                  // trailing: value.person!.progress
+                                  //     ? TextButton(
+                                  //         onPressed: () {
+                                  //           navPushTransition(context,
+                                  //               const ChangeScheduleByNurse());
+                                  //         },
+                                  //         child: Text(
+                                  //           "Change",
+                                  //           style: textStyle.copyWith(
+                                  //               fontSize: 12,
+                                  //               fontWeight: FontWeight.w700,
+                                  //               color: cPrimaryBase),
+                                  //         ),
+                                  //       )
+                                  //     : Text(""),
+                                  ),
                             ),
                           ],
                         )

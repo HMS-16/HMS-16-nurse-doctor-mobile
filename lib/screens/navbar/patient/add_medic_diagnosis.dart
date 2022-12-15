@@ -67,15 +67,15 @@ class _AddMedDiagnosisState extends State<AddMedDiagnosis> {
                   dialogValidation(
                     context: context,
                     onPressedYes: (() {
-                      context.read<TreatmentViewModel>().insertTreatment(
-                            TreatmentModel(
-                              doctor: context.read<PatientViewModel>().person!.doctor,
-                              date: context.read<PatientViewModel>().person!.schedule,
-                              time: context.read<PatientViewModel>().person!.time,
-                              diagnose: diagnoseCtrl.text,
-                              prescription: prescriptionCtrl.text,
-                            ),
-                          );
+                      // context.read<TreatmentViewModel>().insertTreatment(
+                      //       TreatmentModel(
+                      //         doctor: context.read<PatientViewModel>().person!.doctor,
+                      //         date: context.read<PatientViewModel>().person!.schedule,
+                      //         time: context.read<PatientViewModel>().person!.time,
+                      //         diagnose: diagnoseCtrl.text,
+                      //         prescription: prescriptionCtrl.text,
+                      //       ),
+                      //     );
                       Navigator.pop(context);
                       dialogValidation(
                         context: context,

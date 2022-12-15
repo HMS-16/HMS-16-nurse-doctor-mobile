@@ -157,81 +157,81 @@ class _ViewScheduleNurseState extends State<ViewScheduleNurse> {
             const SizedBox(
               height: 24.0,
             ),
-            Consumer<PatientViewModel>(builder: (context, value, child) {
-              // return PatientList(persons: patients);
-              return PatientListSchedule(
-                persons: patients,
-                doctors: listDoctors,
-              );
-            }),
+            // Consumer<PatientViewModel>(builder: (context, value, child) {
+            //   // return PatientList(persons: patients);
+            //   return PatientListSchedule(
+            //     persons: patients,
+            //     doctors: listDoctors,
+            //   );
+            // }),
           ],
         ));
   }
 }
 
-class PatientListSchedule extends StatelessWidget {
-  final List<PatientModel> persons;
-  final List<DoctorModel> doctors;
+// class PatientListSchedule extends StatelessWidget {
+//   final List<PatientModel> persons;
+//   final List<DoctorModel> doctors;
 
-  const PatientListSchedule(
-      {super.key, required this.persons, required this.doctors});
+//   const PatientListSchedule(
+//       {super.key, required this.persons, required this.doctors});
 
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: ListView.builder(
-        physics: const BouncingScrollPhysics(),
-        shrinkWrap: true,
-        scrollDirection: Axis.vertical,
-        itemBuilder: (context, index) {
-          final person = persons.elementAt(index);
-          final doctor = doctors.elementAt(index);
-          if (DateFormat("EEE, d-M-y").format(person.schedule) ==
-              DateFormat("EEE, d-M-y").format(selectedDate)) {
-            return InkWell(
-              onTap: () {
-                context.read<PatientViewModel>().selectedPerson(person);
-                context.read<DoctorViewModel>().selectedDoctor(doctor);
-                navPushTransition(context, const DetailScheduleNurse());
-              },
-              child: Builder(builder: (context) {
-                Color lineColor = cPrimaryBase;
-                Color fontColor = cPrimaryDark;
-                Color badgeColor = cSecondaryLighter;
-                String condition = 'Process';
+//   @override
+//   Widget build(BuildContext context) {
+//     return Expanded(
+//       child: ListView.builder(
+//         physics: const BouncingScrollPhysics(),
+//         shrinkWrap: true,
+//         scrollDirection: Axis.vertical,
+//         itemBuilder: (context, index) {
+//           final person = persons.elementAt(index);
+//           final doctor = doctors.elementAt(index);
+//           if (DateFormat("EEE, d-M-y").format(person.schedule) ==
+//               DateFormat("EEE, d-M-y").format(selectedDate)) {
+//             return InkWell(
+//               onTap: () {
+//                 context.read<PatientViewModel>().selectedPerson(person);
+//                 context.read<DoctorViewModel>().selectedDoctor(doctor);
+//                 navPushTransition(context, const DetailScheduleNurse());
+//               },
+//               child: Builder(builder: (context) {
+//                 Color lineColor = cPrimaryBase;
+//                 Color fontColor = cPrimaryDark;
+//                 Color badgeColor = cSecondaryLighter;
+//                 String condition = 'Process';
 
-                if (person.progress == false) {
-                  lineColor = cGreenLine;
-                  condition = 'Done';
-                  badgeColor = cSuccessLightest;
-                  fontColor = cSuccessDark;
-                }
-                return PatientScheduleCard(
-                    fontColor: fontColor,
-                    lineColor: lineColor,
-                    paintBadge: badgeColor,
-                    badgeText: condition,
-                    patientName: person.name,
-                    // disease: person.disease,
-                    doctorName: person.doctor,
-                    nurseName: person.nurse,
-                    time: person.time == 0
-                        ? "1.00 pm - 1.30 pm"
-                        : person.time == 1
-                            ? "1.30 pm - 2.00 pm"
-                            : person.time == 2
-                                ? "2.00 pm - 2.30 pm"
-                                : "2.30 pm - 3.00 pm");
-              }),
-            );
-          }
-          return Container();
-        },
-        itemCount: persons.length,
-      ),
-    );
-  }
-}
+//                 if (person.progress == false) {
+//                   lineColor = cGreenLine;
+//                   condition = 'Done';
+//                   badgeColor = cSuccessLightest;
+//                   fontColor = cSuccessDark;
+//                 }
+//                 return PatientScheduleCard(
+//                     fontColor: fontColor,
+//                     lineColor: lineColor,
+//                     paintBadge: badgeColor,
+//                     badgeText: condition,
+//                     patientName: person.name,
+//                     // disease: person.disease,
+//                     doctorName: person.doctor,
+//                     nurseName: person.nurse,
+//                     time: person.time == 0
+//                         ? "1.00 pm - 1.30 pm"
+//                         : person.time == 1
+//                             ? "1.30 pm - 2.00 pm"
+//                             : person.time == 2
+//                                 ? "2.00 pm - 2.30 pm"
+//                                 : "2.30 pm - 3.00 pm");
+//               }),
+//             );
+//           }
+//           return Container();
+//         },
+//         itemCount: persons.length,
+//       ),
+//     );
+//   }
+// }
 
 // class SchedulePatientList extends StatelessWidget {
 //   final List<PatientModel> schedulePatients;

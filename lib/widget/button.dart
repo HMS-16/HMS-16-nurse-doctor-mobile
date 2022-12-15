@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:hms_16/utils/constant.dart';
 
 class Button extends StatelessWidget {
-  final String text;
+  final Widget child;
   final Color? bgcolor;
   final EdgeInsetsGeometry? margin;
   final void Function() onpressed;
   const Button({
     Key? key,
-    required this.text,
+    required this.child,
     this.bgcolor,
     this.margin,
     required this.onpressed,
@@ -22,16 +21,15 @@ class Button extends StatelessWidget {
       margin: margin,
       height: 48,
       child: ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-            backgroundColor: cPrimaryBase,
-            foregroundColor: Colors.white,
-          ),
-          onPressed: onpressed,
-          child: Text(
-            text,
-          )),
+        style: ElevatedButton.styleFrom(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          backgroundColor: cPrimaryBase,
+          foregroundColor: Colors.white,
+        ),
+        onPressed: onpressed,
+        child: child,
+      ),
     );
   }
 }

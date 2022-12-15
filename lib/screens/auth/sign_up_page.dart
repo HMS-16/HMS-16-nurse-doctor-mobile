@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:hms_16/screens/auth/login_page.dart';
 import 'package:hms_16/module/login/login_repository.dart';
 import 'package:hms_16/module/register/register_repository.dart';
 import 'package:hms_16/utils/constant.dart';
+import 'package:hms_16/view_model/auth_view_model.dart';
+import 'package:hms_16/view_model/general_view_model.dart';
 import 'package:hms_16/widget/button.dart';
 import 'package:hms_16/model/register_model.dart';
+import 'package:hms_16/widget/dialog_validation.dart';
+import 'package:hms_16/widget/navreplace_transition.dart';
+import 'package:hms_16/widget/status/loading_max.dart';
 import 'package:provider/provider.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -121,8 +127,8 @@ class _SignUpPageState extends State<SignUpPage> {
                     if (!RegExp(r'^[0-9]+$').hasMatch(value)) {
                       return 'Registration Number is Invalid';
                     }
-                    if (!RegExp('.{16,}').hasMatch(value)) {
-                      return 'Registration Number length must be 16 char';
+                    if (!RegExp(r'^.{16}$').hasMatch(value)) {
+                      return 'Registration Number length must be 16 digit';
                     }
                     return null;
                   },
@@ -366,31 +372,48 @@ class _SignUpPageState extends State<SignUpPage> {
                   height: 34.0,
                 ),
                 Button(
-                    text: "Register",
-                    onpressed: () async {
-                      if (_formKey.currentState!.validate()) {
-                        // navReplaceTransition(context, const NavBar());
-                        // var viewModel = Provider.of<RegisterViewModel>(context,
-                        //     listen: false);
-
-                        var data = Datum(
-                          username: controllerUser.text,
-                          password: controllerPassword.text,
-                          email: controllerEmail.text,
-                          strNum: controllerRegNum.text,
-                          // phoneNum: controllerRegNum.text,
-                          role: listRole.indexOf(valueRole) + 1,
-                        );
-
-                        context.read<RegisterViewModel>().register(
-                              data,
-                              context.read<LoginViewModel>().tokenBearer!,
-                              context,
-                            );
-                      } else {
-                        print("error");
+                  child: Consumer<GeneralViewModel>(
+                    builder: (context, value, child) {
+                      switch (value.state) {
+                        case ActionState.none:
+                          return Text('Register');
+                        case ActionState.loading:
+                          return LoadingMax();
+                        default:
+                          return Text('Register');
+                        // case ActionState.error:
+                        //   ScaffoldMessenger.of(context).showSnackBar(
+                        //     SnackBar(content: Text("email or password is invalid")),
+                        //   );
                       }
-                    }),
+                    },
+                  ),
+                  // child: Text("Register"),
+                  onpressed: () async {
+                    if (_formKey.currentState!.validate()) {
+                      // navReplaceTransition(context, const NavBar());
+                      // var viewModel = Provider.of<RegisterViewModel>(context,
+                      //     listen: false);
+
+                      var data = Datum(
+                        username: controllerUser.text,
+                        password: controllerPassword.text,
+                        email: controllerEmail.text,
+                        strNum: controllerRegNum.text,
+                        // phoneNum: controllerRegNum.text,
+                        role: listRole.indexOf(valueRole) + 1,
+                      );
+
+                      context.read<AuthViewModel>().register(
+                            data,
+                            context.read<AuthViewModel>().tokenBearer!,
+                            context,
+                          );
+                    } else {
+                      print("error");
+                    }
+                  },
+                ),
                 const SizedBox(
                   height: 17.0,
                 ),

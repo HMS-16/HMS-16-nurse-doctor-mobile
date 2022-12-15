@@ -26,6 +26,7 @@ void dialogValidation(
             children: [
               Text(
                 title,
+                textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
               ),
               Image.asset('assets/images/succes.png', scale: 3),
