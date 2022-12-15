@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:hms_16/screens/auth/login_page.dart';
 import 'package:hms_16/module/login/login_repository.dart';
 import 'package:hms_16/module/register/register_repository.dart';
+import 'package:hms_16/screens/auth/login_page.dart';
+import 'package:hms_16/services/shared_services.dart';
 import 'package:hms_16/utils/constant.dart';
 import 'package:hms_16/view_model/auth_view_model.dart';
 import 'package:hms_16/view_model/general_view_model.dart';
 import 'package:hms_16/widget/button.dart';
 import 'package:hms_16/model/register_model.dart';
-import 'package:hms_16/widget/dialog_validation.dart';
 import 'package:hms_16/widget/navreplace_transition.dart';
 import 'package:hms_16/widget/status/loading_max.dart';
 import 'package:provider/provider.dart';
@@ -39,7 +39,6 @@ class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: true,
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -49,6 +48,9 @@ class _SignUpPageState extends State<SignUpPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                const SizedBox(
+                  height: 30.0,
+                ),
                 Center(
                   child: Text(
                     "Register New User",
@@ -415,7 +417,31 @@ class _SignUpPageState extends State<SignUpPage> {
                   },
                 ),
                 const SizedBox(
-                  height: 17.0,
+                  height: 10.0,
+                ),
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: 48,
+                  child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10)),
+                        backgroundColor: cWhiteDark,
+                        foregroundColor: Colors.white,
+                      ),
+                      onPressed: () {
+                        final prefs = SharedService();
+                        prefs.deleteToken();
+                        prefs.deleteRole();
+                        navReplaceTransition(context, const LoginPage());
+                      },
+                      child: const Text(
+                        "Logout",
+                        style: TextStyle(color: Colors.black),
+                      )),
+                ),
+                const SizedBox(
+                  height: 10.0,
                 ),
               ],
             ),

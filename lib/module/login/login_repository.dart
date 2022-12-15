@@ -6,6 +6,7 @@ import 'package:hms_16/model/login_model.dart';
 import 'package:dio/dio.dart';
 import 'package:hms_16/screens/auth/sign_up_page.dart';
 import 'package:hms_16/screens/navbar/navbar.dart';
+import 'package:hms_16/services/shared_services.dart';
 import 'package:hms_16/widget/navpush_transition.dart';
 import 'package:hms_16/widget/navreplace_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -36,14 +37,17 @@ class LoginViewModel with ChangeNotifier {
       var responseData = await Auth().login(email: email, password: pass);
       if (responseData.statusCode == 200) {
         LoginModel modelUser = LoginModel.fromJson(responseData.data);
-        final prefs = await SharedPreferences.getInstance();
+        // final prefs = await SharedPreferences.getInstance();
+        SharedService prefs = SharedService();
         // print(modelUser);
-
         dataUser = modelUser.data;
         // print(dataUser);
         final token = modelUser.token;
+        final role = dataUser!.role;
         tokenBearer = token;
         print(token);
+        await prefs.saveToken(token);
+        await prefs.saveRole(role);
 
         var encodeUser = jsonEncode(dataUser);
         print(encodeUser);
