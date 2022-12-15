@@ -298,12 +298,10 @@ class _DetailScheduleNurseState extends State<DetailScheduleNurse> {
                           children: [
                             Text(
                               value.person!.time == 0
-                                  ? "1.00 pm - 1.30 pm"
+                                  ? "09:00 - 12:00"
                                   : value.person!.time == 1
-                                      ? "1.30 pm - 2.00 pm"
-                                      : value.person!.time == 2
-                                          ? "2.00 pm - 2.30 pm"
-                                          : "2.30 pm - 3.00 pm",
+                                      ? "13:00 - 16:00"
+                                      : "18:00 - 21:00",
                               style: textStyle.copyWith(
                                   fontSize: 14,
                                   fontWeight: FontWeight.w400,

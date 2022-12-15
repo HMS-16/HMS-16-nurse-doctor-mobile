@@ -19,14 +19,14 @@ final List<ScheduleModel> listSchedules = [
   ScheduleModel(
       scheduleId: "SC01",
       patientId: "P01",
-      userId: "DOC03",
+      userId: "Dr. Abednego",
       date: DateTime(2022, 12, 13),
       start_time: DateTime(2022, 12, 13, 09, 0),
       end_time: DateTime(2022, 12, 13, 12, 0)),
   ScheduleModel(
       scheduleId: "SC02",
       patientId: "P02",
-      userId: "DOC02",
+      userId: "Dr. Abednego",
       date: DateTime(2022, 12, 12),
       start_time: DateTime(2022, 12, 12, 13, 0),
       end_time: DateTime(2022, 12, 12, 16, 0)),

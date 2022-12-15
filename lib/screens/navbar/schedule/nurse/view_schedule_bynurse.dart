@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hms_16/model/doctor_model.dart';
 import 'package:hms_16/model/patient_model.dart';
-import 'package:hms_16/screens/navbar/patient/patient_detail/patient_detail.dart';
-import 'package:hms_16/screens/navbar/schedule/nurse/change_schedule_bynurse.dart';
 import 'package:hms_16/utils/constant.dart';
 import 'package:hms_16/screens/navbar/schedule/nurse/detail_schedule_bynurse.dart';
 import 'package:hms_16/screens/notification.dart';
@@ -11,7 +9,6 @@ import 'package:hms_16/view_model/doctor_view_model.dart';
 import 'package:hms_16/view_model/patient_view_model.dart';
 import 'package:hms_16/widget/navpush_transition.dart';
 import 'package:hms_16/widget/patientSchedule_card.dart';
-import 'package:hms_16/widget/patient_card.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
@@ -207,21 +204,20 @@ class PatientListSchedule extends StatelessWidget {
                   fontColor = cSuccessDark;
                 }
                 return PatientScheduleCard(
-                    fontColor: fontColor,
-                    lineColor: lineColor,
-                    paintBadge: badgeColor,
-                    badgeText: condition,
-                    patientName: person.name,
-                    // disease: person.disease,
-                    doctorName: person.doctor,
-                    nurseName: person.nurse,
-                    time: person.time == 0
-                        ? "1.00 pm - 1.30 pm"
-                        : person.time == 1
-                            ? "1.30 pm - 2.00 pm"
-                            : person.time == 2
-                                ? "2.00 pm - 2.30 pm"
-                                : "2.30 pm - 3.00 pm");
+                  fontColor: fontColor,
+                  lineColor: lineColor,
+                  paintBadge: badgeColor,
+                  badgeText: condition,
+                  patientName: person.name,
+                  // disease: person.disease,
+                  doctorName: person.doctor,
+                  nurseName: person.nurse,
+                  time: person.time == 0
+                      ? "09:00 - 12:00"
+                      : person.time == 1
+                          ? "13:00 - 16:00"
+                          : "18:00 - 21:00",
+                );
               }),
             );
           }

@@ -14,12 +14,11 @@ class ChangeScheduleByNurse extends StatefulWidget {
 }
 
 List<String> itemsSchedule = [
-  "1.00 pm - 1.30 pm",
-  "1.30 pm - 2.00 pm",
-  "2.00 pm - 2.30 pm",
-  "2.30 pm - 3.00 pm"
+  "09.00 - 12.00",
+  "13.00 - 16.00",
+  "18.00 - 21.00",
 ];
-List<int> itemsScheduleint = [0, 1, 2, 3];
+List<int> itemsScheduleint = [0, 1, 2];
 String valueDropdown = itemsSchedule.first;
 int valueDropdownint = itemsScheduleint.first;
 
@@ -81,30 +80,6 @@ class _ChangeScheduleByNurseState extends State<ChangeScheduleByNurse> {
               height: 20.0,
             ),
             Text(
-              "Status",
-              style:
-                  textStyle.copyWith(fontWeight: FontWeight.w700, fontSize: 12),
-            ),
-            SizedBox(
-              height: 43,
-              child: TextFormField(
-                readOnly: true,
-                decoration: InputDecoration(
-                    contentPadding: const EdgeInsets.only(top: 12, left: 12),
-                    filled: true,
-                    border: OutlineInputBorder(
-                        borderSide: BorderSide.none,
-                        borderRadius: BorderRadius.circular(12)),
-                    fillColor: cWhiteDarker,
-                    hintText: "Available",
-                    hintStyle: textStyle.copyWith(
-                        fontSize: 14, fontWeight: FontWeight.w400)),
-              ),
-            ),
-            const SizedBox(
-              height: 20.0,
-            ),
-            Text(
               "Hours Available",
               style:
                   textStyle.copyWith(fontWeight: FontWeight.w700, fontSize: 12),
@@ -134,12 +109,10 @@ class _ChangeScheduleByNurseState extends State<ChangeScheduleByNurse> {
                       value: e,
                       child: Text(
                           e == 0
-                              ? "1.00 pm - 1.30 pm"
+                              ? "09:00 - 12:00"
                               : e == 1
-                                  ? "1.30 pm - 2.00 pm"
-                                  : e == 2
-                                      ? "2.00 pm - 2.30 pm"
-                                      : "2.30 pm - 3.00 pm",
+                                  ? "13:00 - 16:00"
+                                  : "18:00 - 21:00",
                           style: textStyle.copyWith(
                               fontSize: 14,
                               fontWeight: FontWeight.w400,
@@ -211,12 +184,10 @@ class _ChangeScheduleByNurseState extends State<ChangeScheduleByNurse> {
                                     ),
                                     Text(
                                       valueDropdownint == 0
-                                          ? "1.00 pm - 1.30 pm"
+                                          ? "09:00 - 12:00"
                                           : valueDropdownint == 1
-                                              ? "1.30 pm - 2.00 pm"
-                                              : valueDropdownint == 2
-                                                  ? "2.00 pm - 2.30 pm"
-                                                  : "2.30 pm - 3.00 pm",
+                                              ? "13:00 - 16:00"
+                                              : "18:00 - 21:00",
                                       style: textStyle.copyWith(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w600,
