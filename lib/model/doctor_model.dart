@@ -1,10 +1,10 @@
 class DoctorModel {
-  late final String name;
-  final String urlProfile;
-  final String specialist;
-  final int startTime;
-  final int? endTime;
-  final DateTime? dateTime;
+  String name;
+  String urlProfile;
+  String specialist;
+  int startTime;
+  int? endTime;
+  DateTime? dateTime;
 
   DoctorModel(
       {required this.urlProfile,

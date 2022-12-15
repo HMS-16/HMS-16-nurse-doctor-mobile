@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:hms_16/api/auth.dart';
 import 'package:hms_16/model/register_model.dart';
+import 'package:hms_16/widget/dialog_validation.dart';
 import 'package:hms_16/widget/duration_dialog.dart';
 
 class RegisterViewModel with ChangeNotifier {
