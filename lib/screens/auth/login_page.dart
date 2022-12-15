@@ -166,14 +166,7 @@ class _LoginPageState extends State<LoginPage> {
                               pass: controllerPassword.text,
                               context: context,
                             );
-                        // ScaffoldMessenger.of(context)
-                        //     .showSnackBar(SnackBar(content: Text("Success")));
-                        // navPushTransition(context, const SignUpPage());
                       }
-                      // else {
-                      //   ScaffoldMessenger.of(context)
-                      //       .showSnackBar(SnackBar(content: Text("Failed")));
-                      // }
                     }),
                 const SizedBox(
                   height: 15.0,
