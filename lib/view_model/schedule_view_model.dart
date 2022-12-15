@@ -12,13 +12,4 @@ class ScheduleViewModel extends ChangeNotifier {
     _scheduleModel = newPatient;
     notifyListeners();
   }
-  // changeDoctor(doctor) {
-  //   _patient!.doctor = doctor;
-  //   notifyListeners();
-  // }
-
-  // changeSchedule(schedule) {
-  //   _scheduleModel!.time = schedule;
-  //   notifyListeners();
-  // }
 }

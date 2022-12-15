@@ -1,6 +1,5 @@
 class TreatmentModel {
   String doctor;
-  String patient;
   DateTime date;
   int time;
   String diagnose;
@@ -8,8 +7,7 @@ class TreatmentModel {
 
   TreatmentModel({
     required this.doctor,
-    required this.patient,
-    required this.date,
+    required this.date, 
     required this.time,
     required this.diagnose,
     required this.prescription,

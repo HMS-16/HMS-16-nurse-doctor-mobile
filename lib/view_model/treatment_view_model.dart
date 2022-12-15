@@ -5,7 +5,7 @@ class TreatmentViewModel extends ChangeNotifier {
   List<TreatmentModel> _treatment = [];
   List<TreatmentModel> get treatments => _treatment;
 
-  void insertTreatment(TreatmentModel newTreatment) {
+  insertTreatment(TreatmentModel newTreatment) {
     FocusManager.instance.primaryFocus?.unfocus();
     _treatment = [newTreatment, ..._treatment];
     notifyListeners();

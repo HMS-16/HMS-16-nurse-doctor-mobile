@@ -1,6 +1,5 @@
 class ConditionModel {
   String nurse;
-  String patient;
   DateTime date;
   int time;
   int height;
@@ -14,7 +13,6 @@ class ConditionModel {
 
   ConditionModel({
     required this.nurse,
-    required this.patient,
     required this.date,
     required this.time,
     required this.height,

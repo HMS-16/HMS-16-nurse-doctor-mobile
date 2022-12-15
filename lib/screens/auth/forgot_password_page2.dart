@@ -100,7 +100,7 @@ class ForgotPassword2 extends StatelessWidget {
               ],
             ),
             Button(
-                text: "VERIFY",
+                child: Text("VERIFY"),
                 margin: const EdgeInsets.only(top: 30),
                 onpressed: () {
                   navPushTransition(context, const ForgotPassword3());

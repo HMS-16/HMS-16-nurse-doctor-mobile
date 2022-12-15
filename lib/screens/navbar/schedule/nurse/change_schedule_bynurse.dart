@@ -238,39 +238,39 @@ class _ChangeScheduleByNurseState extends State<ChangeScheduleByNurse> {
                         actions: <Widget>[
                           Row(
                             children: [
-                              Expanded(
-                                child: SizedBox(
-                                  height: 50,
-                                  width: double.infinity,
-                                  child: ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(12)),
-                                      backgroundColor: cPrimaryBase,
-                                    ),
-                                    onPressed: () async {
-                                      context
-                                          .read<PatientViewModel>()
-                                          .changeSchedule(valueDropdownint);
-                                      durationDialog(context,
-                                          "Schedule has been successfully changed!");
-                                      Future.delayed(const Duration(seconds: 2),
-                                          () {
-                                        Navigator.pop(context);
-                                        Navigator.pop(context);
-                                      });
-                                    },
-                                    child: Text(
-                                      "Yes",
-                                      style: textStyle.copyWith(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w600,
-                                          color: Colors.white),
-                                    ),
-                                  ),
-                                ),
-                              ),
+                              // Expanded(
+                              //   child: SizedBox(
+                              //     height: 50,
+                              //     width: double.infinity,
+                              //     child: ElevatedButton(
+                              //       style: ElevatedButton.styleFrom(
+                              //         shape: RoundedRectangleBorder(
+                              //             borderRadius:
+                              //                 BorderRadius.circular(12)),
+                              //         backgroundColor: cPrimaryBase,
+                              //       ),
+                              //       onPressed: () async {
+                              //         context
+                              //             .read<PatientViewModel>()
+                              //             .changeSchedule(valueDropdownint);
+                              //         durationDialog(context,
+                              //             "Schedule has been successfully changed!");
+                              //         Future.delayed(const Duration(seconds: 2),
+                              //             () {
+                              //           Navigator.pop(context);
+                              //           Navigator.pop(context);
+                              //         });
+                              //       },
+                              //       child: Text(
+                              //         "Yes",
+                              //         style: textStyle.copyWith(
+                              //             fontSize: 14,
+                              //             fontWeight: FontWeight.w600,
+                              //             color: Colors.white),
+                              //       ),
+                              //     ),
+                              //   ),
+                              // ),
                               const SizedBox(
                                 width: 10.0,
                               ),

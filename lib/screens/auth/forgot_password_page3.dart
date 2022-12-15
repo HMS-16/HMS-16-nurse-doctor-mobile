@@ -176,7 +176,7 @@ class _ForgotPassword3State extends State<ForgotPassword3> {
               //   height: 3.0,
               // ),
               Button(
-                  text: "SAVE",
+                  child: Text("SAVE"),
                   bgcolor: Colors.blueAccent,
                   margin: const EdgeInsets.only(top: 30),
                   onpressed: () {

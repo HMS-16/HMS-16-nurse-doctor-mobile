@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:hms_16/screens/auth/login_page.dart';
 import 'package:hms_16/utils/constant.dart';
-import 'package:hms_16/screens/navbar/navbar.dart';
+import 'package:hms_16/view_model/auth_view_model.dart';
+import 'package:hms_16/view_model/general_view_model.dart';
 import 'package:hms_16/widget/button.dart';
-import 'package:hms_16/widget/navpush_transition.dart';
+import 'package:hms_16/model/register_model.dart';
+import 'package:hms_16/widget/dialog_validation.dart';
+import 'package:hms_16/widget/navreplace_transition.dart';
+import 'package:hms_16/widget/status/loading_max.dart';
+import 'package:provider/provider.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key}) : super(key: key);
@@ -11,8 +17,13 @@ class SignUpPage extends StatefulWidget {
   State<SignUpPage> createState() => _SignUpPageState();
 }
 
+List<String> listRole = ["Doctor", "Nurse"];
+
+String valueRole = "Choose role";
+
 class _SignUpPageState extends State<SignUpPage> {
   late String email, password;
+  String msgPassword = '.{5,}';
 
   TextEditingController controllerEmail = TextEditingController();
   TextEditingController controllerUser = TextEditingController();
@@ -21,13 +32,12 @@ class _SignUpPageState extends State<SignUpPage> {
   TextEditingController controllerSecPassword = TextEditingController();
 
   bool _hidePassword = false;
+  bool _hideConfirmPassword = false;
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    List<String> listRole = ["Doctor", "Nurse"];
-    String valueRole = listRole.first;
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -52,7 +62,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 Row(
                   children: [
                     Text(
-                      "User ",
+                      "Name",
                       style:
                           textStyle.copyWith(color: cBlackBase, fontSize: 14),
                     ),
@@ -115,8 +125,8 @@ class _SignUpPageState extends State<SignUpPage> {
                     if (!RegExp(r'^[0-9]+$').hasMatch(value)) {
                       return 'Registration Number is Invalid';
                     }
-                    if (!RegExp('.{8,}').hasMatch(value)) {
-                      return 'Registration Number length must be 8 char';
+                    if (!RegExp(r'^.{16}$').hasMatch(value)) {
+                      return 'Registration Number length must be 16 digit';
                     }
                     return null;
                   },
@@ -157,12 +167,15 @@ class _SignUpPageState extends State<SignUpPage> {
                         Icons.supervised_user_circle,
                         color: cBlackBase,
                       ),
+                      border: const OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10))),
                       enabledBorder: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10)))),
                   isExpanded: true,
-                  value: valueRole,
+                  // value: valueRole,
+                  hint: Text(valueRole),
                   validator: (value) {
-                    if (valueRole.isEmpty) {
+                    if (valueRole == "Choose role") {
                       return 'Role can not be empty';
                     }
                   },
@@ -208,7 +221,6 @@ class _SignUpPageState extends State<SignUpPage> {
                   height: 8,
                 ),
                 TextFormField(
-                  // obscureText: !_hidePassword,
                   controller: controllerEmail,
                   keyboardType: TextInputType.emailAddress,
                   validator: (value) {
@@ -260,12 +272,12 @@ class _SignUpPageState extends State<SignUpPage> {
                   obscureText: !_hidePassword,
                   controller: controllerPassword,
                   validator: (value) {
-                    String msg = '.{8,}';
+                    // String msg = '.{8,}';
                     if (value!.isEmpty) {
                       return 'Password must be filled';
                     }
-                    if (!RegExp(msg).hasMatch(value)) {
-                      return 'Password length can’t be less than 8 char';
+                    if (!RegExp(msgPassword).hasMatch(value)) {
+                      return 'Password length can’t be less than 5 char';
                     }
                     return null;
                   },
@@ -314,18 +326,18 @@ class _SignUpPageState extends State<SignUpPage> {
                   height: 8,
                 ),
                 TextFormField(
-                  obscureText: !_hidePassword,
+                  obscureText: !_hideConfirmPassword,
                   controller: controllerSecPassword,
                   validator: (value) {
-                    String msg = '.{8,}';
+                    // String msg = '.{5,}';
                     if (value!.isEmpty) {
-                      return 'Password must be filled';
+                      return 'Confirm password must be filled';
                     }
-                    if (!RegExp(msg).hasMatch(value)) {
-                      return 'Password length can’t be less than 8 char';
+                    if (!RegExp(msgPassword).hasMatch(value)) {
+                      return 'Confirm password length can’t be less than 5 char';
                     }
                     if (controllerSecPassword.text != controllerPassword.text) {
-                      return 'Password not same';
+                      return 'Confirm password doesn’t match';
                     }
                     return null;
                   },
@@ -340,14 +352,14 @@ class _SignUpPageState extends State<SignUpPage> {
                       suffixIcon: IconButton(
                         icon: Icon(
                           // Based on passwordVisible state choose the icon
-                          _hidePassword
+                          _hideConfirmPassword
                               ? Icons.visibility
                               : Icons.visibility_off,
                           color: Theme.of(context).primaryColorDark,
                         ),
                         onPressed: () {
                           setState(() {
-                            _hidePassword = !_hidePassword;
+                            _hideConfirmPassword = !_hideConfirmPassword;
                           });
                         },
                       ),
@@ -358,17 +370,48 @@ class _SignUpPageState extends State<SignUpPage> {
                   height: 34.0,
                 ),
                 Button(
-                    text: "Register",
-                    onpressed: () {
-                      // if (_formKey.currentState!.validate()) {
-                        navPushTransition(context, const NavBar());
-                      // }
-                      // Navigator.push(
-                      //     context,
-                      //     MaterialPageRoute(
-                      //       builder: (context) => const NavBar(),
-                      //     ));
-                    }),
+                  child: Consumer<GeneralViewModel>(
+                    builder: (context, value, child) {
+                      switch (value.state) {
+                        case ActionState.none:
+                          return Text('Register');
+                        case ActionState.loading:
+                          return LoadingMax();
+                        default:
+                          return Text('Register');
+                        // case ActionState.error:
+                        //   ScaffoldMessenger.of(context).showSnackBar(
+                        //     SnackBar(content: Text("email or password is invalid")),
+                        //   );
+                      }
+                    },
+                  ),
+                  // child: Text("Register"),
+                  onpressed: () async {
+                    if (_formKey.currentState!.validate()) {
+                      // navReplaceTransition(context, const NavBar());
+                      // var viewModel = Provider.of<RegisterViewModel>(context,
+                      //     listen: false);
+
+                      var data = Datum(
+                        username: controllerUser.text,
+                        password: controllerPassword.text,
+                        email: controllerEmail.text,
+                        strNum: controllerRegNum.text,
+                        // phoneNum: controllerRegNum.text,
+                        role: listRole.indexOf(valueRole) + 1,
+                      );
+
+                      context.read<AuthViewModel>().register(
+                            data,
+                            context.read<AuthViewModel>().tokenBearer!,
+                            context,
+                          );
+                    } else {
+                      print("error");
+                    }
+                  },
+                ),
                 const SizedBox(
                   height: 17.0,
                 ),

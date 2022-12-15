@@ -104,7 +104,7 @@ class ForgotPassword1 extends StatelessWidget {
               //   height: 3.0,
               // ),
               Button(
-                  text: "Send",
+                  child: Text("Send"),
                   bgcolor: Colors.blueAccent,
                   margin: const EdgeInsets.only(top: 30),
                   onpressed: () {

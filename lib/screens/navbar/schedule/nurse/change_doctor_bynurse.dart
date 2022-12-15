@@ -73,7 +73,7 @@ class _ChangeDoctorByNurseState extends State<ChangeDoctorByNurse> {
                   //             .format(dataProvider.dateTime!) ==
                   //         DateFormat('EEE, d MMM y').format(selectedDate) &&
                   //     patientProvider.person!.time == dataProvider.startTime)
-                  if (dataProvider.startTime == patientProvider.person!.time) {
+                  // if (dataProvider.startTime == patientProvider.person!.time) {
                     return GestureDetector(
                       onTap: () async {
                         await showDialog<void>(
@@ -96,51 +96,51 @@ class _ChangeDoctorByNurseState extends State<ChangeDoctorByNurse> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceEvenly,
                                 children: [
-                                  Expanded(
-                                    child: SizedBox(
-                                      height: 50,
-                                      width: double.infinity,
-                                      child: ElevatedButton(
-                                        style: ElevatedButton.styleFrom(
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(12)),
-                                          backgroundColor: cPrimaryBase,
-                                        ),
-                                        onPressed: () async {
-                                          context
-                                              .read<PatientViewModel>()
-                                              .changeDoctor(value
-                                                  .getlistDoctor[index].name);
-                                          print(
-                                              value.getlistDoctor[index].name);
-                                          // setState(() {
-                                          //   patientProvider.persons[index].doctor =
-                                          //       value.getlistDoctor[index].name;
-                                          // });
-                                          // print(
-                                          //     value.getlistDoctor[index].name);
-                                          // print(value.persons2[index].doctor);
-                                          // print(
-                                          //     "HASIL ======= ${value.getlistDoctor[index].name} ====== ${value.persons2[index].doctor}");
-                                          durationDialog(context,
-                                              "Doctor has been successfully changed!");
-                                          Future.delayed(
-                                              const Duration(seconds: 2), () {
-                                            Navigator.pop(context);
-                                            Navigator.pop(context);
-                                          });
-                                        },
-                                        child: Text(
-                                          "Yes",
-                                          style: textStyle.copyWith(
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.w600,
-                                              color: Colors.white),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
+                                  // Expanded(
+                                  //   child: SizedBox(
+                                  //     height: 50,
+                                  //     width: double.infinity,
+                                  //     child: ElevatedButton(
+                                  //       style: ElevatedButton.styleFrom(
+                                  //         shape: RoundedRectangleBorder(
+                                  //             borderRadius:
+                                  //                 BorderRadius.circular(12)),
+                                  //         backgroundColor: cPrimaryBase,
+                                  //       ),
+                                  //       onPressed: () async {
+                                  //         context
+                                  //             .read<PatientViewModel>()
+                                  //             .changeDoctor(value
+                                  //                 .getlistDoctor[index].name);
+                                  //         print(
+                                  //             value.getlistDoctor[index].name);
+                                  //         // setState(() {
+                                  //         //   patientProvider.persons[index].doctor =
+                                  //         //       value.getlistDoctor[index].name;
+                                  //         // });
+                                  //         // print(
+                                  //         //     value.getlistDoctor[index].name);
+                                  //         // print(value.persons2[index].doctor);
+                                  //         // print(
+                                  //         //     "HASIL ======= ${value.getlistDoctor[index].name} ====== ${value.persons2[index].doctor}");
+                                  //         durationDialog(context,
+                                  //             "Doctor has been successfully changed!");
+                                  //         Future.delayed(
+                                  //             const Duration(seconds: 2), () {
+                                  //           Navigator.pop(context);
+                                  //           Navigator.pop(context);
+                                  //         });
+                                  //       },
+                                  //       child: Text(
+                                  //         "Yes",
+                                  //         style: textStyle.copyWith(
+                                  //             fontSize: 14,
+                                  //             fontWeight: FontWeight.w600,
+                                  //             color: Colors.white),
+                                  //       ),
+                                  //     ),
+                                  //   ),
+                                  // ),
                                   const SizedBox(
                                     width: 10.0,
                                   ),
@@ -290,8 +290,8 @@ class _ChangeDoctorByNurseState extends State<ChangeDoctorByNurse> {
                       ),
                     );
                   }
-                  return Container();
-                },
+                  // return Container();
+                // },
               ));
             },
           )

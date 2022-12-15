@@ -112,22 +112,21 @@ class _AddMedRecordState extends State<AddMedRecord> {
                   dialogValidation(
                     context: context,
                     onPressedYes: () {
-                      context.read<ConditionViewModel>().insertCondition(
-                            ConditionModel(
-                              nurse: context.read<PatientViewModel>().person!.nurse,
-                              patient: context.read<PatientViewModel>().person!.name,
-                              date: context.read<PatientViewModel>().person!.schedule,
-                              time: context.read<PatientViewModel>().person!.time,
-                              height: int.parse(heightCtrl.text),
-                              weight: int.parse(weightCtrl.text),
-                              bloodPressure: bloodPressureCtrl.text,
-                              sugarAnalysis: int.parse(sugarAnalysisCtrl.text),
-                              temperature: double.parse(temperatureCtrl.text),
-                              restHeartRate: int.parse(restHeartRateCtrl.text),
-                              breathRate: int.parse(breathRateCtrl.text),
-                              note: noteCtrl.text,
-                            ),
-                          );
+                      // context.read<ConditionViewModel>().insertCondition(
+                      //       ConditionModel(
+                      //         nurse: context.read<PatientViewModel>().person!.nurse,
+                      //         date: context.read<PatientViewModel>().person!.schedule,
+                      //         time: context.read<PatientViewModel>().person!.time,
+                      //         height: int.parse(heightCtrl.text),
+                      //         weight: int.parse(weightCtrl.text),
+                      //         bloodPressure: bloodPressureCtrl.text,
+                      //         sugarAnalysis: int.parse(sugarAnalysisCtrl.text),
+                      //         temperature: double.parse(temperatureCtrl.text),
+                      //         restHeartRate: int.parse(restHeartRateCtrl.text),
+                      //         breathRate: int.parse(breathRateCtrl.text),
+                      //         note: noteCtrl.text,
+                      //       ),
+                      //     );
                       Navigator.pop(context);
                       dialogValidation(
                         context: context,

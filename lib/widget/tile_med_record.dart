@@ -45,7 +45,7 @@ class _TileMedRecordState extends State<TileMedRecord> {
     // final endTime = DateFormat('jm').format(end);
 
     return Container(
-      // margin: EdgeInsets.symmetric(vertical: 10),
+      margin: EdgeInsets.symmetric(vertical: 10),
       decoration: BoxDecoration(
         boxShadow: [
           if (!_customTileExpanded) ...[
@@ -79,7 +79,6 @@ class _TileMedRecordState extends State<TileMedRecord> {
                 ),
                 SizedBox(height: 6),
                 Text(
-                  // '$startTime - $endTime',
                   widget.time,
                   style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
                 ),
