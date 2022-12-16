@@ -6,8 +6,8 @@ class PatientCard extends StatelessWidget {
   const PatientCard({
     super.key,
     required this.patientName,
-    required this.disease,
-    required this.time,
+    // this.disease,
+    // this.time,
     required this.lineColor,
     required this.badgeText,
     required this.paintBadge,
@@ -15,8 +15,8 @@ class PatientCard extends StatelessWidget {
   });
 
   final String patientName;
-  final String disease;
-  final String time;
+  // final String? disease;
+  // final String? time;
   final String badgeText;
   final Color lineColor;
   final Color paintBadge;
@@ -25,7 +25,7 @@ class PatientCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 105,
+      height: 85,
       width: double.infinity,
       padding: const EdgeInsets.symmetric(vertical: 12),
       decoration: BoxDecoration(
@@ -71,17 +71,17 @@ class PatientCard extends StatelessWidget {
                     fontSize: 14,
                     color: cBlackBase),
               ),
-              subtitle: Text(
-                time,
-                style: textStyle.copyWith(
-                    fontWeight: FontWeight.w400,
-                    fontSize: 12,
-                    color: cBlackLightest),
-              ),
+              // subtitle: Text(
+              //   time!,
+              //   style: textStyle.copyWith(
+              //       fontWeight: FontWeight.w400,
+              //       fontSize: 12,
+              //       color: cBlackLightest),
+              // ),
               trailing: Badge(
                 elevation: 0,
                 badgeColor: paintBadge,
-                padding: EdgeInsets.fromLTRB(10, 8, 10, 8),
+                padding: const EdgeInsets.fromLTRB(10, 8, 10, 8),
                 shape: BadgeShape.square,
                 borderRadius: BorderRadius.circular(20),
                 toAnimate: false,

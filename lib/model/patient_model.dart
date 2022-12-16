@@ -4,7 +4,7 @@ class PatientModel {
     required this.message,
   });
 
-  List<DataPatient> data;
+  List data;
   String message;
 
   factory PatientModel.fromJson(Map<String, dynamic> json) => PatientModel(
@@ -41,7 +41,7 @@ class DataPatient {
   String id;
   String name;
   String pob;
-  DateTime dob;
+  String dob;
   String gender;
   bool married;
   String bloodType;
@@ -53,7 +53,7 @@ class DataPatient {
   String familyName;
   String relationship;
   String familyContact;
-  bool status;
+  String status;
 
   factory DataPatient.fromJson(Map<String, dynamic> json) => DataPatient(
         id: json["id"],
