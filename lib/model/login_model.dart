@@ -13,7 +13,7 @@ class LoginModel {
 
   Data data;
   String message;
-  String token;
+  String? token;
 
   factory LoginModel.fromJson(Map<String, dynamic> json) => LoginModel(
         data: Data.fromJson(json["data"]),

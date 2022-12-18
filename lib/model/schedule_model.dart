@@ -6,13 +6,14 @@ class ScheduleModel {
   DateTime start_time;
   DateTime end_time;
 
-  ScheduleModel(
-      {required this.patientId,
-      required this.userId,
-      required this.scheduleId,
-      required this.date,
-      required this.start_time,
-      required this.end_time});
+  ScheduleModel({
+    required this.patientId,
+    required this.userId,
+    required this.scheduleId,
+    required this.date,
+    required this.start_time,
+    required this.end_time,
+  });
 }
 
 final List<ScheduleModel> listSchedules = [

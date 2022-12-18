@@ -6,13 +6,14 @@ class DoctorModel {
   int? endTime;
   DateTime? dateTime;
 
-  DoctorModel(
-      {required this.urlProfile,
-      required this.name,
-      required this.specialist,
-      required this.startTime,
-      this.endTime,
-      this.dateTime});
+  DoctorModel({
+    required this.urlProfile,
+    required this.name,
+    required this.specialist,
+    required this.startTime,
+    this.endTime,
+    this.dateTime,
+  });
 }
 
 final List<DoctorModel> listDoctors = [

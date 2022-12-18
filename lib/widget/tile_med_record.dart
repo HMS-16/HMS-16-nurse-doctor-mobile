@@ -7,7 +7,6 @@ class TileMedRecord extends StatefulWidget {
     super.key,
     required this.nurse,
     required this.date,
-    required this.time,
     required this.height,
     required this.weight,
     required this.bloodPressure,
@@ -19,7 +18,6 @@ class TileMedRecord extends StatefulWidget {
   });
   String nurse;
   DateTime date;
-  String time;
   int height;
   int weight;
   String bloodPressure;
@@ -38,11 +36,11 @@ class _TileMedRecordState extends State<TileMedRecord> {
 
   @override
   Widget build(BuildContext context) {
-    // final dateNow = widget.date;
-    final tanggal = DateFormat('EEEE, LLL d, y').format(widget.date);
-    // final startTime = DateFormat('jm').format(widget.date);
-    // final end = dateNow.add(Duration(hours: 1));
-    // final endTime = DateFormat('jm').format(end);
+    final dateNow = widget.date;
+    final tanggal = DateFormat('EEEE, LLL d, y').format(dateNow);
+    final startTime = DateFormat('jm').format(widget.date);
+    final end = dateNow.add(Duration(hours: 1));
+    final endTime = DateFormat('jm').format(end);
 
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
@@ -79,7 +77,7 @@ class _TileMedRecordState extends State<TileMedRecord> {
                 ),
                 SizedBox(height: 6),
                 Text(
-                  widget.time,
+                  '$startTime - $endTime',
                   style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
                 ),
                 if (_customTileExpanded) ...[

@@ -6,13 +6,11 @@ class TileMedDiagnosis extends StatefulWidget {
     super.key,
     required this.doctor,
     required this.date,
-    required this.time,
     required this.diagnose,
     required this.prescription,
   });
   String doctor;
   DateTime date;
-  String time;
   String diagnose;
   String prescription;
 
@@ -25,11 +23,11 @@ class _TileMedDiagnosisState extends State<TileMedDiagnosis> {
 
   @override
   Widget build(BuildContext context) {
-    // final dateNow = widget.date;
-    final tanggal = DateFormat('EEEE, LLL d, y').format(widget.date);
-    // final startTime = DateFormat('jm').format(widget.date);
-    // final end = dateNow.add(Duration(hours: 1));
-    // final endTime = DateFormat('jm').format(end);
+    final dateNow = widget.date;
+    final tanggal = DateFormat('EEEE, LLL d, y').format(dateNow);
+    final startTime = DateFormat('jm').format(widget.date);
+    final end = dateNow.add(Duration(hours: 1));
+    final endTime = DateFormat('jm').format(end);
 
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
@@ -67,7 +65,7 @@ class _TileMedDiagnosisState extends State<TileMedDiagnosis> {
                 ),
                 SizedBox(height: 6),
                 Text(
-                  widget.time,
+                  '$startTime - $endTime',
                   style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
                 ),
                 if (_customTileExpanded) ...[

@@ -14,11 +14,23 @@ class Auth {
     return response;
   }
 
-  Future<Response> register({required Datum data, required String token}) async {
+  Future<Response> register(
+      {required Datum data, required String token}) async {
     Response response;
     response = await _dio.post(
       baseUrl + '/register',
       data: data.toJson(),
+      options: Options(
+        headers: {'Authorization': 'Bearer $token'},
+      ),
+    );
+    return response;
+  }
+
+  Future<Response> getById({required String id, required String token}) async {
+    Response response;
+    response = await _dio.get(
+      baseUrl + '/accounts/$id',
       options: Options(
         headers: {'Authorization': 'Bearer $token'},
       ),

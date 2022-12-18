@@ -3,6 +3,7 @@ import 'package:hms_16/screens/navbar/patient/patient_detail/patient_profile.dar
 import 'package:hms_16/utils/constant.dart';
 import 'package:hms_16/screens/navbar/patient/patient_detail/medic_diagnosis.dart';
 import 'package:hms_16/screens/navbar/patient/patient_detail/medic_record.dart';
+import 'package:provider/provider.dart';
 
 class PatientDetail extends StatefulWidget {
   const PatientDetail({super.key});
@@ -12,6 +13,13 @@ class PatientDetail extends StatefulWidget {
 }
 
 class _PatientDetailState extends State<PatientDetail> {
+
+  // @override
+  // void initState() {
+  //   context.read<GeneralViewModel>().roleUser();
+  //   super.initState();
+  // }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(

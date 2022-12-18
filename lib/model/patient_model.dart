@@ -53,7 +53,7 @@ class DataPatient {
   String familyName;
   String relationship;
   String familyContact;
-  String status;
+  int status;
 
   factory DataPatient.fromJson(Map<String, dynamic> json) => DataPatient(
         id: json["id"],

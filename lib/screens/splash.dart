@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hms_16/api/auth.dart';
-import 'package:hms_16/model/login_model.dart';
-import 'package:hms_16/screens/auth/landing_page.dart';
-import 'package:animated_splash_screen/animated_splash_screen.dart';
-import 'package:hms_16/screens/auth/sign_up_page.dart';
-import 'package:hms_16/screens/navbar/navbar.dart';
-import 'package:hms_16/services/shared_services.dart';
+import 'package:hms_16/view_model/auth_view_model.dart';
+import 'package:provider/provider.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -15,56 +10,13 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  Future<void> startTime() async {
-    final prefs = SharedService();
-    String? token = await prefs.getToken();
-    int? role = await prefs.getRole();
-    await Future.delayed(
-      const Duration(seconds: 4),
-      () {
-        if (token != null && role == 1) {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const NavBar(),
-            ),
-          );
-          print("TOKEN ==== $token");
-          print("ROLE ==== $role");
-        } else if (token != null && role == 2) {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const NavBar(),
-            ),
-          );
-          print("TOKEN ==== $token");
-          print("ROLE ==== $role");
-        } else if (token != null && role == 3) {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const SignUpPage(),
-            ),
-          );
-          print("TOKEN ==== $token");
-          print("ROLE ==== $role");
-        } else {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const LandingPage(),
-            ),
-          );
-          print("TOKEN ==== $token");
-          print("ROLE ==== $role");
-        }
-      },
-    );
-  }
 
+  @override
   void initState() {
-    startTime();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+    await context.read<AuthViewModel>().startTime(context);
+    });
+    // startTime();
     super.initState();
   }
 

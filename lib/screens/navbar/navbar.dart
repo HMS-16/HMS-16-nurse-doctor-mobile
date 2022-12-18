@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:hms_16/screens/navbar/home/homepage_nurse.dart';
+import 'package:hms_16/screens/navbar/home/homepage.dart';
 import 'package:hms_16/screens/navbar/message/message.dart';
 import 'package:hms_16/screens/navbar/patient/patient_screen.dart';
 import 'package:hms_16/screens/navbar/schedule/nurse/view_schedule_bynurse.dart';
 import 'package:hms_16/utils/constant.dart';
+import 'package:hms_16/view_model/auth_view_model.dart';
+import 'package:provider/provider.dart';
 
 class NavBar extends StatefulWidget {
   const NavBar({super.key});
@@ -15,11 +17,20 @@ class NavBar extends StatefulWidget {
 class _NavBarState extends State<NavBar> {
   int currenticon = 0;
   final screen = [
-    HomePageNurse(),
+    HomePage(),
     const PatientScreen(),
     const ViewScheduleNurse(),
     const Message(),
   ];
+
+  // @override
+  // void initState() {
+  //   // final id = context.read<AuthViewModel>().idUser;
+  //   WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+  //     await context.read<ProfileViewModel>().getProfileById();
+  //   });
+  //   super.initState();
+  // }
 
   @override
   Widget build(BuildContext context) {

@@ -22,51 +22,41 @@ class ForgotPassword2 extends StatelessWidget {
               fontSize: 20, fontWeight: FontWeight.w600, color: cBlackBase),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+      body: Center(
+        child: ListView(
+          shrinkWrap: true,
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          // mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(
-              child: Image(
-                image: const AssetImage(
-                  "assets/images/forgot-password.png",
-                ),
-                fit: BoxFit.contain,
-                width: MediaQuery.of(context).size.width,
-                height: 300,
+            Image(
+              image: const AssetImage(
+                "assets/images/forgot-password.png",
               ),
+              fit: BoxFit.contain,
+              width: double.maxFinite,
+              height: 220,
             ),
-            Container(
-              margin: const EdgeInsets.symmetric(vertical: 30),
-              padding: const EdgeInsets.symmetric(horizontal: 5),
-              child: Text(
-                "Enter the verification code we just sent you on your email addrress",
-                textAlign: TextAlign.center,
-                style: textStyle.copyWith(
-                    color: cBlackBase,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600),
-              ),
+            SizedBox(height: 30),
+            Text(
+              "Enter the verification code we just sent you on your email addrress",
+              textAlign: TextAlign.center,
+              style: textStyle.copyWith(
+                  color: cBlackBase, fontSize: 14, fontWeight: FontWeight.w600),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                OtpTextField(
-                  numberOfFields: 4,
-                  borderColor: cPrimaryBase,
-                  //set to true to show as box or false to show as dash
-                  showFieldAsBox: true,
-                  //runs when a code is typed in
-                  onCodeChanged: (String code) {
-                    //handle validation or checks here
-                  },
-                  //runs when every textfield is filled
-                  onSubmit: (String verificationCode) {
-                    durationDialog(context, "Code Verify!");
-                  }, // end onSubmit
-                ),
-              ],
+            SizedBox(height: 30),
+            OtpTextField(
+              numberOfFields: 4,
+              borderColor: cPrimaryBase,
+              //set to true to show as box or false to show as dash
+              showFieldAsBox: true,
+              //runs when a code is typed in
+              onCodeChanged: (String code) {
+                //handle validation or checks here
+              },
+              //runs when every textfield is filled
+              onSubmit: (String verificationCode) {
+                durationDialog(context, "Code Verify!");
+              }, // end onSubmit
             ),
             const SizedBox(
               height: 30,
@@ -100,16 +90,19 @@ class ForgotPassword2 extends StatelessWidget {
               ],
             ),
             Button(
-                child: Text("VERIFY"),
-                margin: const EdgeInsets.only(top: 30),
-                onpressed: () {
-                  navPushTransition(context, const ForgotPassword3());
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const ForgotPassword3(),
-                      ));
-                })
+              child: Text("VERIFY"),
+              margin: const EdgeInsets.only(top: 30),
+              onpressed: () {
+                FocusManager.instance.primaryFocus!.unfocus();
+                navPushTransition(context, const ForgotPassword3());
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(
+                //     builder: (context) => const ForgotPassword3(),
+                //   ),
+                // );
+              },
+            )
           ],
         ),
       ),

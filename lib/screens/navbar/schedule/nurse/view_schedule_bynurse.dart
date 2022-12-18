@@ -3,12 +3,13 @@ import 'package:hms_16/model/doctor_model.dart';
 import 'package:hms_16/model/patient_model.dart';
 import 'package:hms_16/screens/navbar/patient/patient_detail/patient_detail.dart';
 import 'package:hms_16/screens/navbar/schedule/nurse/change_schedule_bynurse.dart';
-import 'package:hms_16/screens/profile/profile_nurse.dart';
+import 'package:hms_16/screens/profile/profile.dart';
 import 'package:hms_16/utils/constant.dart';
 import 'package:hms_16/screens/navbar/schedule/nurse/detail_schedule_bynurse.dart';
 import 'package:hms_16/screens/notification.dart';
 import 'package:hms_16/view_model/doctor_view_model.dart';
 import 'package:hms_16/view_model/patient_view_model.dart';
+import 'package:hms_16/widget/dialog_validation.dart';
 import 'package:hms_16/widget/navpush_transition.dart';
 import 'package:hms_16/widget/patientSchedule_card.dart';
 import 'package:intl/intl.dart';
@@ -45,126 +46,138 @@ class _ViewScheduleNurseState extends State<ViewScheduleNurse> {
     }
 
     return Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          iconTheme: IconThemeData(color: cBlack),
-          elevation: 0,
-          backgroundColor: Colors.transparent,
-          title: Text(
-            'Schedule',
-            style: textStyle.copyWith(
-                fontSize: 20, fontWeight: FontWeight.w600, color: cBlackBase),
-          ),
-          actions: [
-            IconButton(
-              onPressed: () {
-                navPushTransition(context, const NotificationPage());
-              },
-              icon: const Icon(Icons.notifications),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(right: 16),
-              child: InkWell(
-                onTap: () {
-                  navPushTransition(context, const ProfileNursePage());
-                },
-                child: const CircleAvatar(
-                  backgroundColor: Colors.transparent,
-                  child: Image(image: AssetImage("assets/images/avatar.png")),
-                ),
-              ),
-            )
-          ],
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        iconTheme: IconThemeData(color: cBlack),
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        title: Text(
+          'Schedule',
+          style: textStyle.copyWith(
+              fontSize: 20, fontWeight: FontWeight.w600, color: cBlackBase),
         ),
-        body: Column(
-          children: [
-            ListTile(
-              title: Row(
-                children: [
-                  const SizedBox(
-                    width: 8.0,
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      pickDate();
-                    },
-                    child: Text(
-                      DateFormat.MMMM().format(selectedDate),
-                      style: textStyle.copyWith(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w700,
-                          color: cBlackBase),
-                    ),
-                  ),
-                  IconButton(
-                      onPressed: () {},
-                      icon: const Icon(Icons.arrow_drop_down_outlined)),
-                ],
+        actions: [
+          IconButton(
+            onPressed: () {
+              // navPushTransition(context, const NotificationPage());
+              dialogValidation(
+                context: context,
+                title: "Coming Soon!",
+                isValidation: false,
+                isImage: false,
+                newPage: () async {
+                  await Future.delayed(Duration(seconds: 2), () {
+                    Navigator.pop(context);
+                  });
+                },
+              );
+            },
+            icon: const Icon(Icons.notifications),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(right: 16),
+            child: InkWell(
+              onTap: () {
+                navPushTransition(context, const ProfilePage());
+              },
+              child: const CircleAvatar(
+                backgroundColor: Colors.transparent,
+                child: Image(image: AssetImage("assets/images/avatar.png")),
               ),
-              trailing:
-                  IconButton(onPressed: () {}, icon: const Icon(Icons.search)),
             ),
-            const SizedBox(
-              height: 32.0,
-            ),
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 16),
-              decoration: BoxDecoration(boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.1),
-                  blurRadius: 10,
-                )
-              ], borderRadius: BorderRadius.circular(12), color: cWhiteBase),
-              child: ListTile(
-                  leading: IconButton(
-                      onPressed: () {
-                        final changeData =
-                            selectedDate.millisecondsSinceEpoch - 86400000;
-                        DateTime cvData =
-                            DateTime.fromMillisecondsSinceEpoch(changeData);
-                        setState(() {
-                          selectedDate = cvData;
-                        });
-                      },
-                      icon: const Icon(Icons.arrow_back_ios)),
-                  title: TextButton(
-                    onPressed: () {
-                      pickDate();
-                    },
-                    child: Text(
-                      DateFormat("EEE, d-M-y").format(selectedDate),
-                      textAlign: TextAlign.center,
-                      style: textStyle.copyWith(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 14,
-                          color: cBlackBase),
-                    ),
+          )
+        ],
+      ),
+      body: Column(
+        children: [
+          ListTile(
+            title: Row(
+              children: [
+                const SizedBox(
+                  width: 8.0,
+                ),
+                TextButton(
+                  onPressed: () {
+                    pickDate();
+                  },
+                  child: Text(
+                    DateFormat.MMMM().format(selectedDate),
+                    style: textStyle.copyWith(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w700,
+                        color: cBlackBase),
                   ),
-                  trailing: IconButton(
+                ),
+                IconButton(
+                    onPressed: () {},
+                    icon: const Icon(Icons.arrow_drop_down_outlined)),
+              ],
+            ),
+            trailing:
+                IconButton(onPressed: () {}, icon: const Icon(Icons.search)),
+          ),
+          const SizedBox(
+            height: 32.0,
+          ),
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 16),
+            decoration: BoxDecoration(boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.1),
+                blurRadius: 10,
+              )
+            ], borderRadius: BorderRadius.circular(12), color: cWhiteBase),
+            child: ListTile(
+                leading: IconButton(
                     onPressed: () {
                       final changeData =
-                          selectedDate.millisecondsSinceEpoch + 86400000;
+                          selectedDate.millisecondsSinceEpoch - 86400000;
                       DateTime cvData =
                           DateTime.fromMillisecondsSinceEpoch(changeData);
                       setState(() {
                         selectedDate = cvData;
                       });
                     },
-                    icon: const Icon(Icons.arrow_forward_ios),
-                  )),
-            ),
-            const SizedBox(
-              height: 24.0,
-            ),
-            // Consumer<PatientViewModel>(builder: (context, value, child) {
-            //   // return PatientList(persons: patients);
-            //   return PatientListSchedule(
-            //     persons: patients,
-            //     doctors: listDoctors,
-            //   );
-            // }),
-          ],
-        ));
+                    icon: const Icon(Icons.arrow_back_ios)),
+                title: TextButton(
+                  onPressed: () {
+                    pickDate();
+                  },
+                  child: Text(
+                    DateFormat("EEE, d-M-y").format(selectedDate),
+                    textAlign: TextAlign.center,
+                    style: textStyle.copyWith(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 14,
+                        color: cBlackBase),
+                  ),
+                ),
+                trailing: IconButton(
+                  onPressed: () {
+                    final changeData =
+                        selectedDate.millisecondsSinceEpoch + 86400000;
+                    DateTime cvData =
+                        DateTime.fromMillisecondsSinceEpoch(changeData);
+                    setState(() {
+                      selectedDate = cvData;
+                    });
+                  },
+                  icon: const Icon(Icons.arrow_forward_ios),
+                )),
+          ),
+          const SizedBox(
+            height: 24.0,
+          ),
+          // Consumer<PatientViewModel>(builder: (context, value, child) {
+          //   // return PatientList(persons: patients);
+          //   return PatientListSchedule(
+          //     persons: patients,
+          //     doctors: listDoctors,
+          //   );
+          // }),
+        ],
+      ),
+    );
   }
 }
 

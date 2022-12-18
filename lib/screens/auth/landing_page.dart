@@ -1,11 +1,11 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:hms_16/model/slider_model.dart';
+import 'package:hms_16/services/shared_services.dart';
 import 'package:hms_16/utils/constant.dart';
 import 'package:hms_16/widget/button.dart';
 import 'package:hms_16/screens/auth/login_page.dart';
 import 'package:hms_16/widget/navpush_transition.dart';
-import 'package:hms_16/widget/navreplace_transition.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class LandingPage extends StatefulWidget {
@@ -20,6 +20,8 @@ int activeIndex = 0;
 class _LandingPageState extends State<LandingPage> {
   @override
   Widget build(BuildContext context) {
+    final prefs = SharedService();
+    
     return Scaffold(
       backgroundColor: Colors.white,
       body: Padding(
@@ -57,7 +59,8 @@ class _LandingPageState extends State<LandingPage> {
             Button(
               child: Text("Sign In"),
               // margin: EdgeInsets.only(top: 15),
-              onpressed: () {
+              onpressed: () async {
+                await prefs.saveFirstTime();
                 navReplaceTransition(context, const LoginPage());
               },
             ),

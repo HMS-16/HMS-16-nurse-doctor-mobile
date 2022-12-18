@@ -237,7 +237,7 @@ class _PatientProfileState extends State<PatientProfile> {
             const SizedBox(height: 16),
             Consumer<PatientViewModel>(
               builder: (context, value, child) {
-                if (detail.person!.status == 'b') {
+                if (detail.person!.status == 0) {
                   return ElevatedButton(
                     onPressed: () async {
                       await showDialog<void>(
@@ -280,10 +280,9 @@ class _PatientProfileState extends State<PatientProfile> {
                                           context
                                               .read<PatientViewModel>()
                                               .changeProgressPatient(
-                                                  context
-                                                      .read<AuthViewModel>()
-                                                      .tokenBearer!,
-                                                  detail.person!.id);
+                                                detail.person!.id,
+                                                context,
+                                              );
                                           durationDialog(context,
                                               "End case successfully!");
                                           Future.delayed(
