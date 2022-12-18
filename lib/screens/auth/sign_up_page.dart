@@ -352,7 +352,6 @@ class _SignUpPageState extends State<SignUpPage> {
                       ),
                       suffixIcon: IconButton(
                         icon: Icon(
-                          // Based on passwordVisible state choose the icon
                           _hideConfirmPassword
                               ? Icons.visibility
                               : Icons.visibility_off,
