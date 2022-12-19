@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:hms_16/model/patient_model.dart';
+import 'package:hms_16/screens/navbar/schedule/view_schedule.dart';
 import 'package:hms_16/view_model/doctor_view_model.dart';
 import 'package:hms_16/utils/constant.dart';
-import 'package:hms_16/screens/navbar/schedule/nurse/view_schedule_bynurse.dart';
 import 'package:hms_16/view_model/patient_view_model.dart';
 import 'package:hms_16/widget/duration_dialog.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-class ChangeDoctorByNurse extends StatefulWidget {
-  const ChangeDoctorByNurse({super.key});
+class ChangeDoctor extends StatefulWidget {
+  const ChangeDoctor({super.key});
 
   @override
-  State<ChangeDoctorByNurse> createState() => _ChangeDoctorByNurseState();
+  State<ChangeDoctor> createState() => _ChangeDoctorState();
 }
 
-class _ChangeDoctorByNurseState extends State<ChangeDoctorByNurse> {
+class _ChangeDoctorState extends State<ChangeDoctor> {
   @override
   Widget build(BuildContext context) {
     final patientProvider = Provider.of<PatientViewModel>(context);
@@ -229,32 +229,35 @@ class _ChangeDoctorByNurseState extends State<ChangeDoctorByNurse> {
                                                         fontWeight:
                                                             FontWeight.w600,
                                                         color: cBlack)),
-                                                Text(dataProvider.specialist,
-                                                    style: textStyle.copyWith(
-                                                        fontSize: 12,
-                                                        fontWeight:
-                                                            FontWeight.w400,
-                                                        color: cBlackLightest)),
+                                                // Text(
+                                                //   dataProvider.specialist,
+                                                //   style: textStyle.copyWith(
+                                                //     fontSize: 12,
+                                                //     fontWeight: FontWeight.w400,
+                                                //     color: cBlackLightest,
+                                                //   ),
+                                                // ),
                                                 const SizedBox(
                                                   height: 20.0,
                                                 ),
-                                                Text(
-                                                    dataProvider.startTime == 0
-                                                        ? "1.00 pm - 1.30 pm"
-                                                        : dataProvider
-                                                                    .startTime ==
-                                                                1
-                                                            ? "1.30 pm - 2.00 pm"
-                                                            : dataProvider
-                                                                        .startTime ==
-                                                                    2
-                                                                ? "2.00 pm - 2.30 pm"
-                                                                : "2.30 pm - 3.00 pm",
-                                                    style: textStyle.copyWith(
-                                                        fontSize: 12,
-                                                        fontWeight:
-                                                            FontWeight.w400,
-                                                        color: cBlackLightest)),
+                                                // Text(
+                                                //   dataProvider.startTime == 0
+                                                //       ? "1.00 pm - 1.30 pm"
+                                                //       : dataProvider
+                                                //                   .startTime ==
+                                                //               1
+                                                //           ? "1.30 pm - 2.00 pm"
+                                                //           : dataProvider
+                                                //                       .startTime ==
+                                                //                   2
+                                                //               ? "2.00 pm - 2.30 pm"
+                                                //               : "2.30 pm - 3.00 pm",
+                                                //   style: textStyle.copyWith(
+                                                //     fontSize: 12,
+                                                //     fontWeight: FontWeight.w400,
+                                                //     color: cBlackLightest,
+                                                //   ),
+                                                // ),
                                               ],
                                             ),
                                           ),

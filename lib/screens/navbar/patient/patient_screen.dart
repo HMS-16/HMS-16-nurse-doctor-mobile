@@ -1,18 +1,12 @@
-import 'dart:convert';
-
-import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:hms_16/screens/profile/profile.dart';
-import 'package:hms_16/view_model/auth_view_model.dart';
 import 'package:hms_16/view_model/patient_view_model.dart';
-import 'package:hms_16/screens/notification.dart';
 import 'package:hms_16/model/patient_model.dart';
 import 'package:hms_16/utils/constant.dart';
 import 'package:hms_16/screens/navbar/patient/patient_detail/patient_detail.dart';
 import 'package:hms_16/widget/dialog_validation.dart';
 import 'package:hms_16/widget/navpush_transition.dart';
 import 'package:hms_16/widget/patient_card.dart';
-import 'package:hms_16/widget/status/error_max.dart';
 import 'package:hms_16/widget/status/loading_max.dart';
 import 'package:provider/provider.dart';
 
@@ -65,16 +59,13 @@ class _PatientScreenState extends State<PatientScreen> {
           ),
           Padding(
             padding: const EdgeInsets.only(right: 16),
-            child: InkWell(
-              onTap: () {
-                navPushTransition(context, const ProfilePage());
+            child: IconButton(
+              onPressed: () {
+                navPushTransition(context, ProfilePage());
               },
-              child: const CircleAvatar(
-                backgroundColor: Colors.transparent,
-                child: Image(image: AssetImage("assets/images/avatar.png")),
-              ),
+              icon: Icon(Icons.account_circle, size: 38),
             ),
-          )
+          ),
         ],
       ),
       body: Builder(

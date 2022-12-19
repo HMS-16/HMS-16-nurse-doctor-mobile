@@ -8,9 +8,9 @@ class PatientScheduleCard extends StatelessWidget {
     super.key,
     required this.patientName,
     // required this.disease,
-    required this.doctorName,
-    required this.nurseName,
-    required this.time,
+    this.doctorName,
+    this.nurseName,
+    this.time,
     required this.lineColor,
     required this.badgeText,
     required this.paintBadge,
@@ -19,9 +19,9 @@ class PatientScheduleCard extends StatelessWidget {
 
   final String patientName;
   // final String disease;
-  final String doctorName;
-  final String nurseName;
-  final String time;
+  final String? doctorName;
+  final String? nurseName;
+  final String? time;
   final String badgeText;
   final Color lineColor;
   final Color paintBadge;
@@ -105,13 +105,13 @@ class PatientScheduleCard extends StatelessWidget {
                               fontSize: 12,
                               fontWeight: FontWeight.w400),
                         ),
-                        Text(
-                          time,
-                          style: textStyle.copyWith(
-                              color: cBlackLightest,
-                              fontSize: 12,
-                              fontWeight: FontWeight.w400),
-                        ),
+                        // Text(
+                        //   time!,
+                        //   style: textStyle.copyWith(
+                        //       color: cBlackLightest,
+                        //       fontSize: 12,
+                        //       fontWeight: FontWeight.w400),
+                        // ),
                       ],
                     ),
                     Expanded(

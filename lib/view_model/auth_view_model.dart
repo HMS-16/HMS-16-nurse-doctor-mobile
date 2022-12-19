@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:dialog_flowtter/dialog_flowtter.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:hms_16/screens/auth/landing_page.dart';
@@ -9,7 +8,6 @@ import 'package:hms_16/services/shared_services.dart';
 import 'package:hms_16/utils/constant.dart';
 import 'package:hms_16/widget/dialog_validation.dart';
 import 'package:hms_16/widget/navpush_transition.dart';
-import 'package:provider/provider.dart';
 import 'package:hms_16/model/login_model.dart';
 import 'package:hms_16/screens/auth/sign_up_page.dart';
 import 'package:hms_16/screens/navbar/navbar.dart';
@@ -38,10 +36,10 @@ class AuthViewModel with ChangeNotifier {
   // }
 
   ActionState authState = ActionState.none;
-  Data? _profile;
+  DataLogin? _profile;
   // int? _role;
   // ActionState get state => _state;
-  Data? get profile => _profile;
+  DataLogin? get profile => _profile;
   // int? get role => _role;
 
   // final prefs = SharedService();
@@ -62,13 +60,35 @@ class AuthViewModel with ChangeNotifier {
     String? token = await prefs.getToken();
     // String? idUser = await prefs.getIduser();
     if (token != null) {
-      await getProfileById();
+      await getProfile();
     }
     // _role = await prefs.getRole();
+    // String? user = await prefs.getUser();
+    // print(user);
+    // _profile = Data.fromJson(jsonDecode(user!));
+    // final decodeUser = jsonEncode(jsonDecode(user));
+    // print(decode);
+    // print(decodeUser);
+    // _profile = decode;
+    // _profile = (decodeUser).map(
+    //   (e) => Data(
+    //     id: e["id"],
+    //     createdAt: e["created_at"],
+    //     updatedAt: e["updated_at"],
+    //     username: e["username"],
+    //     email: e["email"],
+    //     role: e["role"],
+    //   ),
+    // ).toMap();
+    if (_profile != null) {
+      print("ada isi");
+    }
+    // print(decodeUser.toString());
     bool? firstTime = await prefs.getFirstTime();
     await Future.delayed(
       const Duration(seconds: 4),
       () {
+        // print(token);
         if (token != null && (_profile!.role == 1 || _profile!.role == 2)) {
           Navigator.pushReplacement(
             context,
@@ -115,28 +135,33 @@ class AuthViewModel with ChangeNotifier {
     changeState(ActionState.loading);
     try {
       // authState = ActionState.loading;
-      var token = await prefs.getToken();
-      var response = await Auth().register(data: data, token: token!);
-      message = response.data['message'].toString();
+      // var token = await prefs.getToken();
+      var response = await AuthServices().register(data: data);
+      // message = response;
       print(data.toJson());
-      print("dalam try $message");
+      print("dalam try $response");
       // authState = ActionState.none;
       changeState(ActionState.none);
-      dialogValidation(
-        context: context,
-        isValidation: false,
-        title: "New user account has been registered successfully",
-        newPage: () {
-          Future.delayed(Duration(seconds: 2), () {
-            navReplaceTransition(context, LoginPage());
-          });
-        },
-      );
+      if (response != null) {
+        dialogValidation(
+          context: context,
+          isValidation: false,
+          title: "New user account has been registered successfully",
+          newPage: () {
+            Future.delayed(Duration(seconds: 2), () async {
+              await prefs.deleteToken();
+              navReplaceTransition(context, LoginPage());
+            });
+          },
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content:
+                Text("Registration Number is invalid!")));
+      }
       // durationDialog(
       //     context, "New user account has been registered successfully");
       // navReplaceTransition(context, LoginPage());
-      // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      //     content: Text("New user account has been registered successfully")));
       // changeState(ActionState.none);
       notifyListeners();
     } on DioError catch (e) {
@@ -152,35 +177,37 @@ class AuthViewModel with ChangeNotifier {
     required String pass,
     required BuildContext context,
   }) async {
-      changeState(ActionState.loading);
-      if (authState == ActionState.loading) {
-        print('mau login? loading ya');
-      }
+    changeState(ActionState.loading);
+    if (authState == ActionState.loading) {
+      print('mau login? loading ya');
+    }
     try {
       // authState = ActionState.loading;
       // changeState(DataState.loading);
 
-      var responseData = await Auth().login(email: email, password: pass);
+      var responseData =
+          await AuthServices().login(email: email, password: pass);
       if (responseData.statusCode == 200) {
         LoginModel modelUser = LoginModel.fromJson(responseData.data);
-        final prefs = SharedService();
+        // final prefs = SharedService();
         // print(modelUser);
 
-        Data dataUser = modelUser.data;
-        idUser = modelUser.data.id;
+        final dataUser = modelUser.data;
+        idUser = modelUser.data.strNum;
         print(idUser);
-        // print(dataUser);
+        print(dataUser);
         final token = modelUser.token;
         // tokenBearer = token;
         print(token);
 
-        var encodeUser = jsonEncode(dataUser);
+        var encodeUser = json.encode(dataUser);
         print(encodeUser);
         //var token = jsonEncode(token);
 
-        // await prefs.saveRole(dataUser!.role);
+        await prefs.saveUser(encodeUser);
+        // await prefs.saveRole(dataUser.role);
         await prefs.saveToken(token!);
-        await prefs.saveIdUser(dataUser.id);
+        // await prefs.saveIdUser(dataUser.id);
         // context.read<ProfileViewModel>().getProfileById();
         // await prefs.setString('token', token);
         // await prefs.setString('idUser', dataUser!.id);
@@ -200,6 +227,7 @@ class AuthViewModel with ChangeNotifier {
           navReplaceTransition(context, const NavBar());
         }
 
+        // changeState(ActionState.none);
         if (authState == ActionState.none) {
           print('login admin? none ya');
         }
@@ -233,37 +261,46 @@ class AuthViewModel with ChangeNotifier {
     }
   }
 
-  Future getProfileById() async {
-      changeState(ActionState.loading);
-      if (authState == ActionState.loading) {
-        print('get profile? ok laoding');
-      }
-    try {
-      // authState = ActionState.loading;
-      // var token = await prefs.getToken();
-      String? idUser = await prefs.getIduser();
-      String? token = await prefs.getToken();
-      var responseData = await Auth().getById(id: idUser!, token: token!);
-      LoginModel modelUser = LoginModel.fromJson(responseData.data);
-      // print("${modelUser.data}");
-      _profile = modelUser.data;
-      final encodeuser = jsonEncode(_profile);
-      print("ini di try getprofilebyid $encodeuser");
-      // return modelUser.data;
-      // await Future.delayed(Duration(seconds: 2));
-      // print('setelah 4 detik');
-      changeState(ActionState.none);
-      authState = ActionState.none;
-      if (authState == ActionState.none) {
-        print('selesai get profile? none ya');
-      }
-      notifyListeners();
-    } catch (e) {
-      e.toString();
-      // changeState(ActionState.none);
-      notifyListeners();
-    }
+  Future getProfile() async {
+    changeState(ActionState.loading);
+    String? user = await prefs.getUser();
+    // print(user);
+    _profile = DataLogin.fromJson(jsonDecode(user!));
+    notifyListeners();
+    changeState(ActionState.none);
   }
+
+  // Future getProfileById() async {
+  //   changeState(ActionState.loading);
+  //   if (authState == ActionState.loading) {
+  //     print('get profile? ok loading');
+  //   }
+  //   try {
+  //     // authState = ActionState.loading;
+  //     // var token = await prefs.getToken();
+  //     // String? idUser = await prefs.getIduser();
+  //     // String? token = await prefs.getToken();
+  //     var responseData = await AuthServices().getById();
+  //     LoginModel modelUser = LoginModel.fromJson(responseData.data);
+  //     // print("${modelUser.data}");
+  //     _profile = modelUser.data;
+  //     final encodeuser = jsonEncode(_profile);
+  //     print("ini di try getprofilebyid $encodeuser");
+  //     // return modelUser.data;
+  //     // await Future.delayed(Duration(seconds: 2));
+  //     // print('setelah 4 detik');
+  //     changeState(ActionState.none);
+  //     authState = ActionState.none;
+  //     if (authState == ActionState.none) {
+  //       print('selesai get profile? none ya');
+  //     }
+  //     notifyListeners();
+  //   } catch (e) {
+  //     e.toString();
+  //     // changeState(ActionState.none);
+  //     notifyListeners();
+  //   }
+  // }
 
   Future logout(BuildContext context) async {
     // changeState(ActionState.loading);
@@ -271,7 +308,8 @@ class AuthViewModel with ChangeNotifier {
       print('mau logout? loading ya');
     }
     await SharedService().deleteToken();
-    await SharedService().deleteIdUser();
+    // await SharedService().deleteIdUser();
+    await SharedService().deleteUser();
     // await Future.delayed(Duration(seconds: 1));
     // Navigator.push
     // Navigator.pop(context);

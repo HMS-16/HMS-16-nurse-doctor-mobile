@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:hms_16/screens/navbar/home/homepage.dart';
 import 'package:hms_16/screens/navbar/message/message.dart';
 import 'package:hms_16/screens/navbar/patient/patient_screen.dart';
-import 'package:hms_16/screens/navbar/schedule/nurse/view_schedule_bynurse.dart';
+import 'package:hms_16/screens/navbar/schedule/view_schedule.dart';
 import 'package:hms_16/utils/constant.dart';
 import 'package:hms_16/view_model/auth_view_model.dart';
+import 'package:hms_16/view_model/patient_view_model.dart';
 import 'package:provider/provider.dart';
 
 class NavBar extends StatefulWidget {
@@ -19,7 +20,7 @@ class _NavBarState extends State<NavBar> {
   final screen = [
     HomePage(),
     const PatientScreen(),
-    const ViewScheduleNurse(),
+    ViewSchedule(),
     const Message(),
   ];
 

@@ -1,15 +1,16 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:hms_16/screens/auth/login_page.dart';
 import 'package:hms_16/services/shared_services.dart';
 import 'package:hms_16/widget/navpush_transition.dart';
 
-class PatientApi {
+class PatientServices {
   final _dio = Dio();
   String baseUrl = 'https://hms-api.fly.dev/v1';
   final prefs = SharedService();
 
-  Future getAll({required String token}) async {
+  Future getAll() async {
+    String? token = await prefs.getToken();
     try {
       Response response;
       response = await _dio.get(
@@ -33,7 +34,8 @@ class PatientApi {
     // print(response);
   }
 
-  Future endCase({required String token, required String id}) async {
+  Future endCase({required String id}) async {
+    String? token = await prefs.getToken();
     try {
       Response response;
       response = await _dio.put(
@@ -43,8 +45,9 @@ class PatientApi {
         ),
       );
       return response;
-    } catch (e) {
-      e.toString();
+    } on DioError catch (e) {
+      print(e.response!.statusMessage);
+      print(e.response!.statusCode);
     }
   }
 }

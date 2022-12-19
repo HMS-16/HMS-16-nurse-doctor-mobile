@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:hms_16/screens/navbar/message/roomchat.dart';
 import 'package:hms_16/screens/profile/profile.dart';
 import 'package:hms_16/utils/constant.dart';
-import 'package:hms_16/screens/notification.dart';
 import 'package:hms_16/widget/dialog_validation.dart';
 import 'package:hms_16/widget/navpush_transition.dart';
 
@@ -42,14 +41,11 @@ class Message extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.only(right: 16),
-            child: InkWell(
-              onTap: () {
-                navPushTransition(context, const ProfilePage());
+            child: IconButton(
+              onPressed: () {
+                navPushTransition(context, ProfilePage());
               },
-              child: const CircleAvatar(
-                backgroundColor: Colors.transparent,
-                child: Image(image: AssetImage("assets/images/avatar.png")),
-              ),
+              icon: Icon(Icons.account_circle, size: 38),
             ),
           ),
           // IconButton(

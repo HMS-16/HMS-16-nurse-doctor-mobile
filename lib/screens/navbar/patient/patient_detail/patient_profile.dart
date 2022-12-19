@@ -279,10 +279,7 @@ class _PatientProfileState extends State<PatientProfile> {
                                         onPressed: () async {
                                           context
                                               .read<PatientViewModel>()
-                                              .changeProgressPatient(
-                                                detail.person!.id,
-                                                context,
-                                              );
+                                              .changeProgressPatient(context);
                                           durationDialog(context,
                                               "End case successfully!");
                                           Future.delayed(

@@ -5,6 +5,7 @@ import 'package:hms_16/utils/constant.dart';
 import 'package:hms_16/view_model/auth_view_model.dart';
 import 'package:hms_16/widget/button.dart';
 import 'package:hms_16/model/register_model.dart';
+import 'package:hms_16/widget/dialog_validation.dart';
 import 'package:hms_16/widget/navpush_transition.dart';
 import 'package:hms_16/widget/status/loading_max.dart';
 import 'package:provider/provider.dart';
@@ -386,7 +387,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     //     listen: false);
 
                     var data = Datum(
-                      username: controllerUser.text,
+                      name: controllerUser.text,
                       password: controllerPassword.text,
                       email: controllerEmail.text,
                       strNum: controllerRegNum.text,
@@ -410,20 +411,27 @@ class _SignUpPageState extends State<SignUpPage> {
                 width: MediaQuery.of(context).size.width,
                 height: 48,
                 child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10)),
-                      backgroundColor: cWhiteDark,
-                      foregroundColor: Colors.white,
-                    ),
-                    onPressed: () async {
-                      context.read<AuthViewModel>().logout(context);
-                      // final prefs = SharedService();
-                      // await prefs.deleteToken();
-                      // // await prefs.deleteProfile();
-                      // navReplaceTransition(context, const LoginPage());
-                    },
-                    child: Row(
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10)),
+                    backgroundColor: cWhiteDark,
+                    foregroundColor: Colors.white,
+                  ),
+                  onPressed: () async {
+                    dialogValidation(
+                      context: context,
+                      onPressedYes: (() {
+                        context.read<AuthViewModel>().logout(context);
+                      }),
+                      title: 'Are you sure?',
+                    );
+                    // context.read<AuthViewModel>().logout(context);
+                    // final prefs = SharedService();
+                    // await prefs.deleteToken();
+                    // // await prefs.deleteProfile();
+                    // navReplaceTransition(context, const LoginPage());
+                  },
+                  child: Row(
                     // mainAxisAlignment: MainAxisAlignment.center,
                     mainAxisSize: MainAxisSize.min,
                     children: [
@@ -436,12 +444,12 @@ class _SignUpPageState extends State<SignUpPage> {
                         width: 7,
                       ),
                       Text(
-                      "Logout",
-                      style: TextStyle(color: Colors.red),
-                    )
+                        "Logout",
+                        style: TextStyle(color: Colors.red),
+                      )
                     ],
                   ),
-                    ),
+                ),
               ),
               const SizedBox(
                 height: 10.0,

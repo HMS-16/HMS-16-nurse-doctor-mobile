@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:hms_16/screens/profile/profile_change_password.dart';
 import 'package:hms_16/utils/constant.dart';
 import 'package:hms_16/view_model/auth_view_model.dart';
 import 'package:hms_16/widget/dialog_validation.dart';
 import 'package:hms_16/widget/listtile_profile.dart';
-import 'package:hms_16/widget/navpush_transition.dart';
 import 'package:provider/provider.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -37,7 +35,7 @@ class ProfilePage extends StatelessWidget {
               ),
               ListTileProfile(
                 title: "Name",
-                subtitle: value.profile!.username,
+                subtitle: value.profile!.name,
               ),
               ListTileProfile(
                 title: "Registration Number",

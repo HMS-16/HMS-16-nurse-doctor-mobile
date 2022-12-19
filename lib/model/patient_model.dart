@@ -55,24 +55,24 @@ class DataPatient {
   String familyContact;
   int status;
 
-  factory DataPatient.fromJson(Map<String, dynamic> json) => DataPatient(
-        id: json["id"],
-        name: json["name"],
-        pob: json["pob"],
-        dob: json["DOB"],
-        gender: json["gender"],
-        married: json["married"],
-        bloodType: json["blood_type"],
-        phone: json["phone_num"],
-        email: json["email"],
-        address: json["address"],
-        city: json["city"],
-        province: json["province"],
-        familyName: json["family_name"],
-        relationship: json["relationship"],
-        familyContact: json["family_contact"],
-        status: json["status"],
-      );
+  // factory DataPatient.fromJson(Map<String, dynamic> json) => DataPatient(
+  //       id: json["id"],
+  //       name: json["name"],
+  //       pob: json["pob"],
+  //       dob: json["DOB"],
+  //       gender: json["gender"],
+  //       married: json["married"],
+  //       bloodType: json["blood_type"],
+  //       phone: json["phone_num"],
+  //       email: json["email"],
+  //       address: json["address"],
+  //       city: json["city"],
+  //       province: json["province"],
+  //       familyName: json["family_name"],
+  //       relationship: json["relationship"],
+  //       familyContact: json["family_contact"],
+  //       status: json["status"],
+  //     );
 
   // Map<String, dynamic> toJson() => {
   //       "id": id,

@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-LoginModel loginFromJson(String str) => LoginModel.fromJson(json.decode(str));
+// LoginModel loginFromJson(String str) => LoginModel.fromJson(json.decode(str));
 
-String logintoJson(LoginModel data) => json.encode(data.toJson());
+// String logintoJson(LoginModel data) => json.encode(data.toJson());
 
 class LoginModel {
   LoginModel({
@@ -11,12 +11,12 @@ class LoginModel {
     required this.token,
   });
 
-  Data data;
+  DataLogin data;
   String message;
   String? token;
 
   factory LoginModel.fromJson(Map<String, dynamic> json) => LoginModel(
-        data: Data.fromJson(json["data"]),
+        data: DataLogin.fromJson(json["data"]),
         message: json["message"],
         token: json["token"],
       );
@@ -28,37 +28,37 @@ class LoginModel {
       };
 }
 
-class Data {
-  Data({
-    required this.id,
+class DataLogin {
+  DataLogin({
+    required this.strNum,
     required this.createdAt,
     required this.updatedAt,
-    required this.username,
+    required this.name,
     required this.email,
     required this.role,
   });
 
-  String id;
+  String strNum;
   DateTime createdAt;
   DateTime updatedAt;
-  String username;
+  String name;
   String email;
   int role;
 
-  factory Data.fromJson(Map<String, dynamic> json) => Data(
-        id: json["id"],
+  factory DataLogin.fromJson(Map<String, dynamic> json) => DataLogin(
+        strNum: json["str_num"],
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
-        username: json["username"],
+        name: json["name"],
         email: json["email"],
         role: json["role"],
       );
 
   Map<String, dynamic> toJson() => {
-        "id": id,
+        "str_num": strNum,
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),
-        "username": username,
+        "name": name,
         "email": email,
         "role": role,
       };

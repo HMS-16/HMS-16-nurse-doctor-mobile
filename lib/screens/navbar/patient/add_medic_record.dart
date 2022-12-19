@@ -116,7 +116,7 @@ class _AddMedRecordState extends State<AddMedRecord> {
                       context.read<ConditionViewModel>().insertCondition(
                             ConditionModel(
                               idPatient: context.read<PatientViewModel>().person!.id,
-                              nurse: context.read<AuthViewModel>().profile!.username,
+                              nurse: context.read<AuthViewModel>().profile!.name,
                               date: DateTime.now(),
                               height: int.parse(heightCtrl.text),
                               weight: int.parse(weightCtrl.text),

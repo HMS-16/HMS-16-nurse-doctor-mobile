@@ -44,8 +44,8 @@ class PatientViewModel extends ChangeNotifier {
         // patientState = ActionState.loading;
         // context.read<AuthViewModel>().changeState(ActionState.loading);
       }
-      var token = await prefs.getToken();
-      var response = await PatientApi().getAll(token: token!);
+      // var token = await prefs.getToken();
+      var response = await PatientServices().getAll();
       // print(response.data.toString());
       PatientModel modelPatient = PatientModel.fromJson(response.data);
       if (_patients.length != modelPatient.data.length) {
@@ -56,7 +56,7 @@ class PatientViewModel extends ChangeNotifier {
       }
       // final encoder = JsonEncoder.withIndent('  ').convert(modelPatient.data);
       // await Future.delayed(Duration(seconds: 2));
-      // await Future.delayed(Duration(seconds: 2));
+      await Future.delayed(Duration(seconds: 1));
       // print(_patients);
       _patients = _filterPatient = (modelPatient.data)
           .map(
@@ -123,10 +123,10 @@ class PatientViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  changeProgressPatient(id, context) async {
+  changeProgressPatient(context) async {
     try {
-      var token = await prefs.getToken();
-      var response = await PatientApi().endCase(token: token!, id: id);
+      // var token = await prefs.getToken();
+      var response = await PatientServices().endCase(id: _patient!.id);
       // print(response);
       getAllPatient(context);
       // _patient!.status = !status;

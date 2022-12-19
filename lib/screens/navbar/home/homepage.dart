@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:hms_16/screens/notification.dart';
+import 'package:hms_16/model/patient_model.dart';
+import 'package:hms_16/model/schedule_model.dart';
+import 'package:hms_16/screens/navbar/schedule/detail_schedule.dart';
 import 'package:hms_16/screens/profile/profile.dart';
 import 'package:hms_16/utils/constant.dart';
 import 'package:hms_16/view_model/auth_view_model.dart';
+import 'package:hms_16/view_model/patient_view_model.dart';
+import 'package:hms_16/view_model/schedule_view_model.dart';
 import 'package:hms_16/widget/dialog_validation.dart';
 import 'package:hms_16/widget/navpush_transition.dart';
+import 'package:hms_16/widget/patientHome_card.dart';
 import 'package:hms_16/widget/status/loading_max.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -23,8 +28,9 @@ class _HomePageState extends State<HomePage> {
     final profileViewModel = context.read<AuthViewModel>();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
       if (profileViewModel.profile == null) {
-        await profileViewModel.getProfileById();
+        await profileViewModel.getProfile();
       }
+      context.read<PatientViewModel>().getAllPatient(context);
     });
     super.initState();
   }
@@ -51,7 +57,7 @@ class _HomePageState extends State<HomePage> {
                     // default:
                     // print('mana nih datanya');
                     // return Text('Sign In');
-                    final username = value.profile!.username;
+                    final username = value.profile!.name;
                     return RichText(
                       text: TextSpan(
                         children: <TextSpan>[
@@ -95,16 +101,13 @@ class _HomePageState extends State<HomePage> {
               ),
               Padding(
                 padding: const EdgeInsets.only(right: 16),
-                child: InkWell(
-                  onTap: () {
-                    navPushTransition(context, const ProfilePage());
+                child: IconButton(
+                  onPressed: () {
+                    navPushTransition(context, ProfilePage());
                   },
-                  child: const CircleAvatar(
-                    backgroundColor: Colors.transparent,
-                    child: Image(image: AssetImage("assets/images/avatar.png")),
-                  ),
+                  icon: Icon(Icons.account_circle, size: 38),
                 ),
-              )
+              ),
             ],
             iconTheme: IconThemeData(color: cBlack),
             // floating: true,
@@ -131,11 +134,14 @@ class _HomePageState extends State<HomePage> {
           SliverList(
             delegate: SliverChildBuilderDelegate(
               (context, index) {
-                // return Consumer<PatientViewModel>(
-                //     builder: (context, value, child) {
-                //   // return PatientList(persons: patients);
-                //   return PatientListHomeScreen(persons: patients);
-                // });
+                return Consumer<ScheduleViewModel>(
+                    builder: (context, value, child) {
+                  // return PatientList(persons: patients);
+                  return PatientListHomeScreen(
+                    schedules: value.getlistSchedules,
+                    patients: context.read<PatientViewModel>().persons,
+                  );
+                });
               },
               childCount: 1,
             ),
@@ -146,61 +152,79 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-// class PatientListHomeScreen extends StatelessWidget {
-//   final List<PatientModel> persons;
+class PatientListHomeScreen extends StatelessWidget {
+  final List<ScheduleModel> schedules;
+  final List<DataPatient> patients;
 
-//   const PatientListHomeScreen({super.key, required this.persons});
+  const PatientListHomeScreen({
+    super.key,
+    required this.schedules,
+    required this.patients,
+  });
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return ListView.builder(
-//       physics: const BouncingScrollPhysics(),
-//       padding: EdgeInsets.zero,
-//       shrinkWrap: true,
-//       scrollDirection: Axis.vertical,
-//       itemBuilder: (context, index) {
-//         final person = persons.elementAt(index);
-//         if (DateFormat("EEE, d-M-y").format(person.schedule) ==
-//             DateFormat("EEE, d-M-y").format(DateTime.now())) {
-//           return InkWell(
-//             onTap: () {
-//               context.read<PatientViewModel>().selectedPerson(person);
-//               navPushTransition(context, const DetailScheduleNurse());
-//             },
-//             child: Builder(builder: (context) {
-//               Color lineColor = cPrimaryBase;
-//               Color fontColor = cPrimaryDark;
-//               Color badgeColor = cSecondaryLighter;
-//               String condition = 'Process';
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<PatientViewModel>(
+      builder: (context, value, child) {
+        switch (value.patientState) {
+          case ActionState.loading:
+            return Center(child: LoadingMax(color: cPrimaryLight));
+          case ActionState.none:
+            return ListView.builder(
+              physics: const BouncingScrollPhysics(),
+              padding: EdgeInsets.zero,
+              shrinkWrap: true,
+              scrollDirection: Axis.vertical,
+              itemBuilder: (context, index) {
+                final schedule = schedules.elementAt(index);
+                final patient = patients.elementAt(index);
+                if (DateFormat("EEE, d-M-y").format(schedule.date) ==
+                    DateFormat("EEE, d-M-y").format(DateTime.now())) {
+                  return InkWell(
+                    onTap: () {
+                      context.read<PatientViewModel>().selectedPerson(patient);
+                      context
+                          .read<ScheduleViewModel>()
+                          .selectedPatient(schedule);
+                      navPushTransition(context, const DetailSchedule());
+                    },
+                    child: Builder(builder: (context) {
+                      Color lineColor = cPrimaryBase;
+                      Color fontColor = cPrimaryDark;
+                      Color badgeColor = cSecondaryLighter;
+                      String condition = 'Process';
 
-//               if (person.progress == false) {
-//                 lineColor = cGreenLine;
-//                 condition = 'Done';
-//                 badgeColor = cSuccessLightest;
-//                 fontColor = cSuccessDark;
-//               }
-//               return PatientHomeCard(
-//                 fontColor: fontColor,
-//                 lineColor: lineColor,
-//                 paintBadge: badgeColor,
-//                 badgeText: condition,
-//                 patientName: person.name,
-//                 doctorName: person.doctor,
-//                 nurseName: person.nurse,
-//                 time: person.time == 0
-//                     ? "1.00 pm - 1.30 pm"
-//                     : person.time == 1
-//                         ? "1.30 pm - 2.00 pm"
-//                         : person.time == 2
-//                             ? "2.00 pm - 2.30 pm"
-//                             : "2.30 pm - 3.00 pm",
-//               );
-//             }),
-//           );
-//         }
-//         return SizedBox();
-//       },
-//       itemCount: persons.length,
-//     );
-//   }
-// }
+                      if (patient.status != 0) {
+                        lineColor = cGreenLine;
+                        condition = 'Done';
+                        badgeColor = cSuccessLightest;
+                        fontColor = cSuccessDark;
+                      }
+                      return PatientHomeCard(
+                        fontColor: fontColor,
+                        lineColor: lineColor,
+                        paintBadge: badgeColor,
+                        badgeText: condition,
+                        patientName: patient.name,
+                        doctorName: schedule.doctor,
+                        nurseName: schedule.nurse,
+                        // time: person.time == 0
+                        //     ? "1.00 pm - 1.30 pm"
+                        //     : person.time == 1
+                        //         ? "1.30 pm - 2.00 pm"
+                        //         : person.time == 2
+                        //             ? "2.00 pm - 2.30 pm"
+                        //             : "2.30 pm - 3.00 pm",
+                      );
+                    }),
+                  );
+                }
+                return SizedBox();
+              },
+              itemCount: schedules.length,
+            );
+        }
+      },
+    );
+  }
+}

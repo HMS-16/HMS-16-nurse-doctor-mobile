@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:hms_16/screens/navbar/schedule/view_schedule.dart';
 import 'package:hms_16/utils/constant.dart';
-import 'package:hms_16/screens/navbar/schedule/nurse/view_schedule_bynurse.dart';
 import 'package:hms_16/view_model/patient_view_model.dart';
 import 'package:hms_16/widget/duration_dialog.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-class ChangeScheduleByNurse extends StatefulWidget {
-  const ChangeScheduleByNurse({super.key});
+class ChangeSchedule extends StatefulWidget {
+  const ChangeSchedule({super.key});
 
   @override
-  State<ChangeScheduleByNurse> createState() => _ChangeScheduleByNurseState();
+  State<ChangeSchedule> createState() => _ChangeScheduleState();
 }
 
 List<String> itemsSchedule = [
@@ -22,7 +22,7 @@ List<int> itemsScheduleint = [0, 1, 2];
 String valueDropdown = itemsSchedule.first;
 int valueDropdownint = itemsScheduleint.first;
 
-class _ChangeScheduleByNurseState extends State<ChangeScheduleByNurse> {
+class _ChangeScheduleState extends State<ChangeSchedule> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
