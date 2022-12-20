@@ -159,13 +159,14 @@ class _DetailScheduleState extends State<DetailSchedule> {
                                 builder: (context, value, child) {
                               return ListTile(
                                 title: Text(
-                                  value.getscheduleModel!.doctor,
+                                  value.schedule!.doctor,
                                   style: textStyle.copyWith(
                                       fontSize: 14,
                                       fontWeight: FontWeight.w400,
                                       color: cBlackBase),
                                 ),
-                                trailing: patientProvider.person!.status == 0 && authProvider.profile!.role == 2
+                                trailing: patientProvider.person!.status == 0 &&
+                                        authProvider.profile!.role == 2
                                     ? TextButton(
                                         onPressed: () {
                                           dialogValidation(
@@ -237,14 +238,15 @@ class _DetailScheduleState extends State<DetailSchedule> {
                             builder: (context, value, child) {
                           return ListTile(
                             title: Text(
-                              value.getscheduleModel!.nurse,
+                              "value.schedule!.nurse",
                               style: textStyle.copyWith(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400,
                                 color: cBlackBase,
                               ),
                             ),
-                            trailing: patientProvider.person!.status == 0 && authProvider.profile!.role == 2
+                            trailing: patientProvider.person!.status == 0 &&
+                                    authProvider.profile!.role == 2
                                 ? TextButton(
                                     onPressed: () async {
                                       dialogValidation(

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hms_16/model/patient_model.dart';
 import 'package:hms_16/model/schedule_model.dart';
 import 'package:hms_16/screens/navbar/schedule/detail_schedule.dart';
+import 'package:hms_16/screens/navbar/schedule/testing.dart';
 import 'package:hms_16/screens/profile/profile.dart';
 import 'package:hms_16/utils/constant.dart';
 import 'package:hms_16/view_model/doctor_view_model.dart';
@@ -21,15 +22,14 @@ class ViewSchedule extends StatefulWidget {
 }
 
 DateTime selectedDate = DateTime.now();
-DateTime prevDate =
-    DateTime(selectedDate.year, selectedDate.month, selectedDate.day - 1);
-DateTime nextDate =
-    DateTime(selectedDate.year, selectedDate.month, selectedDate.day + 1);
 
 class _ViewScheduleState extends State<ViewSchedule> {
   @override
   void initState() {
     // WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+    context
+        .read<ScheduleViewModel>()
+        .getAllSchedule(DateFormat('M/d/y').format(selectedDate));
     context.read<DoctorViewModel>().getAllDoctor();
     // });
     super.initState();
@@ -48,6 +48,9 @@ class _ViewScheduleState extends State<ViewSchedule> {
         setState(() {
           selectedDate = pickedDate;
         });
+        context
+            .read<ScheduleViewModel>()
+            .getAllSchedule(DateFormat('M/d/y').format(selectedDate));
       }
     }
 
@@ -72,7 +75,7 @@ class _ViewScheduleState extends State<ViewSchedule> {
                 isValidation: false,
                 isImage: false,
                 newPage: () async {
-                  await Future.delayed(Duration(seconds: 2), () {
+                  await Future.delayed(const Duration(seconds: 2), () {
                     Navigator.pop(context);
                   });
                 },
@@ -84,9 +87,9 @@ class _ViewScheduleState extends State<ViewSchedule> {
             padding: const EdgeInsets.only(right: 16),
             child: IconButton(
               onPressed: () {
-                navPushTransition(context, ProfilePage());
+                navPushTransition(context, const ProfilePage());
               },
-              icon: Icon(Icons.account_circle, size: 38),
+              icon: const Icon(Icons.account_circle, size: 38),
             ),
           ),
         ],
@@ -124,7 +127,7 @@ class _ViewScheduleState extends State<ViewSchedule> {
                     isValidation: false,
                     isImage: false,
                     newPage: () async {
-                      await Future.delayed(Duration(seconds: 2), () {
+                      await Future.delayed(const Duration(seconds: 2), () {
                         Navigator.pop(context);
                       });
                     },
@@ -153,6 +156,8 @@ class _ViewScheduleState extends State<ViewSchedule> {
                       setState(() {
                         selectedDate = cvData;
                       });
+                      context.read<ScheduleViewModel>().getAllSchedule(
+                          DateFormat('M/d/y').format(selectedDate));
                     },
                     icon: const Icon(Icons.arrow_back_ios)),
                 title: TextButton(
@@ -177,6 +182,8 @@ class _ViewScheduleState extends State<ViewSchedule> {
                     setState(() {
                       selectedDate = cvData;
                     });
+                    context.read<ScheduleViewModel>().getAllSchedule(
+                        DateFormat('M/d/y').format(selectedDate));
                   },
                   icon: const Icon(Icons.arrow_forward_ios),
                 )),
@@ -187,8 +194,8 @@ class _ViewScheduleState extends State<ViewSchedule> {
           Consumer<ScheduleViewModel>(builder: (context, value, child) {
             // return PatientList(persons: patients);
             return PatientListSchedule(
-              schedules: value.getlistSchedules,
-              patients: context.read<PatientViewModel>().persons,
+              schedules: context.read<ScheduleViewModel>().schedules,
+              // patients: context.read<PatientViewModel>().persons,
               // doctors: listDoctors,
             );
           }),
@@ -199,13 +206,13 @@ class _ViewScheduleState extends State<ViewSchedule> {
 }
 
 class PatientListSchedule extends StatelessWidget {
-  final List<ScheduleModel> schedules;
-  final List<DataPatient> patients;
+  final List<DataSchedule> schedules;
+  // final List<DataPatient> patients;
 
   const PatientListSchedule({
     super.key,
     required this.schedules,
-    required this.patients,
+    // required this.patients,
   });
 
   @override
@@ -217,15 +224,15 @@ class PatientListSchedule extends StatelessWidget {
         scrollDirection: Axis.vertical,
         itemBuilder: (context, index) {
           final schedule = schedules.elementAt(index);
-          final patient = patients.elementAt(index);
+          // final patient = patients.elementAt(index);
           // final schedule = listSchedules.elementAt(index);
-          if (DateFormat("EEE, d-M-y").format(schedule.date) ==
-              DateFormat("EEE, d-M-y").format(selectedDate)) {
+          print(schedule);
+          if (schedules.isNotEmpty) {
             return InkWell(
               onTap: () {
-                context.read<PatientViewModel>().selectedPerson(patient);
-                context.read<ScheduleViewModel>().selectedPatient(schedule);
-                navPushTransition(context, const DetailSchedule());
+                // context.read<PatientViewModel>().selectedPerson(patient);
+                // context.read<ScheduleViewModel>().(schedule);
+                // navPushTransition(context, const DetailSchedule());
               },
               child: Builder(builder: (context) {
                 Color lineColor = cPrimaryBase;
@@ -233,35 +240,40 @@ class PatientListSchedule extends StatelessWidget {
                 Color badgeColor = cSecondaryLighter;
                 String condition = 'Process';
 
-                if (patient.status != 0) {
-                  lineColor = cGreenLine;
-                  condition = 'Done';
-                  badgeColor = cSuccessLightest;
-                  fontColor = cSuccessDark;
-                }
+                // if (patient.status != 0) {
+                //   lineColor = cGreenLine;
+                //   condition = 'Done';
+                //   badgeColor = cSuccessLightest;
+                //   fontColor = cSuccessDark;
+                // }
                 return PatientScheduleCard(
-                  fontColor: fontColor,
-                  lineColor: lineColor,
-                  paintBadge: badgeColor,
-                  badgeText: condition,
-                  patientName: patient.name,
-                  // disease: person.disease,
-                  doctorName: schedule.doctor,
-                  nurseName: schedule.nurse,
-                  // nurseName: person.nurse,
-                  // time: person.time == 0
-                  //     ? "1.00 pm - 1.30 pm"
-                  //     : person.time == 1
-                  //         ? "1.30 pm - 2.00 pm"
-                  //         : person.time == 2
-                  //             ? "2.00 pm - 2.30 pm"
-                  //             : "2.30 pm - 3.00 pm",
-                );
+                    fontColor: fontColor,
+                    lineColor: lineColor,
+                    paintBadge: badgeColor,
+                    badgeText: condition,
+                    patientName: schedule.name,
+                    // disease: person.disease,
+                    doctorName: schedule.doctor,
+                    nurseName: schedule.nurse,
+                    // nurseName: person.nurse,
+                    time: schedule.shift
+                    //  == 0
+                    //     ? "1.00 pm - 1.30 pm"
+                    //     : person.time == 1
+                    //         ? "1.30 pm - 2.00 pm"
+                    //         : person.time == 2
+                    //             ? "2.00 pm - 2.30 pm"
+                    //             : "2.30 pm - 3.00 pm",
+                    );
               }),
             );
           }
-          return Container();
+          // if (DateFormat("EEE, d-M-y").format(schedule.date) ==
+          //     DateFormat("EEE, d-M-y").format(selectedDate)) {
+          return const SizedBox();
         },
+        // return Container();
+        // },
         itemCount: schedules.length,
       ),
     );
