@@ -9,10 +9,18 @@ class NotificationPage extends StatefulWidget {
   State<NotificationPage> createState() => _NotificationPageState();
 }
 
+List notifdata = [
+  "You have new schedule to replace Dr. Bednego at 01.00-01.30 today!",
+  "Reminder! You have schedule at 10.00 - 11.00 am",
+  "Reminder! You have schedule at 10.00 - 11.00 am",
+  "You have new schedule to replace Dr. Bednego at 01.00-01.30 today!"
+];
+
 class _NotificationPageState extends State<NotificationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: cWhiteBase,
       appBar: AppBar(
         iconTheme: IconThemeData(color: cBlack),
         elevation: 0,
@@ -31,14 +39,14 @@ class _NotificationPageState extends State<NotificationPage> {
                   builder: (context) => AlertDialog(
                     content: Container(
                       alignment: Alignment.center,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                           image: DecorationImage(
                         image: AssetImage("assets/images/succes.png"),
                       )),
                     ),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20)),
-                    title: Text("Are you sure to clear all notifications?"),
+                    title: const Text("Are you sure to clear all notifications?"),
                     actions: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -48,26 +56,29 @@ class _NotificationPageState extends State<NotificationPage> {
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(20)),
                                   backgroundColor: cPrimaryBase,
-                                  minimumSize: Size(130, 50)),
+                                  minimumSize: const Size(130, 50)),
                               onPressed: () async {
                                 durationDialog(
                                     context, "Notifications has been cleared!");
                                 Future.delayed(const Duration(seconds: 2), () {
                                   Navigator.pop(context);
                                 });
+                                setState(() {
+                                  notifdata.removeRange(0, notifdata.length);
+                                });
                               },
-                              child: Text("Yes")),
+                              child: const Text("Yes")),
                           ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                   side: BorderSide(color: cPrimaryBase),
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(20)),
                                   backgroundColor: Colors.white,
-                                  minimumSize: Size(130, 50)),
+                                  minimumSize: const Size(130, 50)),
                               onPressed: () {
                                 Navigator.pop(context);
                               },
-                              child: Text(
+                              child: const Text(
                                 "No",
                                 style: TextStyle(color: Colors.black),
                               )),
@@ -79,7 +90,7 @@ class _NotificationPageState extends State<NotificationPage> {
               });
             },
             itemBuilder: (context) => [
-              PopupMenuItem(
+              const PopupMenuItem(
                 value: 1,
                 child: Text("Clear all"),
               )
@@ -90,60 +101,54 @@ class _NotificationPageState extends State<NotificationPage> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Padding(
-            padding: EdgeInsets.only(left: 30),
-            child: Text("Today"),
-          ),
-          Expanded(
-            child: ListView(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Card(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10)),
-                    elevation: 8,
-                    child: ListTile(
-                      leading: Padding(
-                        padding: const EdgeInsets.only(left: 20),
-                        child: CircleAvatar(
-                          maxRadius: 10,
-                          backgroundColor: Colors.grey.shade700,
-                        ),
-                      ),
-                      title: const Text(
-                        "Reminder! You have schedule at 10.00 - 11.00 am",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 15),
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Card(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10)),
-                    elevation: 8,
-                    child: ListTile(
-                      leading: Padding(
-                        padding: const EdgeInsets.only(left: 20),
-                        child: CircleAvatar(
-                          maxRadius: 10,
-                          backgroundColor: Colors.grey.shade700,
-                        ),
-                      ),
-                      title: const Text(
-                        "Reminder! You have schedule at 10.00 - 11.00 am",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 15),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
+          if (notifdata.isNotEmpty) ...[
+            const Padding(
+              padding: EdgeInsets.only(left: 30),
+              child: Text("Today"),
             ),
-          )
+            Expanded(
+              child: ListView.builder(
+                itemCount: notifdata.length,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Card(
+                      shadowColor: const Color.fromRGBO(111, 111, 111, 0.12),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                      elevation: 2,
+                      child: ListTile(
+                        leading: Padding(
+                          padding: const EdgeInsets.only(left: 20),
+                          child: CircleAvatar(
+                            maxRadius: 10,
+                            backgroundColor: Colors.grey.shade700,
+                          ),
+                        ),
+                        title: Text(
+                          notifdata[index],
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 15),
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              ),
+            )
+          ] else ...[
+            Center(
+              child: Column(
+                children: [
+                  const Image(image: AssetImage("assets/images/no_data.png")),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  const Text("You don't have any notification yet.")
+                ],
+              ),
+            )
+          ],
         ],
       ),
     );

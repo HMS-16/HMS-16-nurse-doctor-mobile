@@ -4,10 +4,12 @@ import 'package:intl/intl.dart';
 class TileMedDiagnosis extends StatefulWidget {
   TileMedDiagnosis({
     super.key,
+    required this.doctor,
     required this.date,
     required this.diagnose,
     required this.prescription,
   });
+  String doctor;
   DateTime date;
   String diagnose;
   String prescription;
@@ -69,7 +71,7 @@ class _TileMedDiagnosisState extends State<TileMedDiagnosis> {
                 if (_customTileExpanded) ...[
                   SizedBox(height: 5),
                   Text(
-                    'Doctor - Dzakwan',
+                    'Doctor - ${widget.doctor}',
                     style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
                   ),
                 ]

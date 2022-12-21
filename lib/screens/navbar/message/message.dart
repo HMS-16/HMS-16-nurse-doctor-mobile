@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hms_16/screens/navbar/message/roomchat.dart';
-import 'package:hms_16/utils/constant.dart';
 import 'package:hms_16/screens/notification.dart';
 import 'package:hms_16/screens/profile/profile.dart';
+import 'package:hms_16/utils/constant.dart';
+import 'package:hms_16/view_model/auth_view_model.dart';
 import 'package:hms_16/widget/navpush_transition.dart';
+import 'package:provider/provider.dart';
 
 class Message extends StatelessWidget {
   const Message({super.key});
@@ -26,27 +28,45 @@ class Message extends StatelessWidget {
             onPressed: () {
               navPushTransition(context, const NotificationPage());
             },
-            icon: const Icon(Icons.notifications),
+            icon: Icon(
+              Icons.notifications,
+              color: cPrimaryBase,
+            ),
           ),
           Padding(
             padding: const EdgeInsets.only(right: 16),
-            child: InkWell(
-              onTap: () {
-                navPushTransition(context, const ProfilePage());
+            child: IconButton(
+              onPressed: () {
+                navPushTransition(context, ProfilePage());
               },
-              child: const CircleAvatar(
-                backgroundColor: Colors.transparent,
-                child: Image(image: AssetImage("assets/images/avatar.png")),
+              icon: Consumer<AuthViewModel>(
+                builder: (context, value, child) {
+                  return CircleAvatar(
+                    backgroundColor: cPrimaryBase,
+                    minRadius: 40,
+                    child: LayoutBuilder(builder: (context, constraints) {
+                      if (value.profile!.role == 1) {
+                        return const Image(
+                          image: AssetImage("assets/images/doctor_icon.png"),
+                        );
+                      } else {
+                        return const Image(
+                          image: AssetImage("assets/images/nurse_icon.png"),
+                        );
+                      }
+                    }),
+                  );
+                },
               ),
             ),
-          )
+          ),
         ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            SizedBox(
+            const SizedBox(
               width: double.infinity,
               height: 48,
               child: TextField(
@@ -63,13 +83,13 @@ class Message extends StatelessWidget {
             ),
             ListTile(
               onTap: () {
-                navPushTransition(context, RoomChatPage());
+                navPushTransition(context, const RoomChatPage());
               },
-              leading: CircleAvatar(
+              leading: const CircleAvatar(
                 maxRadius: 25,
                 child: Icon(Icons.person),
               ),
-              title: Text("Nurul Zakiah",
+              title: const Text("Nurul Zakiah",
                   style: TextStyle(fontWeight: FontWeight.bold)),
               subtitle: Text(
                 "Hey, you are free at 01.30 - 02.30 pm today?",
@@ -78,18 +98,18 @@ class Message extends StatelessWidget {
               isThreeLine: true,
               trailing: Column(
                 children: [
-                  Text("8:15 am"),
+                  const Text("8:15 am"),
                   Expanded(
                     child: Container(
-                      margin: EdgeInsets.only(top: 8, right: 30),
+                      margin: const EdgeInsets.only(top: 8, right: 30),
                       child: CircleAvatar(
                         backgroundColor: cPrimaryBase,
-                        child: Text(
+                        maxRadius: 12,
+                        child: const Text(
                           "1",
                           style: TextStyle(
                               fontSize: 10, fontWeight: FontWeight.bold),
                         ),
-                        maxRadius: 12,
                       ),
                     ),
                   )

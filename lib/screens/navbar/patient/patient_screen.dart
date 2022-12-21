@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:hms_16/view_model/patient_view_model.dart';
 import 'package:hms_16/screens/notification.dart';
 import 'package:hms_16/screens/profile/profile.dart';
+import 'package:hms_16/view_model/auth_view_model.dart';
+import 'package:hms_16/view_model/patient_view_model.dart';
 import 'package:hms_16/model/patient_model.dart';
 import 'package:hms_16/utils/constant.dart';
 import 'package:hms_16/screens/navbar/patient/patient_detail/patient_detail.dart';
 import 'package:hms_16/widget/navpush_transition.dart';
 import 'package:hms_16/widget/patient_card.dart';
-import 'package:hms_16/widget/status/error_max.dart';
 import 'package:hms_16/widget/status/loading_max.dart';
 import 'package:provider/provider.dart';
 
@@ -20,53 +20,85 @@ class PatientScreen extends StatefulWidget {
 
 class _PatientScreenState extends State<PatientScreen> {
   @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      context.read<PatientViewModel>().getAllPatient(context);
+    });
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          iconTheme: IconThemeData(color: cBlack),
-          elevation: 0,
-          backgroundColor: Colors.transparent,
-          title: Text(
-            'Patient',
-            style: textStyle.copyWith(
-                fontSize: 20, fontWeight: FontWeight.w600, color: cBlackBase),
-          ),
-          actions: [
-            IconButton(
-              onPressed: () {
-                navPushTransition(context, const NotificationPage());
-              },
-              icon: const Icon(Icons.notifications),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(right: 16),
-              child: InkWell(
-                onTap: () {
-                  navPushTransition(context, const ProfilePage());
-                },
-                child: const CircleAvatar(
-                  backgroundColor: Colors.transparent,
-                  child: Image(image: AssetImage("assets/images/avatar.png")),
-                ),
-              ),
-            )
-          ],
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        iconTheme: IconThemeData(color: cBlack),
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        title: Text(
+          'Patient',
+          style: textStyle.copyWith(
+              fontSize: 20, fontWeight: FontWeight.w600, color: cBlackBase),
         ),
-        body: Builder(builder: (context) {
+        actions: [
+          IconButton(
+            onPressed: () {
+              navPushTransition(context, const NotificationPage());
+             
+            },
+            icon: Icon(
+              Icons.notifications,
+              color: cPrimaryBase,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(right: 16),
+            child: IconButton(
+              onPressed: () {
+                navPushTransition(context, ProfilePage());
+              },
+              icon: Consumer<AuthViewModel>(
+                builder: (context, value, child) {
+                  return CircleAvatar(
+                    backgroundColor: cPrimaryBase,
+                    minRadius: 40,
+                    child: LayoutBuilder(builder: (context, constraints) {
+                      if (value.profile!.role == 1) {
+                        return Image(
+                          image: AssetImage("assets/images/doctor_icon.png"),
+                        );
+                      } else {
+                        return Image(
+                          image: AssetImage("assets/images/nurse_icon.png"),
+                        );
+                      }
+                    }),
+                  );
+                },
+              ),
+            ),
+          ),
+        ],
+      ),
+      body: Builder(
+        builder: (context) {
           return Consumer<PatientViewModel>(
             builder: (context, value, child) {
-              switch (value.state) {
+              switch (value.patientState) {
                 case ActionState.loading:
-                  return const LoadingMax();
+                  return Center(child: LoadingMax(color: cInfoLight));
                 case ActionState.none:
-                  return const MyWidget();
-                case ActionState.error:
-                  return const ErrorMax();
+                  return MyWidget();
+                // case ActionState.error:
+                //   return Center(
+                //     child: Text('error'),
+                //   );
               }
             },
           );
-        }));
+        },
+      ),
+    );
   }
 }
 
@@ -75,43 +107,44 @@ class MyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<PatientViewModel>(context, listen: false);
-    return Padding(
+    final provider = context.read<PatientViewModel>();
+    return ListView(
       padding: const EdgeInsets.all(16.0),
-      child: Column(
-        children: [
-          SizedBox(
-            width: double.infinity,
-            height: 48,
-            child: TextField(
-              onChanged: (value) {
-                provider.searchPatient(value);
-              },
-              decoration: const InputDecoration(
-                prefixIcon: Icon(Icons.search),
-                label: Text('Search'),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(15),
-                  ),
+      children: [
+        SizedBox(
+          width: double.infinity,
+          height: 48,
+          child: TextField(
+            onChanged: (value) {
+              provider.searchPatient(value);
+            },
+            decoration: const InputDecoration(
+              prefixIcon: Icon(Icons.search),
+              label: Text('Search'),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(15),
                 ),
               ),
             ),
           ),
-          const SizedBox(height: 24),
-          Consumer<PatientViewModel>(builder: (context, value, child) {
-            return _screenValidator(value.persons);
-          }),
-        ],
-      ),
+        ),
+        const SizedBox(height: 24),
+        // _screenValidator(provider.persons),
+        Consumer<PatientViewModel>(builder: (context, value, child) {
+          return _screenValidator(value.filterPatients, value.persons);
+        }),
+      ],
     );
   }
 }
 
-Widget _screenValidator(Iterable<PatientModel> patient) {
-  if (patient.isNotEmpty) {
-    return PatientList(persons: patient.toList());
-  } else if (patient.isEmpty) {
+Widget _screenValidator(List search, List<DataPatient> patient) {
+  patient.sort((a, b) => a.status.compareTo(b.status));
+  if (search.isNotEmpty) {
+    return PatientList(persons: search);
+  }
+  if (search.isEmpty) {
     return Center(
       child: Column(
         children: [
@@ -125,62 +158,58 @@ Widget _screenValidator(Iterable<PatientModel> patient) {
       ),
     );
   }
-
-  return PatientList(persons: patients);
+  // final variabel = jsonEncode(search);
+  // print("mockingbird = $variabel");
+  return PatientList(persons: patient);
 }
 
 class PatientList extends StatelessWidget {
-  final List<PatientModel> persons;
+  final List persons;
 
-  const PatientList({super.key, required this.persons});
+  PatientList({super.key, required this.persons});
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: ListView.separated(
-        physics: const BouncingScrollPhysics(),
-        shrinkWrap: true,
-        scrollDirection: Axis.vertical,
-        itemBuilder: (context, index) {
-          final person = persons.elementAt(index);
-          return InkWell(
-            onTap: () {
-              context.read<PatientViewModel>().selectedPerson(person);
-              navPushTransition(context, const PatientDetail());
-            },
-            child: Builder(builder: (context) {
-              Color lineColor = cPrimaryBase;
-              Color fontColor = cPrimaryDark;
-              Color badgeColor = cSecondaryLighter;
-              String condition = 'Process';
+    return ListView.separated(
+      physics: const BouncingScrollPhysics(),
+      shrinkWrap: true,
+      scrollDirection: Axis.vertical,
+      itemBuilder: (context, index) {
+        final person = persons.elementAt(index);
+        return InkWell(
+          onTap: () {
+            context.read<PatientViewModel>().selectedPerson(person);
+            navPushTransition(context, const PatientDetail());
+          },
+          child: Builder(builder: (context) {
+            // Consumer<PatientViewModel>(
+            //   builder: (context, value, chiild) {
+            Color lineColor = cPrimaryBase;
+            Color fontColor = cPrimaryDark;
+            Color badgeColor = cSecondaryLighter;
+            String condition = 'Process';
+            // print(person);
 
-              if (person.progress == false) {
-                lineColor = cGreenLine;
-                condition = 'Done';
-                badgeColor = cSuccessLightest;
-                fontColor = cSuccessDark;
-              }
-              return PatientCard(
-                fontColor: fontColor,
-                lineColor: lineColor,
-                paintBadge: badgeColor,
-                patientName: person.name,
-                disease: person.disease,
-                time: person.time == 0
-                    ? "1.00 pm - 1.30 pm"
-                    : person.time == 1
-                        ? "1.30 pm - 2.00 pm"
-                        : person.time == 2
-                            ? "2.00 pm - 2.30 pm"
-                            : "2.30 pm - 3.00 pm",
-                badgeText: condition,
-              );
-            }),
-          );
-        },
-        itemCount: persons.length,
-        separatorBuilder: (context, index) => const SizedBox(height: 16),
-      ),
+            if (person!.status != 0) {
+              lineColor = cGreenLine;
+              condition = 'Done';
+              badgeColor = cSuccessLightest;
+              fontColor = cSuccessDark;
+            }
+            return PatientCard(
+              fontColor: fontColor,
+              lineColor: lineColor,
+              paintBadge: badgeColor,
+              patientName: person!.name,
+              badgeText: condition,
+            );
+          }),
+          //   },
+          // ),
+        );
+      },
+      itemCount: persons.length,
+      separatorBuilder: (context, index) => const SizedBox(height: 16),
     );
   }
 }

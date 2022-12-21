@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 
 class LoadingMax extends StatelessWidget {
-  const LoadingMax({super.key});
+  LoadingMax({
+    super.key,
+    this.color = Colors.white,
+  });
+
+  Color color;
 
   @override
   Widget build(BuildContext context) {
-    return const CircularProgressIndicator();
+    return CircularProgressIndicator(color: color);
   }
 }

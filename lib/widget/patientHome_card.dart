@@ -6,20 +6,20 @@ import 'package:hms_16/utils/constant.dart';
 class PatientHomeCard extends StatelessWidget {
   const PatientHomeCard({
     super.key,
-    required this.patientName,
+    this.patientName,
     required this.doctorName,
     required this.nurseName,
-    required this.time,
+    this.time,
     required this.lineColor,
     required this.badgeText,
     required this.paintBadge,
     required this.fontColor,
   });
 
-  final String patientName;
+  final String? patientName;
   final String doctorName;
   final String nurseName;
-  final String time;
+  final String? time;
   final String badgeText;
   final Color lineColor;
   final Color paintBadge;
@@ -77,7 +77,7 @@ class PatientHomeCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          patientName,
+                          patientName!,
                           style: textStyle.copyWith(
                               fontSize: 16, fontWeight: FontWeight.w600),
                         ),
@@ -95,13 +95,13 @@ class PatientHomeCard extends StatelessWidget {
                               fontSize: 12,
                               fontWeight: FontWeight.w400),
                         ),
-                        Text(
-                          time,
-                          style: textStyle.copyWith(
-                              color: cBlackLightest,
-                              fontSize: 12,
-                              fontWeight: FontWeight.w400),
-                        ),
+                        // Text(
+                        //   time!,
+                        //   style: textStyle.copyWith(
+                        //       color: cBlackLightest,
+                        //       fontSize: 12,
+                        //       fontWeight: FontWeight.w400),
+                        // ),
                       ],
                     ),
                     Expanded(

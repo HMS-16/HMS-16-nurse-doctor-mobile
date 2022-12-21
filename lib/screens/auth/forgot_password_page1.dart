@@ -23,26 +23,23 @@ class ForgotPassword1 extends StatelessWidget {
               fontSize: 20, fontWeight: FontWeight.w600, color: cBlackBase),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Form(
-          autovalidateMode: AutovalidateMode.always,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+      body: Form(
+        autovalidateMode: AutovalidateMode.onUserInteraction,
+        child: Center(
+          child: ListView(
+            shrinkWrap: true,
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            // mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Container(
-                child: Image(
-                  image: const AssetImage(
-                    "assets/images/forgot-password.png",
-                  ),
-                  fit: BoxFit.contain,
-                  width: MediaQuery.of(context).size.width,
-                  height: 200,
+              Image(
+                image: const AssetImage(
+                  "assets/images/forgot-password.png",
                 ),
+                fit: BoxFit.contain,
+                width: double.maxFinite,
+                height: 220,
               ),
-              const SizedBox(
-                height: 50,
-              ),
+              const SizedBox(height: 30),
               Center(
                 child: Text(
                   "Please Enter Your Email Address",
@@ -53,7 +50,7 @@ class ForgotPassword1 extends StatelessWidget {
                 ),
               ),
               const SizedBox(
-                height: 30,
+                height: 30
               ),
               Row(
                 children: [
@@ -91,8 +88,7 @@ class ForgotPassword1 extends StatelessWidget {
                     errorStyle: textStyle.copyWith(color: Colors.red),
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
-                        borderSide:
-                            BorderSide(color: cSuccessBase, width: 5.0)),
+                        borderSide: BorderSide(color: cSuccessBase, width: 5.0)),
                     prefixIcon: const Icon(
                       Icons.email_outlined,
                       color: Colors.black,
@@ -104,17 +100,20 @@ class ForgotPassword1 extends StatelessWidget {
               //   height: 3.0,
               // ),
               Button(
-                  text: "Send",
-                  bgcolor: Colors.blueAccent,
-                  margin: const EdgeInsets.only(top: 30),
-                  onpressed: () {
-                    navPushTransition(context, const ForgotPassword2());
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const ForgotPassword2(),
-                        ));
-                  })
+                child: Text("Send"),
+                bgcolor: Colors.blueAccent,
+                margin: const EdgeInsets.only(top: 30),
+                onpressed: () {
+                  FocusManager.instance.primaryFocus!.unfocus();
+                  navPushTransition(context, const ForgotPassword2());
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //     builder: (context) => const ForgotPassword2(),
+                  //   ),
+                  // );
+                },
+              )
             ],
           ),
         ),

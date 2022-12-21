@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hms_16/screens/auth/forgot_password_page1.dart';
 import 'package:hms_16/utils/constant.dart';
+import 'package:hms_16/view_model/auth_view_model.dart';
+import 'package:hms_16/widget/dialog_validation.dart';
 import 'package:hms_16/widget/duration_dialog.dart';
 import 'package:hms_16/widget/navpush_transition.dart';
+import 'package:provider/provider.dart';
 
 class ChangePasswordPage extends StatelessWidget {
   ChangePasswordPage({super.key});
@@ -49,6 +52,7 @@ class ChangePasswordPage extends StatelessWidget {
                 ),
               ),
               BuildPassField(
+                
                 validator: (p0) {
                   if (p0!.isEmpty) {
                     return ("Password can not be empty");
@@ -61,7 +65,17 @@ class ChangePasswordPage extends StatelessWidget {
               ),
               InkWell(
                 onTap: () {
-                  navPushTransition(context, ForgotPassword1());
+                  dialogValidation(
+                      context: context,
+                      title: "Coming Soon!",
+                      isValidation: false,
+                      isImage: false,
+                      newPage: () async {
+                        await Future.delayed(Duration(seconds: 2), () {
+                          Navigator.pop(context);
+                        });
+                      },
+                    );
                 },
                 child: Container(
                   margin: EdgeInsets.symmetric(vertical: 30),
@@ -143,7 +157,8 @@ class ChangePasswordPage extends StatelessWidget {
                 controller: cnewpasscontrol,
                 hint: "Confirm New password",
               ),
-              Container(
+              Consumer<AuthViewModel>(builder: (context, value, child) {
+                return Container(
                 decoration:
                     BoxDecoration(borderRadius: BorderRadius.circular(20)),
                 padding: EdgeInsets.symmetric(horizontal: 10),
@@ -158,6 +173,7 @@ class ChangePasswordPage extends StatelessWidget {
                             Size(MediaQuery.of(context).size.width, 50)),
                     onPressed: () async {
                       if (_formKey.currentState!.validate()) {
+                        
                         await showDialog<void>(
                           context: context,
                           builder: (context) => AlertDialog(
@@ -208,7 +224,8 @@ class ChangePasswordPage extends StatelessWidget {
                       }
                     },
                     child: Text("Send")),
-              )
+              );
+              },)
             ],
           ),
         ),

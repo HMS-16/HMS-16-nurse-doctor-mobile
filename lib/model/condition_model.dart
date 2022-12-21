@@ -1,4 +1,6 @@
 class ConditionModel {
+  String idPatient;
+  String nurse;
   DateTime date;
   int height;
   int weight;
@@ -7,9 +9,11 @@ class ConditionModel {
   double temperature;
   int restHeartRate;
   int breathRate;
-  String? note;
+  String note;
 
   ConditionModel({
+    required this.idPatient,
+    required this.nurse,
     required this.date,
     required this.height,
     required this.weight,
@@ -18,6 +22,6 @@ class ConditionModel {
     required this.temperature,
     required this.restHeartRate,
     required this.breathRate,
-    this.note,
+    required this.note,
   });
 }

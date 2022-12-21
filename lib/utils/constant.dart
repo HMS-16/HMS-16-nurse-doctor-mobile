@@ -26,3 +26,9 @@ Color cSuccessDark = const Color(0xff228018);
 Color cSecondaryLighter = const Color(0xffE3ECFA);
 
 TextStyle textStyle = GoogleFonts.nunito();
+
+enum ActionState {
+  none,
+  loading,
+  // error,
+}

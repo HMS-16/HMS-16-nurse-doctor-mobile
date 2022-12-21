@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 class TileMedRecord extends StatefulWidget {
   TileMedRecord({
     super.key,
+    required this.nurse,
     required this.date,
     required this.height,
     required this.weight,
@@ -15,6 +16,7 @@ class TileMedRecord extends StatefulWidget {
     required this.breathRate,
     this.note,
   });
+  String nurse;
   DateTime date;
   int height;
   int weight;
@@ -81,7 +83,7 @@ class _TileMedRecordState extends State<TileMedRecord> {
                 if (_customTileExpanded) ...[
                   SizedBox(height: 5),
                   Text(
-                    'Nurse - Ahmad',
+                    'Nurse - ${widget.nurse}',
                     style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
                   ),
                 ]

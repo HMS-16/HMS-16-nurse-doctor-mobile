@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hms_16/model/treatment_model.dart';
 import 'package:hms_16/utils/constant.dart';
+import 'package:hms_16/view_model/auth_view_model.dart';
+import 'package:hms_16/view_model/patient_view_model.dart';
 import 'package:hms_16/view_model/treatment_view_model.dart';
 import 'package:hms_16/widget/dialog_validation.dart';
 import 'package:hms_16/widget/field_form_medical.dart';
@@ -20,6 +22,8 @@ class _AddMedDiagnosisState extends State<AddMedDiagnosis> {
 
   @override
   Widget build(BuildContext context) {
+    final authProvider = context.read<AuthViewModel>();
+    final patientProvider = context.read<PatientViewModel>();
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -68,6 +72,8 @@ class _AddMedDiagnosisState extends State<AddMedDiagnosis> {
                     onPressedYes: (() {
                       context.read<TreatmentViewModel>().insertTreatment(
                             TreatmentModel(
+                              idPatient: patientProvider.person!.id,
+                              doctor: authProvider.profile!.name,
                               date: DateTime.now(),
                               diagnose: diagnoseCtrl.text,
                               prescription: prescriptionCtrl.text,

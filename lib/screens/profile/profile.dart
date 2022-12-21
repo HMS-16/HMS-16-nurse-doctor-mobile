@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:hms_16/screens/auth/sign_up_page.dart';
-import 'package:hms_16/screens/profile/edit_profile_page.dart';
-import 'package:hms_16/screens/profile/profile_change_password.dart';
 import 'package:hms_16/utils/constant.dart';
-import 'package:hms_16/widget/navpush_transition.dart';
+import 'package:hms_16/view_model/auth_view_model.dart';
+import 'package:hms_16/widget/dialog_validation.dart';
+import 'package:hms_16/widget/listtile_profile.dart';
+import 'package:provider/provider.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,128 +21,116 @@ class ProfilePage extends StatelessWidget {
               fontSize: 20, fontWeight: FontWeight.w600, color: cBlackBase),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            const ListTile(
-              leading: CircleAvatar(
-                backgroundColor: Colors.grey,
-                child: Image(image: AssetImage("assets/images/avatar.png")),
+      body: Consumer<AuthViewModel>(
+        builder: (context, value, child) {
+          // print(value.profile);
+          return Column(
+            children: [
+              CircleAvatar(
+                backgroundColor: cPrimaryBase,
+                minRadius: 40,
+                child: LayoutBuilder(builder: (context, constraints) { 
+                    if(value.profile!.role == 1){
+                        return const Image(image: AssetImage("assets/images/doctor_icon.png"),
+                    );
+                    }else{
+                        return const Image(image: AssetImage("assets/images/nurse_icon.png"),
+                    );
+                    }  
+                }),
               ),
-              title: Text(
-                "Abed Nego",
-                style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
+              ListTileProfile(
+                title: "Name",
+                subtitle: value.profile!.name,
               ),
-              subtitle: Text(
-                """
-+6287788546976
-abednego1@gmail.com
-""",
-                style: TextStyle(color: Colors.black),
+              ListTileProfile(
+                title: "Registration Number",
+                subtitle: value.profile!.strNum,
               ),
-              isThreeLine: true,
-            ),
-            Row(
-              children: const [
-                Padding(
-                    padding: EdgeInsets.only(left: 20),
-                    child: Icon(Icons.person)),
-                Padding(
-                  padding: EdgeInsets.only(left: 10),
-                  child: Text(
-                    "Account",
-                    style: TextStyle(fontWeight: FontWeight.w600),
+              Container(
+                margin: const EdgeInsets.symmetric(horizontal: 16),
+                decoration: BoxDecoration(
+                    border: Border(
+                        bottom: BorderSide(width: 2, color: cWhiteDarker))),
+                child: ListTile(
+                  title: Text(
+                    "Role",
+                    style: TextStyle(color: cBlackLightest),
+                  ),
+                  subtitle: LayoutBuilder(
+                    builder: (context, constraints) {
+                      if (value.profile!.role == 1) {
+                        return Text("Doctor",
+                            style: TextStyle(fontSize: 16, color: cBlack));
+                      } else {
+                        return Text("Nurse",
+                            style: TextStyle(fontSize: 16, color: cBlack));
+                      }
+                    },
                   ),
                 ),
-              ],
-            ),
-            CardTile(
-              onTap: () {
-                navPushTransition(context, const EditProfilePage());
-              },
-              title: 'Edit Profile',
-              subtitle: const Text('Edit your account profile'),
-              icon: Icons.edit,
-            ),
-            CardTile(
-              onTap: () {
-                navPushTransition(context, ChangePasswordPage());
-              },
-              title: 'Change Password',
-              subtitle: const Text('Change your password'),
-              icon: Icons.lock,
-            ),
-            const SizedBox(
-              height: 300,
-            ),
-            InkWell(
-              onTap: () {
-                navPushTransition(context, SignUpPage());
-              },
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.logout_outlined,
-                    size: 30,
+              ),
+              ListTileProfile(
+                title: "Email",
+                subtitle: value.profile!.email,
+              ),
+              ListTileProfile(
+                title: "Change Password",
+                subtitle: "Change your password",
+                trailing: IconButton(
+                  onPressed: () {
+                    dialogValidation(
+                      context: context,
+                      title: "Coming Soon!",
+                      isValidation: false,
+                      isImage: false,
+                      newPage: () async {
+                        await Future.delayed(const Duration(seconds: 2), () {
+                          Navigator.pop(context);
+                        });
+                      },
+                    );
+                    // navPushTransition(context, ChangePasswordPage());
+                  },
+                  icon: Icon(
+                    Icons.keyboard_arrow_right,
+                    color: cWhiteLast,
                   ),
-                  Text("Sign out")
-                ],
+                ),
               ),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class CardTile extends StatelessWidget {
-  final IconData? icon;
-  final String title;
-  final Widget? subtitle;
-  void Function()? onTap;
-  CardTile({
-    Key? key,
-    required this.icon,
-    required this.title,
-    required this.subtitle,
-    this.onTap,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: InkWell(
-        onTap: onTap,
-        child: Card(
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-          elevation: 2,
-          child: ListTile(
-            leading: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Icon(
-                icon,
-                color: Colors.black,
+              const Spacer(),
+              // SizedBox(child: Spacer()),
+              Container(
+                margin: const EdgeInsets.only(bottom: 15),
+                child: InkWell(
+                  onTap: () {
+                    dialogValidation(
+                      context: context,
+                      onPressedYes: (() {
+                        context.read<AuthViewModel>().logout(context);
+                      }),
+                      title: 'Are you sure?',
+                    );
+                  },
+                  child: Row(
+                    // mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
+                    children: const[
+                       Icon(
+                        Icons.logout_outlined,
+                        size: 30,
+                      ),
+                       SizedBox(
+                        width: 16,
+                      ),
+                       Text("Sign out")
+                    ],
+                  ),
+                ),
               ),
-            ),
-            title: Text(
-              title,
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-            ),
-            subtitle: subtitle,
-            trailing: Container(
-              padding: const EdgeInsets.all(5),
-              child: Icon(
-                Icons.arrow_forward_ios,
-                color: Colors.grey.shade400,
-                size: 20,
-              ),
-            ),
-          ),
-        ),
+            ],
+          );
+        },
       ),
     );
   }

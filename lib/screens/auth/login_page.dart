@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:hms_16/utils/constant.dart';
 import 'package:hms_16/screens/auth/forgot_password_page1.dart';
-import 'package:hms_16/screens/auth/sign_up_page.dart';
+import 'package:hms_16/view_model/auth_view_model.dart';
 import 'package:hms_16/widget/button.dart';
+import 'package:hms_16/widget/dialog_validation.dart';
 import 'package:hms_16/widget/navpush_transition.dart';
-import 'package:hms_16/module/login/login_repository.dart';
-import 'package:hms_16/widget/navreplace_transition.dart';
+import 'package:hms_16/widget/status/loading_max.dart';
+import 'package:provider/provider.dart';
 import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
@@ -23,28 +24,32 @@ class _LoginPageState extends State<LoginPage> {
 
   bool _hidePassword = false;
   final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Form(
-            key: _formKey,
-            autovalidateMode: AutovalidateMode.always,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+      body: SafeArea(
+        child: Form(
+          key: _formKey,
+          // autovalidateMode: AutovalidateMode.onUserInteraction,
+          child: Center(
+            child: ListView(
+              shrinkWrap: true,
+              // addAutomaticKeepAlives: false,
+              // physics: NeverScrollableScrollPhysics(),
+              padding: const EdgeInsets.symmetric(horizontal: 16),
               children: [
-                const SizedBox(
-                  height: 220,
-                ),
+                // const SizedBox(
+                //   height: 220,
+                // ),
                 Center(
                   child: Text(
                     "Sign In",
                     style: textStyle.copyWith(
-                        color: cBlackBase,
-                        fontSize: 34,
-                        fontWeight: FontWeight.w700),
+                      color: cBlackBase,
+                      fontSize: 34,
+                      fontWeight: FontWeight.w700,
+                    ),
                   ),
                 ),
                 const SizedBox(
@@ -54,12 +59,17 @@ class _LoginPageState extends State<LoginPage> {
                   children: [
                     Text(
                       "Email ",
-                      style:
-                          textStyle.copyWith(color: cBlackBase, fontSize: 14),
+                      style: textStyle.copyWith(
+                        color: cBlackBase,
+                        fontSize: 14,
+                      ),
                     ),
                     Text(
                       "*",
-                      style: textStyle.copyWith(color: cRed, fontSize: 14),
+                      style: textStyle.copyWith(
+                        color: cRed,
+                        fontSize: 14,
+                      ),
                     ),
                   ],
                 ),
@@ -84,16 +94,17 @@ class _LoginPageState extends State<LoginPage> {
                     email = value!;
                   },
                   decoration: InputDecoration(
-                      errorStyle: textStyle.copyWith(color: Colors.red),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      prefixIcon: const Icon(
-                        Icons.email_outlined,
-                        color: Colors.black,
-                      ),
-                      hintText: "Email",
-                      floatingLabelBehavior: FloatingLabelBehavior.auto),
+                    errorStyle: textStyle.copyWith(color: Colors.red),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    prefixIcon: const Icon(
+                      Icons.email_outlined,
+                      color: Colors.black,
+                    ),
+                    hintText: "Email",
+                    floatingLabelBehavior: FloatingLabelBehavior.auto,
+                  ),
                 ),
                 const SizedBox(
                   height: 12.0,
@@ -102,12 +113,17 @@ class _LoginPageState extends State<LoginPage> {
                   children: [
                     Text(
                       "Password ",
-                      style:
-                          textStyle.copyWith(color: cBlackBase, fontSize: 14),
+                      style: textStyle.copyWith(
+                        color: cBlackBase,
+                        fontSize: 14,
+                      ),
                     ),
                     Text(
                       "*",
-                      style: textStyle.copyWith(color: cRed, fontSize: 14),
+                      style: textStyle.copyWith(
+                        color: cRed,
+                        fontSize: 14,
+                      ),
                     ),
                   ],
                 ),
@@ -117,83 +133,119 @@ class _LoginPageState extends State<LoginPage> {
                 TextFormField(
                   controller: controllerPassword,
                   obscureText: !_hidePassword,
+                  onFieldSubmitted: (value) {
+                    if (_formKey.currentState!.validate()) {
+                      context.read<AuthViewModel>().signIn(
+                            email: controllerEmail.text,
+                            pass: controllerPassword.text,
+                            context: context,
+                          );
+                    }
+                  },
                   validator: (value) {
-                    String msg = '.{8,}';
+                    String msg = '.{5,}';
                     if (value!.isEmpty) {
                       return 'Password can not be empty';
                     }
                     if (!RegExp(msg).hasMatch(value)) {
-                      return 'Password length can’t be less than 8 char';
+                      return 'Password length can’t be less than 5 char';
                     }
                     return null;
                   },
                   decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide(
-                            color: cSuccessBase,
-                          )),
-                      prefixIcon: const Icon(
-                        Icons.lock,
-                        color: Colors.black,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide(
+                        color: cSuccessBase,
                       ),
-                      suffixIcon: IconButton(
-                        icon: Icon(
-                          // Based on passwordVisible state choose the icon
-                          _hidePassword
-                              ? Icons.visibility
-                              : Icons.visibility_off,
-                          color: Theme.of(context).primaryColorDark,
-                        ),
-                        onPressed: () {
-                          setState(() {
-                            _hidePassword = !_hidePassword;
-                          });
-                        },
+                    ),
+                    prefixIcon: const Icon(
+                      Icons.lock,
+                      color: Colors.black,
+                    ),
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        // Based on passwordVisible state choose the icon
+                        _hidePassword ? Icons.visibility : Icons.visibility_off,
+                        color: Theme.of(context).primaryColorDark,
                       ),
-                      hintText: ("Password"),
-                      floatingLabelBehavior: FloatingLabelBehavior.always),
+                      onPressed: () {
+                        setState(() {
+                          _hidePassword = !_hidePassword;
+                        });
+                      },
+                    ),
+                    hintText: ("Password"),
+                    floatingLabelBehavior: FloatingLabelBehavior.always,
+                  ),
                 ),
                 const SizedBox(
                   height: 26.0,
                 ),
                 Button(
-                    text: "Sign In",
-                    onpressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        context.read<LoginViewModel>().signIn(
-                              email: controllerEmail.text,
-                              pass: controllerPassword.text,
-                              context: context,
-                            );
-                        // ScaffoldMessenger.of(context)
-                        //     .showSnackBar(SnackBar(content: Text("Success")));
-                        // navPushTransition(context, const SignUpPage());
+                  child: Consumer<AuthViewModel>(
+                    builder: (context, value, child) {
+                      switch (value.authState) {
+                        case ActionState.none:
+                          return Text('Sign In');
+                        case ActionState.loading:
+                          return LoadingMax();
+                        default:
+                          return Text('Sign In');
+                        // case ActionState.error:
+                        //   ScaffoldMessenger.of(context).showSnackBar(
+                        //     SnackBar(content: Text("email or password is invalid")),
+                        //   );
                       }
-                      // else {
-                      //   ScaffoldMessenger.of(context)
-                      //       .showSnackBar(SnackBar(content: Text("Failed")));
-                      // }
-                    }),
+                    },
+                  ),
+                  onpressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      context.read<AuthViewModel>().signIn(
+                            email: controllerEmail.text,
+                            pass: controllerPassword.text,
+                            context: context,
+                          );
+                      // ScaffoldMessenger.of(context)
+                      //     .showSnackBar(SnackBar(content: Text("Success")));
+                      // navPushTransition(context, const SignUpPage());
+                    }
+                    // else {
+                    //   ScaffoldMessenger.of(context)
+                    //       .showSnackBar(SnackBar(content: Text("Failed")));
+                    // }
+                  },
+                ),
                 const SizedBox(
                   height: 15.0,
                 ),
                 TextButton(
-                    onPressed: () {
-                      navPushTransition(context, const ForgotPassword1());
-                    },
-                    child: Center(
-                      child: Text(
-                        "Forgot Password?",
-                        style: textStyle.copyWith(
-                            color: cPrimaryBase,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400),
+                  onPressed: () {
+                    dialogValidation(
+                      context: context,
+                      title: "Coming Soon!",
+                      isValidation: false,
+                      isImage: false,
+                      newPage: () async {
+                        await Future.delayed(Duration(seconds: 2), () {
+                          Navigator.pop(context);
+                        });
+                      },
+                    );
+                    // navPushTransition(context, const ForgotPassword1());
+                  },
+                  child: Center(
+                    child: Text(
+                      "Forgot Password?",
+                      style: textStyle.copyWith(
+                        color: cPrimaryBase,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
                       ),
-                    )),
-                const SizedBox(
-                  height: 63.0,
+                    ),
+                  ),
                 ),
+                // const SizedBox(height: 63.0),
               ],
             ),
           ),
