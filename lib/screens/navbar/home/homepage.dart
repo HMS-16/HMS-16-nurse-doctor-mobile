@@ -31,6 +31,9 @@ class _HomePageState extends State<HomePage> {
         await profileViewModel.getProfile();
       }
       context.read<PatientViewModel>().getAllPatient(context);
+      context
+          .read<ScheduleViewModel>()
+          .getAllSchedule(DateFormat('M/d/y').format(DateTime.now()));
     });
     super.initState();
   }
@@ -138,8 +141,8 @@ class _HomePageState extends State<HomePage> {
                     builder: (context, value, child) {
                   // return PatientList(persons: patients);
                   return PatientListHomeScreen(
-                    schedules: value.getlistSchedules,
-                    patients: context.read<PatientViewModel>().persons,
+                    schedules: context.read<ScheduleViewModel>().schedules,
+                    // patients: context.read<PatientViewModel>().persons,
                   );
                 });
               },
@@ -153,13 +156,13 @@ class _HomePageState extends State<HomePage> {
 }
 
 class PatientListHomeScreen extends StatelessWidget {
-  final List<ScheduleModel> schedules;
-  final List<DataPatient> patients;
+  final List<DataSchedule> schedules;
+  // final List<DataPatient> patients;
 
   const PatientListHomeScreen({
     super.key,
     required this.schedules,
-    required this.patients,
+    // required this.patients,
   });
 
   @override
@@ -177,49 +180,49 @@ class PatientListHomeScreen extends StatelessWidget {
               scrollDirection: Axis.vertical,
               itemBuilder: (context, index) {
                 final schedule = schedules.elementAt(index);
-                final patient = patients.elementAt(index);
-                if (DateFormat("EEE, d-M-y").format(schedule.date) ==
-                    DateFormat("EEE, d-M-y").format(DateTime.now())) {
-                  return InkWell(
-                    onTap: () {
-                      context.read<PatientViewModel>().selectedPerson(patient);
-                      context
-                          .read<ScheduleViewModel>()
-                          .selectedPatient(schedule);
-                      navPushTransition(context, const DetailSchedule());
-                    },
-                    child: Builder(builder: (context) {
-                      Color lineColor = cPrimaryBase;
-                      Color fontColor = cPrimaryDark;
-                      Color badgeColor = cSecondaryLighter;
-                      String condition = 'Process';
+                // final patient = patients.elementAt(index);
+                // if (DateFormat("EEE, d-M-y").format(schedule.date) ==
+                //     DateFormat("EEE, d-M-y").format(DateTime.now())) {
+                return InkWell(
+                  onTap: () {
+                    // context.read<PatientViewModel>().selectedPerson(patient);
+                    // context
+                    //     .read<ScheduleViewModel>()
+                    //     .selectedPatient(schedule);
+                    // navPushTransition(context, const DetailSchedule());
+                  },
+                  child: Builder(builder: (context) {
+                    Color lineColor = cPrimaryBase;
+                    Color fontColor = cPrimaryDark;
+                    Color badgeColor = cSecondaryLighter;
+                    String condition = 'Process';
 
-                      if (patient.status != 0) {
-                        lineColor = cGreenLine;
-                        condition = 'Done';
-                        badgeColor = cSuccessLightest;
-                        fontColor = cSuccessDark;
-                      }
-                      return PatientHomeCard(
-                        fontColor: fontColor,
-                        lineColor: lineColor,
-                        paintBadge: badgeColor,
-                        badgeText: condition,
-                        patientName: patient.name,
-                        doctorName: schedule.doctor,
-                        nurseName: schedule.nurse,
-                        // time: person.time == 0
-                        //     ? "1.00 pm - 1.30 pm"
-                        //     : person.time == 1
-                        //         ? "1.30 pm - 2.00 pm"
-                        //         : person.time == 2
-                        //             ? "2.00 pm - 2.30 pm"
-                        //             : "2.30 pm - 3.00 pm",
-                      );
-                    }),
-                  );
-                }
-                return SizedBox();
+                    if (schedule.status != false) {
+                      lineColor = cGreenLine;
+                      condition = 'Done';
+                      badgeColor = cSuccessLightest;
+                      fontColor = cSuccessDark;
+                    }
+                    return PatientHomeCard(
+                      fontColor: fontColor,
+                      lineColor: lineColor,
+                      paintBadge: badgeColor,
+                      badgeText: condition,
+                      patientName: schedule.name,
+                      doctorName: schedule.doctor,
+                      nurseName: schedule.nurse,
+                      // time: person.time == 0
+                      //     ? "1.00 pm - 1.30 pm"
+                      //     : person.time == 1
+                      //         ? "1.30 pm - 2.00 pm"
+                      //         : person.time == 2
+                      //             ? "2.00 pm - 2.30 pm"
+                      //             : "2.30 pm - 3.00 pm",
+                    );
+                  }),
+                );
+                // }
+                // return SizedBox();
               },
               itemCount: schedules.length,
             );

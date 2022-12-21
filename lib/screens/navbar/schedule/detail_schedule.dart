@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hms_16/model/doctor_model.dart';
+import 'package:hms_16/screens/navbar/schedule/change_doctor.dart';
+import 'package:hms_16/screens/navbar/schedule/change_schedule.dart';
+import 'package:hms_16/screens/navbar/schedule/view_schedule.dart';
 import 'package:hms_16/utils/constant.dart';
 import 'package:hms_16/screens/navbar/patient/patient_detail/patient_detail.dart';
 import 'package:hms_16/view_model/auth_view_model.dart';
@@ -8,6 +11,7 @@ import 'package:hms_16/view_model/patient_view_model.dart';
 import 'package:hms_16/view_model/schedule_view_model.dart';
 import 'package:hms_16/widget/dialog_validation.dart';
 import 'package:hms_16/widget/navpush_transition.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class DetailSchedule extends StatefulWidget {
@@ -20,7 +24,8 @@ class DetailSchedule extends StatefulWidget {
 class _DetailScheduleState extends State<DetailSchedule> {
   @override
   Widget build(BuildContext context) {
-    final patientProvider = context.read<PatientViewModel>();
+    // final patientProvider = context.read<PatientViewModel>();
+    final scheduleProvider = context.read<ScheduleViewModel>();
     final authProvider = context.read<AuthViewModel>();
     return Scaffold(
       appBar: AppBar(
@@ -50,7 +55,7 @@ class _DetailScheduleState extends State<DetailSchedule> {
                 borderRadius: BorderRadius.circular(24),
                 color: cSecondaryLightest,
               ),
-              child: Consumer<PatientViewModel>(
+              child: Consumer<ScheduleViewModel>(
                 builder: (context, value, child) {
                   return ListTile(
                     title: Column(
@@ -64,7 +69,7 @@ class _DetailScheduleState extends State<DetailSchedule> {
                               fontWeight: FontWeight.w700),
                         ),
                         Text(
-                          value.person!.name,
+                          value.schedule!.name,
                           style: textStyle.copyWith(
                               color: cBlackBase,
                               fontSize: 16,
@@ -84,7 +89,8 @@ class _DetailScheduleState extends State<DetailSchedule> {
                     ),
                     subtitle: GestureDetector(
                       onTap: () {
-                        navPushTransition(context, const PatientDetail());
+                        // context.read<PatientViewModel>().selectedPerson(person);
+                        // navPushTransition(context, const PatientDetail());
                       },
                       child: Padding(
                         padding: const EdgeInsets.symmetric(vertical: 8),
@@ -159,29 +165,19 @@ class _DetailScheduleState extends State<DetailSchedule> {
                                 builder: (context, value, child) {
                               return ListTile(
                                 title: Text(
-                                  value.getscheduleModel!.doctor,
+                                  value.schedule!.doctor,
                                   style: textStyle.copyWith(
                                       fontSize: 14,
                                       fontWeight: FontWeight.w400,
                                       color: cBlackBase),
                                 ),
-                                trailing: patientProvider.person!.status == 0 && authProvider.profile!.role == 2
+                                trailing: scheduleProvider.schedule!.status ==
+                                            false &&
+                                        authProvider.profile!.role == 2
                                     ? TextButton(
                                         onPressed: () {
-                                          dialogValidation(
-                                            context: context,
-                                            title: "Coming Soon!",
-                                            isValidation: false,
-                                            isImage: false,
-                                            newPage: () async {
-                                              await Future.delayed(
-                                                  Duration(seconds: 2), () {
-                                                Navigator.pop(context);
-                                              });
-                                            },
-                                          );
-                                          // navPushTransition(context,
-                                          //     const ChangeDoctorByNurse());
+                                          navPushTransition(
+                                              context, const ChangeDoctor());
                                         },
                                         child: Text(
                                           "Change",
@@ -237,38 +233,40 @@ class _DetailScheduleState extends State<DetailSchedule> {
                             builder: (context, value, child) {
                           return ListTile(
                             title: Text(
-                              value.getscheduleModel!.nurse,
+                              value.schedule!.nurse,
                               style: textStyle.copyWith(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400,
                                 color: cBlackBase,
                               ),
                             ),
-                            trailing: patientProvider.person!.status == 0 && authProvider.profile!.role == 2
-                                ? TextButton(
-                                    onPressed: () async {
-                                      dialogValidation(
-                                        context: context,
-                                        title: "Coming Soon!",
-                                        isValidation: false,
-                                        isImage: false,
-                                        newPage: () async {
-                                          await Future.delayed(
-                                              Duration(seconds: 2), () {
-                                            Navigator.pop(context);
-                                          });
+                            trailing:
+                                scheduleProvider.schedule!.status == false &&
+                                        authProvider.profile!.role == 2
+                                    ? TextButton(
+                                        onPressed: () async {
+                                          dialogValidation(
+                                            context: context,
+                                            title: "Coming Soon!",
+                                            isValidation: false,
+                                            isImage: false,
+                                            newPage: () async {
+                                              await Future.delayed(
+                                                  Duration(seconds: 2), () {
+                                                Navigator.pop(context);
+                                              });
+                                            },
+                                          );
                                         },
-                                      );
-                                    },
-                                    child: Text(
-                                      "Change",
-                                      style: textStyle.copyWith(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w700,
-                                          color: cPrimaryBase),
-                                    ),
-                                  )
-                                : Text(""),
+                                        child: Text(
+                                          "Change",
+                                          style: textStyle.copyWith(
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w700,
+                                              color: cPrimaryBase),
+                                        ),
+                                      )
+                                    : Text(""),
                           );
                         }),
                       ),
@@ -302,37 +300,35 @@ class _DetailScheduleState extends State<DetailSchedule> {
                   ),
                   Row(
                     children: [
-                      // Text(
-                      //   value.person!.time == 0
-                      //       ? "1.00 pm - 1.30 pm"
-                      //       : value.person!.time == 1
-                      //           ? "1.30 pm - 2.00 pm"
-                      //           : value.person!.time == 2
-                      //               ? "2.00 pm - 2.30 pm"
-                      //               : "2.30 pm - 3.00 pm",
-                      //   style: textStyle.copyWith(
-                      //       fontSize: 14,
-                      //       fontWeight: FontWeight.w400,
-                      //       color: cBlackBase),
-                      // ),
+                      Consumer<ScheduleViewModel>(
+                        builder: (context, value, child) {
+                          return Text(
+                            value.schedule!.shift,
+                            style: textStyle.copyWith(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400,
+                                color: cBlackBase),
+                          );
+                        },
+                      ),
                       Expanded(
                         child: ListTile(
-                            // trailing: value.person!.progress
-                            //     ? TextButton(
-                            //         onPressed: () {
-                            //           navPushTransition(context,
-                            //               const ChangeScheduleByNurse());
-                            //         },
-                            //         child: Text(
-                            //           "Change",
-                            //           style: textStyle.copyWith(
-                            //               fontSize: 12,
-                            //               fontWeight: FontWeight.w700,
-                            //               color: cPrimaryBase),
-                            //         ),
-                            //       )
-                            //     : Text(""),
-                            ),
+                          trailing: scheduleProvider.schedule!.status == false
+                              ? TextButton(
+                                  onPressed: () {
+                                    navPushTransition(
+                                        context, const ChangeSchedule());
+                                  },
+                                  child: Text(
+                                    "Change",
+                                    style: textStyle.copyWith(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w700,
+                                        color: cPrimaryBase),
+                                  ),
+                                )
+                              : Text(""),
+                        ),
                       ),
                     ],
                   )
