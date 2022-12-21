@@ -23,6 +23,7 @@ class ScheduleViewModel extends ChangeNotifier {
     try {
       var response = await ScheduleServices().getAllSchedule(date);
       // print("ASDADASDA = ${response.data['data']}");
+      // print("berhasil ${response.data['data']['date']}");
       if (response.data['data'] != null) {
         ScheduleModel modelSchedule = ScheduleModel.fromJson(response.data);
         // print(modelDoctor.data);

@@ -4,6 +4,7 @@ import 'package:hms_16/model/schedule_model.dart';
 import 'package:hms_16/screens/navbar/schedule/detail_schedule.dart';
 import 'package:hms_16/screens/profile/profile.dart';
 import 'package:hms_16/utils/constant.dart';
+import 'package:hms_16/view_model/auth_view_model.dart';
 import 'package:hms_16/view_model/doctor_view_model.dart';
 import 'package:hms_16/view_model/patient_view_model.dart';
 import 'package:hms_16/view_model/schedule_view_model.dart';
@@ -80,15 +81,36 @@ class _ViewScheduleState extends State<ViewSchedule> {
                 },
               );
             },
-            icon: const Icon(Icons.notifications),
+            icon: Icon(
+              Icons.notifications,
+              color: cPrimaryBase,
+            ),
           ),
           Padding(
             padding: const EdgeInsets.only(right: 16),
             child: IconButton(
               onPressed: () {
-                navPushTransition(context, const ProfilePage());
+                navPushTransition(context, ProfilePage());
               },
-              icon: const Icon(Icons.account_circle, size: 38),
+              icon: Consumer<AuthViewModel>(
+                builder: (context, value, child) {
+                  return CircleAvatar(
+                    backgroundColor: cPrimaryBase,
+                    minRadius: 40,
+                    child: LayoutBuilder(builder: (context, constraints) {
+                      if (value.profile!.role == 1) {
+                        return Image(
+                          image: AssetImage("assets/images/doctor_icon.png"),
+                        );
+                      } else {
+                        return Image(
+                          image: AssetImage("assets/images/nurse_icon.png"),
+                        );
+                      }
+                    }),
+                  );
+                },
+              ),
             ),
           ),
         ],
@@ -237,7 +259,7 @@ class PatientListSchedule extends StatelessWidget {
                 Color lineColor = cPrimaryBase;
                 Color fontColor = cPrimaryDark;
                 Color badgeColor = cSecondaryLighter;
-                String condition = 'Process';
+                // String condition = 'Process';
 
                 // if (patient.status != 0) {
                 //   lineColor = cGreenLine;
@@ -248,8 +270,8 @@ class PatientListSchedule extends StatelessWidget {
                 return PatientScheduleCard(
                     fontColor: fontColor,
                     lineColor: lineColor,
-                    paintBadge: badgeColor,
-                    badgeText: condition,
+                    // paintBadge: badgeColor,
+                    // badgeText: condition,
                     patientName: schedule.name,
                     // disease: person.disease,
                     doctorName: schedule.doctor,

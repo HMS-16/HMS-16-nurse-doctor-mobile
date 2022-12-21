@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hms_16/screens/profile/profile.dart';
+import 'package:hms_16/view_model/auth_view_model.dart';
 import 'package:hms_16/view_model/patient_view_model.dart';
 import 'package:hms_16/model/patient_model.dart';
 import 'package:hms_16/utils/constant.dart';
@@ -55,7 +56,10 @@ class _PatientScreenState extends State<PatientScreen> {
                 },
               );
             },
-            icon: const Icon(Icons.notifications),
+            icon: Icon(
+              Icons.notifications,
+              color: cPrimaryBase,
+            ),
           ),
           Padding(
             padding: const EdgeInsets.only(right: 16),
@@ -63,7 +67,25 @@ class _PatientScreenState extends State<PatientScreen> {
               onPressed: () {
                 navPushTransition(context, ProfilePage());
               },
-              icon: Icon(Icons.account_circle, size: 38),
+              icon: Consumer<AuthViewModel>(
+                builder: (context, value, child) {
+                  return CircleAvatar(
+                    backgroundColor: cPrimaryBase,
+                    minRadius: 40,
+                    child: LayoutBuilder(builder: (context, constraints) {
+                      if (value.profile!.role == 1) {
+                        return Image(
+                          image: AssetImage("assets/images/doctor_icon.png"),
+                        );
+                      } else {
+                        return Image(
+                          image: AssetImage("assets/images/nurse_icon.png"),
+                        );
+                      }
+                    }),
+                  );
+                },
+              ),
             ),
           ),
         ],

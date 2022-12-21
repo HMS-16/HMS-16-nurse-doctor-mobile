@@ -236,11 +236,7 @@ class _ChangeScheduleState extends State<ChangeSchedule> {
                                                 value.schedule!.id,
                                                 DateFormat('M/d/y')
                                                     .format(selectedDate));
-                                            context
-                                                .read<ScheduleViewModel>()
-                                                .getAllSchedule(
-                                                    DateFormat('M/d/y')
-                                                        .format(selectedDate));
+
                                             // context
                                             // .read<PatientViewModel>()
                                             // .changeSchedule(valueDropdownint);

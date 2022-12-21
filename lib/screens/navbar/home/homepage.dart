@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hms_16/model/patient_model.dart';
 import 'package:hms_16/model/schedule_model.dart';
 import 'package:hms_16/screens/navbar/schedule/detail_schedule.dart';
+import 'package:hms_16/screens/notification.dart';
 import 'package:hms_16/screens/profile/profile.dart';
 import 'package:hms_16/utils/constant.dart';
 import 'package:hms_16/view_model/auth_view_model.dart';
@@ -56,16 +57,18 @@ class _HomePageState extends State<HomePage> {
                     print('lagi loading (homepage)');
                     return LoadingMax(color: cBlackLight);
                   case ActionState.none:
-                    // return Text('Sign In');
-                    // default:
-                    // print('mana nih datanya');
-                    // return Text('Sign In');
                     final username = value.profile!.name;
+                    final call;
+                    if (value.profile!.role == 1) {
+                      call = "Dr.";
+                    } else {
+                      call = "Mrs.";
+                    }
                     return RichText(
                       text: TextSpan(
-                        children: <TextSpan>[
+                        children: [
                           TextSpan(
-                            text: "\nDr. ${username}",
+                            text: "\n $call ${username}",
                             style: TextStyle(
                               fontWeight: FontWeight.w700,
                               fontSize: 16,
@@ -87,20 +90,12 @@ class _HomePageState extends State<HomePage> {
             actions: [
               IconButton(
                 onPressed: () {
-                  dialogValidation(
-                    context: context,
-                    title: "Coming Soon!",
-                    isValidation: false,
-                    isImage: false,
-                    newPage: () async {
-                      await Future.delayed(Duration(seconds: 2), () {
-                        Navigator.pop(context);
-                      });
-                    },
-                  );
-                  // navPushTransition(context, const NotificationPage());
+                  navPushTransition(context, const NotificationPage());
                 },
-                icon: const Icon(Icons.notifications),
+                icon: Icon(
+                  Icons.notifications,
+                  color: cPrimaryBase,
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.only(right: 16),
@@ -108,7 +103,26 @@ class _HomePageState extends State<HomePage> {
                   onPressed: () {
                     navPushTransition(context, ProfilePage());
                   },
-                  icon: Icon(Icons.account_circle, size: 38),
+                  icon: Consumer<AuthViewModel>(
+                    builder: (context, value, child) {
+                      return CircleAvatar(
+                        backgroundColor: cPrimaryBase,
+                        minRadius: 40,
+                        child: LayoutBuilder(builder: (context, constraints) {
+                          if (value.profile!.role == 1) {
+                            return Image(
+                              image:
+                                  AssetImage("assets/images/doctor_icon.png"),
+                            );
+                          } else {
+                            return Image(
+                              image: AssetImage("assets/images/nurse_icon.png"),
+                            );
+                          }
+                        }),
+                      );
+                    },
+                  ),
                 ),
               ),
             ],

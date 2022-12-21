@@ -12,8 +12,8 @@ class PatientScheduleCard extends StatelessWidget {
     this.nurseName,
     this.time,
     required this.lineColor,
-    required this.badgeText,
-    required this.paintBadge,
+    // required this.badgeText,
+    // required this.paintBadge,
     required this.fontColor,
   });
 
@@ -22,9 +22,9 @@ class PatientScheduleCard extends StatelessWidget {
   final String? doctorName;
   final String? nurseName;
   final String? time;
-  final String badgeText;
+  // final String badgeText;
   final Color lineColor;
-  final Color paintBadge;
+  // final Color paintBadge;
   final Color fontColor;
 
   @override
@@ -114,23 +114,23 @@ class PatientScheduleCard extends StatelessWidget {
                         ),
                       ],
                     ),
-                    Expanded(
-                      child: ListTile(
-                        trailing: Badge(
-                          elevation: 0,
-                          badgeColor: paintBadge,
-                          padding: EdgeInsets.fromLTRB(10, 8, 10, 8),
-                          shape: BadgeShape.square,
-                          borderRadius: BorderRadius.circular(20),
-                          toAnimate: false,
-                          badgeContent: Text(
-                            badgeText,
-                            style: TextStyle(
-                                color: fontColor, fontWeight: FontWeight.w600),
-                          ),
-                        ),
-                      ),
-                    ),
+                    const Expanded(
+                        child: ListTile(
+                            // trailing:
+                            // Badge(
+                            //   elevation: 0,
+                            //   badgeColor: paintBadge,
+                            //   padding: EdgeInsets.fromLTRB(10, 8, 10, 8),
+                            //   shape: BadgeShape.square,
+                            //   borderRadius: BorderRadius.circular(20),
+                            //   toAnimate: false,
+                            //   badgeContent: Text(
+                            //     badgeText,
+                            //     style: TextStyle(
+                            //         color: fontColor, fontWeight: FontWeight.w600),
+                            //   ),
+                            // ),
+                            )),
                   ],
                 )
               ],
