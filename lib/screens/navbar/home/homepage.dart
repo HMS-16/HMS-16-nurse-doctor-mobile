@@ -110,12 +110,12 @@ class _HomePageState extends State<HomePage> {
                         minRadius: 40,
                         child: LayoutBuilder(builder: (context, constraints) {
                           if (value.profile!.role == 1) {
-                            return const Image(
+                            return Image(
                               image:
                                   AssetImage("assets/images/doctor_icon.png"),
                             );
                           } else {
-                            return const Image(
+                            return Image(
                               image: AssetImage("assets/images/nurse_icon.png"),
                             );
                           }
@@ -138,11 +138,14 @@ class _HomePageState extends State<HomePage> {
                   image: AssetImage("assets/images/Banner.png")),
             ),
           ),
-          const SliverToBoxAdapter(
+          SliverToBoxAdapter(
             child: ListTile(
-              title: Text("Today's Appointment",
+              title: const Text("Today's Appointment",
                   style: TextStyle(
                       fontWeight: FontWeight.bold, letterSpacing: 0.4)),
+              subtitle: Text(DateFormat("EEE, MMM d, yyyy")
+                  .format(DateTime.now())
+                  .toString()),
             ),
           ),
           SliverList(
@@ -191,8 +194,14 @@ class PatientListHomeScreen extends StatelessWidget {
               scrollDirection: Axis.vertical,
               itemBuilder: (context, index) {
                 final schedule = schedules.elementAt(index);
+                // final patient = patients.elementAt(index);
+                // if (DateFormat("EEE, d-M-y").format(schedule.date) ==
+                //     DateFormat("EEE, d-M-y").format(DateTime.now())) {
                 return InkWell(
                   onTap: () {
+                    context
+                        .read<ScheduleViewModel>()
+                        .selectedSchedule(schedule);
                     navPushTransition(context, const DetailSchedule());
                   },
                   child: Builder(builder: (context) {
@@ -200,10 +209,7 @@ class PatientListHomeScreen extends StatelessWidget {
                     Color fontColor = cPrimaryDark;
                     Color badgeColor = cSecondaryLighter;
                     String condition = 'Process';
-                      context
-                        .read<ScheduleViewModel>()
-                        .selectedSchedule(schedule);
-                    navPushTransition(context, const DetailSchedule());
+
                     if (schedule.status != false) {
                       lineColor = cGreenLine;
                       condition = 'Done';
@@ -218,6 +224,13 @@ class PatientListHomeScreen extends StatelessWidget {
                       patientName: schedule.name,
                       doctorName: schedule.doctor,
                       nurseName: schedule.nurse,
+                      // time: person.time == 0
+                      //     ? "1.00 pm - 1.30 pm"
+                      //     : person.time == 1
+                      //         ? "1.30 pm - 2.00 pm"
+                      //         : person.time == 2
+                      //             ? "2.00 pm - 2.30 pm"
+                      //             : "2.30 pm - 3.00 pm",
                     );
                   }),
                 );
