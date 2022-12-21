@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:hms_16/model/patient_model.dart';
 import 'package:hms_16/model/schedule_model.dart';
 import 'package:hms_16/screens/navbar/schedule/detail_schedule.dart';
-import 'package:hms_16/screens/navbar/schedule/testing.dart';
 import 'package:hms_16/screens/profile/profile.dart';
 import 'package:hms_16/utils/constant.dart';
 import 'package:hms_16/view_model/doctor_view_model.dart';
@@ -226,13 +225,13 @@ class PatientListSchedule extends StatelessWidget {
           final schedule = schedules.elementAt(index);
           // final patient = patients.elementAt(index);
           // final schedule = listSchedules.elementAt(index);
-          print(schedule);
+          // print(schedule);
           if (schedules.isNotEmpty) {
             return InkWell(
               onTap: () {
                 // context.read<PatientViewModel>().selectedPerson(patient);
-                // context.read<ScheduleViewModel>().(schedule);
-                // navPushTransition(context, const DetailSchedule());
+                context.read<ScheduleViewModel>().selectedSchedule(schedule);
+                navPushTransition(context, const DetailSchedule());
               },
               child: Builder(builder: (context) {
                 Color lineColor = cPrimaryBase;
