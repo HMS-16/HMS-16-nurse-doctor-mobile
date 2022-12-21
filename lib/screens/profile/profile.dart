@@ -6,10 +6,10 @@ import 'package:hms_16/widget/listtile_profile.dart';
 import 'package:provider/provider.dart';
 
 class ProfilePage extends StatelessWidget {
-  const ProfilePage({super.key});
-
+  ProfilePage({super.key});
   @override
   Widget build(BuildContext context) {
+    bool isDoctor = true;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -30,8 +30,15 @@ class ProfilePage extends StatelessWidget {
               CircleAvatar(
                 backgroundColor: cPrimaryBase,
                 minRadius: 40,
-                child:
-                    Image(image: AssetImage("assets/images/doctor_icon.png")),
+                child: LayoutBuilder(builder: (context, constraints) { 
+                    if(value.profile!.role == 1){
+                        return Image(image: AssetImage("assets/images/doctor_icon.png"),
+                    );
+                    }else{
+                        return Image(image: AssetImage("assets/images/nurse_icon.png"),
+                    );
+                    }  
+                }),
               ),
               ListTileProfile(
                 title: "Name",
@@ -39,11 +46,30 @@ class ProfilePage extends StatelessWidget {
               ),
               ListTileProfile(
                 title: "Registration Number",
-                subtitle: "not found",
+                subtitle: value.profile!.strNum,
               ),
-              ListTileProfile(
-                title: "Phone Number",
-                subtitle: "not found",
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 16),
+                decoration: BoxDecoration(
+                    border: Border(
+                        bottom: BorderSide(width: 2, color: cWhiteDarker))),
+                child: ListTile(
+                  title: Text(
+                    "Role",
+                    style: TextStyle(color: cBlackLightest),
+                  ),
+                  subtitle: LayoutBuilder(
+                    builder: (context, constraints) {
+                      if (value.profile!.role == 1) {
+                        return Text("Doctor",
+                            style: TextStyle(fontSize: 16, color: cBlack));
+                      } else {
+                        return Text("Nurse",
+                            style: TextStyle(fontSize: 16, color: cBlack));
+                      }
+                    },
+                  ),
+                ),
               ),
               ListTileProfile(
                 title: "Email",
@@ -73,9 +99,6 @@ class ProfilePage extends StatelessWidget {
                   ),
                 ),
               ),
-              // SizedBox(
-              //   height: 15,
-              // ),
               Spacer(),
               // SizedBox(child: Spacer()),
               Container(

@@ -4,6 +4,7 @@ import 'package:hms_16/model/schedule_model.dart';
 import 'package:hms_16/screens/navbar/schedule/detail_schedule.dart';
 import 'package:hms_16/screens/profile/profile.dart';
 import 'package:hms_16/utils/constant.dart';
+import 'package:hms_16/view_model/auth_view_model.dart';
 import 'package:hms_16/view_model/doctor_view_model.dart';
 import 'package:hms_16/view_model/patient_view_model.dart';
 import 'package:hms_16/view_model/schedule_view_model.dart';
@@ -78,7 +79,10 @@ class _ViewScheduleState extends State<ViewSchedule> {
                 },
               );
             },
-            icon: const Icon(Icons.notifications),
+            icon: Icon(
+              Icons.notifications,
+              color: cPrimaryBase,
+            ),
           ),
           Padding(
             padding: const EdgeInsets.only(right: 16),
@@ -86,7 +90,25 @@ class _ViewScheduleState extends State<ViewSchedule> {
               onPressed: () {
                 navPushTransition(context, ProfilePage());
               },
-              icon: Icon(Icons.account_circle, size: 38),
+              icon: Consumer<AuthViewModel>(
+                builder: (context, value, child) {
+                  return CircleAvatar(
+                    backgroundColor: cPrimaryBase,
+                    minRadius: 40,
+                    child: LayoutBuilder(builder: (context, constraints) {
+                      if (value.profile!.role == 1) {
+                        return Image(
+                          image: AssetImage("assets/images/doctor_icon.png"),
+                        );
+                      } else {
+                        return Image(
+                          image: AssetImage("assets/images/nurse_icon.png"),
+                        );
+                      }
+                    }),
+                  );
+                },
+              ),
             ),
           ),
         ],

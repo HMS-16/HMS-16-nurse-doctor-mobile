@@ -9,10 +9,18 @@ class NotificationPage extends StatefulWidget {
   State<NotificationPage> createState() => _NotificationPageState();
 }
 
+List notifdata = [
+  "You have new schedule to replace Dr. Bednego at 01.00-01.30 today!",
+  "Reminder! You have schedule at 10.00 - 11.00 am",
+  "Reminder! You have schedule at 10.00 - 11.00 am",
+  "You have new schedule to replace Dr. Bednego at 01.00-01.30 today!"
+];
+
 class _NotificationPageState extends State<NotificationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: cWhiteBase,
       appBar: AppBar(
         iconTheme: IconThemeData(color: cBlack),
         elevation: 0,
@@ -55,6 +63,9 @@ class _NotificationPageState extends State<NotificationPage> {
                                 Future.delayed(const Duration(seconds: 2), () {
                                   Navigator.pop(context);
                                 });
+                                setState(() {
+                                  notifdata.removeRange(0, notifdata.length);
+                                });
                               },
                               child: Text("Yes")),
                           ElevatedButton(
@@ -90,60 +101,54 @@ class _NotificationPageState extends State<NotificationPage> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Padding(
-            padding: EdgeInsets.only(left: 30),
-            child: Text("Today"),
-          ),
-          Expanded(
-            child: ListView(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Card(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10)),
-                    elevation: 8,
-                    child: ListTile(
-                      leading: Padding(
-                        padding: const EdgeInsets.only(left: 20),
-                        child: CircleAvatar(
-                          maxRadius: 10,
-                          backgroundColor: Colors.grey.shade700,
-                        ),
-                      ),
-                      title: const Text(
-                        "Reminder! You have schedule at 10.00 - 11.00 am",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 15),
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Card(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10)),
-                    elevation: 8,
-                    child: ListTile(
-                      leading: Padding(
-                        padding: const EdgeInsets.only(left: 20),
-                        child: CircleAvatar(
-                          maxRadius: 10,
-                          backgroundColor: Colors.grey.shade700,
-                        ),
-                      ),
-                      title: const Text(
-                        "Reminder! You have schedule at 10.00 - 11.00 am",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 15),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
+          if (notifdata.isNotEmpty) ...[
+            Padding(
+              padding: EdgeInsets.only(left: 30),
+              child: Text("Today"),
             ),
-          )
+            Expanded(
+              child: ListView.builder(
+                itemCount: notifdata.length,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Card(
+                      shadowColor: Color.fromRGBO(111, 111, 111, 0.12),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                      elevation: 2,
+                      child: ListTile(
+                        leading: Padding(
+                          padding: const EdgeInsets.only(left: 20),
+                          child: CircleAvatar(
+                            maxRadius: 10,
+                            backgroundColor: Colors.grey.shade700,
+                          ),
+                        ),
+                        title: Text(
+                          notifdata[index],
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 15),
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              ),
+            )
+          ] else ...[
+            Center(
+              child: Column(
+                children: [
+                  Image(image: AssetImage("assets/images/no_data.png")),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text("You don't have any notification yet.")
+                ],
+              ),
+            )
+          ],
         ],
       ),
     );

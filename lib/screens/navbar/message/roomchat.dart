@@ -11,14 +11,15 @@ class RoomChatPage extends StatefulWidget {
 }
 
 class _RoomChatPageState extends State<RoomChatPage> {
-  bool isEmpty = true;
+  bool isEmpty = false;
   late DialogFlowtter dialogFlowtter;
   final control = TextEditingController();
   List<Map<String, dynamic>> messages = [];
 
   @override
   void initState() {
-    DialogFlowtter.fromFile(path: "assets/file/hmsbot.json").then((instance) => dialogFlowtter = instance);
+    DialogFlowtter.fromFile(path: "assets/file/hmsbot.json")
+        .then((instance) => dialogFlowtter = instance);
     super.initState();
   }
 
@@ -63,38 +64,6 @@ class _RoomChatPageState extends State<RoomChatPage> {
               child: MessageScreen(
             text: messages,
           )
-              //     Column(
-              //   children: [
-              //     BubbleSpecialOne(
-              //       text: 'Added iMassage shape bubbles',
-              //       color: Color.fromRGBO(208, 224, 247, 1),
-              //       textStyle: TextStyle(color: cBlack, fontSize: 16),
-              //     ),
-              //     BubbleSpecialOne(
-              //       text: 'Please try and give some feedback on it!',
-              //       color: Color.fromRGBO(208, 224, 247, 1),
-              //       tail: false,
-              //       textStyle: TextStyle(color: cBlack, fontSize: 16),
-              //     ),
-              //     BubbleSpecialOne(
-              //       text: 'Sure',
-              //       color: cWhiteDark,
-              //       isSender: false,
-              //     ),
-              //     BubbleSpecialOne(
-              //       text: "I tried. It's awesome!!!",
-              //       color: cWhiteDark,
-              //       tail: false,
-              //       isSender: false,
-              //     ),
-              //     BubbleSpecialOne(
-              //       text: "Thanks",
-              //       color: cWhiteDark,
-              //       tail: false,
-              //       isSender: false,
-              //     )
-              //   ],
-              // )
               ),
           Row(
             children: [
