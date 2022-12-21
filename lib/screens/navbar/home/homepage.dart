@@ -200,7 +200,10 @@ class PatientListHomeScreen extends StatelessWidget {
                     Color fontColor = cPrimaryDark;
                     Color badgeColor = cSecondaryLighter;
                     String condition = 'Process';
-
+                      context
+                        .read<ScheduleViewModel>()
+                        .selectedSchedule(schedule);
+                    navPushTransition(context, const DetailSchedule());
                     if (schedule.status != false) {
                       lineColor = cGreenLine;
                       condition = 'Done';
