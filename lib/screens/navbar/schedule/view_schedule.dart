@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hms_16/model/patient_model.dart';
 import 'package:hms_16/model/schedule_model.dart';
 import 'package:hms_16/screens/navbar/schedule/detail_schedule.dart';
+import 'package:hms_16/screens/notification.dart';
 import 'package:hms_16/screens/profile/profile.dart';
 import 'package:hms_16/utils/constant.dart';
 import 'package:hms_16/view_model/auth_view_model.dart';
@@ -68,18 +69,7 @@ class _ViewScheduleState extends State<ViewSchedule> {
         actions: [
           IconButton(
             onPressed: () {
-              // navPushTransition(context, const NotificationPage());
-              dialogValidation(
-                context: context,
-                title: "Coming Soon!",
-                isValidation: false,
-                isImage: false,
-                newPage: () async {
-                  await Future.delayed(const Duration(seconds: 2), () {
-                    Navigator.pop(context);
-                  });
-                },
-              );
+              navPushTransition(context, const NotificationPage());
             },
             icon: Icon(
               Icons.notifications,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hms_16/screens/notification.dart';
 import 'package:hms_16/screens/profile/profile.dart';
 import 'package:hms_16/view_model/auth_view_model.dart';
 import 'package:hms_16/view_model/patient_view_model.dart';
@@ -43,18 +44,8 @@ class _PatientScreenState extends State<PatientScreen> {
         actions: [
           IconButton(
             onPressed: () {
-              // navPushTransition(context, const NotificationPage());
-              dialogValidation(
-                context: context,
-                title: "Coming Soon!",
-                isValidation: false,
-                isImage: false,
-                newPage: () async {
-                  await Future.delayed(Duration(seconds: 2), () {
-                    Navigator.pop(context);
-                  });
-                },
-              );
+              navPushTransition(context, const NotificationPage());
+             
             },
             icon: Icon(
               Icons.notifications,

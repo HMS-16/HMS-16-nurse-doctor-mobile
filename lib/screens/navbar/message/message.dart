@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hms_16/screens/navbar/message/roomchat.dart';
+import 'package:hms_16/screens/notification.dart';
 import 'package:hms_16/screens/profile/profile.dart';
 import 'package:hms_16/utils/constant.dart';
 import 'package:hms_16/view_model/auth_view_model.dart';
@@ -26,18 +27,7 @@ class Message extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
-              dialogValidation(
-                context: context,
-                title: "Coming Soon!",
-                isValidation: false,
-                isImage: false,
-                newPage: () async {
-                  await Future.delayed(Duration(seconds: 2), () {
-                    Navigator.pop(context);
-                  });
-                },
-              );
-              // navPushTransition(context, const NotificationPage());
+              navPushTransition(context, const NotificationPage());
             },
             icon: Icon(
               Icons.notifications,

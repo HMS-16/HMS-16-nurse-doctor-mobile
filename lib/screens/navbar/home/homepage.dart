@@ -203,7 +203,7 @@ class PatientListHomeScreen extends StatelessWidget {
                     // context
                     //     .read<ScheduleViewModel>()
                     //     .selectedPatient(schedule);
-                    // navPushTransition(context, const DetailSchedule());
+                    navPushTransition(context, const DetailSchedule());
                   },
                   child: Builder(builder: (context) {
                     Color lineColor = cPrimaryBase;
