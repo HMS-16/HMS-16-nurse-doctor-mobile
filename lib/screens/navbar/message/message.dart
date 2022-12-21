@@ -4,7 +4,6 @@ import 'package:hms_16/screens/notification.dart';
 import 'package:hms_16/screens/profile/profile.dart';
 import 'package:hms_16/utils/constant.dart';
 import 'package:hms_16/view_model/auth_view_model.dart';
-import 'package:hms_16/widget/dialog_validation.dart';
 import 'package:hms_16/widget/navpush_transition.dart';
 import 'package:provider/provider.dart';
 
@@ -47,11 +46,11 @@ class Message extends StatelessWidget {
                     minRadius: 40,
                     child: LayoutBuilder(builder: (context, constraints) {
                       if (value.profile!.role == 1) {
-                        return Image(
+                        return const Image(
                           image: AssetImage("assets/images/doctor_icon.png"),
                         );
                       } else {
-                        return Image(
+                        return const Image(
                           image: AssetImage("assets/images/nurse_icon.png"),
                         );
                       }
@@ -67,7 +66,7 @@ class Message extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            SizedBox(
+            const SizedBox(
               width: double.infinity,
               height: 48,
               child: TextField(
@@ -84,13 +83,13 @@ class Message extends StatelessWidget {
             ),
             ListTile(
               onTap: () {
-                navPushTransition(context, RoomChatPage());
+                navPushTransition(context, const RoomChatPage());
               },
-              leading: CircleAvatar(
+              leading: const CircleAvatar(
                 maxRadius: 25,
                 child: Icon(Icons.person),
               ),
-              title: Text("Nurul Zakiah",
+              title: const Text("Nurul Zakiah",
                   style: TextStyle(fontWeight: FontWeight.bold)),
               subtitle: Text(
                 "Hey, you are free at 01.30 - 02.30 pm today?",
@@ -99,18 +98,18 @@ class Message extends StatelessWidget {
               isThreeLine: true,
               trailing: Column(
                 children: [
-                  Text("8:15 am"),
+                  const Text("8:15 am"),
                   Expanded(
                     child: Container(
-                      margin: EdgeInsets.only(top: 8, right: 30),
+                      margin: const EdgeInsets.only(top: 8, right: 30),
                       child: CircleAvatar(
                         backgroundColor: cPrimaryBase,
-                        child: Text(
+                        maxRadius: 12,
+                        child: const Text(
                           "1",
                           style: TextStyle(
                               fontSize: 10, fontWeight: FontWeight.bold),
                         ),
-                        maxRadius: 12,
                       ),
                     ),
                   )

@@ -16,11 +16,6 @@ class MedicalRecord extends StatefulWidget {
 }
 
 class _MedicalRecordState extends State<MedicalRecord> {
-  // @override
-  // void initState() {
-  //   context.read<GeneralViewModel>().checkRole();
-  //   super.initState();
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -59,12 +54,12 @@ class _MedicalRecordState extends State<MedicalRecord> {
         Consumer<ConditionViewModel>(
           builder: (context, value, child) {
             return ScrollConfiguration(
-              behavior: ScrollBehavior().copyWith(overscroll: false),
+              behavior: const ScrollBehavior().copyWith(overscroll: false),
               child: value.conditions.isNotEmpty
                   ? ListView.separated(
                       shrinkWrap: true,
                       separatorBuilder: (context, index) =>
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                       itemCount: value.conditions.length,
                       itemBuilder: (context, index) {
                         final condition = value.conditions[index];
@@ -82,7 +77,7 @@ class _MedicalRecordState extends State<MedicalRecord> {
                             note: condition.note,
                           );
                         }
-                        return SizedBox.shrink();
+                        return const SizedBox.shrink();
                       },
                     )
                   : Center(

@@ -24,18 +24,12 @@ class DetailSchedule extends StatefulWidget {
 class _DetailScheduleState extends State<DetailSchedule> {
   @override
   void initState() {
-    // Future.delayed(Duration(seconds: 5), () {
-    //   context
-    //       .read<ScheduleViewModel>()
-    //       .getAllSchedule(DateFormat('M/d/y').format(selectedDate));
-    // });
 
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    // final patientProvider = context.read<PatientViewModel>();
     final scheduleProvider = context.read<ScheduleViewModel>();
     final authProvider = context.read<AuthViewModel>();
     return Scaffold(
@@ -89,24 +83,14 @@ class _DetailScheduleState extends State<DetailSchedule> {
                         const SizedBox(
                           height: 12.0,
                         ),
-                        // Text(
-                        //   "Register Date : ${value.person!.register}",
-                        //   style: textStyle.copyWith(
-                        //       color: cBlackBase,
-                        //       fontSize: 12,
-                        //       fontWeight: FontWeight.w400),
-                        // ),
                       ],
                     ),
                     subtitle: GestureDetector(
                       onTap: () {
-                        // context.read<PatientViewModel>().selectedPerson(person);
-                        // navPushTransition(context, const PatientDetail());
                       },
                       child: Padding(
                         padding: const EdgeInsets.symmetric(vertical: 8),
                         child: Row(
-                          // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Expanded(
                               flex: 6,
@@ -251,33 +235,6 @@ class _DetailScheduleState extends State<DetailSchedule> {
                                 color: cBlackBase,
                               ),
                             ),
-                            // trailing:
-                            //     scheduleProvider.schedule!.status == false &&
-                            //             authProvider.profile!.role == 2
-                            //         ? TextButton(
-                            //             onPressed: () async {
-                            //               dialogValidation(
-                            //                 context: context,
-                            //                 title: "Coming Soon!",
-                            //                 isValidation: false,
-                            //                 isImage: false,
-                            //                 newPage: () async {
-                            //                   await Future.delayed(
-                            //                       Duration(seconds: 2), () {
-                            //                     Navigator.pop(context);
-                            //                   });
-                            //                 },
-                            //               );
-                            //             },
-                            //             child: Text(
-                            //               "Change",
-                            //               style: textStyle.copyWith(
-                            //                   fontSize: 12,
-                            //                   fontWeight: FontWeight.w700,
-                            //                   color: cPrimaryBase),
-                            //             ),
-                            //           )
-                            //         : Text(""),
                           );
                         }),
                       ),

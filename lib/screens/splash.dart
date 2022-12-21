@@ -16,7 +16,6 @@ class _SplashScreenState extends State<SplashScreen> {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
     await context.read<AuthViewModel>().startTime(context);
     });
-    // startTime();
     super.initState();
   }
 
@@ -46,22 +45,3 @@ class _SplashScreenState extends State<SplashScreen> {
     );
   }
 }
-  // @override
-  // Widget build(BuildContext context) {
-  //   return AnimatedSplashScreen(
-  //     splash: Center(
-  //       child: Container(
-  //         decoration: const BoxDecoration(
-  //           image: DecorationImage(image: AssetImage("assets/images/logo.png")),
-  //         ),
-  //       ),
-  //     ),
-  //     nextScreen: LandingPage(),
-  //     splashTransition: SplashTransition.fadeTransition,
-  //     backgroundColor: Colors.white,
-  //     splashIconSize: 500,
-  //     duration: 1000,
-  //     animationDuration: const Duration(seconds: 2),
-  //   );
-  // }
-// }

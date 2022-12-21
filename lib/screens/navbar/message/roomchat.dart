@@ -31,11 +31,11 @@ class _RoomChatPageState extends State<RoomChatPage> {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            CircleAvatar(
+            const CircleAvatar(
               maxRadius: 15,
               child: Icon(Icons.person),
             ),
-            SizedBox(
+            const SizedBox(
               width: 20,
             ),
             Text(
@@ -57,7 +57,7 @@ class _RoomChatPageState extends State<RoomChatPage> {
       ),
       body: Column(
         children: [
-          SizedBox(
+          const SizedBox(
             height: 50,
           ),
           Flexible(
@@ -85,7 +85,7 @@ class _RoomChatPageState extends State<RoomChatPage> {
                     autofocus: true,
                     decoration: InputDecoration(
                         hintText: "Message",
-                        prefixIcon: Icon(Icons.emoji_emotions),
+                        prefixIcon: const Icon(Icons.emoji_emotions),
                         suffixIcon: IconButton(
                             onPressed: () {
                               sendMessage(control.text);

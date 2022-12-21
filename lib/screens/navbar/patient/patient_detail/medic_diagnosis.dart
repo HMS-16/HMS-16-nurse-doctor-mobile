@@ -16,11 +16,6 @@ class MedicalDiagnosis extends StatefulWidget {
 }
 
 class _MedicalDiagnosisState extends State<MedicalDiagnosis> {
-  // @override
-  // void initState() {
-  //   context.read<ProfileViewModel>().checkRole();
-  //   super.initState();
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -60,12 +55,12 @@ class _MedicalDiagnosisState extends State<MedicalDiagnosis> {
         Consumer<TreatmentViewModel>(
           builder: (context, value, child) {
             return ScrollConfiguration(
-              behavior: ScrollBehavior().copyWith(overscroll: false),
+              behavior: const ScrollBehavior().copyWith(overscroll: false),
               child: value.treatments.isNotEmpty
                   ? ListView.separated(
                       shrinkWrap: true,
                       separatorBuilder: (context, index) =>
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                       itemCount: value.treatments.length,
                       itemBuilder: (context, index) {
                         final treatment = value.treatments[index];
@@ -77,12 +72,11 @@ class _MedicalDiagnosisState extends State<MedicalDiagnosis> {
                             prescription: treatment.prescription,
                           );
                         }
-                        return SizedBox.shrink();
+                        return const SizedBox.shrink();
                       },
                     )
                   : Center(
                       child: Column(
-                        // mainAxisSize: MainAxisSize.min,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Image.asset(

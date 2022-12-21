@@ -39,14 +39,14 @@ class _NotificationPageState extends State<NotificationPage> {
                   builder: (context) => AlertDialog(
                     content: Container(
                       alignment: Alignment.center,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                           image: DecorationImage(
                         image: AssetImage("assets/images/succes.png"),
                       )),
                     ),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20)),
-                    title: Text("Are you sure to clear all notifications?"),
+                    title: const Text("Are you sure to clear all notifications?"),
                     actions: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -56,7 +56,7 @@ class _NotificationPageState extends State<NotificationPage> {
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(20)),
                                   backgroundColor: cPrimaryBase,
-                                  minimumSize: Size(130, 50)),
+                                  minimumSize: const Size(130, 50)),
                               onPressed: () async {
                                 durationDialog(
                                     context, "Notifications has been cleared!");
@@ -67,18 +67,18 @@ class _NotificationPageState extends State<NotificationPage> {
                                   notifdata.removeRange(0, notifdata.length);
                                 });
                               },
-                              child: Text("Yes")),
+                              child: const Text("Yes")),
                           ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                   side: BorderSide(color: cPrimaryBase),
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(20)),
                                   backgroundColor: Colors.white,
-                                  minimumSize: Size(130, 50)),
+                                  minimumSize: const Size(130, 50)),
                               onPressed: () {
                                 Navigator.pop(context);
                               },
-                              child: Text(
+                              child: const Text(
                                 "No",
                                 style: TextStyle(color: Colors.black),
                               )),
@@ -90,7 +90,7 @@ class _NotificationPageState extends State<NotificationPage> {
               });
             },
             itemBuilder: (context) => [
-              PopupMenuItem(
+              const PopupMenuItem(
                 value: 1,
                 child: Text("Clear all"),
               )
@@ -102,7 +102,7 @@ class _NotificationPageState extends State<NotificationPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (notifdata.isNotEmpty) ...[
-            Padding(
+            const Padding(
               padding: EdgeInsets.only(left: 30),
               child: Text("Today"),
             ),
@@ -113,7 +113,7 @@ class _NotificationPageState extends State<NotificationPage> {
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Card(
-                      shadowColor: Color.fromRGBO(111, 111, 111, 0.12),
+                      shadowColor: const Color.fromRGBO(111, 111, 111, 0.12),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10)),
                       elevation: 2,
@@ -127,7 +127,7 @@ class _NotificationPageState extends State<NotificationPage> {
                         ),
                         title: Text(
                           notifdata[index],
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 15),
                         ),
                       ),
@@ -140,11 +140,11 @@ class _NotificationPageState extends State<NotificationPage> {
             Center(
               child: Column(
                 children: [
-                  Image(image: AssetImage("assets/images/no_data.png")),
-                  SizedBox(
+                  const Image(image: AssetImage("assets/images/no_data.png")),
+                  const SizedBox(
                     height: 10,
                   ),
-                  Text("You don't have any notification yet.")
+                  const Text("You don't have any notification yet.")
                 ],
               ),
             )

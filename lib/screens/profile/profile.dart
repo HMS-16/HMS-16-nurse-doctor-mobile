@@ -6,10 +6,9 @@ import 'package:hms_16/widget/listtile_profile.dart';
 import 'package:provider/provider.dart';
 
 class ProfilePage extends StatelessWidget {
-  ProfilePage({super.key});
+  const ProfilePage({super.key});
   @override
   Widget build(BuildContext context) {
-    bool isDoctor = true;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -32,10 +31,10 @@ class ProfilePage extends StatelessWidget {
                 minRadius: 40,
                 child: LayoutBuilder(builder: (context, constraints) { 
                     if(value.profile!.role == 1){
-                        return Image(image: AssetImage("assets/images/doctor_icon.png"),
+                        return const Image(image: AssetImage("assets/images/doctor_icon.png"),
                     );
                     }else{
-                        return Image(image: AssetImage("assets/images/nurse_icon.png"),
+                        return const Image(image: AssetImage("assets/images/nurse_icon.png"),
                     );
                     }  
                 }),
@@ -49,7 +48,7 @@ class ProfilePage extends StatelessWidget {
                 subtitle: value.profile!.strNum,
               ),
               Container(
-                margin: EdgeInsets.symmetric(horizontal: 16),
+                margin: const EdgeInsets.symmetric(horizontal: 16),
                 decoration: BoxDecoration(
                     border: Border(
                         bottom: BorderSide(width: 2, color: cWhiteDarker))),
@@ -86,7 +85,7 @@ class ProfilePage extends StatelessWidget {
                       isValidation: false,
                       isImage: false,
                       newPage: () async {
-                        await Future.delayed(Duration(seconds: 2), () {
+                        await Future.delayed(const Duration(seconds: 2), () {
                           Navigator.pop(context);
                         });
                       },
@@ -99,10 +98,10 @@ class ProfilePage extends StatelessWidget {
                   ),
                 ),
               ),
-              Spacer(),
+              const Spacer(),
               // SizedBox(child: Spacer()),
               Container(
-                margin: EdgeInsets.only(bottom: 15),
+                margin: const EdgeInsets.only(bottom: 15),
                 child: InkWell(
                   onTap: () {
                     dialogValidation(
@@ -116,15 +115,15 @@ class ProfilePage extends StatelessWidget {
                   child: Row(
                     // mainAxisAlignment: MainAxisAlignment.center,
                     mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Icon(
+                    children: const[
+                       Icon(
                         Icons.logout_outlined,
                         size: 30,
                       ),
-                      SizedBox(
+                       SizedBox(
                         width: 16,
                       ),
-                      Text("Sign out")
+                       Text("Sign out")
                     ],
                   ),
                 ),

@@ -19,13 +19,13 @@ class _MessageScreenState extends State<MessageScreen> {
           text: widget.text[index]['message'].text.text[0],
           isSender: widget.text[index]['isUserMessage'] ? true : false,
           color: widget.text[index]['isUserMessage']
-              ? Color.fromRGBO(208, 224, 247, 1)
+              ? const Color.fromRGBO(208, 224, 247, 1)
               : cWhiteDark,
           textStyle: TextStyle(color: cBlack, fontSize: 16),
         ),
       ),
       separatorBuilder: (context, index) =>
-          Padding(padding: EdgeInsets.only(top: 10)),
+          const Padding(padding: EdgeInsets.only(top: 10)),
       itemCount: widget.text.length,
     );
   }

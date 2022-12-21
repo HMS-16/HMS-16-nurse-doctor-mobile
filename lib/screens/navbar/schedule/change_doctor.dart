@@ -74,11 +74,6 @@ class _ChangeDoctorState extends State<ChangeDoctor> {
                       itemCount: value.getlistDoctor.length,
                       itemBuilder: (context, index) {
                         final dataProvider = value.getlistDoctor[index];
-                        //  if (DateFormat('EEE, d MMM y')
-                        //             .format(dataProvider.dateTime!) ==
-                        //         DateFormat('EEE, d MMM y').format(selectedDate) &&
-                        //     patientProvider.person!.time == dataProvider.startTime)
-                        // if (dataProvider.startTime == patientProvider.person!.time) {
                         if (dataProvider.role == 1) {
                           return GestureDetector(
                             onTap: () async {
@@ -116,10 +111,6 @@ class _ChangeDoctorState extends State<ChangeDoctor> {
                                                 backgroundColor: cPrimaryBase,
                                               ),
                                               onPressed: () async {
-                                                // context
-                                                //     .read<PatientViewModel>()
-                                                //     .changeDoctor(value
-                                                //         .getlistDoctor[index].name);
                                                 print(value
                                                     .getlistDoctor[index].name);
 

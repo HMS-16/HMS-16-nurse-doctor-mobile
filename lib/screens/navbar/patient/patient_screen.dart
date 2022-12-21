@@ -6,7 +6,6 @@ import 'package:hms_16/view_model/patient_view_model.dart';
 import 'package:hms_16/model/patient_model.dart';
 import 'package:hms_16/utils/constant.dart';
 import 'package:hms_16/screens/navbar/patient/patient_detail/patient_detail.dart';
-import 'package:hms_16/widget/dialog_validation.dart';
 import 'package:hms_16/widget/navpush_transition.dart';
 import 'package:hms_16/widget/patient_card.dart';
 import 'package:hms_16/widget/status/loading_max.dart';

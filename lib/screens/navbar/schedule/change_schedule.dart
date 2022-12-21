@@ -17,13 +17,7 @@ class ChangeSchedule extends StatefulWidget {
   State<ChangeSchedule> createState() => _ChangeScheduleState();
 }
 
-// List<String> itemsSchedule = [
-//   "09.00 - 12.00",
-//   "13.00 - 16.00",
-//   "18.00 - 21.00",
-// ];
 List<int> itemsScheduleint = [1, 2, 3];
-// String valueDropdown = itemsSchedule.first;
 int valueDropdownint = itemsScheduleint.first;
 
 class _ChangeScheduleState extends State<ChangeSchedule> {

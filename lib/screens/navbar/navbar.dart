@@ -4,9 +4,7 @@ import 'package:hms_16/screens/navbar/message/message.dart';
 import 'package:hms_16/screens/navbar/patient/patient_screen.dart';
 import 'package:hms_16/screens/navbar/schedule/view_schedule.dart';
 import 'package:hms_16/utils/constant.dart';
-import 'package:hms_16/view_model/auth_view_model.dart';
-import 'package:hms_16/view_model/patient_view_model.dart';
-import 'package:provider/provider.dart';
+
 
 class NavBar extends StatefulWidget {
   const NavBar({super.key});
@@ -23,15 +21,6 @@ class _NavBarState extends State<NavBar> {
     ViewSchedule(),
     const Message(),
   ];
-
-  // @override
-  // void initState() {
-  //   // final id = context.read<AuthViewModel>().idUser;
-  //   WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
-  //     await context.read<ProfileViewModel>().getProfileById();
-  //   });
-  //   super.initState();
-  // }
 
   @override
   Widget build(BuildContext context) {
