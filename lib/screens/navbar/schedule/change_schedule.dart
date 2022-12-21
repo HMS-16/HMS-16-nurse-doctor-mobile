@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:hms_16/model/change_schedule_model.dart';
+import 'package:hms_16/screens/navbar/schedule/detail_schedule.dart';
 import 'package:hms_16/screens/navbar/schedule/view_schedule.dart';
 import 'package:hms_16/utils/constant.dart';
 import 'package:hms_16/view_model/patient_view_model.dart';
 import 'package:hms_16/view_model/schedule_view_model.dart';
 import 'package:hms_16/widget/duration_dialog.dart';
+import 'package:hms_16/widget/navpush_transition.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
@@ -236,7 +238,6 @@ class _ChangeScheduleState extends State<ChangeSchedule> {
                                                 value.schedule!.id,
                                                 DateFormat('M/d/y')
                                                     .format(selectedDate));
-
                                             // context
                                             // .read<PatientViewModel>()
                                             // .changeSchedule(valueDropdownint);
@@ -244,6 +245,7 @@ class _ChangeScheduleState extends State<ChangeSchedule> {
                                                 "Schedule has been successfully changed!");
                                             Future.delayed(
                                                 const Duration(seconds: 2), () {
+                                              Navigator.pop(context);
                                               Navigator.pop(context);
                                               Navigator.pop(context);
                                             });
