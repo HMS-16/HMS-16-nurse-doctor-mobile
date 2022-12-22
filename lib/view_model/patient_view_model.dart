@@ -23,41 +23,26 @@ class PatientViewModel extends ChangeNotifier {
   final prefs = SharedService();
   ActionState patientState = ActionState.none;
 
-  // var response;
-  // List<PatientModel> _patients = patients;
-  // List<PatientModel> get persons => _patients;
-
   void changeState(ActionState state) {
     patientState = state;
     notifyListeners();
   }
 
   Future<void> getAllPatient(BuildContext context) async {
-    // print("paling atas func");
-    // if (context.read<AuthViewModel>().state == ActionState.loading) {
-    //   print("get all pasien? loading ya");
-    // }
     try {
       if (_patients.isEmpty) {
-        // print("if pertama $_patients");
         changeState(ActionState.loading);
-        // patientState = ActionState.loading;
-        // context.read<AuthViewModel>().changeState(ActionState.loading);
       }
-      // var token = await prefs.getToken();
+
       var response = await PatientServices().getAll();
-      // print(response.data.toString());
+
       PatientModel modelPatient = PatientModel.fromJson(response.data);
       if (_patients.length != modelPatient.data.length) {
-        // print("if kedua $_patients");
         changeState(ActionState.loading);
-        // patientState = ActionState.loading;
-        // context.read<AuthViewModel>().changeState(ActionState.loading);
       }
-      // final encoder = JsonEncoder.withIndent('  ').convert(modelPatient.data);
-      // await Future.delayed(Duration(seconds: 2));
+
       await Future.delayed(Duration(seconds: 1));
-      // print(_patients);
+
       _patients = _filterPatient = (modelPatient.data)
           .map(
             (e) => DataPatient(
@@ -80,20 +65,14 @@ class PatientViewModel extends ChangeNotifier {
             ),
           )
           .toList();
-      // print(_patients);
-      // print("berhasil try");
-      // print(_patients);
-        changeState(ActionState.none);
-      // patientState = ActionState.none;
-      // context.read<AuthViewModel>().changeState(ActionState.none);
+
+      changeState(ActionState.none);
+
       if (patientState == ActionState.none) {
         print("sudah get all? none ya");
       }
       notifyListeners();
     } on DioError catch (e) {
-      // if () {
-
-      // }
       print(e.message);
       print("error di viewmodel get all");
       dialogValidation(
@@ -104,16 +83,14 @@ class PatientViewModel extends ChangeNotifier {
         newPage: () {
           Future.delayed(Duration(seconds: 2), () {
             changeState(ActionState.none);
-            // patientState = ActionState.none;
-            // context.read<AuthViewModel>().changeState(ActionState.none);
+
             navReplaceTransition(context, LoginPage());
           });
         },
       );
       await prefs.deleteToken();
       await prefs.deleteIdUser();
-      // await Future.delayed(Duration(seconds: 2));
-      // print(e.toString());
+
       notifyListeners();
     }
   }
@@ -125,11 +102,10 @@ class PatientViewModel extends ChangeNotifier {
 
   changeProgressPatient(context) async {
     try {
-      // var token = await prefs.getToken();
       var response = await PatientServices().endCase(id: _patient!.id);
-      // print(response);
+
       getAllPatient(context);
-      // _patient!.status = !status;
+
       notifyListeners();
     } catch (e) {
       e.toString();
@@ -144,14 +120,4 @@ class PatientViewModel extends ChangeNotifier {
 
     notifyListeners();
   }
-
-  // void changeDoctor(doctor) {
-  //   _patient!.doctor = doctor;
-  //   notifyListeners();
-  // }
-
-  // void changeSchedule(schedule) {
-  //   _patient!.time = schedule;
-  //   notifyListeners();
-  // }
 }

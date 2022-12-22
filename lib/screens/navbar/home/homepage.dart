@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hms_16/model/patient_model.dart';
 import 'package:hms_16/model/schedule_model.dart';
 import 'package:hms_16/screens/navbar/schedule/detail_schedule.dart';
 import 'package:hms_16/screens/notification.dart';
@@ -8,7 +7,6 @@ import 'package:hms_16/utils/constant.dart';
 import 'package:hms_16/view_model/auth_view_model.dart';
 import 'package:hms_16/view_model/patient_view_model.dart';
 import 'package:hms_16/view_model/schedule_view_model.dart';
-import 'package:hms_16/widget/dialog_validation.dart';
 import 'package:hms_16/widget/navpush_transition.dart';
 import 'package:hms_16/widget/patientHome_card.dart';
 import 'package:hms_16/widget/status/loading_max.dart';
@@ -25,7 +23,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   void initState() {
-    // final id = context.read<AuthViewModel>().idUser;
     final profileViewModel = context.read<AuthViewModel>();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
       if (profileViewModel.profile == null) {
@@ -50,11 +47,7 @@ class _HomePageState extends State<HomePage> {
             title: Consumer<AuthViewModel>(
               builder: (context, value, child) {
                 switch (value.authState) {
-                  // case ActionState.error:
-                  //   return Center(child: Text('error'),);
                   case ActionState.loading:
-                    // Future.delayed(Duration(seconds: 2));
-                    print('lagi loading (homepage)');
                     return LoadingMax(color: cBlackLight);
                   case ActionState.none:
                     final username = value.profile!.name;
@@ -110,12 +103,12 @@ class _HomePageState extends State<HomePage> {
                         minRadius: 40,
                         child: LayoutBuilder(builder: (context, constraints) {
                           if (value.profile!.role == 1) {
-                            return const Image(
+                            return Image(
                               image:
                                   AssetImage("assets/images/doctor_icon.png"),
                             );
                           } else {
-                            return const Image(
+                            return Image(
                               image: AssetImage("assets/images/nurse_icon.png"),
                             );
                           }
@@ -127,22 +120,23 @@ class _HomePageState extends State<HomePage> {
               ),
             ],
             iconTheme: IconThemeData(color: cBlack),
-            // floating: true,
             pinned: true,
             backgroundColor: const Color.fromRGBO(110, 169, 250, 1),
             expandedHeight: 220,
             flexibleSpace: const FlexibleSpaceBar(
               background: Image(
-                  // alignment: Alignment.bottomRight,
                   fit: BoxFit.cover,
                   image: AssetImage("assets/images/Banner.png")),
             ),
           ),
-          const SliverToBoxAdapter(
+          SliverToBoxAdapter(
             child: ListTile(
-              title: Text("Today's Appointment",
+              title: const Text("Today's Appointment",
                   style: TextStyle(
                       fontWeight: FontWeight.bold, letterSpacing: 0.4)),
+              subtitle: Text(DateFormat("EEE, MMM d, yyyy")
+                  .format(DateTime.now())
+                  .toString()),
             ),
           ),
           SliverList(
@@ -150,10 +144,8 @@ class _HomePageState extends State<HomePage> {
               (context, index) {
                 return Consumer<ScheduleViewModel>(
                     builder: (context, value, child) {
-                  // return PatientList(persons: patients);
                   return PatientListHomeScreen(
                     schedules: context.read<ScheduleViewModel>().schedules,
-                    // patients: context.read<PatientViewModel>().persons,
                   );
                 });
               },
@@ -168,12 +160,10 @@ class _HomePageState extends State<HomePage> {
 
 class PatientListHomeScreen extends StatelessWidget {
   final List<DataSchedule> schedules;
-  // final List<DataPatient> patients;
 
   const PatientListHomeScreen({
     super.key,
     required this.schedules,
-    // required this.patients,
   });
 
   @override
@@ -191,8 +181,12 @@ class PatientListHomeScreen extends StatelessWidget {
               scrollDirection: Axis.vertical,
               itemBuilder: (context, index) {
                 final schedule = schedules.elementAt(index);
+
                 return InkWell(
                   onTap: () {
+                    context
+                        .read<ScheduleViewModel>()
+                        .selectedSchedule(schedule);
                     navPushTransition(context, const DetailSchedule());
                   },
                   child: Builder(builder: (context) {
@@ -200,10 +194,7 @@ class PatientListHomeScreen extends StatelessWidget {
                     Color fontColor = cPrimaryDark;
                     Color badgeColor = cSecondaryLighter;
                     String condition = 'Process';
-                      context
-                        .read<ScheduleViewModel>()
-                        .selectedSchedule(schedule);
-                    navPushTransition(context, const DetailSchedule());
+
                     if (schedule.status != false) {
                       lineColor = cGreenLine;
                       condition = 'Done';
@@ -221,8 +212,6 @@ class PatientListHomeScreen extends StatelessWidget {
                     );
                   }),
                 );
-                // }
-                // return SizedBox();
               },
               itemCount: schedules.length,
             );

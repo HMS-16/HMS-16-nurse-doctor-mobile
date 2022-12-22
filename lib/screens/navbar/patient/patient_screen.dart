@@ -44,7 +44,6 @@ class _PatientScreenState extends State<PatientScreen> {
           IconButton(
             onPressed: () {
               navPushTransition(context, const NotificationPage());
-             
             },
             icon: Icon(
               Icons.notifications,
@@ -89,10 +88,6 @@ class _PatientScreenState extends State<PatientScreen> {
                   return Center(child: LoadingMax(color: cInfoLight));
                 case ActionState.none:
                   return MyWidget();
-                // case ActionState.error:
-                //   return Center(
-                //     child: Text('error'),
-                //   );
               }
             },
           );
@@ -130,7 +125,6 @@ class MyWidget extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 24),
-        // _screenValidator(provider.persons),
         Consumer<PatientViewModel>(builder: (context, value, child) {
           return _screenValidator(value.filterPatients, value.persons);
         }),
@@ -158,8 +152,7 @@ Widget _screenValidator(List search, List<DataPatient> patient) {
       ),
     );
   }
-  // final variabel = jsonEncode(search);
-  // print("mockingbird = $variabel");
+
   return PatientList(persons: patient);
 }
 
@@ -182,13 +175,10 @@ class PatientList extends StatelessWidget {
             navPushTransition(context, const PatientDetail());
           },
           child: Builder(builder: (context) {
-            // Consumer<PatientViewModel>(
-            //   builder: (context, value, chiild) {
             Color lineColor = cPrimaryBase;
             Color fontColor = cPrimaryDark;
             Color badgeColor = cSecondaryLighter;
             String condition = 'Process';
-            // print(person);
 
             if (person!.status != 0) {
               lineColor = cGreenLine;
@@ -204,8 +194,6 @@ class PatientList extends StatelessWidget {
               badgeText: condition,
             );
           }),
-          //   },
-          // ),
         );
       },
       itemCount: persons.length,

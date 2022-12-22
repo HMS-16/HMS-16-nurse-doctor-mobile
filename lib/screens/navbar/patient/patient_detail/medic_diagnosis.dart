@@ -16,7 +16,6 @@ class MedicalDiagnosis extends StatefulWidget {
 }
 
 class _MedicalDiagnosisState extends State<MedicalDiagnosis> {
-
   @override
   Widget build(BuildContext context) {
     final generalProvider = Provider.of<AuthViewModel>(context, listen: false);

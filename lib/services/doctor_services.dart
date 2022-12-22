@@ -8,19 +8,20 @@ class DoctorServices {
 
   Future getAll() async {
     String? token = await prefs.getToken();
-    // print(token);
+
     try {
       Response response = await _dio.get(
-        baseUrl + '/accounts',
+        '$baseUrl/accounts',
         options: Options(
           headers: {'Authorization': 'Bearer $token'},
         ),
       );
-      // print("error di get api ${response.data}");
+
       return response;
     } on DioError catch (e) {
       print(e.response!.statusMessage);
       print(e.response!.statusCode);
+      print("error message = ${e.message}");
     }
   }
 }

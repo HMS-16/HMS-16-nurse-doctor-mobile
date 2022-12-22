@@ -22,12 +22,9 @@ class ScheduleViewModel extends ChangeNotifier {
   getAllSchedule(String date) async {
     try {
       var response = await ScheduleServices().getAllSchedule(date);
-      // print("ASDADASDA = ${response.data['data']}");
-      // print("berhasil ${response.data['data']['date']}");
+
       if (response.data['data'] != null) {
         ScheduleModel modelSchedule = ScheduleModel.fromJson(response.data);
-        // print(modelDoctor.data);
-        // print(modelSchedule.data);
 
         _schedules = (modelSchedule.data)
             .map((e) => DataSchedule(
@@ -44,9 +41,6 @@ class ScheduleViewModel extends ChangeNotifier {
       } else {
         _schedules = response.data['data'] == null ? [] : [];
       }
-      // print("error di view model ${response}");
-
-      // print(response.data);
     } on DioError catch (e) {
       print(e.response!.statusMessage);
       print(e.response!.statusCode);
@@ -65,16 +59,3 @@ class ScheduleViewModel extends ChangeNotifier {
     notifyListeners();
   }
 }
-
-// class ScheduleViewModel extends ChangeNotifier {
-//   List<ScheduleModel> _listSchedules = listSchedules;
-//   ScheduleModel? _scheduleModel;
-
-//   List<ScheduleModel> get getlistSchedules => _listSchedules;
-//   ScheduleModel? get getscheduleModel => _scheduleModel;
-
-//   void selectedPatient(ScheduleModel newPatient) {
-//     _scheduleModel = newPatient;
-//     notifyListeners();
-//   }
-// }

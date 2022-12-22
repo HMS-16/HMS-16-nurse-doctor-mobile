@@ -26,7 +26,6 @@ class Datum {
     required this.password,
     required this.email,
     required this.strNum,
-    // required this.phoneNum,
     required this.role,
   });
 
@@ -34,7 +33,7 @@ class Datum {
   String password;
   String email;
   String strNum;
-  // String phoneNum;
+
   int role;
 
   factory Datum.fromJson(Map<String, dynamic> json) => Datum(
@@ -42,7 +41,6 @@ class Datum {
         password: json["password"],
         email: json["email"],
         strNum: json["str_num"],
-        // phoneNum: json["phone_num"],
         role: json["role"],
       );
 
@@ -51,7 +49,6 @@ class Datum {
         "password": password,
         "email": email,
         "str_num": strNum,
-        // "phone_num": phoneNum,
         "role": role,
       };
 }

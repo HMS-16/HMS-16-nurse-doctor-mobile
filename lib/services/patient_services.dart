@@ -1,8 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
-import 'package:hms_16/screens/auth/login_page.dart';
 import 'package:hms_16/services/shared_services.dart';
-import 'package:hms_16/widget/navpush_transition.dart';
 
 class PatientServices {
   final _dio = Dio();
@@ -14,7 +11,7 @@ class PatientServices {
     try {
       Response response;
       response = await _dio.get(
-        baseUrl + '/patients',
+        '$baseUrl/patients',
         options: Options(
           headers: {'Authorization': 'Bearer $token'},
         ),
@@ -24,14 +21,8 @@ class PatientServices {
     } on DioError catch (e) {
       print(e.response!.statusMessage);
       print(e.response!.statusCode);
-      // throw e.toString();
+      print("error message = ${e.message}");
     }
-
-    // final encoder = JsonEncoder.withIndent('  ').convert(response.data);
-    // final data = DataPatient.fromJson(response.data['data']);
-    // print(data);
-    // print(encoder);
-    // print(response);
   }
 
   Future endCase({required String id}) async {
@@ -39,7 +30,7 @@ class PatientServices {
     try {
       Response response;
       response = await _dio.put(
-        baseUrl + '/patients/endcase/$id',
+        '$baseUrl/patients/endcase/$id',
         options: Options(
           headers: {'Authorization': 'Bearer $token'},
         ),
@@ -48,6 +39,7 @@ class PatientServices {
     } on DioError catch (e) {
       print(e.response!.statusMessage);
       print(e.response!.statusCode);
+      print("error message = ${e.message}");
     }
   }
 }

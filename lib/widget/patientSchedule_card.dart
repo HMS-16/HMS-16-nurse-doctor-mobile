@@ -7,24 +7,21 @@ class PatientScheduleCard extends StatelessWidget {
   const PatientScheduleCard({
     super.key,
     required this.patientName,
-    // required this.disease,
     this.doctorName,
     this.nurseName,
     this.time,
     required this.lineColor,
-    // required this.badgeText,
-    // required this.paintBadge,
     required this.fontColor,
   });
 
   final String patientName;
-  // final String disease;
+
   final String? doctorName;
   final String? nurseName;
   final String? time;
-  // final String badgeText;
+
   final Color lineColor;
-  // final Color paintBadge;
+
   final Color fontColor;
 
   @override
@@ -83,14 +80,6 @@ class PatientScheduleCard extends StatelessWidget {
                           style: textStyle.copyWith(
                               fontSize: 16, fontWeight: FontWeight.w600),
                         ),
-                        // Text(
-                        //   disease,
-                        //   style: textStyle.copyWith(
-                        //     color: cBlackLightest,
-                        //     fontSize: 12,
-                        //     fontWeight: FontWeight.w400,
-                        //   ),
-                        // ),
                         Text(
                           "Doctor : $doctorName",
                           style: textStyle.copyWith(
@@ -114,23 +103,7 @@ class PatientScheduleCard extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const Expanded(
-                        child: ListTile(
-                            // trailing:
-                            // Badge(
-                            //   elevation: 0,
-                            //   badgeColor: paintBadge,
-                            //   padding: EdgeInsets.fromLTRB(10, 8, 10, 8),
-                            //   shape: BadgeShape.square,
-                            //   borderRadius: BorderRadius.circular(20),
-                            //   toAnimate: false,
-                            //   badgeContent: Text(
-                            //     badgeText,
-                            //     style: TextStyle(
-                            //         color: fontColor, fontWeight: FontWeight.w600),
-                            //   ),
-                            // ),
-                            )),
+                    const Expanded(child: ListTile()),
                   ],
                 )
               ],

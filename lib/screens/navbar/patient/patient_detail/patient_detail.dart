@@ -12,8 +12,6 @@ class PatientDetail extends StatefulWidget {
 }
 
 class _PatientDetailState extends State<PatientDetail> {
-
-
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -54,7 +52,6 @@ class _PatientDetailState extends State<PatientDetail> {
                 Tab(
                   child: Text(
                     'Medical\nDiagnose',
-                    // maxLines: 2,
                     textAlign: TextAlign.center,
                     style: textStyle.copyWith(
                         fontSize: 14, fontWeight: FontWeight.w400),

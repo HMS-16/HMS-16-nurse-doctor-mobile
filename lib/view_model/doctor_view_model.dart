@@ -13,7 +13,6 @@ class DoctorViewModel extends ChangeNotifier {
   getAllDoctor() async {
     try {
       var response = await DoctorServices().getAll();
-      // print("error di view model ${response}");
       DoctorModels modelDoctor = DoctorModels.fromJson(response.data);
       _listDoctors = (modelDoctor.data)
           .map((e) => DataDoctor(
@@ -24,10 +23,8 @@ class DoctorViewModel extends ChangeNotifier {
               email: e['email'],
               role: e['role']))
           .toList();
-      // print(modelDoctor.data);
-    } on DioError catch (e) {
-      print(e.response!.statusMessage);
-      print(e.response!.statusCode);
+    } catch (e) {
+      print(e.toString());
     }
     notifyListeners();
   }

@@ -1,17 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:hms_16/model/doctor_model.dart';
 import 'package:hms_16/screens/navbar/schedule/change_doctor.dart';
 import 'package:hms_16/screens/navbar/schedule/change_schedule.dart';
-import 'package:hms_16/screens/navbar/schedule/view_schedule.dart';
 import 'package:hms_16/utils/constant.dart';
-import 'package:hms_16/screens/navbar/patient/patient_detail/patient_detail.dart';
 import 'package:hms_16/view_model/auth_view_model.dart';
-import 'package:hms_16/view_model/doctor_view_model.dart';
-import 'package:hms_16/view_model/patient_view_model.dart';
 import 'package:hms_16/view_model/schedule_view_model.dart';
-import 'package:hms_16/widget/dialog_validation.dart';
 import 'package:hms_16/widget/navpush_transition.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class DetailSchedule extends StatefulWidget {
@@ -24,7 +17,6 @@ class DetailSchedule extends StatefulWidget {
 class _DetailScheduleState extends State<DetailSchedule> {
   @override
   void initState() {
-
     super.initState();
   }
 
@@ -86,8 +78,7 @@ class _DetailScheduleState extends State<DetailSchedule> {
                       ],
                     ),
                     subtitle: GestureDetector(
-                      onTap: () {
-                      },
+                      onTap: () {},
                       child: Padding(
                         padding: const EdgeInsets.symmetric(vertical: 8),
                         child: Row(
@@ -305,8 +296,6 @@ class _DetailScheduleState extends State<DetailSchedule> {
             )
           ],
         ),
-        //   },
-        // ),
       ),
     );
   }
