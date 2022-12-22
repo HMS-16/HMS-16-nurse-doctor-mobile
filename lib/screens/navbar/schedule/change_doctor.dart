@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:hms_16/model/change_doctor_model.dart';
 import 'package:hms_16/screens/navbar/schedule/view_schedule.dart';
 import 'package:hms_16/view_model/doctor_view_model.dart';
 import 'package:hms_16/utils/constant.dart';
+import 'package:hms_16/view_model/schedule_view_model.dart';
 import 'package:hms_16/widget/duration_dialog.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -21,7 +23,8 @@ class _ChangeDoctorState extends State<ChangeDoctor> {
 
   @override
   Widget build(BuildContext context) {
-    final doctorProvider = Provider.of<DoctorViewModel>(context);
+    final scheduleProvider =
+        Provider.of<ScheduleViewModel>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(color: cBlack),
@@ -108,12 +111,27 @@ class _ChangeDoctorState extends State<ChangeDoctor> {
                                                             12)),
                                                 backgroundColor: cPrimaryBase,
                                               ),
-                                              onPressed: () async {
+                                              onPressed: () {
+                                                print(dataProvider.strNum);
+                                                print(scheduleProvider
+                                                    .schedule!.id);
+                                                scheduleProvider.changeDoctor(
+                                                    ChangeDoctorModel(
+                                                        doctorId: dataProvider
+                                                            .strNum),
+                                                    scheduleProvider
+                                                        .schedule!.id);
+                                                context
+                                                    .read<ScheduleViewModel>()
+                                                    .getAllSchedule(DateFormat(
+                                                            'M/d/y')
+                                                        .format(selectedDate));
                                                 durationDialog(context,
                                                     "Doctor has been successfully changed!");
                                                 Future.delayed(
                                                     const Duration(seconds: 2),
                                                     () {
+                                                  Navigator.pop(context);
                                                   Navigator.pop(context);
                                                   Navigator.pop(context);
                                                 });

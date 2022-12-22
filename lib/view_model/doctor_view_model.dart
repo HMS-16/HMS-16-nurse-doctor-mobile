@@ -1,7 +1,8 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:hms_16/model/change_doctor_model.dart';
 import 'package:hms_16/model/doctor_model.dart';
 import 'package:hms_16/services/doctor_services.dart';
+import 'package:hms_16/view_model/schedule_view_model.dart';
 
 class DoctorViewModel extends ChangeNotifier {
   List<DataDoctor> _listDoctors = [];

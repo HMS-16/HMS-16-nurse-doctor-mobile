@@ -24,6 +24,12 @@ class DataSchedule {
     required this.nurse,
     required this.status,
     required this.statusString,
+    this.createdAt,
+    this.updatedAt,
+    this.deletedAt,
+    this.doctorId,
+    this.nurseId,
+    this.timeId,
   });
 
   int id;
@@ -35,4 +41,10 @@ class DataSchedule {
   String nurse;
   bool status;
   String statusString;
+  DateTime? createdAt;
+  DateTime? updatedAt;
+  DateTime? deletedAt;
+  String? doctorId;
+  String? nurseId;
+  int? timeId;
 }

@@ -1,9 +1,13 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:hms_16/model/change_doctor_model.dart';
 import 'package:hms_16/model/change_schedule_model.dart';
 import 'package:hms_16/model/schedule_model.dart';
+import 'package:hms_16/screens/navbar/schedule/view_schedule.dart';
+import 'package:hms_16/services/doctor_services.dart';
 import 'package:hms_16/services/schedule_services.dart';
 import 'package:hms_16/utils/constant.dart';
+import 'package:intl/intl.dart';
 
 class ScheduleViewModel extends ChangeNotifier {
   List<DataSchedule> _schedules = [];
@@ -28,6 +32,8 @@ class ScheduleViewModel extends ChangeNotifier {
 
         _schedules = (modelSchedule.data)
             .map((e) => DataSchedule(
+                doctorId: e['doctor_id'],
+                timeId: e['time_id'],
                 id: e['id'],
                 patientId: e['patient_id'],
                 date: e['date'],
@@ -55,7 +61,13 @@ class ScheduleViewModel extends ChangeNotifier {
 
   changeSchedule(ChangeScheduleModel change, int id, date) async {
     await ScheduleServices().changeSchedule(change, id);
-    await getAllSchedule(date);
+    await getAllSchedule(DateFormat('M/d/y').format(selectedDate));
+    notifyListeners();
+  }
+
+  changeDoctor(ChangeDoctorModel doctorId, int id) async {
+    await DoctorServices().changeDoctor(doctorId, id);
+    await getAllSchedule(DateFormat('M/d/y').format(selectedDate));
     notifyListeners();
   }
 }
