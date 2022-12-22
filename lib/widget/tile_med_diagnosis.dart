@@ -50,7 +50,6 @@ class _TileMedDiagnosisState extends State<TileMedDiagnosis> {
             iconColor: Colors.black54,
             textColor: Colors.black,
             backgroundColor: Color(0xffF2F2F2),
-            // collapsedBackgroundColor: Colors.amber,
             collapsedBackgroundColor: Color(0xffFDFDFD),
             tilePadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             trailing: Icon(_customTileExpanded

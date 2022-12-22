@@ -95,13 +95,6 @@ class PatientHomeCard extends StatelessWidget {
                               fontSize: 12,
                               fontWeight: FontWeight.w400),
                         ),
-                        // Text(
-                        //   time!,
-                        //   style: textStyle.copyWith(
-                        //       color: cBlackLightest,
-                        //       fontSize: 12,
-                        //       fontWeight: FontWeight.w400),
-                        // ),
                       ],
                     ),
                     Expanded(

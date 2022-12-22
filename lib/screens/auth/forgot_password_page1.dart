@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hms_16/screens/auth/forgot_password_page2.dart';
-// import 'package:hms_16/Views/auth/forgot_password_page3.dart';
 import 'package:hms_16/utils/constant.dart';
 import 'package:hms_16/widget/button.dart';
 import 'package:hms_16/widget/navpush_transition.dart';
@@ -29,7 +28,6 @@ class ForgotPassword1 extends StatelessWidget {
           child: ListView(
             shrinkWrap: true,
             padding: const EdgeInsets.symmetric(horizontal: 20),
-            // mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image(
                 image: const AssetImage(
@@ -49,9 +47,7 @@ class ForgotPassword1 extends StatelessWidget {
                       fontWeight: FontWeight.w600),
                 ),
               ),
-              const SizedBox(
-                height: 30
-              ),
+              const SizedBox(height: 30),
               Row(
                 children: [
                   Text(
@@ -88,7 +84,8 @@ class ForgotPassword1 extends StatelessWidget {
                     errorStyle: textStyle.copyWith(color: Colors.red),
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(color: cSuccessBase, width: 5.0)),
+                        borderSide:
+                            BorderSide(color: cSuccessBase, width: 5.0)),
                     prefixIcon: const Icon(
                       Icons.email_outlined,
                       color: Colors.black,
@@ -96,9 +93,6 @@ class ForgotPassword1 extends StatelessWidget {
                     hintText: "Email",
                     floatingLabelBehavior: FloatingLabelBehavior.auto),
               ),
-              // const SizedBox(
-              //   height: 3.0,
-              // ),
               Button(
                 child: Text("Send"),
                 bgcolor: Colors.blueAccent,
@@ -106,12 +100,6 @@ class ForgotPassword1 extends StatelessWidget {
                 onpressed: () {
                   FocusManager.instance.primaryFocus!.unfocus();
                   navPushTransition(context, const ForgotPassword2());
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) => const ForgotPassword2(),
-                  //   ),
-                  // );
                 },
               )
             ],

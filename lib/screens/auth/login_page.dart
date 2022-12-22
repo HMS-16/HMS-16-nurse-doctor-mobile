@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hms_16/utils/constant.dart';
-import 'package:hms_16/screens/auth/forgot_password_page1.dart';
 import 'package:hms_16/view_model/auth_view_model.dart';
 import 'package:hms_16/widget/button.dart';
 import 'package:hms_16/widget/dialog_validation.dart';
-import 'package:hms_16/widget/navpush_transition.dart';
 import 'package:hms_16/widget/status/loading_max.dart';
-import 'package:provider/provider.dart';
 import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
@@ -31,17 +28,11 @@ class _LoginPageState extends State<LoginPage> {
       body: SafeArea(
         child: Form(
           key: _formKey,
-          // autovalidateMode: AutovalidateMode.onUserInteraction,
           child: Center(
             child: ListView(
               shrinkWrap: true,
-              // addAutomaticKeepAlives: false,
-              // physics: NeverScrollableScrollPhysics(),
               padding: const EdgeInsets.symmetric(horizontal: 16),
               children: [
-                // const SizedBox(
-                //   height: 220,
-                // ),
                 Center(
                   child: Text(
                     "Sign In",
@@ -165,7 +156,6 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     suffixIcon: IconButton(
                       icon: Icon(
-                        // Based on passwordVisible state choose the icon
                         _hidePassword ? Icons.visibility : Icons.visibility_off,
                         color: Theme.of(context).primaryColorDark,
                       ),
@@ -192,10 +182,6 @@ class _LoginPageState extends State<LoginPage> {
                           return LoadingMax();
                         default:
                           return Text('Sign In');
-                        // case ActionState.error:
-                        //   ScaffoldMessenger.of(context).showSnackBar(
-                        //     SnackBar(content: Text("email or password is invalid")),
-                        //   );
                       }
                     },
                   ),
@@ -206,14 +192,7 @@ class _LoginPageState extends State<LoginPage> {
                             pass: controllerPassword.text,
                             context: context,
                           );
-                      // ScaffoldMessenger.of(context)
-                      //     .showSnackBar(SnackBar(content: Text("Success")));
-                      // navPushTransition(context, const SignUpPage());
                     }
-                    // else {
-                    //   ScaffoldMessenger.of(context)
-                    //       .showSnackBar(SnackBar(content: Text("Failed")));
-                    // }
                   },
                 ),
                 const SizedBox(
@@ -232,7 +211,6 @@ class _LoginPageState extends State<LoginPage> {
                         });
                       },
                     );
-                    // navPushTransition(context, const ForgotPassword1());
                   },
                   child: Center(
                     child: Text(
@@ -245,7 +223,6 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                 ),
-                // const SizedBox(height: 63.0),
               ],
             ),
           ),

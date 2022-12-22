@@ -38,7 +38,6 @@ class _ForgotPassword3State extends State<ForgotPassword3> {
           child: ListView(
             shrinkWrap: true,
             padding: const EdgeInsets.symmetric(horizontal: 20),
-            // mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image(
                 image: const AssetImage(
@@ -81,7 +80,6 @@ class _ForgotPassword3State extends State<ForgotPassword3> {
               ),
               TextFormField(
                 obscureText: !_hidePassword,
-                // controller: controllerPassword,
                 validator: (value) {
                   String msg = '.{8,}';
                   if (value!.isEmpty) {
@@ -90,9 +88,7 @@ class _ForgotPassword3State extends State<ForgotPassword3> {
                   if (!RegExp(msg).hasMatch(value)) {
                     return 'Password length can’t be less than 8 char';
                   }
-                  // return null;
                 },
-                // onSaved: (value) {},
                 decoration: InputDecoration(
                   errorStyle: textStyle.copyWith(color: Colors.red),
                   border: OutlineInputBorder(
@@ -104,7 +100,6 @@ class _ForgotPassword3State extends State<ForgotPassword3> {
                   ),
                   suffixIcon: IconButton(
                     icon: Icon(
-                      // Based on passwordVisible state choose the icon
                       _hidePassword ? Icons.visibility : Icons.visibility_off,
                       color: Theme.of(context).primaryColorDark,
                     ),
@@ -115,7 +110,6 @@ class _ForgotPassword3State extends State<ForgotPassword3> {
                     },
                   ),
                   hintText: "Create Password",
-                  // floatingLabelBehavior: FloatingLabelBehavior.auto,
                 ),
               ),
               const SizedBox(
@@ -146,7 +140,6 @@ class _ForgotPassword3State extends State<ForgotPassword3> {
                   if (!RegExp(msg).hasMatch(value)) {
                     return 'Password length can’t be less than 8 char';
                   }
-                  // return null;
                 },
                 onSaved: (value) {},
                 decoration: InputDecoration(
@@ -160,7 +153,6 @@ class _ForgotPassword3State extends State<ForgotPassword3> {
                   ),
                   suffixIcon: IconButton(
                     icon: Icon(
-                      // Based on passwordVisible state choose the icon
                       _hidePassword ? Icons.visibility : Icons.visibility_off,
                       color: Theme.of(context).primaryColorDark,
                     ),
@@ -171,7 +163,6 @@ class _ForgotPassword3State extends State<ForgotPassword3> {
                     },
                   ),
                   hintText: "Confirm New Password",
-                  // floatingLabelBehavior: FloatingLabelBehavior.auto,
                 ),
               ),
               const SizedBox(
@@ -183,12 +174,6 @@ class _ForgotPassword3State extends State<ForgotPassword3> {
                 margin: const EdgeInsets.only(top: 30),
                 onpressed: () {
                   navReplaceTransition(context, const LoginPage());
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) => const LoginPage(),
-                  //   ),
-                  // );
                 },
               ),
             ],

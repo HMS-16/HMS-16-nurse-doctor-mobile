@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hms_16/view_model/auth_view_model.dart';
 import 'package:hms_16/view_model/patient_view_model.dart';
 import 'package:hms_16/utils/constant.dart';
 import 'package:hms_16/widget/duration_dialog.dart';
@@ -356,7 +355,6 @@ class _PatientProfileState extends State<PatientProfile> {
             ),
           ],
         ),
-        // }),
       ),
     );
   }

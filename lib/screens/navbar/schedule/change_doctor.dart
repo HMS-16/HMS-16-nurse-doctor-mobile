@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hms_16/model/patient_model.dart';
 import 'package:hms_16/screens/navbar/schedule/view_schedule.dart';
 import 'package:hms_16/view_model/doctor_view_model.dart';
 import 'package:hms_16/utils/constant.dart';
-import 'package:hms_16/view_model/patient_view_model.dart';
 import 'package:hms_16/widget/duration_dialog.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -111,9 +109,6 @@ class _ChangeDoctorState extends State<ChangeDoctor> {
                                                 backgroundColor: cPrimaryBase,
                                               ),
                                               onPressed: () async {
-                                                print(value
-                                                    .getlistDoctor[index].name);
-
                                                 durationDialog(context,
                                                     "Doctor has been successfully changed!");
                                                 Future.delayed(

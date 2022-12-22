@@ -199,7 +199,6 @@ class _ViewScheduleState extends State<ViewSchedule> {
             height: 24.0,
           ),
           Consumer<ScheduleViewModel>(builder: (context, value, child) {
-            // return PatientList(persons: patients);
             return PatientListSchedule(
               schedules: context.read<ScheduleViewModel>().schedules,
             );
@@ -212,12 +211,10 @@ class _ViewScheduleState extends State<ViewSchedule> {
 
 class PatientListSchedule extends StatelessWidget {
   final List<DataSchedule> schedules;
-  // final List<DataPatient> patients;
 
   const PatientListSchedule({
     super.key,
     required this.schedules,
-    // required this.patients,
   });
 
   @override
@@ -245,15 +242,12 @@ class PatientListSchedule extends StatelessWidget {
                     patientName: schedule.name,
                     doctorName: schedule.doctor,
                     nurseName: schedule.nurse,
-                    time: schedule.shift
-                    );
+                    time: schedule.shift);
               }),
             );
           }
           return const SizedBox();
         },
-        // return Container();
-        // },
         itemCount: schedules.length,
       ),
     );

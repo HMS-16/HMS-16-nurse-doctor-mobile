@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-// @override
 navPushTransition(BuildContext context, Widget page) {
   Navigator.push(
     context,
@@ -36,6 +35,6 @@ navReplaceTransition(BuildContext context, Widget page) {
         return page;
       },
     ),
-    (route) => false
+    (route) => false,
   );
 }

@@ -23,20 +23,21 @@ class ProfilePage extends StatelessWidget {
       ),
       body: Consumer<AuthViewModel>(
         builder: (context, value, child) {
-          // print(value.profile);
           return Column(
             children: [
               CircleAvatar(
                 backgroundColor: cPrimaryBase,
                 minRadius: 40,
-                child: LayoutBuilder(builder: (context, constraints) { 
-                    if(value.profile!.role == 1){
-                        return const Image(image: AssetImage("assets/images/doctor_icon.png"),
+                child: LayoutBuilder(builder: (context, constraints) {
+                  if (value.profile!.role == 1) {
+                    return const Image(
+                      image: AssetImage("assets/images/doctor_icon.png"),
                     );
-                    }else{
-                        return const Image(image: AssetImage("assets/images/nurse_icon.png"),
+                  } else {
+                    return const Image(
+                      image: AssetImage("assets/images/nurse_icon.png"),
                     );
-                    }  
+                  }
                 }),
               ),
               ListTileProfile(
@@ -90,7 +91,6 @@ class ProfilePage extends StatelessWidget {
                         });
                       },
                     );
-                    // navPushTransition(context, ChangePasswordPage());
                   },
                   icon: Icon(
                     Icons.keyboard_arrow_right,
@@ -99,7 +99,6 @@ class ProfilePage extends StatelessWidget {
                 ),
               ),
               const Spacer(),
-              // SizedBox(child: Spacer()),
               Container(
                 margin: const EdgeInsets.only(bottom: 15),
                 child: InkWell(
@@ -113,17 +112,16 @@ class ProfilePage extends StatelessWidget {
                     );
                   },
                   child: Row(
-                    // mainAxisAlignment: MainAxisAlignment.center,
                     mainAxisSize: MainAxisSize.min,
-                    children: const[
-                       Icon(
+                    children: const [
+                      Icon(
                         Icons.logout_outlined,
                         size: 30,
                       ),
-                       SizedBox(
+                      SizedBox(
                         width: 16,
                       ),
-                       Text("Sign out")
+                      Text("Sign out")
                     ],
                   ),
                 ),

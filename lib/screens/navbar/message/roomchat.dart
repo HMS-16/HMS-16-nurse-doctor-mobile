@@ -116,9 +116,7 @@ class _RoomChatPageState extends State<RoomChatPage> {
   }
 
   sendMessage(String text) async {
-    if (text.isEmpty) {
-      print('Message is empty');
-    } else {
+    if (text.isNotEmpty) {
       setState(() {
         addMessage(Message(text: DialogText(text: [text])), true);
       });

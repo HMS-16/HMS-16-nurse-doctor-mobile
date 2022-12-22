@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:hms_16/screens/auth/login_page.dart';
-import 'package:hms_16/services/shared_services.dart';
 import 'package:hms_16/utils/constant.dart';
 import 'package:hms_16/view_model/auth_view_model.dart';
 import 'package:hms_16/widget/button.dart';
 import 'package:hms_16/model/register_model.dart';
 import 'package:hms_16/widget/dialog_validation.dart';
-import 'package:hms_16/widget/navpush_transition.dart';
 import 'package:hms_16/widget/status/loading_max.dart';
 import 'package:provider/provider.dart';
 
@@ -40,7 +37,6 @@ class _SignUpPageState extends State<SignUpPage> {
       body: SafeArea(
         child: Form(
           key: _formKey,
-          // autovalidateMode: AutovalidateMode.always,
           child: ListView(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             children: [
@@ -158,7 +154,6 @@ class _SignUpPageState extends State<SignUpPage> {
                 height: 8,
               ),
               DropdownButtonFormField<String>(
-                // dropdownColor: Colors.red,
                 decoration: InputDecoration(
                     prefixIcon: Icon(
                       Icons.supervised_user_circle,
@@ -169,7 +164,6 @@ class _SignUpPageState extends State<SignUpPage> {
                     enabledBorder: const OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10)))),
                 isExpanded: true,
-                // value: valueRole,
                 hint: Text(valueRole),
                 validator: (value) {
                   if (valueRole == "Choose role") {
@@ -267,7 +261,6 @@ class _SignUpPageState extends State<SignUpPage> {
                 obscureText: !_hidePassword,
                 controller: controllerPassword,
                 validator: (value) {
-                  // String msg = '.{8,}';
                   if (value!.isEmpty) {
                     return 'Password must be filled';
                   }
@@ -286,7 +279,6 @@ class _SignUpPageState extends State<SignUpPage> {
                     ),
                     suffixIcon: IconButton(
                       icon: Icon(
-                        // Based on passwordVisible state choose the icon
                         _hidePassword ? Icons.visibility : Icons.visibility_off,
                         color: Theme.of(context).primaryColorDark,
                       ),
@@ -321,7 +313,6 @@ class _SignUpPageState extends State<SignUpPage> {
                 obscureText: !_hideConfirmPassword,
                 controller: controllerSecPassword,
                 validator: (value) {
-                  // String msg = '.{5,}';
                   if (value!.isEmpty) {
                     return 'Confirm password must be filled';
                   }
@@ -343,7 +334,6 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                   suffixIcon: IconButton(
                     icon: Icon(
-                      // Based on passwordVisible state choose the icon
                       _hideConfirmPassword
                           ? Icons.visibility
                           : Icons.visibility_off,
@@ -372,26 +362,16 @@ class _SignUpPageState extends State<SignUpPage> {
                         return LoadingMax();
                       default:
                         return Text('Register');
-                      // case ActionState.error:
-                      //   ScaffoldMessenger.of(context).showSnackBar(
-                      //     SnackBar(content: Text("email or password is invalid")),
-                      //   );
                     }
                   },
                 ),
-                // child: Text("Register"),
                 onpressed: () async {
                   if (_formKey.currentState!.validate()) {
-                    // navReplaceTransition(context, const NavBar());
-                    // var viewModel = Provider.of<RegisterViewModel>(context,
-                    //     listen: false);
-
                     var data = Datum(
                       name: controllerUser.text,
                       password: controllerPassword.text,
                       email: controllerEmail.text,
                       strNum: controllerRegNum.text,
-                      // phoneNum: controllerRegNum.text,
                       role: listRole.indexOf(valueRole) + 1,
                     );
 
@@ -399,8 +379,6 @@ class _SignUpPageState extends State<SignUpPage> {
                           data,
                           context,
                         );
-                  } else {
-                    print("error");
                   }
                 },
               ),
@@ -425,14 +403,8 @@ class _SignUpPageState extends State<SignUpPage> {
                       }),
                       title: 'Are you sure?',
                     );
-                    // context.read<AuthViewModel>().logout(context);
-                    // final prefs = SharedService();
-                    // await prefs.deleteToken();
-                    // // await prefs.deleteProfile();
-                    // navReplaceTransition(context, const LoginPage());
                   },
                   child: Row(
-                    // mainAxisAlignment: MainAxisAlignment.center,
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Icon(

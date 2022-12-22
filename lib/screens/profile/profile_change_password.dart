@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:hms_16/screens/auth/forgot_password_page1.dart';
 import 'package:hms_16/utils/constant.dart';
 import 'package:hms_16/view_model/auth_view_model.dart';
 import 'package:hms_16/widget/dialog_validation.dart';
 import 'package:hms_16/widget/duration_dialog.dart';
-import 'package:hms_16/widget/navpush_transition.dart';
 import 'package:provider/provider.dart';
 
 class ChangePasswordPage extends StatelessWidget {
@@ -52,7 +50,6 @@ class ChangePasswordPage extends StatelessWidget {
                 ),
               ),
               BuildPassField(
-                
                 validator: (p0) {
                   if (p0!.isEmpty) {
                     return ("Password can not be empty");
@@ -66,16 +63,16 @@ class ChangePasswordPage extends StatelessWidget {
               InkWell(
                 onTap: () {
                   dialogValidation(
-                      context: context,
-                      title: "Coming Soon!",
-                      isValidation: false,
-                      isImage: false,
-                      newPage: () async {
-                        await Future.delayed(Duration(seconds: 2), () {
-                          Navigator.pop(context);
-                        });
-                      },
-                    );
+                    context: context,
+                    title: "Coming Soon!",
+                    isValidation: false,
+                    isImage: false,
+                    newPage: () async {
+                      await Future.delayed(Duration(seconds: 2), () {
+                        Navigator.pop(context);
+                      });
+                    },
+                  );
                 },
                 child: Container(
                   margin: EdgeInsets.symmetric(vertical: 30),
@@ -157,75 +154,80 @@ class ChangePasswordPage extends StatelessWidget {
                 controller: cnewpasscontrol,
                 hint: "Confirm New password",
               ),
-              Consumer<AuthViewModel>(builder: (context, value, child) {
-                return Container(
-                decoration:
-                    BoxDecoration(borderRadius: BorderRadius.circular(20)),
-                padding: EdgeInsets.symmetric(horizontal: 10),
-                margin: EdgeInsets.only(top: 30),
-                alignment: Alignment.center,
-                child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20)),
-                        backgroundColor: cPrimaryBase,
-                        minimumSize:
-                            Size(MediaQuery.of(context).size.width, 50)),
-                    onPressed: () async {
-                      if (_formKey.currentState!.validate()) {
-                        
-                        await showDialog<void>(
-                          context: context,
-                          builder: (context) => AlertDialog(
+              Consumer<AuthViewModel>(
+                builder: (context, value, child) {
+                  return Container(
+                    decoration:
+                        BoxDecoration(borderRadius: BorderRadius.circular(20)),
+                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    margin: EdgeInsets.only(top: 30),
+                    alignment: Alignment.center,
+                    child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20)),
-                            title: Text("Confirm To Change Password ?"),
-                            actions: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  ElevatedButton(
-                                      style: ElevatedButton.styleFrom(
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(20)),
-                                          backgroundColor: cPrimaryBase,
-                                          minimumSize: Size(130, 50)),
-                                      onPressed: () async {
-                                        durationDialog(context,
-                                            "Password Changed Successfully!");
-                                        Future.delayed(
-                                            const Duration(seconds: 2), () {
-                                          Navigator.pop(context);
-                                        });
-                                      },
-                                      child: Text("Yes")),
-                                  ElevatedButton(
-                                      style: ElevatedButton.styleFrom(
-                                          side: BorderSide(color: cPrimaryBase),
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(20)),
-                                          backgroundColor: Colors.white,
-                                          minimumSize: Size(130, 50)),
-                                      onPressed: () {
-                                        Navigator.pop(context);
-                                      },
-                                      child: Text(
-                                        "No",
-                                        style: TextStyle(color: Colors.black),
-                                      )),
+                            backgroundColor: cPrimaryBase,
+                            minimumSize:
+                                Size(MediaQuery.of(context).size.width, 50)),
+                        onPressed: () async {
+                          if (_formKey.currentState!.validate()) {
+                            await showDialog<void>(
+                              context: context,
+                              builder: (context) => AlertDialog(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20)),
+                                title: Text("Confirm To Change Password ?"),
+                                actions: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                              shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          20)),
+                                              backgroundColor: cPrimaryBase,
+                                              minimumSize: Size(130, 50)),
+                                          onPressed: () async {
+                                            durationDialog(context,
+                                                "Password Changed Successfully!");
+                                            Future.delayed(
+                                                const Duration(seconds: 2), () {
+                                              Navigator.pop(context);
+                                            });
+                                          },
+                                          child: Text("Yes")),
+                                      ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                              side: BorderSide(
+                                                  color: cPrimaryBase),
+                                              shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          20)),
+                                              backgroundColor: Colors.white,
+                                              minimumSize: Size(130, 50)),
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                          child: Text(
+                                            "No",
+                                            style:
+                                                TextStyle(color: Colors.black),
+                                          )),
+                                    ],
+                                  ),
                                 ],
                               ),
-                            ],
-                          ),
-                        );
-                      }
-                    },
-                    child: Text("Send")),
-              );
-              },)
+                            );
+                          }
+                        },
+                        child: Text("Send")),
+                  );
+                },
+              )
             ],
           ),
         ),

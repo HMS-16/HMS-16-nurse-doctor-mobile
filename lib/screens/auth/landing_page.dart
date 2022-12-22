@@ -21,7 +21,7 @@ class _LandingPageState extends State<LandingPage> {
   @override
   Widget build(BuildContext context) {
     final prefs = SharedService();
-    
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: Padding(
@@ -58,7 +58,6 @@ class _LandingPageState extends State<LandingPage> {
             ),
             Button(
               child: Text("Sign In"),
-              // margin: EdgeInsets.only(top: 15),
               onpressed: () async {
                 await prefs.saveFirstTime();
                 navReplaceTransition(context, const LoginPage());
@@ -79,7 +78,6 @@ class CardItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      // color: Colors.amber,
       elevation: 0,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,

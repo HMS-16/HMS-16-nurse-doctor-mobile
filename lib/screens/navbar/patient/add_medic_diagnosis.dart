@@ -61,7 +61,6 @@ class _AddMedDiagnosisState extends State<AddMedDiagnosis> {
               text: 'Add Prescription',
               line: 3,
               isNumeric: false,
-              // isSuffix: false,
             ),
             const SizedBox(height: 15),
             ElevatedButton(

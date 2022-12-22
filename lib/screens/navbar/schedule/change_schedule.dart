@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hms_16/model/change_schedule_model.dart';
-import 'package:hms_16/screens/navbar/schedule/detail_schedule.dart';
 import 'package:hms_16/screens/navbar/schedule/view_schedule.dart';
 import 'package:hms_16/utils/constant.dart';
-import 'package:hms_16/view_model/patient_view_model.dart';
 import 'package:hms_16/view_model/schedule_view_model.dart';
 import 'package:hms_16/widget/duration_dialog.dart';
-import 'package:hms_16/widget/navpush_transition.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
@@ -86,7 +83,6 @@ class _ChangeScheduleState extends State<ChangeSchedule> {
                         fontWeight: FontWeight.w700, fontSize: 12),
                   ),
                   DropdownButtonFormField<int>(
-                    // dropdownColor: Colors.red,
                     decoration: InputDecoration(
                         fillColor: cSecondaryLightest,
                         filled: true,
@@ -224,7 +220,6 @@ class _ChangeScheduleState extends State<ChangeSchedule> {
                                             backgroundColor: cPrimaryBase,
                                           ),
                                           onPressed: () async {
-                                            print(value.schedule!.id);
                                             value.changeSchedule(
                                                 ChangeScheduleModel(
                                                     date: value.schedule!.date,
@@ -232,9 +227,7 @@ class _ChangeScheduleState extends State<ChangeSchedule> {
                                                 value.schedule!.id,
                                                 DateFormat('M/d/y')
                                                     .format(selectedDate));
-                                            // context
-                                            // .read<PatientViewModel>()
-                                            // .changeSchedule(valueDropdownint);
+
                                             durationDialog(context,
                                                 "Schedule has been successfully changed!");
                                             Future.delayed(

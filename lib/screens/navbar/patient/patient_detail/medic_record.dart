@@ -16,7 +16,6 @@ class MedicalRecord extends StatefulWidget {
 }
 
 class _MedicalRecordState extends State<MedicalRecord> {
-
   @override
   Widget build(BuildContext context) {
     final authProvider = context.read<AuthViewModel>();

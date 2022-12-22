@@ -46,7 +46,8 @@ class _NotificationPageState extends State<NotificationPage> {
                     ),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20)),
-                    title: const Text("Are you sure to clear all notifications?"),
+                    title:
+                        const Text("Are you sure to clear all notifications?"),
                     actions: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,

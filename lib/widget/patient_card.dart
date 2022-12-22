@@ -6,8 +6,6 @@ class PatientCard extends StatelessWidget {
   const PatientCard({
     super.key,
     required this.patientName,
-    // this.disease,
-    // this.time,
     required this.lineColor,
     required this.badgeText,
     required this.paintBadge,
@@ -15,8 +13,7 @@ class PatientCard extends StatelessWidget {
   });
 
   final String patientName;
-  // final String? disease;
-  // final String? time;
+
   final String badgeText;
   final Color lineColor;
   final Color paintBadge;
@@ -71,13 +68,6 @@ class PatientCard extends StatelessWidget {
                     fontSize: 14,
                     color: cBlackBase),
               ),
-              // subtitle: Text(
-              //   time!,
-              //   style: textStyle.copyWith(
-              //       fontWeight: FontWeight.w400,
-              //       fontSize: 12,
-              //       color: cBlackLightest),
-              // ),
               trailing: Badge(
                 elevation: 0,
                 badgeColor: paintBadge,

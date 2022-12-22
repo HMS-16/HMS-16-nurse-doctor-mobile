@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-// Color
 Color cIcon = const Color.fromRGBO(50, 50, 50, 1);
 Color cBlackBase = const Color.fromRGBO(34, 34, 34, 1);
 Color cBlackLighter = const Color.fromRGBO(61, 61, 61, 1);
@@ -30,5 +29,4 @@ TextStyle textStyle = GoogleFonts.nunito();
 enum ActionState {
   none,
   loading,
-  // error,
 }

@@ -26,7 +26,6 @@ class ForgotPassword2 extends StatelessWidget {
         child: ListView(
           shrinkWrap: true,
           padding: const EdgeInsets.symmetric(horizontal: 20),
-          // mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image(
               image: const AssetImage(
@@ -47,16 +46,11 @@ class ForgotPassword2 extends StatelessWidget {
             OtpTextField(
               numberOfFields: 4,
               borderColor: cPrimaryBase,
-              //set to true to show as box or false to show as dash
               showFieldAsBox: true,
-              //runs when a code is typed in
-              onCodeChanged: (String code) {
-                //handle validation or checks here
-              },
-              //runs when every textfield is filled
+              onCodeChanged: (String code) {},
               onSubmit: (String verificationCode) {
                 durationDialog(context, "Code Verify!");
-              }, // end onSubmit
+              },
             ),
             const SizedBox(
               height: 30,
@@ -72,12 +66,7 @@ class ForgotPassword2 extends StatelessWidget {
                   ),
                 ),
                 InkWell(
-                  onTap: () {
-                    // Navigator.pushAndRemoveUntil(
-                    //     context,
-                    //     MaterialPageRoute(builder: (builder) => SignUpPage()),
-                    //     (route) => false);
-                  },
+                  onTap: () {},
                   child: Text(
                     "Resend Code",
                     style: TextStyle(
@@ -95,12 +84,6 @@ class ForgotPassword2 extends StatelessWidget {
               onpressed: () {
                 FocusManager.instance.primaryFocus!.unfocus();
                 navPushTransition(context, const ForgotPassword3());
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(
-                //     builder: (context) => const ForgotPassword3(),
-                //   ),
-                // );
               },
             )
           ],
