@@ -4,11 +4,11 @@ class ScheduleModel {
     required this.message,
   });
 
-  List data;
+  List<DataSchedule> data;
   String message;
 
   factory ScheduleModel.fromJson(Map<String, dynamic> json) => ScheduleModel(
-        data: json["data"],
+        data: json["data"] == null ? [] : List<DataSchedule>.from(json["data"]!.map((x) => DataSchedule.fromJson(x))),
         message: json["message"],
       );
 }
@@ -47,4 +47,18 @@ class DataSchedule {
   String? doctorId;
   String? nurseId;
   int? timeId;
+
+  factory DataSchedule.fromJson(Map<String, dynamic> json){ 
+        return DataSchedule(
+        id: json["id"] ?? 0,
+        patientId: json["patient_id"] ?? "",
+        date: json["date"] ?? "",
+        shift: json["shift"] ?? "",
+        name: json["name"] ?? "",
+        doctor: json["doctor"] ?? "",
+        nurse: json["nurse"] ?? "",
+        status: json["status"] ?? false,
+        statusString: json["status_string"] ?? "",
+    );
+  }
 }

@@ -53,6 +53,8 @@ class ChangePasswordPage extends StatelessWidget {
                 validator: (p0) {
                   if (p0!.isEmpty) {
                     return ("Password can not be empty");
+                  } else if (p0 != context.read<AuthViewModel>().passUser) {
+                    return "password is invalid!";
                   } else {
                     return null;
                   }
@@ -116,8 +118,8 @@ class ChangePasswordPage extends StatelessWidget {
                 validator: (p0) {
                   if (p0!.isEmpty) {
                     return ("New password can not be empty");
-                  } else if (p0.characters.length < 8) {
-                    return ("Password length can not be less than 8 character");
+                  } else if (p0.characters.length < 5) {
+                    return ("Password length can not be less than 5 character");
                   } else {
                     return null;
                   }
@@ -163,68 +165,68 @@ class ChangePasswordPage extends StatelessWidget {
                     margin: EdgeInsets.only(top: 30),
                     alignment: Alignment.center,
                     child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20)),
-                            backgroundColor: cPrimaryBase,
-                            minimumSize:
-                                Size(MediaQuery.of(context).size.width, 50)),
-                        onPressed: () async {
-                          if (_formKey.currentState!.validate()) {
-                            await showDialog<void>(
-                              context: context,
-                              builder: (context) => AlertDialog(
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20)),
-                                title: Text("Confirm To Change Password ?"),
-                                actions: [
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      ElevatedButton(
-                                          style: ElevatedButton.styleFrom(
-                                              shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          20)),
-                                              backgroundColor: cPrimaryBase,
-                                              minimumSize: Size(130, 50)),
-                                          onPressed: () async {
-                                            durationDialog(context,
-                                                "Password Changed Successfully!");
-                                            Future.delayed(
-                                                const Duration(seconds: 2), () {
-                                              Navigator.pop(context);
-                                            });
-                                          },
-                                          child: Text("Yes")),
-                                      ElevatedButton(
-                                          style: ElevatedButton.styleFrom(
-                                              side: BorderSide(
-                                                  color: cPrimaryBase),
-                                              shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          20)),
-                                              backgroundColor: Colors.white,
-                                              minimumSize: Size(130, 50)),
-                                          onPressed: () {
-                                            Navigator.pop(context);
-                                          },
-                                          child: Text(
-                                            "No",
-                                            style:
-                                                TextStyle(color: Colors.black),
-                                          )),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            );
-                          }
-                        },
-                        child: Text("Send")),
+                      style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20)),
+                          backgroundColor: cPrimaryBase,
+                          minimumSize:
+                              Size(MediaQuery.of(context).size.width, 50)),
+                      onPressed: () async {
+                        if (_formKey.currentState!.validate()) {
+                          await showDialog<void>(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20)),
+                              title: Text("Confirm To Change Password ?"),
+                              actions: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(20)),
+                                            backgroundColor: cPrimaryBase,
+                                            minimumSize: Size(130, 50)),
+                                        onPressed: () async {
+                                          await context
+                                              .read<AuthViewModel>()
+                                              .changePassword(
+                                                newpasscontrol.text,
+                                                context,
+                                              );
+                                        },
+                                        child: Text("Yes")),
+                                    ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        side: BorderSide(color: cPrimaryBase),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                        ),
+                                        backgroundColor: Colors.white,
+                                        minimumSize: Size(130, 50),
+                                      ),
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: Text(
+                                        "No",
+                                        style: TextStyle(color: Colors.black),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          );
+                        }
+                      },
+                      child: Text("Send"),
+                    ),
                   );
                 },
               )

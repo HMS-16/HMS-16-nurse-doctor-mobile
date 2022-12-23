@@ -77,7 +77,7 @@ class PatientHomeCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          patientName!,
+                          "$patientName!",
                           style: textStyle.copyWith(
                               fontSize: 16, fontWeight: FontWeight.w600),
                         ),

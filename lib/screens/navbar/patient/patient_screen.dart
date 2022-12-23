@@ -85,7 +85,7 @@ class _PatientScreenState extends State<PatientScreen> {
             builder: (context, value, child) {
               switch (value.patientState) {
                 case ActionState.loading:
-                  return Center(child: LoadingMax(color: cInfoLight));
+                  return Center(child: LoadingMax(color: cPrimaryLight));
                 case ActionState.none:
                   return MyWidget();
               }

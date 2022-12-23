@@ -2,10 +2,12 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:hms_16/screens/auth/landing_page.dart';
 import 'package:hms_16/screens/auth/login_page.dart';
+import 'package:hms_16/screens/profile/profile.dart';
 import 'package:hms_16/services/auth_services.dart';
 import 'package:hms_16/services/shared_services.dart';
 import 'package:hms_16/utils/constant.dart';
 import 'package:hms_16/widget/dialog_validation.dart';
+import 'package:hms_16/widget/duration_dialog.dart';
 import 'package:hms_16/widget/navpush_transition.dart';
 import 'package:hms_16/model/login_model.dart';
 import 'package:hms_16/screens/auth/sign_up_page.dart';
@@ -13,7 +15,7 @@ import 'package:hms_16/screens/navbar/navbar.dart';
 import 'package:hms_16/model/register_model.dart';
 
 class AuthViewModel with ChangeNotifier {
-  String? idUser;
+  String? passUser;
   String message = '';
 
   DataLogin? _profile;
@@ -125,7 +127,8 @@ class AuthViewModel with ChangeNotifier {
         LoginModel modelUser = LoginModel.fromJson(responseData.data);
 
         final dataUser = modelUser.data;
-        idUser = modelUser.data.strNum;
+        passUser = pass;
+        print(passUser);
         final token = modelUser.token;
         var encodeUser = json.encode(dataUser);
 
@@ -160,10 +163,14 @@ class AuthViewModel with ChangeNotifier {
   Future getProfile() async {
     changeState(ActionState.loading);
     String? user = await prefs.getUser();
-
-    _profile = DataLogin.fromJson(jsonDecode(user!));
-    notifyListeners();
+    print(jsonDecode(user!));
+    // Map. user.
+    // print(DataLogin.fromJson(user!));
+    _profile = DataLogin.fromJson(jsonDecode(user));
+    // await Future.delayed(Duration(seconds: 2));
     changeState(ActionState.none);
+    notifyListeners();
+    // return user;
   }
 
   Future logout(BuildContext context) async {
@@ -175,5 +182,21 @@ class AuthViewModel with ChangeNotifier {
     await Future.delayed(Duration(seconds: 1));
     _profile = null;
     notifyListeners();
+  }
+
+  Future changePassword(String newPass, BuildContext context) async {
+    try {
+      final response =
+          await AuthServices().changePass(profile!.strNum, newPass);
+      if (response.statusCode == 200) {
+        durationDialog(context, "Password Changed Successfully!");
+        Future.delayed(const Duration(seconds: 2), () {
+          Navigator.pop(context);
+          Navigator.pop(context);
+        });
+      }
+    } catch (e) {
+      print(e.toString());
+    }
   }
 }

@@ -123,9 +123,7 @@ class _ChangeDoctorState extends State<ChangeDoctor> {
                                                         .schedule!.id);
                                                 context
                                                     .read<ScheduleViewModel>()
-                                                    .getAllSchedule(DateFormat(
-                                                            'M/d/y')
-                                                        .format(selectedDate));
+                                                    .getAllSchedule();
                                                 durationDialog(context,
                                                     "Doctor has been successfully changed!");
                                                 Future.delayed(

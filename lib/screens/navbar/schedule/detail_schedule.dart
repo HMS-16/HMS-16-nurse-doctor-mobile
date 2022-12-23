@@ -77,34 +77,6 @@ class _DetailScheduleState extends State<DetailSchedule> {
                         ),
                       ],
                     ),
-                    subtitle: GestureDetector(
-                      onTap: () {},
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              flex: 6,
-                              child: Text(
-                                "View Patient Detail",
-                                style: textStyle.copyWith(
-                                  color: cPrimaryBase,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w700,
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              flex: 1,
-                              child: Icon(
-                                Icons.arrow_forward,
-                                color: cIcon,
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
                   );
                 },
               ),

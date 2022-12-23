@@ -21,23 +21,29 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  // initial() async {
+  // }
+
+  // getprofile() async {}
+
   @override
   void initState() {
-    final profileViewModel = context.read<AuthViewModel>();
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+    // WidgetsBinding.instance.
+    print("init jadi");
+    Future(() async {
+      context.read<ScheduleViewModel>().getAllSchedule();
+      // getprofile();
+      final profileViewModel = context.read<AuthViewModel>();
       if (profileViewModel.profile == null) {
         await profileViewModel.getProfile();
       }
-      context.read<PatientViewModel>().getAllPatient(context);
-      context
-          .read<ScheduleViewModel>()
-          .getAllSchedule(DateFormat('M/d/y').format(DateTime.now()));
     });
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    print("build jadi");
     return Scaffold(
       backgroundColor: cWhiteBase,
       body: CustomScrollView(
@@ -51,17 +57,17 @@ class _HomePageState extends State<HomePage> {
                     return LoadingMax(color: cBlackLight);
                   case ActionState.none:
                     final username = value.profile!.name;
-                    final call;
-                    if (value.profile!.role == 1) {
-                      call = "Dr.";
-                    } else {
-                      call = "Mrs.";
-                    }
+                    // final call;
+                    // if (value.profile!.role == 1) {
+                    //   call = "Dr.";
+                    // }
                     return RichText(
                       text: TextSpan(
                         children: [
                           TextSpan(
-                            text: "\n $call ${username}",
+                            text: value.profile!.role == 1
+                                ? "\n Dr. $username"
+                                : "\n $username",
                             style: TextStyle(
                               fontWeight: FontWeight.w700,
                               fontSize: 16,
@@ -101,18 +107,29 @@ class _HomePageState extends State<HomePage> {
                       return CircleAvatar(
                         backgroundColor: cPrimaryBase,
                         minRadius: 40,
-                        child: LayoutBuilder(builder: (context, constraints) {
-                          if (value.profile!.role == 1) {
-                            return Image(
-                              image:
-                                  AssetImage("assets/images/doctor_icon.png"),
-                            );
-                          } else {
-                            return Image(
-                              image: AssetImage("assets/images/nurse_icon.png"),
-                            );
-                          }
-                        }),
+                        child: value.profile?.role == 1
+                            ? Image(
+                                image:
+                                    AssetImage("assets/images/doctor_icon.png"),
+                              )
+                            : value.profile?.role == 2
+                                ? Image(
+                                    image: AssetImage(
+                                        "assets/images/nurse_icon.png"),
+                                  )
+                                : SizedBox.shrink(),
+                        // LayoutBuilder(builder: (context, constraints) {
+                        //   if (value.profile!.role == 1) {
+                        //     return Image(
+                        //       image:
+                        //           AssetImage("assets/images/doctor_icon.png"),
+                        //     );
+                        //   } else {
+                        //     return Image(
+                        //       image: AssetImage("assets/images/nurse_icon.png"),
+                        //     );
+                        //   }
+                        // }),
                       );
                     },
                   ),
@@ -143,11 +160,18 @@ class _HomePageState extends State<HomePage> {
             delegate: SliverChildBuilderDelegate(
               (context, index) {
                 return Consumer<ScheduleViewModel>(
-                    builder: (context, value, child) {
-                  return PatientListHomeScreen(
-                    schedules: context.read<ScheduleViewModel>().schedules,
-                  );
-                });
+                  builder: (context, value, child) {
+                    switch (value.scheduleState) {
+                      case ActionState.loading:
+                        return Center(child: LoadingMax(color: cPrimaryLight));
+                      case ActionState.none:
+                        return PatientListHomeScreen(
+                          schedules:
+                              context.read<ScheduleViewModel>().schedules,
+                        );
+                    }
+                  },
+                );
               },
               childCount: 1,
             ),
@@ -168,55 +192,57 @@ class PatientListHomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<PatientViewModel>(
-      builder: (context, value, child) {
-        switch (value.patientState) {
-          case ActionState.loading:
-            return Center(child: LoadingMax(color: cPrimaryLight));
-          case ActionState.none:
-            return ListView.builder(
-              physics: const BouncingScrollPhysics(),
-              padding: EdgeInsets.zero,
-              shrinkWrap: true,
-              scrollDirection: Axis.vertical,
-              itemBuilder: (context, index) {
-                final schedule = schedules.elementAt(index);
+    return ListView.builder(
+      physics: const BouncingScrollPhysics(),
+      padding: EdgeInsets.zero,
+      shrinkWrap: true,
+      scrollDirection: Axis.vertical,
+      itemBuilder: (context, index) {
+        final nameUser = context.read<AuthViewModel>().profile?.name;
+        final schedule = schedules.elementAt(index);
+        final getDate = DateFormat('M/d/y').parse(schedule.date);
+        final schedulePatient = DateFormat('y-M-d').format(getDate);
+        final dateNow = DateFormat('y-M-d').format(DateTime.now());
+        // print(schedule.doctor);
+        if ((schedulePatient == dateNow) &&
+            (nameUser == schedule.doctor || nameUser == schedule.nurse)) {
+          return InkWell(
+            onTap: () {
+              context.read<ScheduleViewModel>().selectedSchedule(schedule);
+              navPushTransition(context, const DetailSchedule());
+            },
+            child: Builder(
+              builder: (context) {
+                Color lineColor = cPrimaryBase;
+                Color fontColor = cPrimaryDark;
+                Color badgeColor = cSecondaryLighter;
+                String condition = 'Process';
 
-                return InkWell(
-                  onTap: () {
-                    context
-                        .read<ScheduleViewModel>()
-                        .selectedSchedule(schedule);
-                    navPushTransition(context, const DetailSchedule());
-                  },
-                  child: Builder(builder: (context) {
-                    Color lineColor = cPrimaryBase;
-                    Color fontColor = cPrimaryDark;
-                    Color badgeColor = cSecondaryLighter;
-                    String condition = 'Process';
-
-                    if (schedule.status != false) {
-                      lineColor = cGreenLine;
-                      condition = 'Done';
-                      badgeColor = cSuccessLightest;
-                      fontColor = cSuccessDark;
-                    }
-                    return PatientHomeCard(
-                      fontColor: fontColor,
-                      lineColor: lineColor,
-                      paintBadge: badgeColor,
-                      badgeText: condition,
-                      patientName: schedule.name,
-                      doctorName: schedule.doctor,
-                      nurseName: schedule.nurse,
-                    );
-                  }),
+                if (schedule.status != false) {
+                  lineColor = cGreenLine;
+                  condition = 'Done';
+                  badgeColor = cSuccessLightest;
+                  fontColor = cSuccessDark;
+                }
+                return PatientHomeCard(
+                  fontColor: fontColor,
+                  lineColor: lineColor,
+                  paintBadge: badgeColor,
+                  badgeText: condition,
+                  patientName: schedule.name,
+                  doctorName: schedule.doctor,
+                  nurseName: schedule.nurse,
                 );
               },
-              itemCount: schedules.length,
-            );
+            ),
+          );
         }
+        return SizedBox.shrink();
       },
+      itemCount: schedules.length,
     );
   }
+  //     },
+  //   );
+  // }
 }

@@ -39,4 +39,24 @@ class AuthServices {
       print("error message = ${e.message}");
     }
   }
+
+  Future changePass(String strNum, String newPass) async {
+    String? token = await prefs.getToken();
+    try {
+      Response response = await _dio.put(
+        '$baseUrl/accounts/password/$strNum',
+        data: {
+          "password": newPass,
+        },
+        options: Options(
+          headers: {'Authorization': 'Bearer $token'},
+        ),
+      );
+      return response;
+    } on DioError catch (e) {
+      print(e.response!.statusMessage);
+      print(e.response!.statusCode);
+      print("error message = ${e.message}");
+    }
+  }
 }

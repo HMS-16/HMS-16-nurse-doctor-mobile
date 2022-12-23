@@ -76,7 +76,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   if (value!.isEmpty) {
                     return 'Name can not be empty';
                   }
-                  if (!RegExp(r'^[aA-zZ]+$').hasMatch(value)) {
+                  if (!RegExp(r'^[aA-zZ]+ ?[aA-zZ]+$').hasMatch(value)) {
                     return 'Name is invalid';
                   }
                   return null;

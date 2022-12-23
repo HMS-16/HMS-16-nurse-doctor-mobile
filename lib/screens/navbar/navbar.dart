@@ -4,6 +4,8 @@ import 'package:hms_16/screens/navbar/message/message.dart';
 import 'package:hms_16/screens/navbar/patient/patient_screen.dart';
 import 'package:hms_16/screens/navbar/schedule/view_schedule.dart';
 import 'package:hms_16/utils/constant.dart';
+import 'package:hms_16/view_model/schedule_view_model.dart';
+import 'package:provider/provider.dart';
 
 class NavBar extends StatefulWidget {
   const NavBar({super.key});
@@ -13,6 +15,13 @@ class NavBar extends StatefulWidget {
 }
 
 class _NavBarState extends State<NavBar> {
+
+  // @override
+  // void initState() {
+  //   context.read<ScheduleViewModel>().getAllSchedule();
+  //   super.initState();
+  // }
+
   int currenticon = 0;
   final screen = [
     const HomePage(),

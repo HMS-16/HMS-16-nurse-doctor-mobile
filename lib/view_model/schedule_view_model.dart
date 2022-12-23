@@ -3,11 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:hms_16/model/change_doctor_model.dart';
 import 'package:hms_16/model/change_schedule_model.dart';
 import 'package:hms_16/model/schedule_model.dart';
-import 'package:hms_16/screens/navbar/schedule/view_schedule.dart';
 import 'package:hms_16/services/doctor_services.dart';
 import 'package:hms_16/services/schedule_services.dart';
 import 'package:hms_16/utils/constant.dart';
-import 'package:intl/intl.dart';
 
 class ScheduleViewModel extends ChangeNotifier {
   List<DataSchedule> _schedules = [];
@@ -23,29 +21,17 @@ class ScheduleViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  getAllSchedule(String date) async {
+  getAllSchedule() async {
+    changeState(ActionState.loading);
     try {
-      var response = await ScheduleServices().getAllSchedule(date);
+      var response = await ScheduleServices().getAllSchedule();
 
-      if (response.data['data'] != null) {
+      if (response.statusCode == 200) {
         ScheduleModel modelSchedule = ScheduleModel.fromJson(response.data);
 
-        _schedules = (modelSchedule.data)
-            .map((e) => DataSchedule(
-                doctorId: e['doctor_id'],
-                timeId: e['time_id'],
-                id: e['id'],
-                patientId: e['patient_id'],
-                date: e['date'],
-                shift: e['shift'],
-                name: e['name'],
-                doctor: e['doctor'],
-                nurse: e['nurse'],
-                status: e['status'],
-                statusString: e['status_string']))
-            .toList();
-      } else {
-        _schedules = response.data['data'] == null ? [] : [];
+        _schedules = modelSchedule.data;
+        print(_schedules);
+        changeState(ActionState.none);
       }
     } on DioError catch (e) {
       print(e.response!.statusMessage);
@@ -61,13 +47,13 @@ class ScheduleViewModel extends ChangeNotifier {
 
   changeSchedule(ChangeScheduleModel change, int id, date) async {
     await ScheduleServices().changeSchedule(change, id);
-    await getAllSchedule(DateFormat('M/d/y').format(selectedDate));
+    await getAllSchedule();
     notifyListeners();
   }
 
   changeDoctor(ChangeDoctorModel doctorId, int id) async {
     await DoctorServices().changeDoctor(doctorId, id);
-    await getAllSchedule(DateFormat('M/d/y').format(selectedDate));
+    await getAllSchedule();
     notifyListeners();
   }
 }

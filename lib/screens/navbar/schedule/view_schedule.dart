@@ -25,15 +25,18 @@ DateTime selectedDate = DateTime.now();
 class _ViewScheduleState extends State<ViewSchedule> {
   @override
   void initState() {
-    context
-        .read<ScheduleViewModel>()
-        .getAllSchedule(DateFormat('M/d/y').format(selectedDate));
-    context.read<DoctorViewModel>().getAllDoctor();
+    print("init 1");
+    Future(() {
+      context.read<ScheduleViewModel>().getAllSchedule();
+      context.read<DoctorViewModel>().getAllDoctor();
+      print("init 2");
+    });
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    print("build");
     pickDate() async {
       DateTime? pickedDate = await showDatePicker(
         context: context,
@@ -45,9 +48,7 @@ class _ViewScheduleState extends State<ViewSchedule> {
         setState(() {
           selectedDate = pickedDate;
         });
-        context
-            .read<ScheduleViewModel>()
-            .getAllSchedule(DateFormat('M/d/y').format(selectedDate));
+        context.read<ScheduleViewModel>().getAllSchedule();
       }
     }
 
@@ -60,7 +61,10 @@ class _ViewScheduleState extends State<ViewSchedule> {
         title: Text(
           'Schedule',
           style: textStyle.copyWith(
-              fontSize: 20, fontWeight: FontWeight.w600, color: cBlackBase),
+            fontSize: 20,
+            fontWeight: FontWeight.w600,
+            color: cBlackBase,
+          ),
         ),
         actions: [
           IconButton(
@@ -116,84 +120,92 @@ class _ViewScheduleState extends State<ViewSchedule> {
                   child: Text(
                     DateFormat.MMMM().format(selectedDate),
                     style: textStyle.copyWith(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w700,
-                        color: cBlackBase),
+                      fontSize: 20,
+                      fontWeight: FontWeight.w700,
+                      color: cBlackBase,
+                    ),
                   ),
                 ),
                 IconButton(
-                    onPressed: () {},
-                    icon: const Icon(Icons.arrow_drop_down_outlined)),
+                  onPressed: () {},
+                  icon: const Icon(Icons.arrow_drop_down_outlined),
+                ),
               ],
             ),
             trailing: IconButton(
-                onPressed: () {
-                  dialogValidation(
-                    context: context,
-                    title: "Coming Soon!",
-                    isValidation: false,
-                    isImage: false,
-                    newPage: () async {
-                      await Future.delayed(const Duration(seconds: 2), () {
-                        Navigator.pop(context);
-                      });
-                    },
-                  );
-                },
-                icon: const Icon(Icons.search)),
+              onPressed: () {
+                dialogValidation(
+                  context: context,
+                  title: "Coming Soon!",
+                  isValidation: false,
+                  isImage: false,
+                  newPage: () async {
+                    await Future.delayed(const Duration(seconds: 2), () {
+                      Navigator.pop(context);
+                    });
+                  },
+                );
+              },
+              icon: const Icon(Icons.search),
+            ),
           ),
           const SizedBox(
             height: 32.0,
           ),
           Container(
             margin: const EdgeInsets.symmetric(horizontal: 16),
-            decoration: BoxDecoration(boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.1),
-                blurRadius: 10,
-              )
-            ], borderRadius: BorderRadius.circular(12), color: cWhiteBase),
+            decoration: BoxDecoration(
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.1),
+                  blurRadius: 10,
+                )
+              ],
+              borderRadius: BorderRadius.circular(12),
+              color: cWhiteBase,
+            ),
             child: ListTile(
-                leading: IconButton(
-                    onPressed: () {
-                      final changeData =
-                          selectedDate.millisecondsSinceEpoch - 86400000;
-                      DateTime cvData =
-                          DateTime.fromMillisecondsSinceEpoch(changeData);
-                      setState(() {
-                        selectedDate = cvData;
-                      });
-                      context.read<ScheduleViewModel>().getAllSchedule(
-                          DateFormat('M/d/y').format(selectedDate));
-                    },
-                    icon: const Icon(Icons.arrow_back_ios)),
-                title: TextButton(
-                  onPressed: () {
-                    pickDate();
-                  },
-                  child: Text(
-                    DateFormat("EEE, d-M-y").format(selectedDate),
-                    textAlign: TextAlign.center,
-                    style: textStyle.copyWith(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 14,
-                        color: cBlackBase),
+              leading: IconButton(
+                onPressed: () {
+                  final changeData =
+                      selectedDate.millisecondsSinceEpoch - 86400000;
+                  DateTime cvData =
+                      DateTime.fromMillisecondsSinceEpoch(changeData);
+                  setState(() {
+                    selectedDate = cvData;
+                  });
+                  context.read<ScheduleViewModel>().getAllSchedule();
+                },
+                icon: const Icon(Icons.arrow_back_ios),
+              ),
+              title: TextButton(
+                onPressed: () {
+                  pickDate();
+                },
+                child: Text(
+                  DateFormat("EEE, d-M-y").format(selectedDate),
+                  textAlign: TextAlign.center,
+                  style: textStyle.copyWith(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 14,
+                    color: cBlackBase,
                   ),
                 ),
-                trailing: IconButton(
-                  onPressed: () {
-                    final changeData =
-                        selectedDate.millisecondsSinceEpoch + 86400000;
-                    DateTime cvData =
-                        DateTime.fromMillisecondsSinceEpoch(changeData);
-                    setState(() {
-                      selectedDate = cvData;
-                    });
-                    context.read<ScheduleViewModel>().getAllSchedule(
-                        DateFormat('M/d/y').format(selectedDate));
-                  },
-                  icon: const Icon(Icons.arrow_forward_ios),
-                )),
+              ),
+              trailing: IconButton(
+                onPressed: () {
+                  final changeData =
+                      selectedDate.millisecondsSinceEpoch + 86400000;
+                  DateTime cvData =
+                      DateTime.fromMillisecondsSinceEpoch(changeData);
+                  setState(() {
+                    selectedDate = cvData;
+                  });
+                  context.read<ScheduleViewModel>().getAllSchedule();
+                },
+                icon: const Icon(Icons.arrow_forward_ios),
+              ),
+            ),
           ),
           const SizedBox(
             height: 24.0,
@@ -226,7 +238,10 @@ class PatientListSchedule extends StatelessWidget {
         scrollDirection: Axis.vertical,
         itemBuilder: (context, index) {
           final schedule = schedules.elementAt(index);
-          if (schedules.isNotEmpty) {
+          final getDate = DateFormat('M/d/y').parse(schedule.date);
+          final schedulePatient = DateFormat('y-M-d').format(getDate);
+          final datePilih = DateFormat('y-M-d').format(selectedDate);
+          if (schedules.isNotEmpty && (schedulePatient == datePilih)) {
             return InkWell(
               onTap: () {
                 context.read<ScheduleViewModel>().selectedSchedule(schedule);
@@ -237,12 +252,13 @@ class PatientListSchedule extends StatelessWidget {
                 Color fontColor = cPrimaryDark;
                 Color badgeColor = cSecondaryLighter;
                 return PatientScheduleCard(
-                    fontColor: fontColor,
-                    lineColor: lineColor,
-                    patientName: schedule.name,
-                    doctorName: schedule.doctor,
-                    nurseName: schedule.nurse,
-                    time: schedule.shift);
+                  fontColor: fontColor,
+                  lineColor: lineColor,
+                  patientName: schedule.name,
+                  doctorName: schedule.doctor,
+                  nurseName: schedule.nurse,
+                  time: schedule.shift,
+                );
               }),
             );
           }
